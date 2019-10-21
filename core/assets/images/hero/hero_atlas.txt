@@ -1,0 +1,194 @@
+hero_atlas.png
+size: 1728, 64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+standingDown
+  rotate: false
+  xy: 0, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+standingRight
+  rotate: false
+  xy: 64, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+standingUp
+  rotate: false
+  xy: 128, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+walkingDown
+  rotate: false
+  xy: 192, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+walkingDown
+  rotate: false
+  xy: 256, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+walkingDown
+  rotate: false
+  xy: 320, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+walkingDown
+  rotate: false
+  xy: 384, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+walkingDown
+  rotate: false
+  xy: 448, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+walkingDown
+  rotate: false
+  xy: 512, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+walkingDown
+  rotate: false
+  xy: 576, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+walkingDown
+  rotate: false
+  xy: 640, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+walkingRight
+  rotate: false
+  xy: 704, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+walkingRight
+  rotate: false
+  xy: 768, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+walkingRight
+  rotate: false
+  xy: 832, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+walkingRight
+  rotate: false
+  xy: 896, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+walkingRight
+  rotate: false
+  xy: 960, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+walkingRight
+  rotate: false
+  xy: 1024, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+walkingRight
+  rotate: false
+  xy: 1088, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+walkingRight
+  rotate: false
+  xy: 1152, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+walkingUp
+  rotate: false
+  xy: 1216, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+walkingUp
+  rotate: false
+  xy: 1280, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+walkingUp
+  rotate: false
+  xy: 1344, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+walkingUp
+  rotate: false
+  xy: 1408, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+walkingUp
+  rotate: false
+  xy: 1472, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+walkingUp
+  rotate: false
+  xy: 1536, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+walkingUp
+  rotate: false
+  xy: 1600, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+walkingUp
+  rotate: false
+  xy: 1664, 0
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
