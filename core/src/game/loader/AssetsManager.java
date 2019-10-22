@@ -13,7 +13,7 @@ public class AssetsManager {
     public final AssetManager manager = new AssetManager();
 
     // Textures path
-    public static final String spritesheet = "images/hero/hero_atlas.txt";
+    public static final String spritesheet = "images/atlas.txt";
 
     //Tiled map: file storing info of all tiles in a map to manage it easily
     //layers are containers of tiles and we will use it to render specific layer of a map

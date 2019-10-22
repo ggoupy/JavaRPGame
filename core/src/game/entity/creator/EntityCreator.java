@@ -21,6 +21,7 @@ public class EntityCreator {
     //References to game attributes
     private World world;
     private PooledEngine engine;
+    private TextureAtlas atlas;
 
     private BodyFactory bodyFactory;
 
@@ -31,24 +32,25 @@ public class EntityCreator {
 
 
     //private constructor because it's singleton class
-    private EntityCreator (World world, PooledEngine engine)
+    private EntityCreator (World world, PooledEngine engine, TextureAtlas atlas)
     {
         this.world = world;
         this.engine = engine;
+        this.atlas = atlas;
         bodyFactory = bodyFactory.getInstance(world);
     }
 
     //get the body factory instance and create it if not instanced
     //used to create the instance (like a constructor)
-    public static EntityCreator getInstance(World world, PooledEngine engine)
+    public static EntityCreator getInstance(World world, PooledEngine engine, TextureAtlas atlas)
     {
-        if (thisInstance == null) thisInstance = new EntityCreator(world, engine);
+        if (thisInstance == null) thisInstance = new EntityCreator(world, engine, atlas);
         return thisInstance;
     }
 
 
     //create a player box2D in the world according to his position in the tiled map
-    public void createPlayer(MapObject playerObj, String spec, TextureAtlas atlas)
+    public void createPlayer(MapObject playerObj, String spec)
     {
         switch (spec)
         {
@@ -76,23 +78,22 @@ public class EntityCreator {
         //create a box in the world with coordinates and specific attributes
         body.body = bodyFactory.makeCircleBox(center.x, center.y,1, BodyDef.BodyType.DynamicBody, BodyFactory.HUMAN);
 
-
         position.position.set(center.x,center.y,0);
 
-        texture.region = atlas.findRegion("standingRight");
+        texture.region = atlas.findRegion("hero-standingDown");
 
         type.type = TypeComponent.PLAYER;
 
-        state.set(StateComponent.STANDING);
+        state.set(StateComponent.STANDING_DOWN);
 
         //we add animations of the player in fonction of the state component
         //PlayMode.LOOP repeats animation after all frames shown
-        Animation animStand = new Animation(1f, atlas.findRegions("standingRight"), Animation.PlayMode.NORMAL);
-        Animation animStandUp = new Animation(1f, atlas.findRegions("standingUp"), Animation.PlayMode.NORMAL);
-        Animation animStandDown = new Animation(1f, atlas.findRegions("standingDown"), Animation.PlayMode.NORMAL);
-        Animation animWalkingX = new Animation(0.08f, atlas.findRegions("walkingRight"), Animation.PlayMode.LOOP);
-        Animation animWalkingUp = new Animation(0.08f, atlas.findRegions("walkingUp"), Animation.PlayMode.LOOP);
-        Animation animWalkingDown = new Animation(0.08f, atlas.findRegions("walkingDown"), Animation.PlayMode.LOOP);
+        Animation animStand = new Animation(1f, atlas.findRegions("hero-standingRight"), Animation.PlayMode.NORMAL);
+        Animation animStandUp = new Animation(1f, atlas.findRegions("hero-standingUp"), Animation.PlayMode.NORMAL);
+        Animation animStandDown = new Animation(1f, atlas.findRegions("hero-standingDown"), Animation.PlayMode.NORMAL);
+        Animation animWalkingX = new Animation(0.08f, atlas.findRegions("hero-walkingRight"), Animation.PlayMode.LOOP);
+        Animation animWalkingUp = new Animation(0.08f, atlas.findRegions("hero-walkingUp"), Animation.PlayMode.LOOP);
+        Animation animWalkingDown = new Animation(0.08f, atlas.findRegions("hero-walkingDown"), Animation.PlayMode.LOOP);
         animation.animations.put(StateComponent.MOVING, animWalkingX);
         animation.animations.put(StateComponent.MOVING_UP, animWalkingUp);
         animation.animations.put(StateComponent.MOVING_DOWN, animWalkingDown);
@@ -128,10 +129,8 @@ public class EntityCreator {
             BodyComponent body = engine.createComponent(BodyComponent.class);
             TypeComponent type = engine.createComponent(TypeComponent.class);
 
-
             body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.StaticBody, BodyFactory.STONE);
             type.type = TypeComponent.SCENERY;
-
 
             //store a reference to the entity in the box2d box
             body.body.setUserData(entity);
@@ -153,6 +152,7 @@ public class EntityCreator {
 
         //get a list[toSpawnLeft] of uniques index between 0 and nb of spawns
         Set<Integer> uniqIndex_arr = new HashSet<>(); //HashSet is fast to use contains() method
+        toSpawnLeft = 1; //PROVISOIRE
         while (toSpawnLeft > 0)
         {
             int index = rand.nextInt(nbSpawns);
@@ -164,7 +164,6 @@ public class EntityCreator {
         }
 
         //Iterates all the index array and create an enemy at the spawn i
-        System.out.println(uniqIndex_arr.size());
         for (Integer i: uniqIndex_arr)
         {
             Rectangle rectangle = ((RectangleMapObject) spawns.get(i)).getRectangle();
@@ -181,7 +180,33 @@ public class EntityCreator {
 
             type.type = TypeComponent.ENEMY;
 
-            body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.StaticBody,BodyFactory.STONE);
+            //convert rectangle coordinates into rectangle center coordinates in the world
+            Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
+
+            body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.DynamicBody,BodyFactory.STONE);
+
+            position.position.set(center.x,center.y,0);
+
+            enemy.origin = new Vector2(center.x, center.y);
+
+            texture.region = atlas.findRegion("skeleton-standingDown");
+
+            state.set(StateComponent.STANDING_DOWN);
+
+            //we add animations of the player in fonction of the state component
+            //PlayMode.LOOP repeats animation after all frames shown
+            Animation animStand = new Animation(1f, atlas.findRegions("skeleton-standingRight"), Animation.PlayMode.NORMAL);
+            Animation animStandUp = new Animation(1f, atlas.findRegions("skeleton-standingUp"), Animation.PlayMode.NORMAL);
+            Animation animStandDown = new Animation(1f, atlas.findRegions("skeleton-standingDown"), Animation.PlayMode.NORMAL);
+            Animation animWalkingX = new Animation(0.2f, atlas.findRegions("skeleton-walkingRight"), Animation.PlayMode.LOOP);
+            Animation animWalkingUp = new Animation(0.2f, atlas.findRegions("skeleton-walkingUp"), Animation.PlayMode.LOOP);
+            Animation animWalkingDown = new Animation(0.2f, atlas.findRegions("skeleton-walkingDown"), Animation.PlayMode.LOOP);
+            animation.animations.put(StateComponent.MOVING, animWalkingX);
+            animation.animations.put(StateComponent.MOVING_UP, animWalkingUp);
+            animation.animations.put(StateComponent.MOVING_DOWN, animWalkingDown);
+            animation.animations.put(StateComponent.STANDING, animStand);
+            animation.animations.put(StateComponent.STANDING_UP, animStandUp);
+            animation.animations.put(StateComponent.STANDING_DOWN, animStandDown);
 
             //store a reference to the entity in the box2d box
             body.body.setUserData(entity);

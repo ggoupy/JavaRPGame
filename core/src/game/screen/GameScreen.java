@@ -68,11 +68,10 @@ public class GameScreen implements Screen {
         engine.addSystem(new EnemySystem());
 
         //create entities
-        entityCreator = entityCreator.getInstance(world, engine);
+        entityCreator = entityCreator.getInstance(world, engine, atlas);
         entityCreator.createPlayer(
                 tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
-                game.playerSpecialization,
-                atlas
+                game.playerSpecialization
         );
         entityCreator.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
         entityCreator.createEnemies(tiledMap.getLayers().get("enemySpawnForest").getObjects());

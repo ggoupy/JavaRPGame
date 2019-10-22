@@ -2,7 +2,7 @@
 <map version="1.2" tiledversion="2019.10.08" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="79">
  <tileset firstgid="1" source="TilesetGrass/grass_biome.tsx"/>
  <objectgroup id="6" name="playerPosition">
-  <object id="6" name="player" x="1632" y="1568" width="16" height="16"/>
+  <object id="6" name="player" x="1472" y="1760" width="16" height="16"/>
  </objectgroup>
  <layer id="1" name="background" width="200" height="200">
   <properties>
@@ -635,7 +635,7 @@
   <object id="36" name="house" x="2064" y="1424" width="16" height="16"/>
   <object id="37" name="tree" x="1431.47" y="1731.12" width="34.5908" height="40.5837"/>
   <object id="38" name="trees" x="1494.55" y="1730.17" width="36.5884" height="41.7403"/>
-  <object id="41" x="1603.16" y="1536.19" width="60.455" height="28.5979"/>
+  <object id="41" name="house" x="1603.16" y="1536.19" width="60.455" height="28.5979"/>
   <object id="42" name="tower" x="1816.6" y="1631.87" width="18.2942" height="10.8293"/>
   <object id="43" name="tombes" x="1536.29" y="1279.96" width="126.693" height="28.8081"/>
   <object id="44" name="tombes" x="1535.14" y="1343.36" width="128.48" height="29.7544"/>
