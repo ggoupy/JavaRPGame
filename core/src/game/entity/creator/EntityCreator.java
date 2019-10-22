@@ -152,7 +152,7 @@ public class EntityCreator {
 
         //get a list[toSpawnLeft] of uniques index between 0 and nb of spawns
         Set<Integer> uniqIndex_arr = new HashSet<>(); //HashSet is fast to use contains() method
-        toSpawnLeft = 1; //PROVISOIRE
+       // toSpawnLeft = 1; //PROVISOIRE
         while (toSpawnLeft > 0)
         {
             int index = rand.nextInt(nbSpawns);
@@ -183,11 +183,13 @@ public class EntityCreator {
             //convert rectangle coordinates into rectangle center coordinates in the world
             Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
 
-            body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.DynamicBody,BodyFactory.STONE);
+            body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.DynamicBody, BodyFactory.STONE);
 
             position.position.set(center.x,center.y,0);
 
             enemy.origin = new Vector2(center.x, center.y);
+            enemy.movingTime = 2 + Math.random() * 2; //random between 2 and 4
+            enemy.standingTime = 2 + Math.random() * 2; //random between 2 and 4
 
             texture.region = atlas.findRegion("skeleton-standingDown");
 

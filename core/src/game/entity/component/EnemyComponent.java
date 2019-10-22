@@ -13,4 +13,7 @@ public class EnemyComponent implements Component {
     public double movingTime = 2; // nb of seconds letting the enemy moving
     public double standingTime = 2; //nb of seconds letting the enemy standing
     public double currentTime = standingTime; //nb of seconds in the current action (moving or standing)
+    public boolean collision = false; //handle collisions with scenery
+    public Vector2 direction = new Vector2(0,0); //direction of the enemy
+    // (to avoid collision with static body which set body velocity to 0 and so can't get the last velocity)
 }

@@ -36,8 +36,6 @@ public class EnemySystem extends IteratingSystem {
         StateComponent state = sm.get(entity); //get the state component of the entity
 
         boolean moving = false;
-        float x=0,y = 0;
-
 
         //new action (moving or standing)
         if (enemy.currentTime <= 0)
@@ -48,26 +46,40 @@ public class EnemySystem extends IteratingSystem {
                 moving = false; //then will not move
                 enemy.currentTime = enemy.standingTime;
                 //watch out to have it before the velocity setter to 0 to get the last velocity
-                setStandingState(state, body.body.getLinearVelocity().x, body.body.getLinearVelocity().y);
-                body.body.setLinearVelocity( 0,  0);
+                setStandingState(state, enemy.direction.x, enemy.direction.y);
+                enemy.direction.set(0,0);
+                body.body.setLinearVelocity( enemy.direction.x,  enemy.direction.y);
             }
             else
             {
                 moving = true; //then will move
                 enemy.currentTime = enemy.movingTime;
                 Vector2 s = getRandSpeed(enemy.speed);
-                x = s.x + body.body.getLinearVelocity().x;
-                y = s.y + body.body.getLinearVelocity().y;
-                setMovingState(state,x,y);
+                enemy.direction.set(s.x, s.y);
+                setMovingState(state, enemy.direction.x, enemy.direction.y);
             }
         }
 
         if (moving)
         {
-            body.body.setLinearVelocity( x,  y);
+            body.body.setLinearVelocity(enemy.direction.x, enemy.direction.y);
+        }
+
+        if(enemy.collision)
+        {
+            enemy.direction.set(-enemy.direction.x, -enemy.direction.y);
+            body.body.setLinearVelocity(enemy.direction.x, enemy.direction.y);
+            setMovingState(state, enemy.direction.x, enemy.direction.y);
+            enemy.collision = false;
         }
 
         enemy.currentTime -= deltaTime;
+
+
+        //TO DO:
+        //add a pathfinding to the player
+        //quit the force applied if player collide
+        //add a pathfinding to keep the enemy around his spawn
     }
 
 
@@ -121,7 +133,6 @@ public class EnemySystem extends IteratingSystem {
     {
         if (y > 0) {state.set(StateComponent.STANDING_UP); return;}
         if (y < 0) {state.set(StateComponent.STANDING_DOWN); return;}
-        if (x != 0) {state.set(StateComponent.STANDING); return;}
-        //if x && y = 0 it keeps the previous state
+        else {state.set(StateComponent.STANDING); return;}
     }
 }
