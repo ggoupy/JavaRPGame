@@ -11,9 +11,7 @@ import game.entity.component.StateComponent;
 
 import java.util.Random;
 
-import static game.screen.GameScreen.TILE_SIZE;
-
-public class EnemySystem extends IteratingSystem {
+public class EnemyMovementSystem extends IteratingSystem {
 
     private ComponentMapper<EnemyComponent>  em;
     private ComponentMapper<BodyComponent> bm;
@@ -21,7 +19,7 @@ public class EnemySystem extends IteratingSystem {
 
     private Random rand;
 
-    public EnemySystem() {
+    public EnemyMovementSystem() {
         super(Family.all(EnemyComponent.class).get());
 
         em = ComponentMapper.getFor(EnemyComponent.class);
@@ -86,13 +84,7 @@ public class EnemySystem extends IteratingSystem {
             enemy.collision = false;
         }
 
-        System.out.println("origin: "+enemy.origin.x+" "+enemy.origin.y);
         enemy.currentTime -= deltaTime;
-
-
-        //TO DO:
-        //add a pathfinding to the player
-        //quit the force applied if player collide
     }
 
 

@@ -65,7 +65,7 @@ public class GameScreen implements Screen {
         engine.addSystem(new CollisionSystem());
         engine.addSystem(new PlayerControlSystem(controller));
         engine.addSystem(new AnimationSystem());
-        engine.addSystem(new EnemySystem());
+        engine.addSystem(new EnemyMovementSystem());
 
         //create entities
         entityCreator = entityCreator.getInstance(world, engine, atlas);

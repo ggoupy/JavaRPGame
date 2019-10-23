@@ -4,6 +4,7 @@ import java.util.*;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -52,25 +53,43 @@ public class EntityCreator {
     //create a player box2D in the world according to his position in the tiled map
     public void createPlayer(MapObject playerObj, String spec)
     {
-        switch (spec)
-        {
-            //Create the good player
-            //coming soon
-        }
-
-        //get the rectangle of the mapObject (to have the coordinates)
-        Rectangle rectangle = ((RectangleMapObject)playerObj).getRectangle();
-
         // Create the Entity and all the components that will go in the entity
         Entity entity = engine.createEntity();
+        PlayerComponent player;
+        switch (spec)
+        {
+            case "mage":
+            {
+                player = engine.createComponent(PlayerComponent.class);
+                player.spec = "hunter"; //PROVISOIRE
+            }
+            case "hunter":
+            {
+                player = engine.createComponent(PlayerComponent.class);
+                player.spec = spec;
+            }
+            case "warrior":
+            {
+                player = engine.createComponent(PlayerComponent.class);
+                player.spec = spec;
+            }
+            default:
+            {
+                player = engine.createComponent(PlayerComponent.class);
+                player.spec = spec;
+            }
+        }
+
         BodyComponent body = engine.createComponent(BodyComponent.class);
         TypeComponent type = engine.createComponent(TypeComponent.class);
         TransformComponent position = engine.createComponent(TransformComponent.class);
         TextureComponent texture = engine.createComponent(TextureComponent.class);
-        PlayerComponent player = engine.createComponent(PlayerComponent.class);
         StateComponent state = engine.createComponent(StateComponent.class);
         AnimationComponent animation = engine.createComponent(AnimationComponent.class);
         CollisionComponent collision = engine.createComponent(CollisionComponent.class);
+
+        //get the rectangle of the mapObject (to have the coordinates)
+        Rectangle rectangle = ((RectangleMapObject)playerObj).getRectangle();
 
         //convert rectangle coordinates into rectangle center coordinates in the world
         Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
@@ -80,7 +99,7 @@ public class EntityCreator {
 
         position.position.set(center.x,center.y,0);
 
-        texture.region = atlas.findRegion("hero-standingDown");
+        texture.region = atlas.findRegion(player.spec+"-standingDown");
 
         type.type = TypeComponent.PLAYER;
 
@@ -88,12 +107,12 @@ public class EntityCreator {
 
         //we add animations of the player in fonction of the state component
         //PlayMode.LOOP repeats animation after all frames shown
-        Animation animStand = new Animation(1f, atlas.findRegions("hero-standingRight"), Animation.PlayMode.NORMAL);
-        Animation animStandUp = new Animation(1f, atlas.findRegions("hero-standingUp"), Animation.PlayMode.NORMAL);
-        Animation animStandDown = new Animation(1f, atlas.findRegions("hero-standingDown"), Animation.PlayMode.NORMAL);
-        Animation animWalkingX = new Animation(0.08f, atlas.findRegions("hero-walkingRight"), Animation.PlayMode.LOOP);
-        Animation animWalkingUp = new Animation(0.08f, atlas.findRegions("hero-walkingUp"), Animation.PlayMode.LOOP);
-        Animation animWalkingDown = new Animation(0.08f, atlas.findRegions("hero-walkingDown"), Animation.PlayMode.LOOP);
+        Animation animStand = createAnimation(1.f, player.spec+"-standingRight", PlayMode.NORMAL);
+        Animation animStandUp = createAnimation(1f,player.spec+"-standingUp", PlayMode.NORMAL);
+        Animation animStandDown = createAnimation(1f, player.spec+"-standingDown", PlayMode.NORMAL);
+        Animation animWalkingX = createAnimation(0.08f, player.spec+"-walkingRight", PlayMode.LOOP);
+        Animation animWalkingUp = createAnimation(0.08f, player.spec+"-walkingUp", PlayMode.LOOP);
+        Animation animWalkingDown = createAnimation(0.08f, player.spec+"-walkingDown", PlayMode.LOOP);
         animation.animations.put(StateComponent.MOVING, animWalkingX);
         animation.animations.put(StateComponent.MOVING_UP, animWalkingUp);
         animation.animations.put(StateComponent.MOVING_DOWN, animWalkingDown);
@@ -197,12 +216,12 @@ public class EntityCreator {
 
             //we add animations of the player in fonction of the state component
             //PlayMode.LOOP repeats animation after all frames shown
-            Animation animStand = new Animation(1f, atlas.findRegions("skeleton-standingRight"), Animation.PlayMode.NORMAL);
-            Animation animStandUp = new Animation(1f, atlas.findRegions("skeleton-standingUp"), Animation.PlayMode.NORMAL);
-            Animation animStandDown = new Animation(1f, atlas.findRegions("skeleton-standingDown"), Animation.PlayMode.NORMAL);
-            Animation animWalkingX = new Animation(0.2f, atlas.findRegions("skeleton-walkingRight"), Animation.PlayMode.LOOP);
-            Animation animWalkingUp = new Animation(0.2f, atlas.findRegions("skeleton-walkingUp"), Animation.PlayMode.LOOP);
-            Animation animWalkingDown = new Animation(0.2f, atlas.findRegions("skeleton-walkingDown"), Animation.PlayMode.LOOP);
+            Animation animStand = createAnimation(1f, "skeleton-standingRight", PlayMode.NORMAL);
+            Animation animStandUp = createAnimation(1f, "skeleton-standingUp", PlayMode.NORMAL);
+            Animation animStandDown = createAnimation(1f, "skeleton-standingDown", PlayMode.NORMAL);
+            Animation animWalkingX = createAnimation(0.2f, "skeleton-walkingRight", PlayMode.LOOP);
+            Animation animWalkingUp = createAnimation(0.2f, "skeleton-walkingUp", PlayMode.LOOP);
+            Animation animWalkingDown = createAnimation(0.2f, "skeleton-walkingDown", PlayMode.LOOP);
             animation.animations.put(StateComponent.MOVING, animWalkingX);
             animation.animations.put(StateComponent.MOVING_UP, animWalkingUp);
             animation.animations.put(StateComponent.MOVING_DOWN, animWalkingDown);
@@ -225,5 +244,11 @@ public class EntityCreator {
 
             engine.addEntity(entity);
         }
+    }
+
+    //create an animation with parameters
+    private Animation createAnimation(float frameDuration, String atlasRegions, PlayMode playmode)
+    {
+        return new Animation(frameDuration, atlas.findRegions(atlasRegions), playmode);
     }
 }

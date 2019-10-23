@@ -1,191 +1,191 @@
 atlas.png
-size: 744, 198
+size: 1338, 198
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-hero-standingDown
+hunter-standingDown
   rotate: false
   xy: 1, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-hero-standingRight
+hunter-standingRight
   rotate: false
   xy: 1, 67
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-hero-standingUp
+hunter-standingUp
   rotate: false
   xy: 1, 133
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-hero-walkingDown
+hunter-walkingDown
   rotate: false
   xy: 67, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 1
-hero-walkingDown
+hunter-walkingDown
   rotate: false
   xy: 67, 67
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 2
-hero-walkingDown
+hunter-walkingDown
   rotate: false
   xy: 67, 133
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 3
-hero-walkingDown
+hunter-walkingDown
   rotate: false
   xy: 133, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 4
-hero-walkingDown
+hunter-walkingDown
   rotate: false
   xy: 133, 67
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 5
-hero-walkingDown
+hunter-walkingDown
   rotate: false
   xy: 133, 133
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 6
-hero-walkingDown
+hunter-walkingDown
   rotate: false
   xy: 199, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 7
-hero-walkingDown
+hunter-walkingDown
   rotate: false
   xy: 199, 67
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 8
-hero-walkingRight
+hunter-walkingRight
   rotate: false
   xy: 199, 133
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 1
-hero-walkingRight
+hunter-walkingRight
   rotate: false
   xy: 265, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 2
-hero-walkingRight
+hunter-walkingRight
   rotate: false
   xy: 265, 67
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 3
-hero-walkingRight
+hunter-walkingRight
   rotate: false
   xy: 265, 133
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 4
-hero-walkingRight
+hunter-walkingRight
   rotate: false
   xy: 331, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 5
-hero-walkingRight
+hunter-walkingRight
   rotate: false
   xy: 331, 67
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 6
-hero-walkingRight
+hunter-walkingRight
   rotate: false
   xy: 331, 133
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 7
-hero-walkingRight
+hunter-walkingRight
   rotate: false
   xy: 397, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 8
-hero-walkingUp
+hunter-walkingUp
   rotate: false
   xy: 397, 67
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 1
-hero-walkingUp
+hunter-walkingUp
   rotate: false
   xy: 397, 133
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 2
-hero-walkingUp
+hunter-walkingUp
   rotate: false
   xy: 463, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 3
-hero-walkingUp
+hunter-walkingUp
   rotate: false
   xy: 463, 67
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 4
-hero-walkingUp
+hunter-walkingUp
   rotate: false
   xy: 463, 133
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 5
-hero-walkingUp
+hunter-walkingUp
   rotate: false
   xy: 529, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 6
-hero-walkingUp
+hunter-walkingUp
   rotate: false
   xy: 529, 67
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 7
-hero-walkingUp
+hunter-walkingUp
   rotate: false
   xy: 529, 133
   size: 64, 64
@@ -194,85 +194,274 @@ hero-walkingUp
   index: 8
 skeleton-standingDown
   rotate: false
-  xy: 595, 1
+  xy: 1189, 1
   size: 48, 64
   orig: 48, 64
   offset: 0, 0
   index: -1
 skeleton-standingRight
   rotate: false
-  xy: 595, 67
+  xy: 1189, 67
   size: 48, 64
   orig: 48, 64
   offset: 0, 0
   index: -1
 skeleton-standingUp
   rotate: false
-  xy: 595, 133
+  xy: 1189, 133
   size: 48, 64
   orig: 48, 64
   offset: 0, 0
   index: -1
 skeleton-walkingDown
   rotate: false
-  xy: 645, 1
+  xy: 1239, 1
   size: 48, 64
   orig: 48, 64
   offset: 0, 0
   index: 1
 skeleton-walkingDown
+  rotate: false
+  xy: 1189, 1
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 2
+skeleton-walkingDown
+  rotate: false
+  xy: 1239, 67
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 3
+skeleton-walkingRight
+  rotate: false
+  xy: 1239, 133
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 1
+skeleton-walkingRight
+  rotate: false
+  xy: 1189, 67
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 2
+skeleton-walkingRight
+  rotate: false
+  xy: 1289, 1
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 3
+skeleton-walkingUp
+  rotate: false
+  xy: 1289, 67
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 1
+skeleton-walkingUp
+  rotate: false
+  xy: 1189, 133
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 2
+skeleton-walkingUp
+  rotate: false
+  xy: 1289, 133
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 3
+warrior-standingDown
   rotate: false
   xy: 595, 1
-  size: 48, 64
-  orig: 48, 64
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
-  index: 2
-skeleton-walkingDown
-  rotate: false
-  xy: 645, 67
-  size: 48, 64
-  orig: 48, 64
-  offset: 0, 0
-  index: 3
-skeleton-walkingRight
-  rotate: false
-  xy: 645, 133
-  size: 48, 64
-  orig: 48, 64
-  offset: 0, 0
-  index: 1
-skeleton-walkingRight
+  index: -1
+warrior-standingRight
   rotate: false
   xy: 595, 67
-  size: 48, 64
-  orig: 48, 64
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
-  index: 2
-skeleton-walkingRight
-  rotate: false
-  xy: 695, 1
-  size: 48, 64
-  orig: 48, 64
-  offset: 0, 0
-  index: 3
-skeleton-walkingUp
-  rotate: false
-  xy: 695, 67
-  size: 48, 64
-  orig: 48, 64
-  offset: 0, 0
-  index: 1
-skeleton-walkingUp
+  index: -1
+warrior-standingUp
   rotate: false
   xy: 595, 133
-  size: 48, 64
-  orig: 48, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+warrior-walkingDown
+  rotate: false
+  xy: 661, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-walkingDown
+  rotate: false
+  xy: 661, 67
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: 2
-skeleton-walkingUp
+warrior-walkingDown
   rotate: false
-  xy: 695, 133
-  size: 48, 64
-  orig: 48, 64
+  xy: 661, 133
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: 3
+warrior-walkingDown
+  rotate: false
+  xy: 727, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-walkingDown
+  rotate: false
+  xy: 727, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-walkingDown
+  rotate: false
+  xy: 727, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+warrior-walkingDown
+  rotate: false
+  xy: 793, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+warrior-walkingDown
+  rotate: false
+  xy: 793, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+warrior-walkingRight
+  rotate: false
+  xy: 793, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-walkingRight
+  rotate: false
+  xy: 859, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+warrior-walkingRight
+  rotate: false
+  xy: 859, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-walkingRight
+  rotate: false
+  xy: 859, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-walkingRight
+  rotate: false
+  xy: 925, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-walkingRight
+  rotate: false
+  xy: 925, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+warrior-walkingRight
+  rotate: false
+  xy: 925, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+warrior-walkingRight
+  rotate: false
+  xy: 991, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+warrior-walkingUp
+  rotate: false
+  xy: 991, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-walkingUp
+  rotate: false
+  xy: 991, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+warrior-walkingUp
+  rotate: false
+  xy: 1057, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-walkingUp
+  rotate: false
+  xy: 1057, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-walkingUp
+  rotate: false
+  xy: 1057, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-walkingUp
+  rotate: false
+  xy: 1123, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+warrior-walkingUp
+  rotate: false
+  xy: 1123, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+warrior-walkingUp
+  rotate: false
+  xy: 1123, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8

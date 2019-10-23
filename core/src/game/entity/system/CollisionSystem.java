@@ -34,7 +34,6 @@ public class CollisionSystem  extends IteratingSystem {
 
         Entity collidedEntity = collision.collisionEntity; //get collided entity
 
-
         /* Do Player Collisions */
         if(thisType.type == TypeComponent.PLAYER)
         {

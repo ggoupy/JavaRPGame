@@ -9,6 +9,7 @@ public class PlayerComponent implements Component {
     protected Bar action; //Call it differently
     protected int speed;
     protected int damage;
+    public String spec;
 
     //FOR TEST
     public PlayerComponent()
