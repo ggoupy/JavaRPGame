@@ -14,7 +14,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import game.entity.component.*;
-import game.entity.component.player.PlayerComponent;
+import game.entity.component.PlayerComponent;
+import game.utils.Bar;
 
 
 public class EntityCreator {
@@ -55,31 +56,8 @@ public class EntityCreator {
     {
         // Create the Entity and all the components that will go in the entity
         Entity entity = engine.createEntity();
-        PlayerComponent player;
-        switch (spec)
-        {
-            case "mage":
-            {
-                player = engine.createComponent(PlayerComponent.class);
-                player.spec = "hunter"; //PROVISOIRE
-            }
-            case "hunter":
-            {
-                player = engine.createComponent(PlayerComponent.class);
-                player.spec = spec;
-            }
-            case "warrior":
-            {
-                player = engine.createComponent(PlayerComponent.class);
-                player.spec = spec;
-            }
-            default:
-            {
-                player = engine.createComponent(PlayerComponent.class);
-                player.spec = spec;
-            }
-        }
-
+        PlayerComponent player = engine.createComponent(PlayerComponent.class);
+        createPlayerDefinition(player, spec);
         BodyComponent body = engine.createComponent(BodyComponent.class);
         TypeComponent type = engine.createComponent(TypeComponent.class);
         TransformComponent position = engine.createComponent(TransformComponent.class);
@@ -105,20 +83,14 @@ public class EntityCreator {
 
         state.set(StateComponent.STANDING_DOWN);
 
-        //we add animations of the player in fonction of the state component
+        //we add animations of the player in function of the state component
         //PlayMode.LOOP repeats animation after all frames shown
-        Animation animStand = createAnimation(1.f, player.spec+"-standingRight", PlayMode.NORMAL);
-        Animation animStandUp = createAnimation(1f,player.spec+"-standingUp", PlayMode.NORMAL);
-        Animation animStandDown = createAnimation(1f, player.spec+"-standingDown", PlayMode.NORMAL);
-        Animation animWalkingX = createAnimation(0.08f, player.spec+"-walkingRight", PlayMode.LOOP);
-        Animation animWalkingUp = createAnimation(0.08f, player.spec+"-walkingUp", PlayMode.LOOP);
-        Animation animWalkingDown = createAnimation(0.08f, player.spec+"-walkingDown", PlayMode.LOOP);
-        animation.animations.put(StateComponent.MOVING, animWalkingX);
-        animation.animations.put(StateComponent.MOVING_UP, animWalkingUp);
-        animation.animations.put(StateComponent.MOVING_DOWN, animWalkingDown);
-        animation.animations.put(StateComponent.STANDING, animStand);
-        animation.animations.put(StateComponent.STANDING_UP, animStandUp);
-        animation.animations.put(StateComponent.STANDING_DOWN, animStandDown);
+        createAnimation(animation,StateComponent.MOVING,0.08f, player.spec+"-walkingRight", PlayMode.LOOP);
+        createAnimation(animation,StateComponent.MOVING_UP,0.08f, player.spec+"-walkingUp", PlayMode.LOOP);
+        createAnimation(animation,StateComponent.MOVING_DOWN,0.08f, player.spec+"-walkingDown", PlayMode.LOOP);
+        createAnimation(animation,StateComponent.STANDING,1.f, player.spec+"-standingRight", PlayMode.NORMAL);
+        createAnimation(animation,StateComponent.STANDING_UP,1f,player.spec+"-standingUp", PlayMode.NORMAL);
+        createAnimation(animation,StateComponent.STANDING_DOWN,1f, player.spec+"-standingDown", PlayMode.NORMAL);
 
         //store a reference to the entity in the box2d box
         body.body.setUserData(entity);
@@ -171,7 +143,7 @@ public class EntityCreator {
 
         //get a list[toSpawnLeft] of uniques index between 0 and nb of spawns
         Set<Integer> uniqIndex_arr = new HashSet<>(); //HashSet is fast to use contains() method
-        toSpawnLeft = 1; //PROVISOIRE
+       // toSpawnLeft = 1; //PROVISOIRE
         while (toSpawnLeft > 0)
         {
             int index = rand.nextInt(nbSpawns);
@@ -214,20 +186,14 @@ public class EntityCreator {
 
             state.set(StateComponent.STANDING_DOWN);
 
-            //we add animations of the player in fonction of the state component
+            //we add animations of the player in function of the state component
             //PlayMode.LOOP repeats animation after all frames shown
-            Animation animStand = createAnimation(1f, "skeleton-standingRight", PlayMode.NORMAL);
-            Animation animStandUp = createAnimation(1f, "skeleton-standingUp", PlayMode.NORMAL);
-            Animation animStandDown = createAnimation(1f, "skeleton-standingDown", PlayMode.NORMAL);
-            Animation animWalkingX = createAnimation(0.2f, "skeleton-walkingRight", PlayMode.LOOP);
-            Animation animWalkingUp = createAnimation(0.2f, "skeleton-walkingUp", PlayMode.LOOP);
-            Animation animWalkingDown = createAnimation(0.2f, "skeleton-walkingDown", PlayMode.LOOP);
-            animation.animations.put(StateComponent.MOVING, animWalkingX);
-            animation.animations.put(StateComponent.MOVING_UP, animWalkingUp);
-            animation.animations.put(StateComponent.MOVING_DOWN, animWalkingDown);
-            animation.animations.put(StateComponent.STANDING, animStand);
-            animation.animations.put(StateComponent.STANDING_UP, animStandUp);
-            animation.animations.put(StateComponent.STANDING_DOWN, animStandDown);
+            createAnimation(animation,StateComponent.MOVING,0.2f, "skeleton-walkingRight", PlayMode.LOOP);
+            createAnimation(animation,StateComponent.MOVING_UP,0.2f, "skeleton-walkingUp", PlayMode.LOOP);
+            createAnimation(animation,StateComponent.MOVING_DOWN,0.2f, "skeleton-walkingDown", PlayMode.LOOP);
+            createAnimation(animation,StateComponent.STANDING,1f, "skeleton-standingRight", PlayMode.NORMAL);
+            createAnimation(animation,StateComponent.STANDING_UP,1f, "skeleton-standingUp", PlayMode.NORMAL);
+            createAnimation(animation,StateComponent.STANDING_DOWN,1f, "skeleton-standingDown", PlayMode.NORMAL);
 
             //store a reference to the entity in the box2d box
             body.body.setUserData(entity);
@@ -246,9 +212,44 @@ public class EntityCreator {
         }
     }
 
-    //create an animation with parameters
-    private Animation createAnimation(float frameDuration, String atlasRegions, PlayMode playmode)
+    //create an animation with parameters given to a animation component
+    private void createAnimation(AnimationComponent a, int state, float frameDuration, String atlasRegions, PlayMode playmode)
     {
-        return new Animation(frameDuration, atlas.findRegions(atlasRegions), playmode);
+        a.animations.put(state, new Animation(frameDuration, atlas.findRegions(atlasRegions), playmode));
+    }
+
+    //set player attributes according to his specialization
+    private void createPlayerDefinition(PlayerComponent player, String spec)
+    {
+        switch (spec)
+        {
+            case "mage":
+            {
+                player.life = new Bar(80); //manage current and max life
+                player.action = new Bar(200);
+                player.damage = 10;
+                player.speed = 2;
+                break;
+            }
+            case "hunter":
+            {
+                player.life = new Bar(100); //manage current and max life
+                player.action = new Bar(150);
+                player.damage = 8;
+                player.speed = 4;
+                break;
+            }
+            case "warrior":
+            {
+                player.life = new Bar(200); //manage current and max life
+                player.action = new Bar(100);
+                player.damage = 5;
+                player.speed = 2;
+                break;
+            }
+        }
+
+        player.level = 1;
+        player.spec = spec;
     }
 }

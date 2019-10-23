@@ -5,8 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import game.entity.component.EnemyComponent;
-import game.entity.component.TypeComponent;
-import game.entity.component.player.PlayerComponent;
+import game.entity.component.PlayerComponent;
 
 public class EnemyAttackSystem extends IteratingSystem {
 

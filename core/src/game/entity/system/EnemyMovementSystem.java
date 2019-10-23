@@ -66,7 +66,7 @@ public class EnemyMovementSystem extends IteratingSystem {
         }
 
         //check if an enemy is too far from its spawn and apply a velocity
-        if (isTooFarFromSpawn(body.body.getPosition(), enemy.origin, 3))
+        if (isTooFarFromSpawn(body.body.getPosition(), enemy.origin, enemy.moving_range))
         {
             //get the normalization of the vector going to spawn coordinates
             enemy.direction.x = enemy.origin.x - body.body.getPosition().x;

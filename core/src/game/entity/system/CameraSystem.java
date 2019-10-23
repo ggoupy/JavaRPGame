@@ -6,7 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import game.entity.component.TransformComponent;
-import game.entity.component.player.PlayerComponent;
+import game.entity.component.PlayerComponent;
 
 public class CameraSystem extends IteratingSystem {
 

@@ -75,6 +75,7 @@ public class GameScreen implements Screen {
         );
         entityCreator.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
         entityCreator.createEnemies(tiledMap.getLayers().get("enemySpawnForest").getObjects());
+        entityCreator.createEnemies(tiledMap.getLayers().get("enemySpawnGraveYard").getObjects());
     }
 
     @Override

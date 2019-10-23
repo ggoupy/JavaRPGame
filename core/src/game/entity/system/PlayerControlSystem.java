@@ -1,9 +1,6 @@
 package game.entity.system;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import game.controller.InputsController;
 import game.entity.component.BodyComponent;
-import game.entity.component.TextureComponent;
-import game.entity.component.player.*;
 import game.entity.component.StateComponent;
 
 import com.badlogic.ashley.core.ComponentMapper;
@@ -11,7 +8,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.MathUtils;
-import game.entity.component.player.PlayerComponent;
+import game.entity.component.PlayerComponent;
 
 public class PlayerControlSystem extends IteratingSystem{
 

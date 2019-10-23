@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2019.10.08" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="79">
+<map version="1.2" tiledversion="2019.10.08" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="87">
  <tileset firstgid="1" source="TilesetGrass/grass_biome.tsx"/>
  <objectgroup id="6" name="playerPosition">
-  <object id="6" name="player" x="1472" y="1760" width="16" height="16"/>
+  <object id="6" name="player" x="1632" y="1584" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="12" name="enemySpawnGraveYard">
+  <object id="79" name="spawn1" x="1696" y="1312" width="16" height="16"/>
+  <object id="81" name="spawn2" x="1488" y="1328" width="16" height="16"/>
+  <object id="82" name="spawn3" x="1552" y="1248" width="16" height="16"/>
+  <object id="83" name="spawn4" x="1632" y="1248" width="16" height="16"/>
+  <object id="84" name="spawn5" x="1552" y="1392" width="16" height="16"/>
+  <object id="85" name="spawn6" x="1632" y="1392" width="16" height="16"/>
+  <object id="86" name="spawn7" x="1591.85" y="1320.08" width="16" height="16"/>
  </objectgroup>
  <layer id="1" name="background" width="200" height="200">
   <properties>

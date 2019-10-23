@@ -1,7 +1,6 @@
 package game.entity.system;
 
 import game.entity.component.*;
-import game.entity.component.player.*;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
