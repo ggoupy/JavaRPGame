@@ -234,6 +234,33 @@
             <key type="filename">hero/hunter/hunter-walkingUp_6.png</key>
             <key type="filename">hero/hunter/hunter-walkingUp_7.png</key>
             <key type="filename">hero/hunter/hunter-walkingUp_8.png</key>
+            <key type="filename">hero/mage/mage-standingDown.png</key>
+            <key type="filename">hero/mage/mage-standingRight.png</key>
+            <key type="filename">hero/mage/mage-standingUp.png</key>
+            <key type="filename">hero/mage/mage-walkingDown_1.png</key>
+            <key type="filename">hero/mage/mage-walkingDown_2.png</key>
+            <key type="filename">hero/mage/mage-walkingDown_3.png</key>
+            <key type="filename">hero/mage/mage-walkingDown_4.png</key>
+            <key type="filename">hero/mage/mage-walkingDown_5.png</key>
+            <key type="filename">hero/mage/mage-walkingDown_6.png</key>
+            <key type="filename">hero/mage/mage-walkingDown_7.png</key>
+            <key type="filename">hero/mage/mage-walkingDown_8.png</key>
+            <key type="filename">hero/mage/mage-walkingRight_1.png</key>
+            <key type="filename">hero/mage/mage-walkingRight_2.png</key>
+            <key type="filename">hero/mage/mage-walkingRight_3.png</key>
+            <key type="filename">hero/mage/mage-walkingRight_4.png</key>
+            <key type="filename">hero/mage/mage-walkingRight_5.png</key>
+            <key type="filename">hero/mage/mage-walkingRight_6.png</key>
+            <key type="filename">hero/mage/mage-walkingRight_7.png</key>
+            <key type="filename">hero/mage/mage-walkingRight_8.png</key>
+            <key type="filename">hero/mage/mage-walkingUp_1.png</key>
+            <key type="filename">hero/mage/mage-walkingUp_2.png</key>
+            <key type="filename">hero/mage/mage-walkingUp_3.png</key>
+            <key type="filename">hero/mage/mage-walkingUp_4.png</key>
+            <key type="filename">hero/mage/mage-walkingUp_5.png</key>
+            <key type="filename">hero/mage/mage-walkingUp_6.png</key>
+            <key type="filename">hero/mage/mage-walkingUp_7.png</key>
+            <key type="filename">hero/mage/mage-walkingUp_8.png</key>
             <key type="filename">hero/warrior/warrior-standingDown.png</key>
             <key type="filename">hero/warrior/warrior-standingRight.png</key>
             <key type="filename">hero/warrior/warrior-standingUp.png</key>
@@ -344,6 +371,33 @@
             <filename>enemy/squelet/skeleton-walkingUp_01.png</filename>
             <filename>enemy/squelet/skeleton-walkingUp_02.png</filename>
             <filename>enemy/squelet/skeleton-walkingUp_03.png</filename>
+            <filename>hero/mage/mage-standingDown.png</filename>
+            <filename>hero/mage/mage-standingRight.png</filename>
+            <filename>hero/mage/mage-standingUp.png</filename>
+            <filename>hero/mage/mage-walkingDown_1.png</filename>
+            <filename>hero/mage/mage-walkingDown_2.png</filename>
+            <filename>hero/mage/mage-walkingDown_3.png</filename>
+            <filename>hero/mage/mage-walkingDown_4.png</filename>
+            <filename>hero/mage/mage-walkingDown_5.png</filename>
+            <filename>hero/mage/mage-walkingDown_6.png</filename>
+            <filename>hero/mage/mage-walkingDown_7.png</filename>
+            <filename>hero/mage/mage-walkingDown_8.png</filename>
+            <filename>hero/mage/mage-walkingRight_1.png</filename>
+            <filename>hero/mage/mage-walkingRight_2.png</filename>
+            <filename>hero/mage/mage-walkingRight_3.png</filename>
+            <filename>hero/mage/mage-walkingRight_4.png</filename>
+            <filename>hero/mage/mage-walkingRight_5.png</filename>
+            <filename>hero/mage/mage-walkingRight_6.png</filename>
+            <filename>hero/mage/mage-walkingRight_7.png</filename>
+            <filename>hero/mage/mage-walkingRight_8.png</filename>
+            <filename>hero/mage/mage-walkingUp_1.png</filename>
+            <filename>hero/mage/mage-walkingUp_2.png</filename>
+            <filename>hero/mage/mage-walkingUp_3.png</filename>
+            <filename>hero/mage/mage-walkingUp_4.png</filename>
+            <filename>hero/mage/mage-walkingUp_5.png</filename>
+            <filename>hero/mage/mage-walkingUp_6.png</filename>
+            <filename>hero/mage/mage-walkingUp_7.png</filename>
+            <filename>hero/mage/mage-walkingUp_8.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
