@@ -16,4 +16,5 @@ public class EnemyComponent implements Component {
     public boolean collision = false; //handle collisions with scenery
     public Vector2 direction = new Vector2(0,0); //direction of the enemy
     // (to avoid collision with static body which set body velocity to 0 and so can't get the last velocity)
+    public float moving_range = 7; //range the enemy can move around its spawn (in meters)
 }

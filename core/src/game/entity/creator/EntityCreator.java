@@ -152,7 +152,7 @@ public class EntityCreator {
 
         //get a list[toSpawnLeft] of uniques index between 0 and nb of spawns
         Set<Integer> uniqIndex_arr = new HashSet<>(); //HashSet is fast to use contains() method
-       // toSpawnLeft = 1; //PROVISOIRE
+        toSpawnLeft = 1; //PROVISOIRE
         while (toSpawnLeft > 0)
         {
             int index = rand.nextInt(nbSpawns);

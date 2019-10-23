@@ -11,6 +11,8 @@ import game.entity.component.StateComponent;
 
 import java.util.Random;
 
+import static game.screen.GameScreen.TILE_SIZE;
+
 public class EnemySystem extends IteratingSystem {
 
     private ComponentMapper<EnemyComponent>  em;
@@ -46,9 +48,9 @@ public class EnemySystem extends IteratingSystem {
                 moving = false; //then will not move
                 enemy.currentTime = enemy.standingTime;
                 //watch out to have it before the velocity setter to 0 to get the last velocity
-                setStandingState(state, enemy.direction.x, enemy.direction.y);
+                setStandingState(state, enemy.direction);
                 enemy.direction.set(0,0);
-                body.body.setLinearVelocity( enemy.direction.x,  enemy.direction.y);
+                body.body.setLinearVelocity(enemy.direction);
             }
             else
             {
@@ -56,30 +58,41 @@ public class EnemySystem extends IteratingSystem {
                 enemy.currentTime = enemy.movingTime;
                 Vector2 s = getRandSpeed(enemy.speed);
                 enemy.direction.set(s.x, s.y);
-                setMovingState(state, enemy.direction.x, enemy.direction.y);
+                setMovingState(state, enemy.direction);
             }
         }
 
         if (moving)
         {
-            body.body.setLinearVelocity(enemy.direction.x, enemy.direction.y);
+            body.body.setLinearVelocity(enemy.direction);
+        }
+
+        //check if an enemy is too far from its spawn and apply a velocity
+        if (isTooFarFromSpawn(body.body.getPosition(), enemy.origin, 3))
+        {
+            //get the normalization of the vector going to spawn coordinates
+            enemy.direction.x = enemy.origin.x - body.body.getPosition().x;
+            enemy.direction.y = enemy.origin.y - body.body.getPosition().y;
+            enemy.direction.nor();
+            body.body.setLinearVelocity(enemy.direction);
+            setMovingState(state, enemy.direction);
         }
 
         if(enemy.collision)
         {
             enemy.direction.set(-enemy.direction.x, -enemy.direction.y);
-            body.body.setLinearVelocity(enemy.direction.x, enemy.direction.y);
-            setMovingState(state, enemy.direction.x, enemy.direction.y);
+            body.body.setLinearVelocity(enemy.direction);
+            setMovingState(state, enemy.direction);
             enemy.collision = false;
         }
 
+        System.out.println("origin: "+enemy.origin.x+" "+enemy.origin.y);
         enemy.currentTime -= deltaTime;
 
 
         //TO DO:
         //add a pathfinding to the player
         //quit the force applied if player collide
-        //add a pathfinding to keep the enemy around his spawn
     }
 
 
@@ -114,14 +127,14 @@ public class EnemySystem extends IteratingSystem {
     }
 
     //set the state according to velocity
-    private void setMovingState(StateComponent state, float x, float y)
+    private void setMovingState(StateComponent state, Vector2 v)
     {
-        if (y > 0) {state.set(StateComponent.MOVING_UP); return;}
-        if (y < 0) {state.set(StateComponent.MOVING_DOWN); return;}
-        if (x != 0)
+        if (v.y > 0) {state.set(StateComponent.MOVING_UP); return;}
+        if (v.y < 0) {state.set(StateComponent.MOVING_DOWN); return;}
+        if (v.x != 0)
         {
             state.set(StateComponent.MOVING);
-            if (x < 0) state.horizontalFlip = true;
+            if (v.x < 0) state.horizontalFlip = true;
             else state.horizontalFlip = false;
             return;
         }
@@ -129,10 +142,22 @@ public class EnemySystem extends IteratingSystem {
     }
 
     //set the state according to last velocity
-    private void setStandingState(StateComponent state, float x, float y)
+    private void setStandingState(StateComponent state, Vector2 v)
     {
-        if (y > 0) {state.set(StateComponent.STANDING_UP); return;}
-        if (y < 0) {state.set(StateComponent.STANDING_DOWN); return;}
+        if (v.y < 0) {state.set(StateComponent.STANDING_DOWN); return;}
+        if (v.y > 0) {state.set(StateComponent.STANDING_UP); return;}
         else {state.set(StateComponent.STANDING); return;}
+    }
+
+    //check if coordinates are too far from another according to a range (in world measure : meters)
+    private boolean isTooFarFromSpawn(Vector2 position, Vector2 spawn, float range)
+    {
+        if ((position.x > spawn.x + range)
+            || (position.x < spawn.x - range)
+            || (position.y > spawn.y + range)
+            || (position.y < spawn.y - range))
+            return true;
+
+        return false;
     }
 }
