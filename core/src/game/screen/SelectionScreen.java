@@ -5,8 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -41,8 +43,6 @@ public class SelectionScreen implements Screen {
         final Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-
-        stage.setDebugAll(true);
 
         //Background image
         Texture background = game.assetsManager.manager.get(game.assetsManager.background);
@@ -86,7 +86,14 @@ public class SelectionScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if (!game.playerSpecialization.equals("") && !nameTf.getText().equals(""))
                 {
-                    game.changeScreen(GDXGame.APPLICATION);
+                    //fade out the screen and then run the changeScreen method
+                    stage.addAction(Actions.sequence(
+                        Actions.fadeOut(1),
+                        Actions.run(new Runnable() {
+                            @Override
+                            public void run() {game.changeScreen(GDXGame.APPLICATION);}
+                        })
+                    ));
                 }
                 else
                 {

@@ -630,7 +630,7 @@
 </data>
  </layer>
  <objectgroup id="7" name="mapObjects">
-  <object id="7" name="water" x="1744" y="1296" width="47.3812" height="361.261"/>
+  <object id="7" name="water" x="1744" y="1296" width="47.3812" height="359.398"/>
   <object id="8" name="water" x="1744.23" y="1675.07" width="47.775" height="52.9282"/>
   <object id="9" name="water" x="1696" y="1728" width="112" height="80"/>
   <object id="26" name="water" x="1488" y="1552" width="48" height="48"/>
@@ -643,7 +643,7 @@
   <object id="35" name="house" x="1984" y="1392" width="16" height="16"/>
   <object id="36" name="house" x="2064" y="1424" width="16" height="16"/>
   <object id="37" name="tree" x="1431.47" y="1731.12" width="34.5908" height="40.5837"/>
-  <object id="38" name="trees" x="1494.55" y="1730.17" width="36.5884" height="41.7403"/>
+  <object id="38" name="trees" x="1494.55" y="1730.87" width="36.5884" height="41.0417"/>
   <object id="41" name="house" x="1603.16" y="1536.19" width="60.455" height="28.5979"/>
   <object id="42" name="tower" x="1816.6" y="1631.87" width="18.2942" height="10.8293"/>
   <object id="43" name="tombes" x="1536.29" y="1279.96" width="126.693" height="28.8081"/>

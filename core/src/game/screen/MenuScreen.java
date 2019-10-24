@@ -36,7 +36,6 @@ public class MenuScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-        table.debugAll();
 
         //Background image
         Texture background = game.assetsManager.manager.get(game.assetsManager.background);
