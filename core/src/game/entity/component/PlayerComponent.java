@@ -9,7 +9,7 @@ public class PlayerComponent implements Component {
     public double level;
     public Bar life;
     public Bar action; //Call it differently
-    public int speed;
+    public float speed;
     public int damage;
     public String spec;
 }

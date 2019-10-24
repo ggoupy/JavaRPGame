@@ -38,6 +38,7 @@ public class PlayerControlSystem extends IteratingSystem{
     {
         BodyComponent body = bodm.get(entity); //get the body component of the entity
         StateComponent state = sm.get(entity); //get the state component of the entity
+        PlayerComponent player = pm.get(entity); //get the player component of the entity
 
         //Check the velocity in x and y to update the current state of the entity
         //We update the state only if he is already not currently in this state (for animations purpose)
@@ -59,13 +60,13 @@ public class PlayerControlSystem extends IteratingSystem{
         if(controller.left)
         {
             state.horizontalFlip = true;
-            body.body.setLinearVelocity(MathUtils.lerp(body.body.getLinearVelocity().x, -2f, 0.2f),
+            body.body.setLinearVelocity(MathUtils.lerp(body.body.getLinearVelocity().x, -player.speed, 0.2f),
                                         body.body.getLinearVelocity().y);
         }
         if(controller.right)
         {
             state.horizontalFlip = false;
-            body.body.setLinearVelocity(MathUtils.lerp(body.body.getLinearVelocity().x, 2f, 0.2f),
+            body.body.setLinearVelocity(MathUtils.lerp(body.body.getLinearVelocity().x, player.speed, 0.2f),
                                         body.body.getLinearVelocity().y);
         }
         if(!controller.left && ! controller.right)
@@ -77,13 +78,13 @@ public class PlayerControlSystem extends IteratingSystem{
         {
             state.horizontalFlip = false;
             body.body.setLinearVelocity(body.body.getLinearVelocity().x,
-                                        MathUtils.lerp(body.body.getLinearVelocity().y, 2f, 0.2f));
+                                        MathUtils.lerp(body.body.getLinearVelocity().y, player.speed, 0.2f));
         }
         if(controller.down)
         {
             state.horizontalFlip = false;
             body.body.setLinearVelocity(body.body.getLinearVelocity().x,
-                                        MathUtils.lerp(body.body.getLinearVelocity().y, -2f, 0.2f));
+                                        MathUtils.lerp(body.body.getLinearVelocity().y, -player.speed, 0.2f));
         }
         if(!controller.up && !controller.down)
         {

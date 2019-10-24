@@ -25,7 +25,12 @@ public class GDXGame extends Game {
 	@Override
 	public void create ()
 	{
+		playerSpecialization = "";
+
 		assetsManager = new AssetsManager();
+		assetsManager.queueAddAssets();
+		assetsManager.manager.finishLoading();
+
 		loadingScreen = new LoadingScreen(this);
 		this.setScreen(loadingScreen);
 	}

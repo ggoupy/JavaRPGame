@@ -6,6 +6,8 @@ import game.GDXGame;
 public class LoadingScreen implements Screen {
 
     private GDXGame game;
+    //would load things there in the future
+    //add an animation before menu screen
 
     public LoadingScreen(GDXGame g)
     {

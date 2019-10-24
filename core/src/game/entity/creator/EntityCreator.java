@@ -88,7 +88,7 @@ public class EntityCreator {
         createAnimation(animation,StateComponent.MOVING,0.08f, player.spec+"-walkingRight", PlayMode.LOOP);
         createAnimation(animation,StateComponent.MOVING_UP,0.08f, player.spec+"-walkingUp", PlayMode.LOOP);
         createAnimation(animation,StateComponent.MOVING_DOWN,0.08f, player.spec+"-walkingDown", PlayMode.LOOP);
-        createAnimation(animation,StateComponent.STANDING,1.f, player.spec+"-standingRight", PlayMode.NORMAL);
+        createAnimation(animation,StateComponent.STANDING,1f, player.spec+"-standingRight", PlayMode.NORMAL);
         createAnimation(animation,StateComponent.STANDING_UP,1f,player.spec+"-standingUp", PlayMode.NORMAL);
         createAnimation(animation,StateComponent.STANDING_DOWN,1f, player.spec+"-standingDown", PlayMode.NORMAL);
 
@@ -228,7 +228,7 @@ public class EntityCreator {
                 player.life = new Bar(80); //manage current and max life
                 player.action = new Bar(200);
                 player.damage = 10;
-                player.speed = 2;
+                player.speed = 2f;
                 break;
             }
             case "hunter":
@@ -236,7 +236,7 @@ public class EntityCreator {
                 player.life = new Bar(100); //manage current and max life
                 player.action = new Bar(150);
                 player.damage = 8;
-                player.speed = 4;
+                player.speed = 3f;
                 break;
             }
             case "warrior":
@@ -244,7 +244,7 @@ public class EntityCreator {
                 player.life = new Bar(200); //manage current and max life
                 player.action = new Bar(100);
                 player.damage = 5;
-                player.speed = 2;
+                player.speed = 1.5f;
                 break;
             }
         }

@@ -42,9 +42,7 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0, 0), true);
         world.setContactListener(new CollisionListener());
 
-        /* LOAD AND GET ASSETS */
-        game.assetsManager.queueAddAssets();
-        game.assetsManager.manager.finishLoading();
+        /* GET ASSETS */
         atlas = game.assetsManager.getAtlas();
 
         /* RENDERING SYSTEM */
