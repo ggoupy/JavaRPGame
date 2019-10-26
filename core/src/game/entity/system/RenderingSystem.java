@@ -32,7 +32,7 @@ public class RenderingSystem extends SortedIteratingSystem {
     private int [] fgLayersIndex; //index of tile map layers to render after character
 
     private Array<Entity> renderQueue; // an array used to allow sorting of images allowing us to draw images on top of each other
-    private Comparator<Entity> comparator; // a comparator to sort images based on the z position of the transformComponent
+    private ZComparator perspectiveComparator; // a comparator to sort images based on the z position of the transformComponent
 
     // component mappers to get components from entities
     private ComponentMapper<TextureComponent> textureM;
@@ -42,6 +42,8 @@ public class RenderingSystem extends SortedIteratingSystem {
 
         // gets all entities with a TransformComponent and TextureComponent
         super(Family.all(TransformComponent.class, TextureComponent.class).get(), new ZComparator());
+
+        perspectiveComparator = new ZComparator();
 
         this.batch = batch;
         this.camera = camera;
@@ -70,6 +72,9 @@ public class RenderingSystem extends SortedIteratingSystem {
     public void update(float deltaTime)
     {
         super.update(deltaTime);
+
+        //sort entities according to Z axes in order to display one before other
+        renderQueue.sort(perspectiveComparator);
 
         camera.update();
         mapRenderer.setView(camera);

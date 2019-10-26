@@ -193,7 +193,7 @@ public class EntityCreator {
             //convert rectangle coordinates into rectangle center coordinates in the world
             Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
 
-            body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.DynamicBody, BodyFactory.STONE);
+            body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.DynamicBody, BodyFactory.STONE, true);
 
             position.position.set(center.x,center.y,0);
 

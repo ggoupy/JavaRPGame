@@ -89,7 +89,8 @@ public class BodyFactory {
     }
 
     //Create and return a polygon box2D in the world with a rectangle given and specifics attributes
-    public Body makeBox(Rectangle r, BodyType type, int material)
+    public Body makeBox(Rectangle r, BodyType type, int material) { return makeBox(r , type, material, false); }
+    public Body makeBox(Rectangle r, BodyType type, int material, boolean isSensor)
     {
         //definition of the box
         BodyDef def = new BodyDef();
@@ -103,7 +104,8 @@ public class BodyFactory {
         box.setTransform(getTransformedCenterForRectangle(r), 0);
 
         //create a body fixture (= physical properties) with the material of the box and it's shape
-        box.createFixture(makeFixture(material, getShapeFromRectangle(r)));
+        Fixture fixt = box.createFixture(makeFixture(material, getShapeFromRectangle(r)));
+        fixt.setSensor(isSensor);
 
         return box;
     }

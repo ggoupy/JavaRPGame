@@ -18,9 +18,9 @@ public class ZComparator implements Comparator<Entity> {
         float bz = cmTrans.get(entityB).position.z;
         int res = 0;
         if(az > bz){
-            res = 1;
-        }else if(az < bz){
             res = -1;
+        }else if(az < bz){
+            res = 1;
         }
         return res;
     }
