@@ -10,6 +10,7 @@ public class InputsController implements InputProcessor {
     public boolean right;
     public boolean up;
     public boolean down;
+    public boolean attack_key;
 
 
     @Override
@@ -31,6 +32,10 @@ public class InputsController implements InputProcessor {
                 break;
             case Keys.S:
                 down = true;
+                keyProcessed = true;
+                break;
+            case Keys.E:
+                attack_key = true;
                 keyProcessed = true;
                 break;
         }
@@ -57,6 +62,10 @@ public class InputsController implements InputProcessor {
                 break;
             case Keys.S:
                 down = false;
+                keyProcessed = true;
+                break;
+            case Keys.E:
+                attack_key = false;
                 keyProcessed = true;
                 break;
         }

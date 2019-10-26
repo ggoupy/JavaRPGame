@@ -18,6 +18,7 @@ public class AssetsManager {
 
     //Background path
     public static final String background = "background/background.png";
+    public static final String background_hud = "background/background-hud.png";
 
     //Skin for menu
     private Skin skin;
@@ -43,6 +44,7 @@ public class AssetsManager {
         atlas = new TextureAtlas(spritesheet);
 
         manager.load(background, Texture.class);
+        manager.load(background_hud, Texture.class);
 
         manager.setLoader(TiledMap.class, new TmxMapLoader());
         manager.load(tiledMap, TiledMap.class);

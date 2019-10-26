@@ -1,5 +1,7 @@
 package game.screen;
 
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -7,16 +9,19 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import game.CollisionListener;
+import game.entity.component.PlayerComponent;
 import game.entity.creator.EntityCreator;
 import game.GDXGame;
 import game.controller.InputsController;
 import game.entity.system.*;
+import game.screen.hud.HUD;
+
+import static game.utils.Constants.TILE_SIZE;
 
 
 public class GameScreen implements Screen {
@@ -29,11 +34,11 @@ public class GameScreen implements Screen {
     private SpriteBatch spriteBatch;
     private PooledEngine engine;
 
-    public static final float TILE_SIZE = 16f;
-
     private TiledMap tiledMap;
     private TextureAtlas atlas;
     private EntityCreator entityCreator;
+
+    private Entity player;
 
     public GameScreen(GDXGame g)
     {
@@ -61,19 +66,25 @@ public class GameScreen implements Screen {
         engine.addSystem(new PhysicsDebugSystem(world, camera));
         engine.addSystem(new CameraSystem(camera));
         engine.addSystem(new CollisionSystem());
-        engine.addSystem(new PlayerControlSystem(controller));
+        engine.addSystem(new PlayerMovementSystem(controller));
+        engine.addSystem(new PlayerAttackSystem(controller));
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new EnemyMovementSystem());
+        engine.addSystem(new EnemyHealthSystem());
 
         //create entities
         entityCreator = entityCreator.getInstance(world, engine, atlas);
-        entityCreator.createPlayer(
-                tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
-                game.playerSpecialization
+        player = entityCreator.createPlayer(
+                    tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
+                    game.playerSpecialization,
+                    game.playerName
         );
         entityCreator.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
         entityCreator.createEnemies(tiledMap.getLayers().get("enemySpawnForest").getObjects());
         entityCreator.createEnemies(tiledMap.getLayers().get("enemySpawnGraveYard").getObjects());
+
+        PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, player.getComponent(PlayerComponent.class));
+        engine.addSystem(HUD);
     }
 
     @Override
@@ -83,13 +94,12 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(controller);
     }
 
-   @Override
-   public void render(float delta) {
+    @Override
+    public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-       engine.update(delta);
-   }
+        engine.update(delta);
+    }
 
    @Override
    public void resize(int width, int height) {}

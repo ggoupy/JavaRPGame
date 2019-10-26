@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-import static game.screen.GameScreen.TILE_SIZE;
+import game.utils.Constants;
 
 
 public class BodyFactory {
@@ -50,22 +50,22 @@ public class BodyFactory {
         switch(material)
         {
             case WOOD:
-                fixtureDef.density = 0.5f;
-                fixtureDef.friction = 0.7f;
-                fixtureDef.restitution = 0.3f;
+                fixtureDef.density = 0f;
+                fixtureDef.friction = 0f;
+                fixtureDef.restitution = 0f;
                 break;
             case STONE:
-                fixtureDef.density = 1f;
-                fixtureDef.friction = 0.9f;
-                fixtureDef.restitution = 0.01f;
+                fixtureDef.density = 0f;
+                fixtureDef.friction = 0f;
+                fixtureDef.restitution = 0f;
             case GRASS:
-                fixtureDef.density = 0.5f;
-                fixtureDef.friction = 0.5f;
-                fixtureDef.restitution = 0.5f;
+                fixtureDef.density = 0f;
+                fixtureDef.friction = 0f;
+                fixtureDef.restitution = 0f;
             default:
-                fixtureDef.density = 0.5f;
-                fixtureDef.friction = 0.5f;
-                fixtureDef.restitution = 0.5f;
+                fixtureDef.density = 0f;
+                fixtureDef.friction = 0f;
+                fixtureDef.restitution = 0f;
         }
 
         return fixtureDef;
@@ -76,7 +76,7 @@ public class BodyFactory {
     public static PolygonShape getShapeFromRectangle(Rectangle rectangle)
     {
         PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(rectangle.width*0.5F/ TILE_SIZE,rectangle.height*0.5F/ TILE_SIZE);
+        polygonShape.setAsBox(rectangle.width*0.5F/ Constants.TILE_SIZE,rectangle.height*0.5F/ Constants.TILE_SIZE);
         return polygonShape;
     }
 
@@ -85,7 +85,7 @@ public class BodyFactory {
     {
         Vector2 center = new Vector2();
         rectangle.getCenter(center);
-        return center.scl(1/TILE_SIZE);
+        return center.scl(1/Constants.TILE_SIZE);
     }
 
     //Create and return a polygon box2D in the world with a rectangle given and specifics attributes
@@ -104,7 +104,6 @@ public class BodyFactory {
 
         //create a body fixture (= physical properties) with the material of the box and it's shape
         box.createFixture(makeFixture(material, getShapeFromRectangle(r)));
-        //add a sensor to the fixture?
 
         return box;
     }

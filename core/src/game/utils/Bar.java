@@ -1,8 +1,8 @@
 package game.utils;
 
 public class Bar {
-    private int max;
-    private int current;
+    private float max;
+    private float current;
 
     public Bar(int max) {
         this.max = max;
@@ -12,9 +12,9 @@ public class Bar {
         this.max = max;
         this.current = current;
     }
-    public int getMax() {return max;}
-    public void setMax(int m) {max = m;}
-    public int getCurrent() {return current;}
-    public void setCurrent(int c) {current = c;}
-    public void updateCurrent(int c) {current += c;}
+    public float getMax() {return max;}
+    public void setMax(float m) {max = m;}
+    public float getCurrent() {return current;}
+    public void setCurrent(float c) {current = c;}
+    public void updateCurrent(float c) {current += c;}
 }

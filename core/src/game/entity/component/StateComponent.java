@@ -11,6 +11,9 @@ public class StateComponent implements Component {
     public static final int MOVING = 3; //manage moving to left and right
     public static final int MOVING_UP = 4;
     public static final int MOVING_DOWN = 5;
+    public static final int ATTACKING = 6;
+    public static final int ATTACKING_UP = 7;
+    public static final int ATTACKING_DOWN = 9;
 
     private int state = 0; //current statement (=STANDING)
     public float time = 0.0f; //time in this statement

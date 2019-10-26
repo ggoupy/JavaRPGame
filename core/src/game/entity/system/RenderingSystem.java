@@ -6,31 +6,22 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import game.entity.component.*;
-import game.loader.AssetsManager;
-import sun.awt.X11.XSystemTrayPeer;
+import game.entity.component.EnemyHealthComponent;
+import game.entity.component.TextureComponent;
+import game.entity.component.TransformComponent;
+import game.utils.Constants;
 
 import java.util.Comparator;
 
-import static game.loader.AssetsManager.tmBackground;
-import static game.loader.AssetsManager.tmForeground;
-import static game.loader.AssetsManager.tmGround;
-import static game.screen.GameScreen.TILE_SIZE;
+import static game.loader.AssetsManager.*;
 
 public class RenderingSystem extends SortedIteratingSystem {
-
-    private static final float PIXELS_TO_METRES = 1 / 64f;
 
     private SpriteBatch batch;
     private Viewport viewport;
@@ -55,7 +46,7 @@ public class RenderingSystem extends SortedIteratingSystem {
         this.batch = batch;
         this.camera = camera;
         this.tiledMap = tiledMap;
-        this.mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1/TILE_SIZE);
+        this.mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1/Constants.TILE_SIZE);
 
         //Get layers to render it in a specific order
         MapLayers map = tiledMap.getLayers();
@@ -126,6 +117,6 @@ public class RenderingSystem extends SortedIteratingSystem {
 
     // convenience method to convert pixels to meters
     public static float PixelsToMeters(float pixelValue){
-        return pixelValue * PIXELS_TO_METRES;
+        return pixelValue * Constants.PIXELS_TO_METRES;
     }
 }

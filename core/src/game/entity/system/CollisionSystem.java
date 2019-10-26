@@ -49,6 +49,7 @@ public class CollisionSystem  extends IteratingSystem {
                     {
                         case TypeComponent.ENEMY:
                             System.out.println("player hit enemy");
+                            entity.getComponent(PlayerComponent.class).life.updateCurrent(-10);
                             //Do things
                             break;
 
@@ -94,6 +95,7 @@ public class CollisionSystem  extends IteratingSystem {
 
                         case TypeComponent.PLAYER:
                             System.out.println("enemy hit player");
+                            enemy.life.updateCurrent(-10);
                             enemy.collision = true;
                             break;
 

@@ -5,13 +5,15 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import java.awt.*;
 import game.GDXGame;
 
+import game.utils.Constants;
+
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "The Survival RPG Game";
-		cfg.height = (int) (dimension.getHeight()*0.8); //64*15;
-		cfg.width = (int) (dimension.getWidth()*0.8); //64*25
+		cfg.height = Constants.G_HEIGHT;
+		cfg.width = Constants.G_WIDTH;
 		new LwjglApplication(new GDXGame(), cfg);
 	}
 }

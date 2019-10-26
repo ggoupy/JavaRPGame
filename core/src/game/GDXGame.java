@@ -21,6 +21,8 @@ public class GDXGame extends Game {
 	private GameScreen gameScreen;
 
 	public String playerSpecialization;
+	public String playerName;
+
 
 	@Override
 	public void create ()

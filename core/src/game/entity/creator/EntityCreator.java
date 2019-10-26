@@ -1,21 +1,28 @@
 package game.entity.creator;
 
-import java.util.*;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import game.entity.component.*;
 import game.entity.component.PlayerComponent;
+import game.entity.system.EnemyHealthSystem;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 import game.utils.Bar;
+import game.utils.Timer;
 
 
 public class EntityCreator {
@@ -52,12 +59,11 @@ public class EntityCreator {
 
 
     //create a player box2D in the world according to his position in the tiled map
-    public void createPlayer(MapObject playerObj, String spec)
+    public Entity createPlayer(MapObject playerObj, String spec, String name)
     {
         // Create the Entity and all the components that will go in the entity
         Entity entity = engine.createEntity();
         PlayerComponent player = engine.createComponent(PlayerComponent.class);
-        createPlayerDefinition(player, spec);
         BodyComponent body = engine.createComponent(BodyComponent.class);
         TypeComponent type = engine.createComponent(TypeComponent.class);
         TransformComponent position = engine.createComponent(TransformComponent.class);
@@ -65,6 +71,10 @@ public class EntityCreator {
         StateComponent state = engine.createComponent(StateComponent.class);
         AnimationComponent animation = engine.createComponent(AnimationComponent.class);
         CollisionComponent collision = engine.createComponent(CollisionComponent.class);
+
+        //player definition
+        createPlayerDefinition(player, spec);
+        player.name = name;
 
         //get the rectangle of the mapObject (to have the coordinates)
         Rectangle rectangle = ((RectangleMapObject)playerObj).getRectangle();
@@ -91,6 +101,12 @@ public class EntityCreator {
         createAnimation(animation,StateComponent.STANDING,1f, player.spec+"-standingRight", PlayMode.NORMAL);
         createAnimation(animation,StateComponent.STANDING_UP,1f,player.spec+"-standingUp", PlayMode.NORMAL);
         createAnimation(animation,StateComponent.STANDING_DOWN,1f, player.spec+"-standingDown", PlayMode.NORMAL);
+        createAnimation(animation,StateComponent.ATTACKING,0.08f, player.spec+"-attackingRight", PlayMode.NORMAL);
+        createAnimation(animation,StateComponent.ATTACKING_UP,0.08f,player.spec+"-attackingUp", PlayMode.NORMAL);
+        createAnimation(animation,StateComponent.ATTACKING_DOWN,0.08f, player.spec+"-attackingDown", PlayMode.NORMAL);
+
+        //get the attack duration to disable movements when player attacking
+        player.attackDuration = new Timer(animation.animations.get(StateComponent.ATTACKING).getAnimationDuration());
 
         //store a reference to the entity in the box2d box
         body.body.setUserData(entity);
@@ -107,6 +123,8 @@ public class EntityCreator {
 
         // add the entity to the engine
         engine.addEntity(entity);
+
+        return entity; //to save the player
     }
 
     //convert mapObjects of tiled map into box2D objects in the world
@@ -143,7 +161,7 @@ public class EntityCreator {
 
         //get a list[toSpawnLeft] of uniques index between 0 and nb of spawns
         Set<Integer> uniqIndex_arr = new HashSet<>(); //HashSet is fast to use contains() method
-       // toSpawnLeft = 1; //PROVISOIRE
+        //toSpawnLeft = 1; //PROVISOIRE
         while (toSpawnLeft > 0)
         {
             int index = rand.nextInt(nbSpawns);
@@ -168,6 +186,7 @@ public class EntityCreator {
             AnimationComponent animation = engine.createComponent(AnimationComponent.class);
             TextureComponent texture = engine.createComponent(TextureComponent.class);
             TransformComponent position = engine.createComponent(TransformComponent.class);
+            EnemyHealthComponent healthBar = engine.createComponent(EnemyHealthComponent.class);
 
             type.type = TypeComponent.ENEMY;
 
@@ -207,9 +226,38 @@ public class EntityCreator {
             entity.add(collision);
             entity.add(type);
             entity.add(state);
+            entity.add(healthBar);
+
+            createEnemyHealthBar(entity);
 
             engine.addEntity(entity);
         }
+    }
+
+    private void createEnemyHealthBar(Entity enemy)
+    {
+        Entity entity = engine.createEntity();
+        TextureComponent texture = engine.createComponent(TextureComponent.class);
+        AttachedComponent attached = engine.createComponent(AttachedComponent.class);
+        TransformComponent position = engine.createComponent(TransformComponent.class);
+        EnemyHealthComponent health = engine.createComponent(EnemyHealthComponent.class);
+
+        attached.attachedEntity = enemy;
+
+        texture.region = new TextureRegion(atlas.findRegion("enemy-healthbar"));
+
+        Vector3 enemyPos = enemy.getComponent(TransformComponent.class).position;
+        position.position.set(enemyPos);
+
+        health.size = new Rectangle(texture.region.getRegionX(), texture.region.getRegionY(),
+                                    texture.region.getRegionWidth(), texture.region.getRegionHeight()
+        );
+
+        entity.add(texture);
+        entity.add(position);
+        entity.add(attached);
+        entity.add(health);
+        engine.addEntity(entity);
     }
 
     //create an animation with parameters given to a animation component

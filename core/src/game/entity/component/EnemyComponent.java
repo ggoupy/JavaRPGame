@@ -2,11 +2,12 @@ package game.entity.component;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
+import game.utils.Bar;
 
 public class EnemyComponent implements Component {
     public boolean isDead = false;
     public Vector2 origin = null; //origin position
-    public int life = 100;
+    public Bar life = new Bar(100);
     public float speed = 0.5f;
     public double movingTime = 2; // nb of seconds letting the enemy moving
     public double standingTime = 2; //nb of seconds letting the enemy standing

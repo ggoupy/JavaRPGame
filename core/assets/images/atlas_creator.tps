@@ -181,6 +181,21 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">enemy/enemy-healthbar.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>13,2,25,3</rect>
+                <key>scale9Paddings</key>
+                <rect>13,2,25,3</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">enemy/squelet/skeleton-standingDown.png</key>
             <key type="filename">enemy/squelet/skeleton-standingRight.png</key>
             <key type="filename">enemy/squelet/skeleton-standingUp.png</key>
@@ -207,6 +222,24 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">hero/hunter/hunter-attackingDown_1.png</key>
+            <key type="filename">hero/hunter/hunter-attackingDown_2.png</key>
+            <key type="filename">hero/hunter/hunter-attackingDown_3.png</key>
+            <key type="filename">hero/hunter/hunter-attackingDown_4.png</key>
+            <key type="filename">hero/hunter/hunter-attackingDown_5.png</key>
+            <key type="filename">hero/hunter/hunter-attackingDown_6.png</key>
+            <key type="filename">hero/hunter/hunter-attackingRight_1.png</key>
+            <key type="filename">hero/hunter/hunter-attackingRight_2.png</key>
+            <key type="filename">hero/hunter/hunter-attackingRight_3.png</key>
+            <key type="filename">hero/hunter/hunter-attackingRight_4.png</key>
+            <key type="filename">hero/hunter/hunter-attackingRight_5.png</key>
+            <key type="filename">hero/hunter/hunter-attackingRight_6.png</key>
+            <key type="filename">hero/hunter/hunter-attackingUp_1.png</key>
+            <key type="filename">hero/hunter/hunter-attackingUp_2.png</key>
+            <key type="filename">hero/hunter/hunter-attackingUp_3.png</key>
+            <key type="filename">hero/hunter/hunter-attackingUp_4.png</key>
+            <key type="filename">hero/hunter/hunter-attackingUp_5.png</key>
+            <key type="filename">hero/hunter/hunter-attackingUp_6.png</key>
             <key type="filename">hero/hunter/hunter-standingDown.png</key>
             <key type="filename">hero/hunter/hunter-standingRight.png</key>
             <key type="filename">hero/hunter/hunter-standingUp.png</key>
@@ -234,6 +267,27 @@
             <key type="filename">hero/hunter/hunter-walkingUp_6.png</key>
             <key type="filename">hero/hunter/hunter-walkingUp_7.png</key>
             <key type="filename">hero/hunter/hunter-walkingUp_8.png</key>
+            <key type="filename">hero/mage/mage-attackingDown_1.png</key>
+            <key type="filename">hero/mage/mage-attackingDown_2.png</key>
+            <key type="filename">hero/mage/mage-attackingDown_3.png</key>
+            <key type="filename">hero/mage/mage-attackingDown_4.png</key>
+            <key type="filename">hero/mage/mage-attackingDown_5.png</key>
+            <key type="filename">hero/mage/mage-attackingDown_6.png</key>
+            <key type="filename">hero/mage/mage-attackingDown_7.png</key>
+            <key type="filename">hero/mage/mage-attackingRight_1.png</key>
+            <key type="filename">hero/mage/mage-attackingRight_2.png</key>
+            <key type="filename">hero/mage/mage-attackingRight_3.png</key>
+            <key type="filename">hero/mage/mage-attackingRight_4.png</key>
+            <key type="filename">hero/mage/mage-attackingRight_5.png</key>
+            <key type="filename">hero/mage/mage-attackingRight_6.png</key>
+            <key type="filename">hero/mage/mage-attackingRight_7.png</key>
+            <key type="filename">hero/mage/mage-attackingUp_1.png</key>
+            <key type="filename">hero/mage/mage-attackingUp_2.png</key>
+            <key type="filename">hero/mage/mage-attackingUp_3.png</key>
+            <key type="filename">hero/mage/mage-attackingUp_4.png</key>
+            <key type="filename">hero/mage/mage-attackingUp_5.png</key>
+            <key type="filename">hero/mage/mage-attackingUp_6.png</key>
+            <key type="filename">hero/mage/mage-attackingUp_7.png</key>
             <key type="filename">hero/mage/mage-standingDown.png</key>
             <key type="filename">hero/mage/mage-standingRight.png</key>
             <key type="filename">hero/mage/mage-standingUp.png</key>
@@ -261,6 +315,30 @@
             <key type="filename">hero/mage/mage-walkingUp_6.png</key>
             <key type="filename">hero/mage/mage-walkingUp_7.png</key>
             <key type="filename">hero/mage/mage-walkingUp_8.png</key>
+            <key type="filename">hero/warrior/warrior-attackingDown_1.png</key>
+            <key type="filename">hero/warrior/warrior-attackingDown_2.png</key>
+            <key type="filename">hero/warrior/warrior-attackingDown_3.png</key>
+            <key type="filename">hero/warrior/warrior-attackingDown_4.png</key>
+            <key type="filename">hero/warrior/warrior-attackingDown_5.png</key>
+            <key type="filename">hero/warrior/warrior-attackingDown_6.png</key>
+            <key type="filename">hero/warrior/warrior-attackingDown_7.png</key>
+            <key type="filename">hero/warrior/warrior-attackingDown_8.png</key>
+            <key type="filename">hero/warrior/warrior-attackingRight_1.png</key>
+            <key type="filename">hero/warrior/warrior-attackingRight_2.png</key>
+            <key type="filename">hero/warrior/warrior-attackingRight_3.png</key>
+            <key type="filename">hero/warrior/warrior-attackingRight_4.png</key>
+            <key type="filename">hero/warrior/warrior-attackingRight_5.png</key>
+            <key type="filename">hero/warrior/warrior-attackingRight_6.png</key>
+            <key type="filename">hero/warrior/warrior-attackingRight_7.png</key>
+            <key type="filename">hero/warrior/warrior-attackingRight_8.png</key>
+            <key type="filename">hero/warrior/warrior-attackingUp_1.png</key>
+            <key type="filename">hero/warrior/warrior-attackingUp_2.png</key>
+            <key type="filename">hero/warrior/warrior-attackingUp_3.png</key>
+            <key type="filename">hero/warrior/warrior-attackingUp_4.png</key>
+            <key type="filename">hero/warrior/warrior-attackingUp_5.png</key>
+            <key type="filename">hero/warrior/warrior-attackingUp_6.png</key>
+            <key type="filename">hero/warrior/warrior-attackingUp_7.png</key>
+            <key type="filename">hero/warrior/warrior-attackingUp_8.png</key>
             <key type="filename">hero/warrior/warrior-standingDown.png</key>
             <key type="filename">hero/warrior/warrior-standingRight.png</key>
             <key type="filename">hero/warrior/warrior-standingUp.png</key>
@@ -299,6 +377,22 @@
                 <rect>16,16,32,32</rect>
                 <key>scale9Paddings</key>
                 <rect>16,16,32,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">hud/action-bar.png</key>
+            <key type="filename">hud/health-bar.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>0,13,1,25</rect>
+                <key>scale9Paddings</key>
+                <rect>0,13,1,25</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -398,6 +492,72 @@
             <filename>hero/mage/mage-walkingUp_6.png</filename>
             <filename>hero/mage/mage-walkingUp_7.png</filename>
             <filename>hero/mage/mage-walkingUp_8.png</filename>
+            <filename>hud/action-bar.png</filename>
+            <filename>hud/health-bar.png</filename>
+            <filename>enemy/enemy-healthbar.png</filename>
+            <filename>hero/mage/mage-attackingDown_1.png</filename>
+            <filename>hero/mage/mage-attackingDown_2.png</filename>
+            <filename>hero/mage/mage-attackingDown_3.png</filename>
+            <filename>hero/mage/mage-attackingDown_4.png</filename>
+            <filename>hero/mage/mage-attackingDown_5.png</filename>
+            <filename>hero/mage/mage-attackingDown_6.png</filename>
+            <filename>hero/mage/mage-attackingDown_7.png</filename>
+            <filename>hero/mage/mage-attackingRight_1.png</filename>
+            <filename>hero/mage/mage-attackingRight_2.png</filename>
+            <filename>hero/mage/mage-attackingRight_3.png</filename>
+            <filename>hero/mage/mage-attackingRight_4.png</filename>
+            <filename>hero/mage/mage-attackingRight_5.png</filename>
+            <filename>hero/mage/mage-attackingRight_6.png</filename>
+            <filename>hero/mage/mage-attackingRight_7.png</filename>
+            <filename>hero/mage/mage-attackingUp_1.png</filename>
+            <filename>hero/mage/mage-attackingUp_2.png</filename>
+            <filename>hero/mage/mage-attackingUp_3.png</filename>
+            <filename>hero/mage/mage-attackingUp_4.png</filename>
+            <filename>hero/mage/mage-attackingUp_5.png</filename>
+            <filename>hero/mage/mage-attackingUp_6.png</filename>
+            <filename>hero/mage/mage-attackingUp_7.png</filename>
+            <filename>hero/hunter/hunter-attackingDown_1.png</filename>
+            <filename>hero/hunter/hunter-attackingDown_2.png</filename>
+            <filename>hero/hunter/hunter-attackingDown_3.png</filename>
+            <filename>hero/hunter/hunter-attackingDown_4.png</filename>
+            <filename>hero/hunter/hunter-attackingDown_5.png</filename>
+            <filename>hero/hunter/hunter-attackingDown_6.png</filename>
+            <filename>hero/hunter/hunter-attackingRight_1.png</filename>
+            <filename>hero/hunter/hunter-attackingRight_2.png</filename>
+            <filename>hero/hunter/hunter-attackingRight_3.png</filename>
+            <filename>hero/hunter/hunter-attackingRight_4.png</filename>
+            <filename>hero/hunter/hunter-attackingRight_5.png</filename>
+            <filename>hero/hunter/hunter-attackingRight_6.png</filename>
+            <filename>hero/hunter/hunter-attackingUp_1.png</filename>
+            <filename>hero/hunter/hunter-attackingUp_2.png</filename>
+            <filename>hero/hunter/hunter-attackingUp_3.png</filename>
+            <filename>hero/hunter/hunter-attackingUp_4.png</filename>
+            <filename>hero/hunter/hunter-attackingUp_5.png</filename>
+            <filename>hero/hunter/hunter-attackingUp_6.png</filename>
+            <filename>hero/warrior/warrior-attackingDown_1.png</filename>
+            <filename>hero/warrior/warrior-attackingDown_2.png</filename>
+            <filename>hero/warrior/warrior-attackingDown_3.png</filename>
+            <filename>hero/warrior/warrior-attackingDown_4.png</filename>
+            <filename>hero/warrior/warrior-attackingDown_5.png</filename>
+            <filename>hero/warrior/warrior-attackingDown_6.png</filename>
+            <filename>hero/warrior/warrior-attackingDown_7.png</filename>
+            <filename>hero/warrior/warrior-attackingDown_8.png</filename>
+            <filename>hero/warrior/warrior-attackingRight_1.png</filename>
+            <filename>hero/warrior/warrior-attackingRight_2.png</filename>
+            <filename>hero/warrior/warrior-attackingRight_3.png</filename>
+            <filename>hero/warrior/warrior-attackingRight_4.png</filename>
+            <filename>hero/warrior/warrior-attackingRight_5.png</filename>
+            <filename>hero/warrior/warrior-attackingRight_6.png</filename>
+            <filename>hero/warrior/warrior-attackingRight_7.png</filename>
+            <filename>hero/warrior/warrior-attackingRight_8.png</filename>
+            <filename>hero/warrior/warrior-attackingUp_1.png</filename>
+            <filename>hero/warrior/warrior-attackingUp_2.png</filename>
+            <filename>hero/warrior/warrior-attackingUp_3.png</filename>
+            <filename>hero/warrior/warrior-attackingUp_4.png</filename>
+            <filename>hero/warrior/warrior-attackingUp_5.png</filename>
+            <filename>hero/warrior/warrior-attackingUp_6.png</filename>
+            <filename>hero/warrior/warrior-attackingUp_7.png</filename>
+            <filename>hero/warrior/warrior-attackingUp_8.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

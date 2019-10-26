@@ -76,7 +76,7 @@ public class SelectionScreen implements Screen {
         nameLb.setFontScale(1.1F);
         table.add(nameLb).fill();
 
-        nameTf = new TextField("", skin);
+        nameTf = new TextField("myHero", skin);
         table.add(nameTf).fill().padLeft(10);
         table.row().padTop(200);
 
@@ -86,6 +86,7 @@ public class SelectionScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 if (!game.playerSpecialization.equals("") && !nameTf.getText().equals(""))
                 {
+                    game.playerName = nameTf.getText();
                     //fade out the screen and then run the changeScreen method
                     stage.addAction(Actions.sequence(
                         Actions.fadeOut(1),
