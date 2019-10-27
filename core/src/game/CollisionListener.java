@@ -46,9 +46,9 @@ public class CollisionListener implements ContactListener {
             CollisionComponent colB = colEnt.getComponent(CollisionComponent.class); //get collided entity collision component
 
             //Store the entity B inside the collision component of the entity A if A has an collision component
-            if(colA != null) colA.collisionEntity = colEnt;
+            if(colA != null) colA.addCollidedEntity(colEnt);
             //Store the entity A inside the collision component of the entity B if B has an collision component
-            if(colB != null) colB.collisionEntity = ent;
+            if(colB != null) colB.addCollidedEntity(ent);
         }
     }
 
@@ -88,9 +88,9 @@ public class CollisionListener implements ContactListener {
             CollisionComponent colB = colEnt.getComponent(CollisionComponent.class); //get collided entity collision component
 
             //remove the entity B inside the collision component of the entity A if A has an collision component
-            if(colA != null) colA.collisionEntity = null;
+            if(colA != null) colA.removeCollidedEntity(colEnt);
             //remove the entity A inside the collision component of the entity B if B has an collision component
-            if(colB != null) colB.collisionEntity = null;
+            if(colB != null) colB.removeCollidedEntity(ent);
         }
     }
 

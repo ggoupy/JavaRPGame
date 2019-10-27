@@ -1,4 +1,4 @@
-package game.entity.system;
+package game.entity.system.enemy;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;

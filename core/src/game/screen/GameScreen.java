@@ -1,7 +1,6 @@
 package game.screen;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,21 +11,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import game.CollisionListener;
 import game.entity.component.PlayerComponent;
 import game.entity.creator.EntityCreator;
 import game.GDXGame;
 import game.controller.InputsController;
 import game.entity.system.*;
-import game.screen.hud.HUD;
+import game.entity.system.enemy.*;
+import game.entity.system.player.*;
 
 import static game.utils.Constants.TILE_SIZE;
 
 
 public class GameScreen implements Screen {
 
-    private Viewport viewport;
     private OrthographicCamera camera;
     private InputsController controller;
     private GDXGame game;
@@ -69,13 +67,10 @@ public class GameScreen implements Screen {
         engine.addSystem(new PlayerMovementSystem(controller));
         engine.addSystem(new PlayerAttackSystem(controller));
         engine.addSystem(new EnemyMovementSystem());
-        engine.addSystem(new EnemyHealthSystem());
+        engine.addSystem(new EnemyHealthSystem(engine));
         engine.addSystem(new ReceiveAttackSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new PerspectiveSystem());
-
-        //when enemy moves sometimes not affected by attacks
-
 
         //create entities
         entityCreator = entityCreator.getInstance(world, engine, atlas);

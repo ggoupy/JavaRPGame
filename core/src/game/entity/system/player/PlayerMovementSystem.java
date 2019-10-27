@@ -1,4 +1,4 @@
-package game.entity.system;
+package game.entity.system.player;
 import game.controller.InputsController;
 import game.entity.component.BodyComponent;
 import game.entity.component.StateComponent;

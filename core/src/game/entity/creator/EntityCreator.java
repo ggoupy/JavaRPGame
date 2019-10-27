@@ -12,13 +12,12 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import game.entity.component.*;
 import game.entity.component.PlayerComponent;
-import game.entity.system.EnemyHealthSystem;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -94,6 +93,8 @@ public class EntityCreator {
         type.type = TypeComponent.PLAYER;
 
         receiveAttack.entitiesAttacking = new Array<>();
+
+        collision.collisionEntity = new Array<>();
 
         state.set(StateComponent.STANDING_DOWN);
 
@@ -208,6 +209,8 @@ public class EntityCreator {
             enemy.standingTime = 2 + Math.random() * 2; //random between 2 and 4
 
             receiveAttack.entitiesAttacking = new Array<>();
+
+            collision.collisionEntity = new Array<>();
 
             texture.region = atlas.findRegion("skeleton-standingDown");
 

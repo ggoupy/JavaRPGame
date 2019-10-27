@@ -1,5 +1,6 @@
 package game.entity.system;
 
+import com.badlogic.gdx.utils.Array;
 import game.entity.component.*;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -31,25 +32,27 @@ public class CollisionSystem  extends IteratingSystem {
         CollisionComponent collision = cm.get(entity); //get the entity collision component
         TypeComponent thisType = entity.getComponent(TypeComponent.class); //get the entity type component
 
-        Entity collidedEntity = collision.collisionEntity; //get collided entity
-
+        Array<Entity> collidedEntities = collision.collisionEntity; //get array of collided entities
 
         /* Do Player Collisions */
         //if the player has a collision with an entity
-        if(thisType.type == TypeComponent.PLAYER && collidedEntity != null)
+        if(thisType.type == TypeComponent.PLAYER && collidedEntities.size != 0)
         {
             //get the player entity
             PlayerComponent player = pm.get(entity);
 
-            //get the collided entity type component
-            TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
-
-            //if the the collided entity has a type
-            if(type != null)
+            for(Entity collidedEntity : collidedEntities)
             {
-                if (type.type == TypeComponent.ENEMY)
+                //get the collided entity type component
+                TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
+
+                //if the the collided entity has a type
+                if(type != null)
                 {
-                    player.life.updateCurrent(-0.1f);
+                    if (type.type == TypeComponent.ENEMY)
+                    {
+                        player.life.updateCurrent(-0.1f);
+                    }
                 }
             }
         }
@@ -57,36 +60,39 @@ public class CollisionSystem  extends IteratingSystem {
 
         /* do enemy collision */
         //if the enemy has a collision with an entity
-        if(thisType.type == TypeComponent.ENEMY && collidedEntity != null)
+        if(thisType.type == TypeComponent.ENEMY && collidedEntities.size != 0)
         {
             //get the enemy component of the entity
             EnemyComponent enemy = em.get(entity);
 
-            //get the collided entity type component
-            TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
-
-            //if the the collided entity has a type
-            if(type != null)
+            for (Entity collidedEntity : collidedEntities)
             {
-                if (type.type == TypeComponent.PLAYER)
+                //get the collided entity type component
+                TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
+
+                //if the the collided entity has a type
+                if(type != null)
                 {
-                    PlayerComponent player = collidedEntity.getComponent(PlayerComponent.class);
-                    ReceiveAttackComponent receiveAttack = entity.getComponent(ReceiveAttackComponent.class);
-                    if (player.isAttacking)
+                    if (type.type == TypeComponent.PLAYER)
                     {
-                        if (!receiveAttack.hasReceivedAttack(collidedEntity))
+                        PlayerComponent player = collidedEntity.getComponent(PlayerComponent.class);
+                        ReceiveAttackComponent receiveAttack = entity.getComponent(ReceiveAttackComponent.class);
+                        if (player.isAttacking)
                         {
-                            enemy.life.updateCurrent(-player.damage);
-                            receiveAttack.receiveAttack(collidedEntity, player.attackDuration.getMax());
+                            if (!receiveAttack.hasReceivedAttack(collidedEntity))
+                            {
+                                enemy.life.updateCurrent(-player.damage);
+                                receiveAttack.receiveAttack(collidedEntity, player.attackDuration.getMax());
+                            }
                         }
                     }
-                }
-                //If collision with scenery
-                //We treat the collision normally
-                if (type.type == TypeComponent.SCENERY)
-                {
-                    enemy.collision = true; //so that he can change his direction
-                    collision.collisionEntity = null; //there is no need to keep the collided entity
+                    //If collision with scenery
+                    //We treat the collision normally
+                    if (type.type == TypeComponent.SCENERY)
+                    {
+                        enemy.collision = true; //so that he can change his direction
+                        collision.removeCollidedEntity(collidedEntity);
+                    }
                 }
             }
         }
