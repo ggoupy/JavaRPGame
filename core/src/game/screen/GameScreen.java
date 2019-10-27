@@ -67,10 +67,14 @@ public class GameScreen implements Screen {
         engine.addSystem(new PlayerMovementSystem(controller));
         engine.addSystem(new PlayerAttackSystem(controller));
         engine.addSystem(new EnemyMovementSystem());
-        engine.addSystem(new EnemyHealthSystem(engine));
+        engine.addSystem(new EnemyHealthSystem(engine, world));
         engine.addSystem(new ReceiveAttackSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new PerspectiveSystem());
+
+        //proper way to kill entites
+        //function taking an entity removing its body, attached component and the entity
+
 
         //create entities
         entityCreator = entityCreator.getInstance(world, engine, atlas);

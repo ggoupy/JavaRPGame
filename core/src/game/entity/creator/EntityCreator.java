@@ -192,7 +192,7 @@ public class EntityCreator {
             AnimationComponent animation = engine.createComponent(AnimationComponent.class);
             TextureComponent texture = engine.createComponent(TextureComponent.class);
             TransformComponent position = engine.createComponent(TransformComponent.class);
-            EnemyHealthComponent healthBar = engine.createComponent(EnemyHealthComponent.class);
+            AttachedComponent attached = engine.createComponent(AttachedComponent.class);
             ReceiveAttackComponent receiveAttack = engine.createComponent(ReceiveAttackComponent.class);
 
             type.type = TypeComponent.ENEMY;
@@ -237,16 +237,17 @@ public class EntityCreator {
             entity.add(collision);
             entity.add(type);
             entity.add(state);
-            entity.add(healthBar);
             entity.add(receiveAttack);
 
-            createEnemyHealthBar(entity);
+            //need to be after to store firstly all components in the entity
+            attached.attachedEntity = createEnemyHealthBar(entity);
+            entity.add(attached);
 
             engine.addEntity(entity);
         }
     }
 
-    private void createEnemyHealthBar(Entity enemy)
+    private Entity createEnemyHealthBar(Entity enemy)
     {
         Entity entity = engine.createEntity();
         TextureComponent texture = engine.createComponent(TextureComponent.class);
@@ -270,6 +271,8 @@ public class EntityCreator {
         entity.add(attached);
         entity.add(health);
         engine.addEntity(entity);
+
+        return entity;
     }
 
     //create an animation with parameters given to a animation component
