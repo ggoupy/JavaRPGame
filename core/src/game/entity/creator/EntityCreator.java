@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import game.entity.component.*;
 import game.entity.component.PlayerComponent;
 import game.entity.system.EnemyHealthSystem;
@@ -71,6 +72,7 @@ public class EntityCreator {
         StateComponent state = engine.createComponent(StateComponent.class);
         AnimationComponent animation = engine.createComponent(AnimationComponent.class);
         CollisionComponent collision = engine.createComponent(CollisionComponent.class);
+        ReceiveAttackComponent receiveAttack = engine.createComponent(ReceiveAttackComponent.class);
 
         //player definition
         createPlayerDefinition(player, spec);
@@ -83,13 +85,15 @@ public class EntityCreator {
         Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
 
         //create a box in the world with coordinates and specific attributes
-        body.body = bodyFactory.makeCircleBox(center.x, center.y,1, BodyDef.BodyType.DynamicBody, BodyFactory.HUMAN);
+        body.body = bodyFactory.makeCircleBox(center.x, center.y,0.75f, BodyDef.BodyType.DynamicBody, BodyFactory.HUMAN);
 
         position.position.set(center.x,center.y,0);
 
         texture.region = atlas.findRegion(player.spec+"-standingDown");
 
         type.type = TypeComponent.PLAYER;
+
+        receiveAttack.entitiesAttacking = new Array<>();
 
         state.set(StateComponent.STANDING_DOWN);
 
@@ -120,6 +124,7 @@ public class EntityCreator {
         entity.add(collision);
         entity.add(type);
         entity.add(state);
+        entity.add(receiveAttack);
 
         // add the entity to the engine
         engine.addEntity(entity);
@@ -187,6 +192,7 @@ public class EntityCreator {
             TextureComponent texture = engine.createComponent(TextureComponent.class);
             TransformComponent position = engine.createComponent(TransformComponent.class);
             EnemyHealthComponent healthBar = engine.createComponent(EnemyHealthComponent.class);
+            ReceiveAttackComponent receiveAttack = engine.createComponent(ReceiveAttackComponent.class);
 
             type.type = TypeComponent.ENEMY;
 
@@ -200,6 +206,8 @@ public class EntityCreator {
             enemy.origin = new Vector2(center.x, center.y);
             enemy.movingTime = 2 + Math.random() * 2; //random between 2 and 4
             enemy.standingTime = 2 + Math.random() * 2; //random between 2 and 4
+
+            receiveAttack.entitiesAttacking = new Array<>();
 
             texture.region = atlas.findRegion("skeleton-standingDown");
 
@@ -227,6 +235,7 @@ public class EntityCreator {
             entity.add(type);
             entity.add(state);
             entity.add(healthBar);
+            entity.add(receiveAttack);
 
             createEnemyHealthBar(entity);
 
@@ -275,7 +284,7 @@ public class EntityCreator {
             {
                 player.life = new Bar(80); //manage current and max life
                 player.action = new Bar(200);
-                player.damage = 10;
+                player.damage = 20;
                 player.speed = 2f;
                 break;
             }
@@ -283,7 +292,7 @@ public class EntityCreator {
             {
                 player.life = new Bar(100); //manage current and max life
                 player.action = new Bar(150);
-                player.damage = 8;
+                player.damage = 12;
                 player.speed = 3f;
                 break;
             }
@@ -291,7 +300,7 @@ public class EntityCreator {
             {
                 player.life = new Bar(200); //manage current and max life
                 player.action = new Bar(100);
-                player.damage = 5;
+                player.damage = 15;
                 player.speed = 1.5f;
                 break;
             }

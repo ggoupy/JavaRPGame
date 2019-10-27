@@ -21,4 +21,7 @@ public class Timer {
     {
         current = 0;
     }
+
+    public double getMax() {return max;}
+    public double getCurrent() {return current;}
 }

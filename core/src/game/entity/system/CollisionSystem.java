@@ -33,80 +33,60 @@ public class CollisionSystem  extends IteratingSystem {
 
         Entity collidedEntity = collision.collisionEntity; //get collided entity
 
+
         /* Do Player Collisions */
-        if(thisType.type == TypeComponent.PLAYER)
+        //if the player has a collision with an entity
+        if(thisType.type == TypeComponent.PLAYER && collidedEntity != null)
         {
-            //if the player has a collision with an entity
-            if(collidedEntity != null)
+            //get the player entity
+            PlayerComponent player = pm.get(entity);
+
+            //get the collided entity type component
+            TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
+
+            //if the the collided entity has a type
+            if(type != null)
             {
-                //get the collided entity type component
-                TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
-
-                //if the the collided entity has a type
-                if(type != null)
+                if (type.type == TypeComponent.ENEMY)
                 {
-                    switch(type.type)
-                    {
-                        case TypeComponent.ENEMY:
-                            System.out.println("player hit enemy");
-                            entity.getComponent(PlayerComponent.class).life.updateCurrent(-10);
-                            //Do things
-                            break;
-
-                        case TypeComponent.SCENERY:
-                            System.out.println("player hit scenery");
-                            break;
-
-                        case TypeComponent.OTHER:
-                            System.out.println("player hit other");
-                            break;
-                    }
-
-                    //remove the collided entity stored in the collision component of the entity having a collision
-                    collision.collisionEntity = null;
+                    player.life.updateCurrent(-0.1f);
                 }
             }
         }
 
 
-
         /* do enemy collision */
-        if(thisType.type == TypeComponent.ENEMY)
+        //if the enemy has a collision with an entity
+        if(thisType.type == TypeComponent.ENEMY && collidedEntity != null)
         {
-            //if the enemy has a collision with an entity
-            if(collidedEntity != null)
+            //get the enemy component of the entity
+            EnemyComponent enemy = em.get(entity);
+
+            //get the collided entity type component
+            TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
+
+            //if the the collided entity has a type
+            if(type != null)
             {
-                //get the enemy component of the entity
-                //EnemyComponent enemy = entity.getComponent(EnemyComponent.class);
-                EnemyComponent enemy = em.get(entity);
-
-                //get the collided entity type component
-                TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
-
-                //if the the collided entity has a type
-                if(type != null)
+                if (type.type == TypeComponent.PLAYER)
                 {
-                    switch (type.type)
+                    PlayerComponent player = collidedEntity.getComponent(PlayerComponent.class);
+                    ReceiveAttackComponent receiveAttack = entity.getComponent(ReceiveAttackComponent.class);
+                    if (player.isAttacking)
                     {
-                        case TypeComponent.SCENERY:
-                            System.out.println("enemy hit scenery");
-                            enemy.collision = true;
-                            break;
-
-                        case TypeComponent.PLAYER:
-                            System.out.println("enemy hit player");
-                            enemy.life.updateCurrent(-10);
-                            enemy.collision = true;
-                            break;
-
-                        case TypeComponent.ENEMY:
-                            System.out.println("enemy hit enemy");
-                            enemy.collision = true;
-                            break;
+                        if (!receiveAttack.hasReceivedAttack(collidedEntity))
+                        {
+                            enemy.life.updateCurrent(-player.damage);
+                            receiveAttack.receiveAttack(collidedEntity, player.attackDuration.getMax());
+                        }
                     }
-
-                    //remove the collided entity stored in the collision component of the entity having a collision
-                    collision.collisionEntity = null;
+                }
+                //If collision with scenery
+                //We treat the collision normally
+                if (type.type == TypeComponent.SCENERY)
+                {
+                    enemy.collision = true; //so that he can change his direction
+                    collision.collisionEntity = null; //there is no need to keep the collided entity
                 }
             }
         }

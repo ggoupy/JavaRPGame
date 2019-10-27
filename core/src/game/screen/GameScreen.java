@@ -70,8 +70,11 @@ public class GameScreen implements Screen {
         engine.addSystem(new PlayerAttackSystem(controller));
         engine.addSystem(new EnemyMovementSystem());
         engine.addSystem(new EnemyHealthSystem());
+        engine.addSystem(new ReceiveAttackSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new PerspectiveSystem());
+
+        //when enemy moves sometimes not affected by attacks
 
 
         //create entities

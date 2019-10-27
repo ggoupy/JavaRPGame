@@ -1,7 +1,10 @@
 package game.entity.component;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import game.utils.Bar;
 
 public class EnemyComponent implements Component {
