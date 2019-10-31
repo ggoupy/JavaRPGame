@@ -72,7 +72,7 @@ public class GameScreen implements Screen {
         engine.addSystem(new PlayerHealthSystem(g, entityFactory));
         engine.addSystem(new PlayerAttackSystem(controller));
         engine.addSystem(new EnemySpawnSystem(entityFactory));
-        engine.addSystem(new EnemyMovementSystem());
+        engine.addSystem(new EnemyMovementSystem(engine));
         engine.addSystem(new EnemyHealthSystem(entityFactory));
         engine.addSystem(new ReceiveAttackSystem());
         engine.addSystem(new AnimationSystem());
@@ -85,9 +85,9 @@ public class GameScreen implements Screen {
                     game.playerName
         );
         entityFactory.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
-        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnField").getObjects());
+        //entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnField").getObjects());
         entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnForest").getObjects());
-        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnGraveYard").getObjects());
+        //entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnGraveYard").getObjects());
 
         PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, player.getComponent(PlayerComponent.class));
         engine.addSystem(HUD);

@@ -83,10 +83,11 @@ public class HUD extends Stage {
 
     public void update()
     {
+        levelLb.setText("Level : "+((int) player.level));
+
         float percentLife = (player.life.getCurrent()/player.life.getMax());
         float percentAction = (player.action.getCurrent()/player.action.getMax());
         healthBar.setWidth(hud_width*percentLife);
         actionBar.setWidth(hud_width*percentAction);
-        levelLb.setText("Level : "+((int) player.level));
     }
 }

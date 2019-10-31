@@ -160,15 +160,16 @@ public class EntityFactory {
         Entity entitySpawn = engine.createEntity();
         EnemySpawnComponent enemySpawnCom = engine.createComponent(EnemySpawnComponent.class);
         enemySpawnCom.spawns = new Array<>();
-        enemySpawnCom.RespawnTimer = new Timer(spawns.getCount()*4); //new enemy all x seconds
+        enemySpawnCom.RespawnTimer = new Timer(spawns.getCount()*3); //new enemy all x seconds
         entitySpawn.add(enemySpawnCom);
         engine.addEntity(entitySpawn);
         for(int i=0; i<spawns.getCount(); ++i)
         {
             Rectangle r = ((RectangleMapObject) spawns.get(i)).getRectangle();
             enemySpawnCom.addSpawn(r, false);
-            createEnemy(entitySpawn, i); //create an new enemy in this spawn
+            //createEnemy(entitySpawn, i); //create an new enemy in this spawn
         }
+        createEnemy(entitySpawn,2);
     }
 
     //create enemy box2D from a spawn entity and the index of the spawn
@@ -207,6 +208,7 @@ public class EntityFactory {
         enemy.origin = new Vector2(center.x, center.y);
         enemy.movingTime = 2 + Math.random() * 2; //random between 2 and 4
         enemy.standingTime = 2 + Math.random() * 2; //random between 2 and 4
+        enemy.aggressive = true;
         enemy.xpGain = (float) (0.4f + Math.random()); //random between 0.4 and 1.4
 
         receiveAttack.entitiesAttacking = new Array<>();
