@@ -15,5 +15,7 @@ public class PlayerComponent implements Component {
     public int damage = 0;
     public Timer attackDuration = null;
     public boolean isAttacking = false;
+    public float lifeRegeneration = 1;
+    public float lastDamageDuration = 0;
 }
 

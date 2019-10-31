@@ -1,6 +1,5 @@
 package game.entity.system;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
@@ -11,9 +10,9 @@ import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import game.entity.component.TextureComponent;
 import game.entity.component.TransformComponent;
+import game.entity.utils.ZComparator;
 import game.utils.Constants;
 import static game.entity.utils.Mappers.*;
 import static game.loader.AssetsManager.*;

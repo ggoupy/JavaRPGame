@@ -8,7 +8,7 @@ import static game.entity.utils.Mappers.*;
 
 public class EnemyHealthSystem extends IteratingSystem {
 
-    private EntityFactory entityFactory; //reference to entity factory
+    private static EntityFactory entityFactory; //reference to entity factory
 
     public EnemyHealthSystem(EntityFactory entityFactory)
     {

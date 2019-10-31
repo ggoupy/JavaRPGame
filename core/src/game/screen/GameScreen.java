@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
 
     private TiledMap tiledMap;
     private TextureAtlas atlas;
-    private EntityFactory entityFactory;
+    public static EntityFactory entityFactory;
 
     private Entity player;
 
@@ -69,6 +69,7 @@ public class GameScreen implements Screen {
         engine.addSystem(new CameraSystem(camera));
         engine.addSystem(new CollisionSystem());
         engine.addSystem(new PlayerMovementSystem(controller));
+        engine.addSystem(new PlayerHealthSystem(g, entityFactory));
         engine.addSystem(new PlayerAttackSystem(controller));
         engine.addSystem(new EnemyMovementSystem());
         engine.addSystem(new EnemyHealthSystem(entityFactory));

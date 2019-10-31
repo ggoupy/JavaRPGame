@@ -292,6 +292,7 @@ public class EntityFactory {
                 player.action = new Bar(200);
                 player.damage = 20;
                 player.speed = 2f;
+                player.lifeRegeneration = 0.05f;
                 break;
             }
             case "hunter":
@@ -300,6 +301,7 @@ public class EntityFactory {
                 player.action = new Bar(150);
                 player.damage = 12;
                 player.speed = 3f;
+                player.lifeRegeneration = 0.08f;
                 break;
             }
             case "warrior":
@@ -308,6 +310,7 @@ public class EntityFactory {
                 player.action = new Bar(100);
                 player.damage = 15;
                 player.speed = 1.5f;
+                player.lifeRegeneration = 0.1f;
                 break;
             }
         }
