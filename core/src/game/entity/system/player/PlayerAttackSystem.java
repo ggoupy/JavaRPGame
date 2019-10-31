@@ -7,30 +7,24 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import game.controller.InputsController;
 import game.entity.component.PlayerComponent;
 import game.entity.component.StateComponent;
+import static game.entity.utils.Mappers.*;
+
 
 public class PlayerAttackSystem extends IteratingSystem {
 
-    private ComponentMapper<PlayerComponent> pm;
-    private ComponentMapper<StateComponent> sm;
-
     private InputsController controller;
-
 
     public PlayerAttackSystem(InputsController keyCon)
     {
         super(Family.all(PlayerComponent.class).get());
-
         controller = keyCon;
-
-        pm = ComponentMapper.getFor(PlayerComponent.class);
-        sm = ComponentMapper.getFor(StateComponent.class);
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime)
     {
-        PlayerComponent player = pm.get(entity);
-        StateComponent state = sm.get(entity);
+        PlayerComponent player = playerMapper.get(entity);
+        StateComponent state = stateMapper.get(entity);
 
         //set the attack statement if the player is pressing the attack key and not already attacking
         if (controller.attack_key && player.isAttacking == false)

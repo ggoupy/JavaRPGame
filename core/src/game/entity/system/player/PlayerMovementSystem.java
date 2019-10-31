@@ -1,44 +1,35 @@
 package game.entity.system.player;
+
 import game.controller.InputsController;
 import game.entity.component.BodyComponent;
 import game.entity.component.StateComponent;
-
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.MathUtils;
 import game.entity.component.PlayerComponent;
+import static game.entity.utils.Mappers.*;
+
 
 public class PlayerMovementSystem extends IteratingSystem {
 
-    ComponentMapper<PlayerComponent> pm;
-    ComponentMapper<BodyComponent> bodm;
-    ComponentMapper<StateComponent> sm;
-
     InputsController controller;
-
 
     public PlayerMovementSystem(InputsController keyCon)
     {
         //We create a player control system for all entities containing a player component
         super(Family.all(PlayerComponent.class).get());
-
         //We get the class managing user inputs
         controller = keyCon;
-
-        //We create components mapper of the component class
-        pm = ComponentMapper.getFor(PlayerComponent.class);
-        bodm = ComponentMapper.getFor(BodyComponent.class);
-        sm = ComponentMapper.getFor(StateComponent.class);
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime)
     {
-        BodyComponent body = bodm.get(entity); //get the body component of the entity
-        StateComponent state = sm.get(entity); //get the state component of the entity
-        PlayerComponent player = pm.get(entity); //get the player component of the entity
+        BodyComponent body = bodyMapper.get(entity); //get the body component of the entity
+        StateComponent state = stateMapper.get(entity); //get the state component of the entity
+        PlayerComponent player = playerMapper.get(entity); //get the player component of the entity
 
         //Set the player statement
         setStatement(body, state, player);

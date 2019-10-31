@@ -4,10 +4,9 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import game.entity.component.BodyComponent;
-import game.entity.component.PlayerComponent;
 import game.entity.component.TransformComponent;
 import game.entity.component.TypeComponent;
+import static game.entity.utils.Mappers.*;
 
 
 //This system only update z axe of entities transform components
@@ -16,18 +15,15 @@ import game.entity.component.TypeComponent;
 //More it will be render after, to respect perspective
 public class PerspectiveSystem extends IteratingSystem {
 
-    private ComponentMapper<TransformComponent> tm;
-
     public PerspectiveSystem()
     {
         super(Family.all(TransformComponent.class, TypeComponent.class).get());
-        tm = ComponentMapper.getFor(TransformComponent.class);
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime)
     {
-        TransformComponent position = tm.get(entity);
+        TransformComponent position = transformMapper.get(entity);
         position.position.z = position.position.y;
     }
 }

@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import game.CollisionListener;
 import game.entity.component.PlayerComponent;
-import game.entity.creator.EntityCreator;
+import game.entity.factory.EntityFactory;
 import game.GDXGame;
 import game.controller.InputsController;
 import game.entity.system.*;
@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
 
     private TiledMap tiledMap;
     private TextureAtlas atlas;
-    private EntityCreator entityCreator;
+    private EntityFactory entityFactory;
 
     private Entity player;
 
@@ -59,6 +59,10 @@ public class GameScreen implements Screen {
 
         /* ENGINE */
         engine = new PooledEngine();
+
+        /* ENTITY FACTORY */
+        entityFactory = entityFactory.getInstance(world, engine, atlas);
+
         engine.addSystem(renderingSystem);
         engine.addSystem(new PhysicsSystem(world));
         engine.addSystem(new PhysicsDebugSystem(world, camera));
@@ -67,25 +71,20 @@ public class GameScreen implements Screen {
         engine.addSystem(new PlayerMovementSystem(controller));
         engine.addSystem(new PlayerAttackSystem(controller));
         engine.addSystem(new EnemyMovementSystem());
-        engine.addSystem(new EnemyHealthSystem(engine, world));
+        engine.addSystem(new EnemyHealthSystem(entityFactory));
         engine.addSystem(new ReceiveAttackSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new PerspectiveSystem());
 
-        //proper way to kill entites
-        //function taking an entity removing its body, attached component and the entity
-
-
         //create entities
-        entityCreator = entityCreator.getInstance(world, engine, atlas);
-        player = entityCreator.createPlayer(
+        player = entityFactory.createPlayer(
                     tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
                     game.playerSpecialization,
                     game.playerName
         );
-        entityCreator.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
-        entityCreator.createEnemies(tiledMap.getLayers().get("enemySpawnForest").getObjects());
-        entityCreator.createEnemies(tiledMap.getLayers().get("enemySpawnGraveYard").getObjects());
+        entityFactory.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
+        entityFactory.createEnemies(tiledMap.getLayers().get("enemySpawnForest").getObjects());
+        entityFactory.createEnemies(tiledMap.getLayers().get("enemySpawnGraveYard").getObjects());
 
         PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, player.getComponent(PlayerComponent.class));
         engine.addSystem(HUD);

@@ -1,8 +1,6 @@
 package game.entity.system.player;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import game.entity.component.PlayerComponent;
 import game.loader.AssetsManager;

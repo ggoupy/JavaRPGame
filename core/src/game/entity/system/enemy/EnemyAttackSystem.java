@@ -9,16 +9,9 @@ import game.entity.component.PlayerComponent;
 
 public class EnemyAttackSystem extends IteratingSystem {
 
-    private ComponentMapper<EnemyComponent> em;
-    private ComponentMapper<PlayerComponent> pm;
-
-
     public EnemyAttackSystem()
     {
         super(Family.all(EnemyComponent.class, PlayerComponent.class).get());
-
-        em = ComponentMapper.getFor(EnemyComponent.class);
-        pm = ComponentMapper.getFor(PlayerComponent.class);
     }
 
     @Override

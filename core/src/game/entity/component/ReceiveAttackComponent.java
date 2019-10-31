@@ -2,9 +2,8 @@ package game.entity.component;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.IntMap;
+import game.entity.utils.EntityAttacking;
 import game.utils.Timer;
 
 

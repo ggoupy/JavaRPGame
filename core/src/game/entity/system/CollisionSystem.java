@@ -2,34 +2,24 @@ package game.entity.system;
 
 import com.badlogic.gdx.utils.Array;
 import game.entity.component.*;
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import static game.entity.utils.Mappers.*;
 
 
 public class CollisionSystem  extends IteratingSystem {
-
-    ComponentMapper<CollisionComponent> cm;
-    ComponentMapper<PlayerComponent> pm;
-    ComponentMapper<EnemyComponent> em;
-
 
     public CollisionSystem()
     {
         //create an collision system for all entities containing a collision component
         super(Family.all(CollisionComponent.class).get());
-
-        //create component mappers of component class
-        cm = ComponentMapper.getFor(CollisionComponent.class);
-        pm = ComponentMapper.getFor(PlayerComponent.class);
-        em = ComponentMapper.getFor(EnemyComponent.class);
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime)
     {
-        CollisionComponent collision = cm.get(entity); //get the entity collision component
+        CollisionComponent collision = collisionMapper.get(entity); //get the entity collision component
         TypeComponent thisType = entity.getComponent(TypeComponent.class); //get the entity type component
 
         Array<Entity> collidedEntities = collision.collisionEntity; //get array of collided entities
@@ -39,7 +29,7 @@ public class CollisionSystem  extends IteratingSystem {
         if(thisType.type == TypeComponent.PLAYER && collidedEntities.size != 0)
         {
             //get the player entity
-            PlayerComponent player = pm.get(entity);
+            PlayerComponent player = playerMapper.get(entity);
 
             for(Entity collidedEntity : collidedEntities)
             {
@@ -63,7 +53,7 @@ public class CollisionSystem  extends IteratingSystem {
         if(thisType.type == TypeComponent.ENEMY && collidedEntities.size != 0)
         {
             //get the enemy component of the entity
-            EnemyComponent enemy = em.get(entity);
+            EnemyComponent enemy = enemyMapper.get(entity);
 
             for (Entity collidedEntity : collidedEntities)
             {

@@ -1,17 +1,16 @@
 package game.entity.system;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import game.entity.component.TransformComponent;
 import game.entity.component.PlayerComponent;
+import static game.entity.utils.Mappers.*;
+
 
 public class CameraSystem extends IteratingSystem {
 
-    private ComponentMapper<PlayerComponent> pm;
-    private ComponentMapper<TransformComponent> tm;
     private OrthographicCamera camera;
 
     public CameraSystem(OrthographicCamera camera) {
@@ -20,8 +19,10 @@ public class CameraSystem extends IteratingSystem {
     }
 
     @Override
-    protected void processEntity(Entity entity, float deltaTime) {
-        camera.position.x = entity.getComponent(TransformComponent.class).position.x;
-        camera.position.y = entity.getComponent(TransformComponent.class).position.y;
+    protected void processEntity(Entity entity, float deltaTime)
+    {
+        TransformComponent position = transformMapper.get(entity);
+        camera.position.x = position.position.x;
+        camera.position.y = position.position.y;
     }
 }

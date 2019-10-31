@@ -1,4 +1,4 @@
-package game.entity.component;
+package game.entity.utils;
 
 import com.badlogic.ashley.core.Entity;
 import game.utils.Timer;

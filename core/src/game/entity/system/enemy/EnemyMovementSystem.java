@@ -1,6 +1,5 @@
 package game.entity.system.enemy;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -8,32 +7,25 @@ import com.badlogic.gdx.math.Vector2;
 import game.entity.component.BodyComponent;
 import game.entity.component.EnemyComponent;
 import game.entity.component.StateComponent;
+import static game.entity.utils.Mappers.*;
 
 import java.util.Random;
 
 public class EnemyMovementSystem extends IteratingSystem {
 
-    private ComponentMapper<EnemyComponent>  em;
-    private ComponentMapper<BodyComponent> bm;
-    private ComponentMapper<StateComponent> sm;
-
     private Random rand;
 
-    public EnemyMovementSystem() {
+    public EnemyMovementSystem()
+    {
         super(Family.all(EnemyComponent.class).get());
-
-        em = ComponentMapper.getFor(EnemyComponent.class);
-        bm = ComponentMapper.getFor(BodyComponent.class);
-        sm = ComponentMapper.getFor(StateComponent.class);
-
         rand = new Random();
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        EnemyComponent enemy = em.get(entity); //get the enemy component of the entity
-        BodyComponent body = bm.get(entity); //get the body component of the entity
-        StateComponent state = sm.get(entity); //get the state component of the entity
+        EnemyComponent enemy = enemyMapper.get(entity); //get the enemy component of the entity
+        BodyComponent body = bodyMapper.get(entity); //get the body component of the entity
+        StateComponent state = stateMapper.get(entity); //get the state component of the entity
 
         boolean moving = false;
 

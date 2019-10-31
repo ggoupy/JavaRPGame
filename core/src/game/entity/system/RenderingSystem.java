@@ -12,19 +12,15 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import game.entity.component.EnemyHealthComponent;
 import game.entity.component.TextureComponent;
 import game.entity.component.TransformComponent;
 import game.utils.Constants;
-
-import java.util.Comparator;
-
+import static game.entity.utils.Mappers.*;
 import static game.loader.AssetsManager.*;
 
 public class RenderingSystem extends SortedIteratingSystem {
 
     private SpriteBatch batch;
-    private Viewport viewport;
     private OrthographicCamera camera;
     private TiledMap tiledMap;
     private MapRenderer mapRenderer;
@@ -34,9 +30,6 @@ public class RenderingSystem extends SortedIteratingSystem {
     private Array<Entity> renderQueue; // an array used to allow sorting of images allowing us to draw images on top of each other
     private ZComparator perspectiveComparator; // a comparator to sort images based on the z position of the transformComponent
 
-    // component mappers to get components from entities
-    private ComponentMapper<TextureComponent> textureM;
-    private ComponentMapper<TransformComponent> transformM;
 
     public RenderingSystem(SpriteBatch batch, OrthographicCamera camera, TiledMap tiledMap) {
 
@@ -60,10 +53,6 @@ public class RenderingSystem extends SortedIteratingSystem {
                 map.getIndex(tmForeground)
         };
 
-        //create componentMappers
-        textureM = ComponentMapper.getFor(TextureComponent.class);
-        transformM = ComponentMapper.getFor(TransformComponent.class);
-
         // create array for sorting entities
         renderQueue = new Array<Entity>();
     }
@@ -85,8 +74,8 @@ public class RenderingSystem extends SortedIteratingSystem {
 
         // loop through each entity in our render queue
         for (Entity entity : renderQueue) {
-            TextureComponent tex = textureM.get(entity);
-            TransformComponent t = transformM.get(entity);
+            TextureComponent tex = textureMapper.get(entity);
+            TransformComponent t = transformMapper.get(entity);
 
             if (tex.region == null || t.isHidden) {
                 continue;
