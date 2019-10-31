@@ -28,10 +28,17 @@ public class EnemyHealthSystem extends IteratingSystem {
         //Enemy components
         TransformComponent enemyPos = attached.attachedEntity.getComponent(TransformComponent.class);
         EnemyComponent enemy = attached.attachedEntity.getComponent(EnemyComponent.class);
+        ReceiveAttackComponent enemyAttacker = attached.attachedEntity.getComponent(ReceiveAttackComponent.class);
 
         //Death test
         if (enemy.life.getCurrent() <= 0)
         {
+            Entity lastAttacking = enemyAttacker.lastAttacking;
+
+            /* Player experience */
+            PlayerComponent player = lastAttacking.getComponent(PlayerComponent.class);
+            if (player != null) player.level += enemy.xpGain;
+
             entityFactory.destroyEntity(entity);
             return;
         }

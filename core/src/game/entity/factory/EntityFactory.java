@@ -17,12 +17,11 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import game.entity.component.*;
 import game.entity.component.PlayerComponent;
-
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import game.entity.utils.Spawn;
 import game.utils.Bar;
 import game.utils.Timer;
+
+import static game.entity.utils.Mappers.*;
 
 
 public class EntityFactory {
@@ -156,95 +155,97 @@ public class EntityFactory {
         }
     }
 
-    //create enemies box2D from spawn object in tiled map
-    public void createEnemies(MapObjects spawns)
+    public void createEnemySpawn(MapObjects spawns)
     {
-        //get a random number between nb of spawn in a the spawn layer object and nb of spawn / 3
-        //To define the number of enemies that will spawn in the layer area
-        int nbSpawns = spawns.getCount();
-        Random rand = new Random();
-        int toSpawnLeft = rand.nextInt(nbSpawns - nbSpawns/3) + nbSpawns/3;
-
-        //get a list[toSpawnLeft] of uniques index between 0 and nb of spawns
-        Set<Integer> uniqIndex_arr = new HashSet<>(); //HashSet is fast to use contains() method
-        //toSpawnLeft = 1; //PROVISOIRE
-        while (toSpawnLeft > 0)
+        Entity entitySpawn = engine.createEntity();
+        EnemySpawnComponent enemySpawnCom = engine.createComponent(EnemySpawnComponent.class);
+        enemySpawnCom.spawns = new Array<>();
+        enemySpawnCom.RespawnTimer = new Timer(spawns.getCount()*4); //new enemy all x seconds
+        entitySpawn.add(enemySpawnCom);
+        engine.addEntity(entitySpawn);
+        for(int i=0; i<spawns.getCount(); ++i)
         {
-            int index = rand.nextInt(nbSpawns);
-            if (!uniqIndex_arr.contains(index))
-            {
-                uniqIndex_arr.add(index);
-                toSpawnLeft--;
-            }
+            Rectangle r = ((RectangleMapObject) spawns.get(i)).getRectangle();
+            enemySpawnCom.addSpawn(r, false);
+            createEnemy(entitySpawn, i); //create an new enemy in this spawn
         }
+    }
 
-        //Iterates all the index array and create an enemy at the spawn i
-        for (Integer i: uniqIndex_arr)
-        {
-            Rectangle rectangle = ((RectangleMapObject) spawns.get(i)).getRectangle();
+    //create enemy box2D from a spawn entity and the index of the spawn
+    public void createEnemy(Entity spawnEntity, int index)
+    {
+        EnemySpawnComponent spawnCom = enemySpawnMapper.get(spawnEntity); //get the spawn component from the spawn entity
+        Spawn enemySpawn = spawnCom.spawns.get(index);
 
-            Entity entity = engine.createEntity();
-            EnemyComponent enemy = engine.createComponent(EnemyComponent.class);
-            BodyComponent body = engine.createComponent(BodyComponent.class);
-            TypeComponent type = engine.createComponent(TypeComponent.class);
-            CollisionComponent collision = engine.createComponent(CollisionComponent.class);
-            StateComponent state = engine.createComponent(StateComponent.class);
-            AnimationComponent animation = engine.createComponent(AnimationComponent.class);
-            TextureComponent texture = engine.createComponent(TextureComponent.class);
-            TransformComponent position = engine.createComponent(TransformComponent.class);
-            AttachedComponent attached = engine.createComponent(AttachedComponent.class);
-            ReceiveAttackComponent receiveAttack = engine.createComponent(ReceiveAttackComponent.class);
+        if (enemySpawn.user != null) return; //to do not create an new enemy if already used
 
-            type.type = TypeComponent.ENEMY;
+        Rectangle rectangle = enemySpawn.spawnPos; //get the position rectangle from the array of spawns in the spawn component
+        enemySpawn.taken = true; //set the spawn taken
 
-            //convert rectangle coordinates into rectangle center coordinates in the world
-            Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
+        /* Create the enemy */
+        Entity entity = engine.createEntity();
+        EnemyComponent enemy = engine.createComponent(EnemyComponent.class);
+        BodyComponent body = engine.createComponent(BodyComponent.class);
+        TypeComponent type = engine.createComponent(TypeComponent.class);
+        CollisionComponent collision = engine.createComponent(CollisionComponent.class);
+        StateComponent state = engine.createComponent(StateComponent.class);
+        AnimationComponent animation = engine.createComponent(AnimationComponent.class);
+        TextureComponent texture = engine.createComponent(TextureComponent.class);
+        TransformComponent position = engine.createComponent(TransformComponent.class);
+        AttachedComponent attached = engine.createComponent(AttachedComponent.class);
+        ReceiveAttackComponent receiveAttack = engine.createComponent(ReceiveAttackComponent.class);
 
-            body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.DynamicBody, BodyFactory.STONE, true);
+        type.type = TypeComponent.ENEMY;
 
-            position.position.set(center.x,center.y,0);
+        //convert rectangle coordinates into rectangle center coordinates in the world
+        Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
 
-            enemy.origin = new Vector2(center.x, center.y);
-            enemy.movingTime = 2 + Math.random() * 2; //random between 2 and 4
-            enemy.standingTime = 2 + Math.random() * 2; //random between 2 and 4
+        body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.DynamicBody, BodyFactory.STONE, true);
 
-            receiveAttack.entitiesAttacking = new Array<>();
+        position.position.set(center.x,center.y,0);
 
-            collision.collisionEntity = new Array<>();
+        enemy.origin = new Vector2(center.x, center.y);
+        enemy.movingTime = 2 + Math.random() * 2; //random between 2 and 4
+        enemy.standingTime = 2 + Math.random() * 2; //random between 2 and 4
+        enemy.xpGain = (float) (0.4f + Math.random()); //random between 0.4 and 1.4
 
-            texture.region = atlas.findRegion("skeleton-standingDown");
+        receiveAttack.entitiesAttacking = new Array<>();
 
-            state.set(StateComponent.STANDING_DOWN);
+        collision.collisionEntity = new Array<>();
 
-            //we add animations of the player in function of the state component
-            //PlayMode.LOOP repeats animation after all frames shown
-            createAnimation(animation,StateComponent.MOVING,0.2f, "skeleton-walkingRight", PlayMode.LOOP);
-            createAnimation(animation,StateComponent.MOVING_UP,0.2f, "skeleton-walkingUp", PlayMode.LOOP);
-            createAnimation(animation,StateComponent.MOVING_DOWN,0.2f, "skeleton-walkingDown", PlayMode.LOOP);
-            createAnimation(animation,StateComponent.STANDING,1f, "skeleton-standingRight", PlayMode.NORMAL);
-            createAnimation(animation,StateComponent.STANDING_UP,1f, "skeleton-standingUp", PlayMode.NORMAL);
-            createAnimation(animation,StateComponent.STANDING_DOWN,1f, "skeleton-standingDown", PlayMode.NORMAL);
+        texture.region = atlas.findRegion("skeleton-standingDown");
 
-            //store a reference to the entity in the box2d box
-            body.body.setUserData(entity);
+        state.set(StateComponent.STANDING_DOWN);
 
-            // add the components to the entity
-            entity.add(body);
-            entity.add(position);
-            entity.add(texture);
-            entity.add(animation);
-            entity.add(enemy);
-            entity.add(collision);
-            entity.add(type);
-            entity.add(state);
-            entity.add(receiveAttack);
+        //we add animations of the player in function of the state component
+        //PlayMode.LOOP repeats animation after all frames shown
+        createAnimation(animation,StateComponent.MOVING,0.2f, "skeleton-walkingRight", PlayMode.LOOP);
+        createAnimation(animation,StateComponent.MOVING_UP,0.2f, "skeleton-walkingUp", PlayMode.LOOP);
+        createAnimation(animation,StateComponent.MOVING_DOWN,0.2f, "skeleton-walkingDown", PlayMode.LOOP);
+        createAnimation(animation,StateComponent.STANDING,1f, "skeleton-standingRight", PlayMode.NORMAL);
+        createAnimation(animation,StateComponent.STANDING_UP,1f, "skeleton-standingUp", PlayMode.NORMAL);
+        createAnimation(animation,StateComponent.STANDING_DOWN,1f, "skeleton-standingDown", PlayMode.NORMAL);
 
-            //need to be after to store firstly all components in the entity
-            attached.attachedEntity = createEnemyHealthBar(entity);
-            entity.add(attached);
+        //store a reference to the entity in the box2d box
+        body.body.setUserData(entity);
 
-            engine.addEntity(entity);
-        }
+        // add the components to the entity
+        entity.add(body);
+        entity.add(position);
+        entity.add(texture);
+        entity.add(animation);
+        entity.add(enemy);
+        entity.add(collision);
+        entity.add(type);
+        entity.add(state);
+        entity.add(receiveAttack);
+
+        //need to be after to store firstly all components in the entity
+        attached.attachedEntity = createEnemyHealthBar(entity);
+        entity.add(attached);
+
+        engine.addEntity(entity);
+        enemySpawn.user = entity;
     }
 
     private Entity createEnemyHealthBar(Entity enemy)
@@ -299,7 +300,7 @@ public class EntityFactory {
             {
                 player.life = new Bar(100); //manage current and max life
                 player.action = new Bar(150);
-                player.damage = 12;
+                player.damage = 50;
                 player.speed = 3f;
                 player.lifeRegeneration = 0.08f;
                 break;
@@ -364,5 +365,6 @@ public class EntityFactory {
 
         entity.removeAll(); //remove all components of the entity
         engine.removeEntity(entity); //remove the entity from the engine
+        engine.clearPools(); //remove unused entity from the pool
     }
 }

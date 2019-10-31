@@ -18,10 +18,13 @@ import game.entity.component.PlayerComponent;
 import game.loader.AssetsManager;
 import game.utils.Constants;
 
+import java.util.logging.Level;
+
 
 public class HUD extends Stage {
 
     private PlayerComponent player;
+    private Label levelLb;
     private Image healthBar;
     private Image actionBar;
     float hud_width;
@@ -46,7 +49,7 @@ public class HUD extends Stage {
         Texture background = assetsManager.manager.get(assetsManager.background_hud);
 
         // Create a container storing our table
-        Container<Table> hudContainer = new Container<Table>();
+        Container<Table> hudContainer = new Container<>();
         hudContainer.setSize(hud_width*1.2f, hud_height*1.2f);
         hudContainer.setBackground(new TextureRegionDrawable(background));
         hudContainer.setPosition(50, Constants.G_HEIGHT - hudContainer.getHeight() * 1.2f);
@@ -60,9 +63,14 @@ public class HUD extends Stage {
         // Initialize player name
         Label nameLb = new Label(player.name, assetsManager.getSkin());
 
+        // Initialize the player level
+        levelLb = new Label("Level : "+((int) player.level), assetsManager.getSkin());
+
         // Create table for positioning
         Table barTable = new Table();
         barTable.add(nameLb).width(hud_width);
+        barTable.row();
+        barTable.add(levelLb).left();
         barTable.row().padTop(10);
         barTable.add(healthBar).left().width(hud_width).height(hud_height/9);
         barTable.row().padTop(10);
@@ -79,5 +87,6 @@ public class HUD extends Stage {
         float percentAction = (player.action.getCurrent()/player.action.getMax());
         healthBar.setWidth(hud_width*percentLife);
         actionBar.setWidth(hud_width*percentAction);
+        levelLb.setText("Level : "+((int) player.level));
     }
 }

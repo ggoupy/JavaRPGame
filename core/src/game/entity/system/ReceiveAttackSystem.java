@@ -25,6 +25,7 @@ public class ReceiveAttackSystem extends IteratingSystem {
         {
             if (entityAttacking.attackDuration.update(deltaTime))
             {
+                receiveAttackCom.lastAttacking = entityAttacking.entity;
                 receiveAttackCom.entitiesAttacking.removeValue(entityAttacking,true);
             }
         }
