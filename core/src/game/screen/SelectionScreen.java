@@ -48,7 +48,7 @@ public class SelectionScreen implements Screen {
         Texture background = game.assetsManager.manager.get(game.assetsManager.background);
         table.background(new TextureRegionDrawable(background));
 
-        final Skin skin = game.assetsManager.getSkin();
+        final Skin skin = game.assetsManager.getMenuSkin();
         classLb = new Label("SELECT YOUR CLASS", skin);
         classLb.setColor(Color.DARK_GRAY);
         classLb.setFontScale(1.2F);

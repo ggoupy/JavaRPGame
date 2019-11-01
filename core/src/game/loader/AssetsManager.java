@@ -21,8 +21,12 @@ public class AssetsManager {
     public static final String background_hud = "background/background-hud.png";
 
     //Skin for menu
-    private Skin skin;
-    public static final String skin_path = "menu/craftacular/skin/craftacular-ui.json"; //"menu/flat-earth/skin/flat-earth-ui.json";
+    private Skin menuSkin;
+    public static final String menuSkin_path = "skin/craftacular/skin/craftacular-ui.json";
+
+    //Skin for HUD
+    private Skin HUDSkin;
+    public static final String HUDSkin_path = "skin/pixthulhu/skin/pixthulhu-ui.json";
 
     //Textures path
     public static final String spritesheet = "images/atlas.txt";
@@ -40,7 +44,9 @@ public class AssetsManager {
 
     public void queueAddAssets()
     {
-        skin = new Skin(Gdx.files.internal(skin_path));
+        menuSkin = new Skin(Gdx.files.internal(menuSkin_path));
+        HUDSkin = new Skin(Gdx.files.internal(HUDSkin_path));
+
         atlas = new TextureAtlas(spritesheet);
 
         manager.load(background, Texture.class);
@@ -55,5 +61,6 @@ public class AssetsManager {
         return atlas;
     }
 
-    public final Skin getSkin() { return skin; }
+    public final Skin getMenuSkin() { return menuSkin; }
+    public final Skin getHUDSkin() { return HUDSkin; }
 }

@@ -34,8 +34,9 @@ public class HUD extends Stage {
         //Player reference
         player = p;
 
-        //Skin
-        Skin skin = assetsManager.getSkin();
+        //Skins
+        Skin menuSkin = assetsManager.getMenuSkin();
+        Skin HUDSkin = assetsManager.getHUDSkin();
 
         //Table size
         hud_width = Constants.G_WIDTH / 6;
@@ -62,10 +63,10 @@ public class HUD extends Stage {
         actionBar.setSize(hud_width, hud_width/9);
 
         // Initialize player name
-        Label nameLb = new Label(player.name, skin);
+        Label nameLb = new Label(player.name, menuSkin);
 
         // Initialize the player level
-        levelLb = new Label("Level : " + player.level, skin);
+        levelLb = new Label("Level : " + player.level, menuSkin);
 
         // Create table for positioning
         Table barTable = new Table();
@@ -81,35 +82,11 @@ public class HUD extends Stage {
         hudContainer.setActor(barTable);
         addActor(hudContainer);
 
-        //XP bar style
-        ProgressBarStyle progressBarStyle = new ProgressBarStyle();
-
-        Pixmap pixmap = new Pixmap(100, 20, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.DARK_GRAY);
-        pixmap.fill();
-        TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-        pixmap.dispose();
-        progressBarStyle.background = drawable;
-
-        pixmap = new Pixmap(0, 20, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.BLUE);
-        pixmap.fill();
-        drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-        pixmap.dispose();
-        progressBarStyle.knob = drawable;
-
-        pixmap = new Pixmap(100, 20, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.valueOf("#003399"));
-        pixmap.fill();
-        drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-        pixmap.dispose();
-        progressBarStyle.knobBefore = drawable;
-
-
-        xpBar = new ProgressBar(0.0f,1.0f,0.01f,false,skin);
+        //XP bar
+        xpBar = new ProgressBar(0.0f,1.0f,0.01f,false, HUDSkin);
         xpBar.setValue(0.0f);
         xpBar.setAnimateDuration(0.25f);
-        xpBar.setBounds(10, 0, Constants.G_WIDTH - 20, Constants.G_HEIGHT/20);
+        xpBar.setBounds(10, 0, Constants.G_WIDTH - 20, Constants.G_HEIGHT/25);
         addActor(xpBar);
     }
 

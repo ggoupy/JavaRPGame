@@ -41,7 +41,7 @@ public class MenuScreen implements Screen {
         Texture background = game.assetsManager.manager.get(game.assetsManager.background);
         table.background(new TextureRegionDrawable(background));
 
-        Skin skin = game.assetsManager.getSkin();
+        Skin skin = game.assetsManager.getMenuSkin();
 
         TextButton newGame = new TextButton("New Game", skin);
         TextButton exit = new TextButton("Exit", skin);
