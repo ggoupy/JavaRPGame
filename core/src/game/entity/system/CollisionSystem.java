@@ -72,8 +72,8 @@ public class CollisionSystem  extends IteratingSystem {
                         {
                             if (!receiveAttack.hasReceivedAttack(collidedEntity))
                             {
-                                enemy.life.updateCurrent(-player.damage);
                                 receiveAttack.receiveAttack(collidedEntity, player.attackDuration.getMax());
+                                enemy.life.updateCurrent(-player.damage);
                             }
                         }
                     }

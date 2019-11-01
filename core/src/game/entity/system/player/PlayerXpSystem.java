@@ -20,12 +20,21 @@ public class PlayerXpSystem extends IteratingSystem {
         PlayerComponent player = playerMapper.get(entity); //get player component for the entity
         if (player.xpBar.isFull()) //if player xpBar is completed
         {
-            player.level++; //update player level
+            playerUP(player);
 
-            float xpSurplus = player.xpBar.getCurrent() - 100; //xp points over the max
+            float xpSurplus = player.xpBar.getCurrent() - player.xpBar.getMax(); //xp points over the max
+            System.out.println(xpSurplus);
             xpSurplus = xpSurplus > 0 ? xpSurplus : 0; //assert that is > 0
             player.xpBar.setCurrent(xpSurplus); //init xp bar for next level
             player.xpBar.setMax(player.xpBar.getMax()*1.5f); //update xp needed for next level
         }
+    }
+
+    private void playerUP(PlayerComponent player)
+    {
+        player.level++; //update player level
+        player.life.setMax(player.life.getMax()*1.1f,true);
+        player.action.setMax(player.action.getMax()*1.1f,true);
+        player.damage = player.damage * 1.1f;
     }
 }

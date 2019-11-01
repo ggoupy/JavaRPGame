@@ -2,6 +2,7 @@ package game.entity.factory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,9 +16,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.ObjectMap;
 import game.entity.component.*;
 import game.entity.component.PlayerComponent;
 import game.entity.utils.Spawn;
+import game.loader.AssetsManager;
 import game.utils.Bar;
 import game.utils.Timer;
 
@@ -30,6 +34,7 @@ public class EntityFactory {
     private World world;
     private PooledEngine engine;
     private TextureAtlas atlas;
+    private AssetsManager assetsManager;
 
     private BodyFactory bodyFactory;
 
@@ -40,19 +45,20 @@ public class EntityFactory {
 
 
     //private constructor because it's singleton class
-    private EntityFactory (World world, PooledEngine engine, TextureAtlas atlas)
+    private EntityFactory (World world, PooledEngine engine, AssetsManager assetsManager)
     {
         this.world = world;
         this.engine = engine;
-        this.atlas = atlas;
+        this.atlas = assetsManager.getAtlas();
+        this.assetsManager = assetsManager;
         bodyFactory = bodyFactory.getInstance(world);
     }
 
     //get the body factory instance and create it if not instanced
     //used to create the instance (like a constructor)
-    public static EntityFactory getInstance(World world, PooledEngine engine, TextureAtlas atlas)
+    public static EntityFactory getInstance(World world, PooledEngine engine, AssetsManager assetsManager)
     {
-        if (thisInstance == null) thisInstance = new EntityFactory(world, engine, atlas);
+        if (thisInstance == null) thisInstance = new EntityFactory(world, engine, assetsManager);
         return thisInstance;
     }
 
@@ -160,7 +166,7 @@ public class EntityFactory {
         Entity entitySpawn = engine.createEntity();
         EnemySpawnComponent enemySpawnCom = engine.createComponent(EnemySpawnComponent.class);
         enemySpawnCom.spawns = new Array<>();
-        enemySpawnCom.RespawnTimer = new Timer(spawns.getCount()*3); //new enemy all x seconds
+        enemySpawnCom.RespawnTimer = new Timer(1);//spawns.getCount()*3); //new enemy all x seconds
         entitySpawn.add(enemySpawnCom);
         engine.addEntity(entitySpawn);
         for(int i=0; i<spawns.getCount(); ++i)
@@ -286,37 +292,16 @@ public class EntityFactory {
     //set player attributes according to his specialization
     private void createPlayerDefinition(PlayerComponent player, String spec)
     {
-        switch (spec)
-        {
-            case "mage":
-            {
-                player.life = new Bar(80); //manage current and max life
-                player.action = new Bar(200);
-                player.damage = 20;
-                player.speed = 2f;
-                player.lifeRegeneration = 0.05f;
-                break;
-            }
-            case "hunter":
-            {
-                player.life = new Bar(100); //manage current and max life
-                player.action = new Bar(150);
-                player.damage = 50;
-                player.speed = 3f;
-                player.lifeRegeneration = 0.08f;
-                break;
-            }
-            case "warrior":
-            {
-                player.life = new Bar(200); //manage current and max life
-                player.action = new Bar(100);
-                player.damage = 15;
-                player.speed = 1.5f;
-                player.lifeRegeneration = 0.1f;
-                break;
-            }
-        }
+        ObjectMap heroCfg = assetsManager.json.fromJson(
+                ObjectMap.class,
+                Gdx.files.internal(assetsManager.heroCfg_path+spec+".json")
+        );
 
+        player.life = new Bar((float) heroCfg.get("life"));
+        player.action = new Bar((float) heroCfg.get("action"));
+        player.damage = (float) heroCfg.get("damage");
+        player.speed = (float) heroCfg.get("speed");
+        player.lifeRegeneration = (float) heroCfg.get("lifeRegeneration");
         player.level = 1;
         player.xpBar = new Bar(100,0);
         player.spec = spec;

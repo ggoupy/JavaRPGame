@@ -61,7 +61,7 @@ public class GameScreen implements Screen {
         engine = new PooledEngine();
 
         /* ENTITY FACTORY */
-        entityFactory = entityFactory.getInstance(world, engine, atlas);
+        entityFactory = entityFactory.getInstance(world, engine, game.assetsManager);
 
         engine.addSystem(renderingSystem);
         engine.addSystem(new PhysicsSystem(world));

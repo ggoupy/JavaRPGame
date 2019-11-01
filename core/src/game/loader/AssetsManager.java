@@ -9,12 +9,21 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+
+import java.util.ArrayList;
 
 public class AssetsManager {
 
     //Another way to declare member variable
     //These attributes are constants but accessible by other classes
     public final AssetManager manager = new AssetManager();
+
+    //Config
+    public Json json;
+    public static final String heroes_config = "config/heroes.json";
+    public static final String heroCfg_path = "config/heroes/";
 
     //Background path
     public static final String background = "background/background.png";
@@ -41,14 +50,16 @@ public class AssetsManager {
     //Atlas: spritesheet storing info of all sprites, better performance to load all in one time
     private TextureAtlas atlas;
 
+    public AssetsManager()
+    {
+        json = new Json();
+        menuSkin = new Skin(Gdx.files.internal(menuSkin_path));
+        HUDSkin = new Skin(Gdx.files.internal(HUDSkin_path));
+        atlas = new TextureAtlas(spritesheet);
+    }
 
     public void queueAddAssets()
     {
-        menuSkin = new Skin(Gdx.files.internal(menuSkin_path));
-        HUDSkin = new Skin(Gdx.files.internal(HUDSkin_path));
-
-        atlas = new TextureAtlas(spritesheet);
-
         manager.load(background, Texture.class);
         manager.load(background_hud, Texture.class);
 

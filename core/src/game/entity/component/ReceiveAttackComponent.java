@@ -15,6 +15,7 @@ public class ReceiveAttackComponent implements Component {
     public void receiveAttack(Entity e, double duration)
     {
         entitiesAttacking.add(new EntityAttacking(e,new Timer(duration)));
+        lastAttacking = e;
     }
 
     public boolean hasReceivedAttack(Entity e)

@@ -85,7 +85,7 @@ public class HUD extends Stage {
         //XP bar
         xpBar = new ProgressBar(0.0f,1.0f,0.01f,false, HUDSkin);
         xpBar.setValue(0.0f);
-        xpBar.setAnimateDuration(0.25f);
+        xpBar.setAnimateDuration(0.35f);
         xpBar.setBounds(10, 0, Constants.G_WIDTH - 20, Constants.G_HEIGHT/25);
         addActor(xpBar);
     }
