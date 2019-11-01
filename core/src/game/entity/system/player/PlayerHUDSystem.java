@@ -20,7 +20,8 @@ public class PlayerHUDSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         spriteBatch.setProjectionMatrix(hud.getCamera().combined);
-        hud.update();
-        hud.draw();
+        hud.update(); // Update HUD actors
+        hud.act(); // For the xp progress bar
+        hud.draw(); // Draw the HUD stage
     }
 }

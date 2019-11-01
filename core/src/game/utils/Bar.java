@@ -17,4 +17,6 @@ public class Bar {
     public float getCurrent() {return current;}
     public void setCurrent(float c) {current = c;}
     public void updateCurrent(float c) {current += c;}
+    public boolean isFull() {return current>=max;}
+    public boolean isEmpty() {return current<=0;}
 }

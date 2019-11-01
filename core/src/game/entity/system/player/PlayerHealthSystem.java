@@ -28,7 +28,7 @@ public class PlayerHealthSystem extends IteratingSystem {
     {
         PlayerComponent player = playerMapper.get(entity);
 
-        if (player.life.getCurrent() <= 0)
+        if (player.life.isEmpty())
         {
             //entityFactory.destroyEntity(entity);
             //game.changeScreen(GDXGame.ENDSCREEN);

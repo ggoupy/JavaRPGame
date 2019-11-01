@@ -8,7 +8,8 @@ public class PlayerComponent implements Component {
 
     public String name = "";
     public String spec = "";
-    public double level = 1;
+    public int level = 1;
+    public Bar xpBar = null;
     public Bar life = null;
     public Bar action = null; //Call it differently
     public float speed = 1;

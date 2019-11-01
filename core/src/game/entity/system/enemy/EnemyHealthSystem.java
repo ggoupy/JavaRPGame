@@ -31,13 +31,13 @@ public class EnemyHealthSystem extends IteratingSystem {
         ReceiveAttackComponent enemyAttacker = attached.attachedEntity.getComponent(ReceiveAttackComponent.class);
 
         //Death test
-        if (enemy.life.getCurrent() <= 0)
+        if (enemy.life.isEmpty())
         {
             Entity lastAttacking = enemyAttacker.lastAttacking;
 
             /* Player experience */
             PlayerComponent player = lastAttacking.getComponent(PlayerComponent.class);
-            if (player != null) player.level += enemy.xpGain;
+            if (player != null) player.xpBar.updateCurrent(enemy.xpGain);
 
             entityFactory.destroyEntity(entity);
             return;

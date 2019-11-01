@@ -167,9 +167,8 @@ public class EntityFactory {
         {
             Rectangle r = ((RectangleMapObject) spawns.get(i)).getRectangle();
             enemySpawnCom.addSpawn(r, false);
-            //createEnemy(entitySpawn, i); //create an new enemy in this spawn
+            createEnemy(entitySpawn, i); //create an new enemy in this spawn
         }
-        createEnemy(entitySpawn,2);
     }
 
     //create enemy box2D from a spawn entity and the index of the spawn
@@ -209,7 +208,7 @@ public class EntityFactory {
         enemy.movingTime = 2 + Math.random() * 2; //random between 2 and 4
         enemy.standingTime = 2 + Math.random() * 2; //random between 2 and 4
         enemy.aggressive = true;
-        enemy.xpGain = (float) (0.4f + Math.random()); //random between 0.4 and 1.4
+        enemy.xpGain = (float) (10f + Math.random() * 30f); //random between 10 and 40
 
         receiveAttack.entitiesAttacking = new Array<>();
 
@@ -319,6 +318,7 @@ public class EntityFactory {
         }
 
         player.level = 1;
+        player.xpBar = new Bar(100,0);
         player.spec = spec;
     }
 

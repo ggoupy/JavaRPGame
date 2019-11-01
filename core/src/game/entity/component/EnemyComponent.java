@@ -22,6 +22,6 @@ public class EnemyComponent implements Component {
     public boolean aggressive = false; // if the enemy is aggressive
     public boolean aggro = false; // if the enemy has aggro player
     public boolean cant_aggro = false; //disable the aggro possibility
-    public float aggro_range = 4; //aggressive enemy aggro the player if he is inside its range
-    public float xpGain = 0.5f; //nb of xp that the player earn after killing it
+    public float aggro_range = 3; //aggressive enemy aggro the player if he is inside its range
+    public float xpGain = 50; //nb of xp that the player earn after killing it
 }
