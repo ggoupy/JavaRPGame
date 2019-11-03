@@ -41,7 +41,7 @@ public class CollisionSystem  extends IteratingSystem {
                 {
                     if (type.type == TypeComponent.ENEMY)
                     {
-                        player.life.updateCurrent(-0.1f);
+                        player.life.updateCurrent(-collidedEntity.getComponent(EnemyComponent.class).damage);
                         player.lastDamageDuration = 0;
                     }
                 }

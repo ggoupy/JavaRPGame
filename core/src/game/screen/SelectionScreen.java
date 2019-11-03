@@ -129,7 +129,7 @@ public class SelectionScreen implements Screen {
     public String [] getClassesFromJson()
     {
         Json json = new Json();
-        ArrayList<String> list = json.fromJson(ArrayList.class, Gdx.files.internal("config/hero_cfg.json"));
+        ArrayList<String> list = json.fromJson(ArrayList.class, Gdx.files.internal(game.assetsManager.heroes));
 
         String [] classes = list.toArray(new String[list.size()]);
         return classes;

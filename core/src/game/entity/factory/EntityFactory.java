@@ -30,13 +30,15 @@ import static game.entity.utils.Mappers.*;
 
 public class EntityFactory {
 
-    //References to game attributes
-    private World world;
-    private PooledEngine engine;
-    private TextureAtlas atlas;
-    private AssetsManager assetsManager;
+    //Friendly attributes
+    World world;
+    PooledEngine engine;
+    TextureAtlas atlas;
+    AssetsManager assetsManager;
+    BodyFactory bodyFactory;
 
-    private BodyFactory bodyFactory;
+    private EnemyFactory enemyFactory;
+    private PlayerFactory playerFactory;
 
     //the EntityCreator class will be created only one time
     //So we will store the instance in the class
@@ -52,6 +54,13 @@ public class EntityFactory {
         this.atlas = assetsManager.getAtlas();
         this.assetsManager = assetsManager;
         bodyFactory = bodyFactory.getInstance(world);
+        enemyFactory = enemyFactory.getInstance(this);
+        playerFactory = playerFactory.getInstance(this);
+
+      //  CHECK ALL CODE OF ENEMY , PLAYER , ENTITY FACTORY
+      //      TRY TO OPTIMIZE
+       //     FIND BUGS
+         //   AND IMPLEMENT WELL LEVEL FOR ENEMY
     }
 
     //get the body factory instance and create it if not instanced
@@ -62,81 +71,6 @@ public class EntityFactory {
         return thisInstance;
     }
 
-
-    //create a player box2D in the world according to his position in the tiled map
-    public Entity createPlayer(MapObject playerObj, String spec, String name)
-    {
-        // Create the Entity and all the components that will go in the entity
-        Entity entity = engine.createEntity();
-        PlayerComponent player = engine.createComponent(PlayerComponent.class);
-        BodyComponent body = engine.createComponent(BodyComponent.class);
-        TypeComponent type = engine.createComponent(TypeComponent.class);
-        TransformComponent position = engine.createComponent(TransformComponent.class);
-        TextureComponent texture = engine.createComponent(TextureComponent.class);
-        StateComponent state = engine.createComponent(StateComponent.class);
-        AnimationComponent animation = engine.createComponent(AnimationComponent.class);
-        CollisionComponent collision = engine.createComponent(CollisionComponent.class);
-        ReceiveAttackComponent receiveAttack = engine.createComponent(ReceiveAttackComponent.class);
-
-        //player definition
-        createPlayerDefinition(player, spec);
-        player.name = name;
-
-        //get the rectangle of the mapObject (to have the coordinates)
-        Rectangle rectangle = ((RectangleMapObject)playerObj).getRectangle();
-
-        //convert rectangle coordinates into rectangle center coordinates in the world
-        Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
-
-        //create a box in the world with coordinates and specific attributes
-        body.body = bodyFactory.makeCircleBox(center.x, center.y,0.75f, BodyDef.BodyType.DynamicBody, BodyFactory.HUMAN);
-
-        position.position.set(center.x,center.y,0);
-
-        texture.region = atlas.findRegion(player.spec+"-standingDown");
-
-        type.type = TypeComponent.PLAYER;
-
-        receiveAttack.entitiesAttacking = new Array<>();
-
-        collision.collisionEntity = new Array<>();
-
-        state.set(StateComponent.STANDING_DOWN);
-
-        //we add animations of the player in function of the state component
-        //PlayMode.LOOP repeats animation after all frames shown
-        createAnimation(animation,StateComponent.MOVING,0.08f, player.spec+"-walkingRight", PlayMode.LOOP);
-        createAnimation(animation,StateComponent.MOVING_UP,0.08f, player.spec+"-walkingUp", PlayMode.LOOP);
-        createAnimation(animation,StateComponent.MOVING_DOWN,0.08f, player.spec+"-walkingDown", PlayMode.LOOP);
-        createAnimation(animation,StateComponent.STANDING,1f, player.spec+"-standingRight", PlayMode.NORMAL);
-        createAnimation(animation,StateComponent.STANDING_UP,1f,player.spec+"-standingUp", PlayMode.NORMAL);
-        createAnimation(animation,StateComponent.STANDING_DOWN,1f, player.spec+"-standingDown", PlayMode.NORMAL);
-        createAnimation(animation,StateComponent.ATTACKING,0.08f, player.spec+"-attackingRight", PlayMode.NORMAL);
-        createAnimation(animation,StateComponent.ATTACKING_UP,0.08f,player.spec+"-attackingUp", PlayMode.NORMAL);
-        createAnimation(animation,StateComponent.ATTACKING_DOWN,0.08f, player.spec+"-attackingDown", PlayMode.NORMAL);
-
-        //get the attack duration to disable movements when player attacking
-        player.attackDuration = new Timer(animation.animations.get(StateComponent.ATTACKING).getAnimationDuration());
-
-        //store a reference to the entity in the box2d box
-        body.body.setUserData(entity);
-
-        // add the components to the entity
-        entity.add(body);
-        entity.add(position);
-        entity.add(texture);
-        entity.add(animation);
-        entity.add(player);
-        entity.add(collision);
-        entity.add(type);
-        entity.add(state);
-        entity.add(receiveAttack);
-
-        // add the entity to the engine
-        engine.addEntity(entity);
-
-        return entity; //to save the player
-    }
 
     //convert mapObjects of tiled map into box2D objects in the world
     public void createObjects(MapObjects objects)
@@ -161,156 +95,41 @@ public class EntityFactory {
         }
     }
 
+
+    //create a player box2D in the world according to his position in the tiled map
+    public Entity createPlayer(MapObject playerObj, String spec, String name)
+    {
+        return playerFactory.createPlayer(playerObj,spec,name);
+    }
+
+
+    //create an enemy spawn in the world
     public void createEnemySpawn(MapObjects spawns)
     {
-        Entity entitySpawn = engine.createEntity();
-        EnemySpawnComponent enemySpawnCom = engine.createComponent(EnemySpawnComponent.class);
-        enemySpawnCom.spawns = new Array<>();
-        enemySpawnCom.RespawnTimer = new Timer(1);//spawns.getCount()*3); //new enemy all x seconds
-        entitySpawn.add(enemySpawnCom);
-        engine.addEntity(entitySpawn);
-        for(int i=0; i<spawns.getCount(); ++i)
-        {
-            Rectangle r = ((RectangleMapObject) spawns.get(i)).getRectangle();
-            enemySpawnCom.addSpawn(r, false);
-            createEnemy(entitySpawn, i); //create an new enemy in this spawn
-        }
+        enemyFactory.createEnemySpawn(spawns);
     }
+
 
     //create enemy box2D from a spawn entity and the index of the spawn
-    public void createEnemy(Entity spawnEntity, int index)
+    public void createEnemy(Entity spawnEntity, int index, String enemyType, int enemyLevel)
     {
-        EnemySpawnComponent spawnCom = enemySpawnMapper.get(spawnEntity); //get the spawn component from the spawn entity
-        Spawn enemySpawn = spawnCom.spawns.get(index);
-
-        if (enemySpawn.user != null) return; //to do not create an new enemy if already used
-
-        Rectangle rectangle = enemySpawn.spawnPos; //get the position rectangle from the array of spawns in the spawn component
-        enemySpawn.taken = true; //set the spawn taken
-
-        /* Create the enemy */
-        Entity entity = engine.createEntity();
-        EnemyComponent enemy = engine.createComponent(EnemyComponent.class);
-        BodyComponent body = engine.createComponent(BodyComponent.class);
-        TypeComponent type = engine.createComponent(TypeComponent.class);
-        CollisionComponent collision = engine.createComponent(CollisionComponent.class);
-        StateComponent state = engine.createComponent(StateComponent.class);
-        AnimationComponent animation = engine.createComponent(AnimationComponent.class);
-        TextureComponent texture = engine.createComponent(TextureComponent.class);
-        TransformComponent position = engine.createComponent(TransformComponent.class);
-        AttachedComponent attached = engine.createComponent(AttachedComponent.class);
-        ReceiveAttackComponent receiveAttack = engine.createComponent(ReceiveAttackComponent.class);
-
-        type.type = TypeComponent.ENEMY;
-
-        //convert rectangle coordinates into rectangle center coordinates in the world
-        Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
-
-        body.body = bodyFactory.makeBox(rectangle, BodyDef.BodyType.DynamicBody, BodyFactory.STONE, true);
-
-        position.position.set(center.x,center.y,0);
-
-        enemy.origin = new Vector2(center.x, center.y);
-        enemy.movingTime = 2 + Math.random() * 2; //random between 2 and 4
-        enemy.standingTime = 2 + Math.random() * 2; //random between 2 and 4
-        enemy.aggressive = true;
-        enemy.xpGain = (float) (10f + Math.random() * 30f); //random between 10 and 40
-
-        receiveAttack.entitiesAttacking = new Array<>();
-
-        collision.collisionEntity = new Array<>();
-
-        texture.region = atlas.findRegion("skeleton-standingDown");
-
-        state.set(StateComponent.STANDING_DOWN);
-
-        //we add animations of the player in function of the state component
-        //PlayMode.LOOP repeats animation after all frames shown
-        createAnimation(animation,StateComponent.MOVING,0.2f, "skeleton-walkingRight", PlayMode.LOOP);
-        createAnimation(animation,StateComponent.MOVING_UP,0.2f, "skeleton-walkingUp", PlayMode.LOOP);
-        createAnimation(animation,StateComponent.MOVING_DOWN,0.2f, "skeleton-walkingDown", PlayMode.LOOP);
-        createAnimation(animation,StateComponent.STANDING,1f, "skeleton-standingRight", PlayMode.NORMAL);
-        createAnimation(animation,StateComponent.STANDING_UP,1f, "skeleton-standingUp", PlayMode.NORMAL);
-        createAnimation(animation,StateComponent.STANDING_DOWN,1f, "skeleton-standingDown", PlayMode.NORMAL);
-
-        //store a reference to the entity in the box2d box
-        body.body.setUserData(entity);
-
-        // add the components to the entity
-        entity.add(body);
-        entity.add(position);
-        entity.add(texture);
-        entity.add(animation);
-        entity.add(enemy);
-        entity.add(collision);
-        entity.add(type);
-        entity.add(state);
-        entity.add(receiveAttack);
-
-        //need to be after to store firstly all components in the entity
-        attached.attachedEntity = createEnemyHealthBar(entity);
-        entity.add(attached);
-
-        engine.addEntity(entity);
-        enemySpawn.user = entity;
+        enemyFactory.createEnemy(spawnEntity, index, enemyType, enemyLevel);
     }
 
-    private Entity createEnemyHealthBar(Entity enemy)
-    {
-        Entity entity = engine.createEntity();
-        TextureComponent texture = engine.createComponent(TextureComponent.class);
-        AttachedComponent attached = engine.createComponent(AttachedComponent.class);
-        TransformComponent position = engine.createComponent(TransformComponent.class);
-        EnemyHealthComponent health = engine.createComponent(EnemyHealthComponent.class);
-
-        attached.attachedEntity = enemy;
-
-        texture.region = new TextureRegion(atlas.findRegion("enemy-healthbar"));
-
-        Vector3 enemyPos = enemy.getComponent(TransformComponent.class).position;
-        position.position.set(enemyPos);
-
-        health.size = new Rectangle(texture.region.getRegionX(), texture.region.getRegionY(),
-                                    texture.region.getRegionWidth(), texture.region.getRegionHeight()
-        );
-
-        entity.add(texture);
-        entity.add(position);
-        entity.add(attached);
-        entity.add(health);
-        engine.addEntity(entity);
-
-        return entity;
-    }
 
     //create an animation with parameters given to a animation component
-    private void createAnimation(AnimationComponent a, int state, float frameDuration, String atlasRegions, PlayMode playmode)
+    public void createAnimation(AnimationComponent a, int state, float frameDuration, String atlasRegions, Animation.PlayMode playmode)
     {
         a.animations.put(state, new Animation(frameDuration, atlas.findRegions(atlasRegions), playmode));
     }
 
-    //set player attributes according to his specialization
-    private void createPlayerDefinition(PlayerComponent player, String spec)
-    {
-        ObjectMap heroCfg = assetsManager.json.fromJson(
-                ObjectMap.class,
-                Gdx.files.internal(assetsManager.heroCfg_path+spec+".json")
-        );
-
-        player.life = new Bar((float) heroCfg.get("life"));
-        player.action = new Bar((float) heroCfg.get("action"));
-        player.damage = (float) heroCfg.get("damage");
-        player.speed = (float) heroCfg.get("speed");
-        player.lifeRegeneration = (float) heroCfg.get("lifeRegeneration");
-        player.level = 1;
-        player.xpBar = new Bar(100,0);
-        player.spec = spec;
-    }
-
-
 
     //Destroy an entity and all components attached to it
-    public void destroyEntity(Entity entity) {destroyEntity(entity, true);}
+    public void destroyEntity(Entity entity)
+    {
+        destroyEntity(entity, true);
+    }
+
     public void destroyEntity(Entity entity, boolean removeAttached)
     {
         if (removeAttached) //if we chose to remove the attached entity too

@@ -22,8 +22,9 @@ public class AssetsManager {
 
     //Config
     public Json json;
-    public static final String heroes_config = "config/heroes.json";
+    public static final String heroes = "config/heroes/heroes.json";
     public static final String heroCfg_path = "config/heroes/";
+    public static final String enemyCfg_path = "config/enemies/";
 
     //Background path
     public static final String background = "background/background.png";

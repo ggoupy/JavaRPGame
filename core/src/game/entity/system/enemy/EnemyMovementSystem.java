@@ -51,7 +51,7 @@ public class EnemyMovementSystem extends IteratingSystem {
 
                 //if distance between player and enemy is < to its aggro range
                 //we set the direction of the enemy to player
-                if (distance <= enemy.aggro_range)
+                if (distance <= enemy.aggroRange)
                 {
                     goTo(enemy, body, playerPos.position.x, playerPos.position.y);
                     setMovingState(state, enemy.direction);
@@ -90,7 +90,7 @@ public class EnemyMovementSystem extends IteratingSystem {
             body.body.setLinearVelocity(enemy.direction);
 
             //check if an enemy is too far from its spawn and apply a velocity
-            if (isTooFarFromSpawn(body.body.getPosition(), enemy.origin, enemy.moving_range))
+            if (isTooFarFromSpawn(body.body.getPosition(), enemy.origin, enemy.movingRange))
             {
                 goTo(enemy, body, enemy.origin);
                 setMovingState(state, enemy.direction);
