@@ -5,6 +5,10 @@
   <object id="6" name="player" x="1632" y="1584" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="12" name="enemySpawnGraveYard">
+  <properties>
+   <property name="enemyLevel" type="int" value="3"/>
+   <property name="enemyType" value="skeleton"/>
+  </properties>
   <object id="79" name="spawn1" x="1696" y="1312" width="16" height="16"/>
   <object id="81" name="spawn2" x="1488" y="1328" width="16" height="16"/>
   <object id="82" name="spawn3" x="1552" y="1248" width="16" height="16"/>
@@ -14,6 +18,10 @@
   <object id="86" name="spawn7" x="1591.85" y="1320.08" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="13" name="enemySpawnField">
+  <properties>
+   <property name="enemyLevel" type="int" value="5"/>
+   <property name="enemyType" value="skeleton"/>
+  </properties>
   <object id="87" type="spawn3" x="1824" y="1408" width="16" height="16"/>
   <object id="88" type="spawn2" x="1856" y="1472" width="16" height="16"/>
   <object id="89" type="spawn1" x="1920" y="1424" width="16" height="16"/>
@@ -656,6 +664,10 @@
   <object id="45" name="house" x="1488.25" y="1296.05" width="15.4555" height="10.9345"/>
  </objectgroup>
  <objectgroup id="11" name="enemySpawnForest">
+  <properties>
+   <property name="enemyLevel" type="int" value="1"/>
+   <property name="enemyType" value="skeleton"/>
+  </properties>
   <object id="51" name="spawn6" x="1424" y="1792" width="15.28" height="16"/>
   <object id="52" name="spawn10" x="1520" y="1792" width="16" height="16"/>
   <object id="53" name="sapwn11" x="1568" y="1744" width="16" height="16"/>

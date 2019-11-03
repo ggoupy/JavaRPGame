@@ -86,9 +86,9 @@ public class GameScreen implements Screen {
                     game.playerName
         );
         entityFactory.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
-        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnField").getObjects());
-        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnForest").getObjects());
-        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnGraveYard").getObjects());
+        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnField"));
+        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnForest"));
+        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnGraveYard"));
 
         PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, player.getComponent(PlayerComponent.class));
         engine.addSystem(HUD);

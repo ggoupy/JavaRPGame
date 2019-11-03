@@ -60,7 +60,7 @@ public class EnemySpawnSystem extends IteratingSystem {
                 //get a random index in the list
                 int index = freeSpawnIndexes.get(rand.nextInt(freeSpawnIndexes.size));
                 //create an enemy in the spawn 'entity' at the spawn[index]
-                entityFactory.createEnemy(entity, index, EnemyFactory.SKELETON, 1);
+                entityFactory.createEnemy(entity, index);
                 //reset the spawn timer to allow another respawn
                 spawnCom.RespawnTimer.reset();
             }

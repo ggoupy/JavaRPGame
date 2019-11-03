@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -56,11 +57,6 @@ public class EntityFactory {
         bodyFactory = bodyFactory.getInstance(world);
         enemyFactory = enemyFactory.getInstance(this);
         playerFactory = playerFactory.getInstance(this);
-
-      //  CHECK ALL CODE OF ENEMY , PLAYER , ENTITY FACTORY
-      //      TRY TO OPTIMIZE
-       //     FIND BUGS
-         //   AND IMPLEMENT WELL LEVEL FOR ENEMY
     }
 
     //get the body factory instance and create it if not instanced
@@ -104,16 +100,16 @@ public class EntityFactory {
 
 
     //create an enemy spawn in the world
-    public void createEnemySpawn(MapObjects spawns)
+    public void createEnemySpawn(MapLayer spawnLayer)
     {
-        enemyFactory.createEnemySpawn(spawns);
+        enemyFactory.createEnemySpawn(spawnLayer);
     }
 
 
     //create enemy box2D from a spawn entity and the index of the spawn
-    public void createEnemy(Entity spawnEntity, int index, String enemyType, int enemyLevel)
+    public void createEnemy(Entity spawnEntity, int index)
     {
-        enemyFactory.createEnemy(spawnEntity, index, enemyType, enemyLevel);
+        enemyFactory.createEnemy(spawnEntity, index);
     }
 
 

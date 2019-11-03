@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
@@ -97,30 +98,34 @@ public class EnemyFactory {
     {
         enemyCom.life.setMax(enemyCom.life.getMax()*enemyCom.level*1.1f,true);
         enemyCom.damage *= enemyCom.level*1.1f;
-        enemyCom.xpGain *= enemyCom.level*1.1f;
+        enemyCom.xpGain *= enemyCom.level*1.2f;
     }
 
 
     //create an enemy spawn entity containing various spawns in an area
-    public void createEnemySpawn(MapObjects spawns)
+    public void createEnemySpawn(MapLayer spawnLayer)
     {
+        MapObjects spawns = spawnLayer.getObjects();
+
         Entity entitySpawn = entityFactory.engine.createEntity();
         EnemySpawnComponent enemySpawnCom = entityFactory.engine.createComponent(EnemySpawnComponent.class);
         enemySpawnCom.spawns = new Array<>();
         enemySpawnCom.RespawnTimer = new Timer(spawns.getCount()*3); //new enemy all x seconds
+        enemySpawnCom.enemyType = (String) spawnLayer.getProperties().get("enemyType");
+        enemySpawnCom.enemyLevel = (int) spawnLayer.getProperties().get("enemyLevel");
         entitySpawn.add(enemySpawnCom);
         entityFactory.engine.addEntity(entitySpawn);
         for(int i=0; i<spawns.getCount(); ++i)
         {
             Rectangle r = ((RectangleMapObject) spawns.get(i)).getRectangle();
             enemySpawnCom.addSpawn(r, false);
-            createEnemy(entitySpawn, i, SKELETON, 1); //create an new enemy in this spawn
+            createEnemy(entitySpawn, i); //create an new enemy in this spawn
         }
     }
 
 
     //create enemy box2D from a spawn entity and the index of the spawn
-    public void createEnemy(Entity spawnEntity, int index, String enemyType, int level)
+    public void createEnemy(Entity spawnEntity, int index)
     {
         //get the spawn component from the spawn entity
         EnemySpawnComponent spawnCom = enemySpawnMapper.get(spawnEntity);
@@ -137,7 +142,7 @@ public class EnemyFactory {
 
         /* Create the enemy entity */
         Entity entity = entityFactory.engine.createEntity();
-        EnemyComponent enemy = createEnemyComponent(enemyType, level); //according to enemy type
+        EnemyComponent enemy = createEnemyComponent(spawnCom.enemyType, spawnCom.enemyLevel);
         BodyComponent body = entityFactory.engine.createComponent(BodyComponent.class);
         TypeComponent type = entityFactory.engine.createComponent(TypeComponent.class);
         CollisionComponent collision = entityFactory.engine.createComponent(CollisionComponent.class);
