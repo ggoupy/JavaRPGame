@@ -3,6 +3,7 @@ package game.entity.factory;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
@@ -26,6 +27,9 @@ public class EnemyFactory {
 
     public static final String SKELETON = "skeleton";
     public static final String SPIDER = "spider";
+    public static final String GOBLIN = "goblin";
+    public static final String DEVIL = "devil";
+
 
     //unique instance of this class = created only one time
     private static EnemyFactory thisInstance = null;
@@ -42,6 +46,9 @@ public class EnemyFactory {
         this.prototypes = new ArrayMap<>();
 
         loadEnemyDefinition(SKELETON);
+        loadEnemyDefinition(SPIDER);
+        loadEnemyDefinition(GOBLIN);
+        loadEnemyDefinition(DEVIL);
     }
 
 
@@ -96,9 +103,12 @@ public class EnemyFactory {
     //adjust stats of an enemy component according to its level
     public void adjustLevel(EnemyComponent enemyCom)
     {
-        enemyCom.life.setMax(enemyCom.life.getMax()*enemyCom.level*1.1f,true);
-        enemyCom.damage *= enemyCom.level*1.1f;
-        enemyCom.xpGain *= enemyCom.level*1.2f;
+        if (enemyCom.level > 1) //we do not multiply stats of lvl 1
+        {
+            enemyCom.life.setMax(enemyCom.life.getMax()*enemyCom.level*1.1f,true);
+            enemyCom.damage *= enemyCom.level*1.1f;
+            enemyCom.xpGain *= enemyCom.level*1.1f;
+        }
     }
 
 
@@ -152,6 +162,7 @@ public class EnemyFactory {
         TransformComponent position = entityFactory.engine.createComponent(TransformComponent.class);
         AttachedComponent attached = entityFactory.engine.createComponent(AttachedComponent.class);
         ReceiveAttackComponent receiveAttack = entityFactory.engine.createComponent(ReceiveAttackComponent.class);
+        FontComponent font = entityFactory.engine.createComponent(FontComponent.class);
 
         type.type = TypeComponent.ENEMY;
 
@@ -169,21 +180,25 @@ public class EnemyFactory {
 
         collision.collisionEntity = new Array<>();
 
-        texture.region = entityFactory.atlas.findRegion("skeleton-standingDown");
+        texture.region = entityFactory.atlas.findRegion(spawnCom.enemyType+"-standingDown");
 
         state.set(StateComponent.STANDING_DOWN);
 
         //we add animations of the player in function of the state component
         //PlayMode.LOOP repeats animation after all frames shown
-        entityFactory.createAnimation(animation,StateComponent.MOVING,0.2f, "skeleton-walkingRight", Animation.PlayMode.LOOP);
-        entityFactory.createAnimation(animation,StateComponent.MOVING_UP,0.2f, "skeleton-walkingUp", Animation.PlayMode.LOOP);
-        entityFactory.createAnimation(animation,StateComponent.MOVING_DOWN,0.2f, "skeleton-walkingDown", Animation.PlayMode.LOOP);
-        entityFactory.createAnimation(animation,StateComponent.STANDING,1f, "skeleton-standingRight", Animation.PlayMode.NORMAL);
-        entityFactory.createAnimation(animation,StateComponent.STANDING_UP,1f, "skeleton-standingUp", Animation.PlayMode.NORMAL);
-        entityFactory.createAnimation(animation,StateComponent.STANDING_DOWN,1f, "skeleton-standingDown", Animation.PlayMode.NORMAL);
+        entityFactory.createAnimation(animation,StateComponent.MOVING,0.2f, spawnCom.enemyType+"-walkingRight", Animation.PlayMode.LOOP);
+        entityFactory.createAnimation(animation,StateComponent.MOVING_UP,0.2f, spawnCom.enemyType+"-walkingUp", Animation.PlayMode.LOOP);
+        entityFactory.createAnimation(animation,StateComponent.MOVING_DOWN,0.2f, spawnCom.enemyType+"-walkingDown", Animation.PlayMode.LOOP);
+        entityFactory.createAnimation(animation,StateComponent.STANDING,1f, spawnCom.enemyType+"-standingRight", Animation.PlayMode.NORMAL);
+        entityFactory.createAnimation(animation,StateComponent.STANDING_UP,1f, spawnCom.enemyType+"-standingUp", Animation.PlayMode.NORMAL);
+        entityFactory.createAnimation(animation,StateComponent.STANDING_DOWN,1f, spawnCom.enemyType+"-standingDown", Animation.PlayMode.NORMAL);
 
         //store a reference to the entity in the box2d box
         body.body.setUserData(entity);
+
+        font.text = "Lv. " + enemy.level;
+        font.worldPos = new Vector3();
+        font.screenPos = new Vector3();
 
         // add the components to the entity
         entity.add(body);
@@ -195,6 +210,7 @@ public class EnemyFactory {
         entity.add(type);
         entity.add(state);
         entity.add(receiveAttack);
+        entity.add(font);
 
         //need to be at the end, to store firstly all components in the entity
         //create the enemy health bar entity

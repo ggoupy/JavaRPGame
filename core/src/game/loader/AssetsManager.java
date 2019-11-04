@@ -3,13 +3,13 @@ package game.loader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 import java.util.ArrayList;
@@ -51,12 +51,25 @@ public class AssetsManager {
     //Atlas: spritesheet storing info of all sprites, better performance to load all in one time
     private TextureAtlas atlas;
 
+    //Font
+    public static final String font_path = "fonts/DroidSans.ttf";
+    private BitmapFont font;
+
+
     public AssetsManager()
     {
         json = new Json();
         menuSkin = new Skin(Gdx.files.internal(menuSkin_path));
         HUDSkin = new Skin(Gdx.files.internal(HUDSkin_path));
         atlas = new TextureAtlas(spritesheet);
+
+        //Font loading
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal(font_path));
+        FreeTypeFontParameter fontParameter = new FreeTypeFontParameter();
+        fontParameter.size = 25;
+        font = fontGenerator.generateFont(fontParameter);
+        font.getCache().setUseIntegerPositions(false);
+        fontGenerator.dispose();
     }
 
     public void queueAddAssets()
@@ -75,4 +88,6 @@ public class AssetsManager {
 
     public final Skin getMenuSkin() { return menuSkin; }
     public final Skin getHUDSkin() { return HUDSkin; }
+
+    public final BitmapFont getFont() { return font; }
 }

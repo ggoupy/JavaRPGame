@@ -181,47 +181,62 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">enemy/enemy-healthbar.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>13,2,25,3</rect>
-                <key>scale9Paddings</key>
-                <rect>13,2,25,3</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">enemy/squelet/skeleton-standingDown.png</key>
-            <key type="filename">enemy/squelet/skeleton-standingRight.png</key>
-            <key type="filename">enemy/squelet/skeleton-standingUp.png</key>
-            <key type="filename">enemy/squelet/skeleton-walkingDown_01.png</key>
-            <key type="filename">enemy/squelet/skeleton-walkingDown_02.png</key>
-            <key type="filename">enemy/squelet/skeleton-walkingDown_03.png</key>
-            <key type="filename">enemy/squelet/skeleton-walkingRight_01.png</key>
-            <key type="filename">enemy/squelet/skeleton-walkingRight_02.png</key>
-            <key type="filename">enemy/squelet/skeleton-walkingRight_03.png</key>
-            <key type="filename">enemy/squelet/skeleton-walkingUp_01.png</key>
-            <key type="filename">enemy/squelet/skeleton-walkingUp_02.png</key>
-            <key type="filename">enemy/squelet/skeleton-walkingUp_03.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>12,16,24,32</rect>
-                <key>scale9Paddings</key>
-                <rect>12,16,24,32</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
+            <key type="filename">enemy/devil/devil-standingDown.png</key>
+            <key type="filename">enemy/devil/devil-standingRight.png</key>
+            <key type="filename">enemy/devil/devil-standingUp.png</key>
+            <key type="filename">enemy/devil/devil-walkingDown_1.png</key>
+            <key type="filename">enemy/devil/devil-walkingDown_2.png</key>
+            <key type="filename">enemy/devil/devil-walkingDown_3.png</key>
+            <key type="filename">enemy/devil/devil-walkingDown_4.png</key>
+            <key type="filename">enemy/devil/devil-walkingRight_1.png</key>
+            <key type="filename">enemy/devil/devil-walkingRight_13.png</key>
+            <key type="filename">enemy/devil/devil-walkingRight_14.png</key>
+            <key type="filename">enemy/devil/devil-walkingRight_2.png</key>
+            <key type="filename">enemy/devil/devil-walkingUp_1.png</key>
+            <key type="filename">enemy/devil/devil-walkingUp_2.png</key>
+            <key type="filename">enemy/devil/devil-walkingUp_3.png</key>
+            <key type="filename">enemy/devil/devil-walkingUp_4.png</key>
+            <key type="filename">enemy/goblin/goblin-standingDown.png</key>
+            <key type="filename">enemy/goblin/goblin-standingRight.png</key>
+            <key type="filename">enemy/goblin/goblin-standingUp.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingDown_000.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingDown_001.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingDown_002.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingDown_003.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingDown_004.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingDown_005.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingRight_001.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingRight_002.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingRight_003.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingRight_004.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingRight_005.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingUp_001.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingUp_002.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingUp_003.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingUp_004.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingUp_005.png</key>
+            <key type="filename">enemy/goblin/goblin-walkingUp_006.png</key>
+            <key type="filename">enemy/spider/spider-standingDown.png</key>
+            <key type="filename">enemy/spider/spider-standingRight.png</key>
+            <key type="filename">enemy/spider/spider-standingUp.png</key>
+            <key type="filename">enemy/spider/spider-walkingDown_1.png</key>
+            <key type="filename">enemy/spider/spider-walkingDown_2.png</key>
+            <key type="filename">enemy/spider/spider-walkingDown_3.png</key>
+            <key type="filename">enemy/spider/spider-walkingDown_4.png</key>
+            <key type="filename">enemy/spider/spider-walkingDown_5.png</key>
+            <key type="filename">enemy/spider/spider-walkingDown_6.png</key>
+            <key type="filename">enemy/spider/spider-walkingRight_1.png</key>
+            <key type="filename">enemy/spider/spider-walkingRight_2.png</key>
+            <key type="filename">enemy/spider/spider-walkingRight_3.png</key>
+            <key type="filename">enemy/spider/spider-walkingRight_4.png</key>
+            <key type="filename">enemy/spider/spider-walkingRight_5.png</key>
+            <key type="filename">enemy/spider/spider-walkingRight_6.png</key>
+            <key type="filename">enemy/spider/spider-walkingUp_1.png</key>
+            <key type="filename">enemy/spider/spider-walkingUp_2.png</key>
+            <key type="filename">enemy/spider/spider-walkingUp_3.png</key>
+            <key type="filename">enemy/spider/spider-walkingUp_4.png</key>
+            <key type="filename">enemy/spider/spider-walkingUp_5.png</key>
+            <key type="filename">enemy/spider/spider-walkingUp_6.png</key>
             <key type="filename">hero/hunter/hunter-attackingDown_1.png</key>
             <key type="filename">hero/hunter/hunter-attackingDown_2.png</key>
             <key type="filename">hero/hunter/hunter-attackingDown_3.png</key>
@@ -377,6 +392,47 @@
                 <rect>16,16,32,32</rect>
                 <key>scale9Paddings</key>
                 <rect>16,16,32,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">enemy/enemy-healthbar.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>13,2,25,3</rect>
+                <key>scale9Paddings</key>
+                <rect>13,2,25,3</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">enemy/squelet/skeleton-standingDown.png</key>
+            <key type="filename">enemy/squelet/skeleton-standingRight.png</key>
+            <key type="filename">enemy/squelet/skeleton-standingUp.png</key>
+            <key type="filename">enemy/squelet/skeleton-walkingDown_01.png</key>
+            <key type="filename">enemy/squelet/skeleton-walkingDown_02.png</key>
+            <key type="filename">enemy/squelet/skeleton-walkingDown_03.png</key>
+            <key type="filename">enemy/squelet/skeleton-walkingRight_01.png</key>
+            <key type="filename">enemy/squelet/skeleton-walkingRight_02.png</key>
+            <key type="filename">enemy/squelet/skeleton-walkingRight_03.png</key>
+            <key type="filename">enemy/squelet/skeleton-walkingUp_01.png</key>
+            <key type="filename">enemy/squelet/skeleton-walkingUp_02.png</key>
+            <key type="filename">enemy/squelet/skeleton-walkingUp_03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,16,24,32</rect>
+                <key>scale9Paddings</key>
+                <rect>12,16,24,32</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -558,6 +614,62 @@
             <filename>hero/warrior/warrior-attackingUp_6.png</filename>
             <filename>hero/warrior/warrior-attackingUp_7.png</filename>
             <filename>hero/warrior/warrior-attackingUp_8.png</filename>
+            <filename>enemy/devil/devil-standingDown.png</filename>
+            <filename>enemy/devil/devil-standingRight.png</filename>
+            <filename>enemy/devil/devil-standingUp.png</filename>
+            <filename>enemy/devil/devil-walkingDown_1.png</filename>
+            <filename>enemy/devil/devil-walkingDown_2.png</filename>
+            <filename>enemy/devil/devil-walkingDown_3.png</filename>
+            <filename>enemy/devil/devil-walkingDown_4.png</filename>
+            <filename>enemy/devil/devil-walkingRight_1.png</filename>
+            <filename>enemy/devil/devil-walkingRight_2.png</filename>
+            <filename>enemy/devil/devil-walkingRight_13.png</filename>
+            <filename>enemy/devil/devil-walkingRight_14.png</filename>
+            <filename>enemy/devil/devil-walkingUp_1.png</filename>
+            <filename>enemy/devil/devil-walkingUp_2.png</filename>
+            <filename>enemy/devil/devil-walkingUp_3.png</filename>
+            <filename>enemy/devil/devil-walkingUp_4.png</filename>
+            <filename>enemy/goblin/goblin-standingRight.png</filename>
+            <filename>enemy/goblin/goblin-standingUp.png</filename>
+            <filename>enemy/goblin/goblin-walkingDown_000.png</filename>
+            <filename>enemy/goblin/goblin-walkingDown_001.png</filename>
+            <filename>enemy/goblin/goblin-walkingDown_002.png</filename>
+            <filename>enemy/goblin/goblin-walkingDown_003.png</filename>
+            <filename>enemy/goblin/goblin-walkingDown_004.png</filename>
+            <filename>enemy/goblin/goblin-walkingDown_005.png</filename>
+            <filename>enemy/goblin/goblin-walkingRight_001.png</filename>
+            <filename>enemy/goblin/goblin-walkingRight_002.png</filename>
+            <filename>enemy/goblin/goblin-walkingRight_003.png</filename>
+            <filename>enemy/goblin/goblin-walkingRight_004.png</filename>
+            <filename>enemy/goblin/goblin-walkingRight_005.png</filename>
+            <filename>enemy/goblin/goblin-walkingUp_001.png</filename>
+            <filename>enemy/goblin/goblin-walkingUp_002.png</filename>
+            <filename>enemy/goblin/goblin-walkingUp_003.png</filename>
+            <filename>enemy/goblin/goblin-walkingUp_004.png</filename>
+            <filename>enemy/goblin/goblin-walkingUp_005.png</filename>
+            <filename>enemy/goblin/goblin-walkingUp_006.png</filename>
+            <filename>enemy/spider/spider-standingDown.png</filename>
+            <filename>enemy/spider/spider-standingRight.png</filename>
+            <filename>enemy/spider/spider-standingUp.png</filename>
+            <filename>enemy/spider/spider-walkingDown_1.png</filename>
+            <filename>enemy/spider/spider-walkingDown_2.png</filename>
+            <filename>enemy/spider/spider-walkingDown_3.png</filename>
+            <filename>enemy/spider/spider-walkingDown_4.png</filename>
+            <filename>enemy/spider/spider-walkingDown_5.png</filename>
+            <filename>enemy/spider/spider-walkingDown_6.png</filename>
+            <filename>enemy/spider/spider-walkingRight_1.png</filename>
+            <filename>enemy/spider/spider-walkingRight_2.png</filename>
+            <filename>enemy/spider/spider-walkingRight_3.png</filename>
+            <filename>enemy/spider/spider-walkingRight_4.png</filename>
+            <filename>enemy/spider/spider-walkingRight_5.png</filename>
+            <filename>enemy/spider/spider-walkingRight_6.png</filename>
+            <filename>enemy/spider/spider-walkingUp_1.png</filename>
+            <filename>enemy/spider/spider-walkingUp_2.png</filename>
+            <filename>enemy/spider/spider-walkingUp_3.png</filename>
+            <filename>enemy/spider/spider-walkingUp_4.png</filename>
+            <filename>enemy/spider/spider-walkingUp_5.png</filename>
+            <filename>enemy/spider/spider-walkingUp_6.png</filename>
+            <filename>enemy/goblin/goblin-standingDown.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2019.10.08" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="90">
+<map version="1.2" tiledversion="2019.10.08" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="91">
  <tileset firstgid="1" source="TilesetGrass/grass_biome.tsx"/>
  <objectgroup id="6" name="playerPosition">
   <object id="6" name="player" x="1632" y="1584" width="16" height="16"/>
@@ -20,11 +20,18 @@
  <objectgroup id="13" name="enemySpawnField">
   <properties>
    <property name="enemyLevel" type="int" value="5"/>
-   <property name="enemyType" value="skeleton"/>
+   <property name="enemyType" value="goblin"/>
   </properties>
   <object id="87" type="spawn3" x="1824" y="1408" width="16" height="16"/>
   <object id="88" type="spawn2" x="1856" y="1472" width="16" height="16"/>
   <object id="89" type="spawn1" x="1920" y="1424" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="14" name="enemySpawnTower">
+  <properties>
+   <property name="enemyLevel" type="int" value="10"/>
+   <property name="enemyType" value="devil"/>
+  </properties>
+  <object id="90" name="spawn1" x="1856" y="1648" width="16" height="16"/>
  </objectgroup>
  <layer id="1" name="background" width="200" height="200">
   <properties>
@@ -666,7 +673,7 @@
  <objectgroup id="11" name="enemySpawnForest">
   <properties>
    <property name="enemyLevel" type="int" value="1"/>
-   <property name="enemyType" value="skeleton"/>
+   <property name="enemyType" value="spider"/>
   </properties>
   <object id="51" name="spawn6" x="1424" y="1792" width="15.28" height="16"/>
   <object id="52" name="spawn10" x="1520" y="1792" width="16" height="16"/>

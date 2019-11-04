@@ -24,6 +24,7 @@ public class EnemyHealthSystem extends IteratingSystem {
         EnemyHealthComponent health = enemyHealthMapper.get(entity);
         TransformComponent position = transformMapper.get(entity);
         AttachedComponent attached = attachedMapper.get(entity);
+        FontComponent font = fontMapper.get(entity);
 
         //Enemy components
         TransformComponent enemyPos = attached.attachedEntity.getComponent(TransformComponent.class);

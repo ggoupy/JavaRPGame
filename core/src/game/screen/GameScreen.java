@@ -19,13 +19,16 @@ import game.controller.InputsController;
 import game.entity.system.*;
 import game.entity.system.enemy.*;
 import game.entity.system.player.*;
+import game.loader.AssetsManager;
+import game.utils.Constants;
 
 import static game.utils.Constants.TILE_SIZE;
 
 
 public class GameScreen implements Screen {
 
-    private OrthographicCamera camera;
+    private OrthographicCamera cameraUI;
+    private OrthographicCamera cameraBox2D;
     private InputsController controller;
     private GDXGame game;
     private World world;
@@ -33,8 +36,8 @@ public class GameScreen implements Screen {
     private PooledEngine engine;
 
     private TiledMap tiledMap;
-    private TextureAtlas atlas;
-    public static EntityFactory entityFactory;
+
+    private EntityFactory entityFactory;
 
     private Entity player;
 
@@ -45,28 +48,27 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0, 0), true);
         world.setContactListener(new CollisionListener());
 
-        /* GET ASSETS */
-        atlas = game.assetsManager.getAtlas();
+        /* CAMERAS */
+        cameraBox2D = new OrthographicCamera();
+        cameraBox2D.setToOrtho(false, TILE_SIZE, TILE_SIZE);
+        cameraUI = new OrthographicCamera();
+        cameraUI.setToOrtho(false, Constants.G_WIDTH, Constants.G_HEIGHT);
 
         /* RENDERING SYSTEM */
         spriteBatch = new SpriteBatch();
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false,TILE_SIZE, TILE_SIZE);
-        camera.position.x = 200 / 2;
-        camera.position.y = 200 / 2;
-        tiledMap = game.assetsManager.manager.get(game.assetsManager.tiledMap);
-        RenderingSystem renderingSystem = new RenderingSystem(spriteBatch, camera, tiledMap);
+        tiledMap = game.assetsManager.manager.get(AssetsManager.tiledMap);
+        RenderingSystem renderingSystem = new RenderingSystem(spriteBatch, cameraBox2D, cameraUI, tiledMap, g.assetsManager);
 
         /* ENGINE */
         engine = new PooledEngine();
 
         /* ENTITY FACTORY */
-        entityFactory = entityFactory.getInstance(world, engine, game.assetsManager);
+        entityFactory = EntityFactory.getInstance(world, engine, game.assetsManager);
 
         engine.addSystem(renderingSystem);
         engine.addSystem(new PhysicsSystem(world));
-        engine.addSystem(new PhysicsDebugSystem(world, camera));
-        engine.addSystem(new CameraSystem(camera));
+        engine.addSystem(new PhysicsDebugSystem(world, cameraBox2D));
+        engine.addSystem(new CameraSystem(cameraBox2D, cameraUI));
         engine.addSystem(new CollisionSystem());
         engine.addSystem(new PlayerMovementSystem(controller));
         engine.addSystem(new PlayerHealthSystem(g, entityFactory));
@@ -75,6 +77,7 @@ public class GameScreen implements Screen {
         engine.addSystem(new EnemySpawnSystem(entityFactory));
         engine.addSystem(new EnemyMovementSystem(engine));
         engine.addSystem(new EnemyHealthSystem(entityFactory));
+        engine.addSystem(new EnemyLevelSystem(cameraBox2D, cameraUI));
         engine.addSystem(new ReceiveAttackSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new PerspectiveSystem());
@@ -85,7 +88,10 @@ public class GameScreen implements Screen {
                     game.playerSpecialization,
                     game.playerName
         );
+
         entityFactory.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
+
+        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnTower"));
         entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnField"));
         entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnForest"));
         entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnGraveYard"));

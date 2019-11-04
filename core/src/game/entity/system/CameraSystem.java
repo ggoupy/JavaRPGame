@@ -11,18 +11,22 @@ import static game.entity.utils.Mappers.*;
 
 public class CameraSystem extends IteratingSystem {
 
-    private OrthographicCamera camera;
+    private OrthographicCamera cameraBox2D;
+    private OrthographicCamera cameraUI;
 
-    public CameraSystem(OrthographicCamera camera) {
+    public CameraSystem(OrthographicCamera cameraBox2D, OrthographicCamera cameraUI) {
         super(Family.all(PlayerComponent.class, TransformComponent.class).get());
-        this.camera = camera;
+        this.cameraBox2D = cameraBox2D; //to draw stuff that uses metres (in Box2D world)
+        this.cameraUI = cameraUI; //to draw stuff that uses pixels
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime)
     {
-        TransformComponent position = transformMapper.get(entity);
-        camera.position.x = position.position.x;
-        camera.position.y = position.position.y;
+        TransformComponent playerPosition = transformMapper.get(entity);
+        cameraBox2D.position.x = playerPosition.position.x;
+        cameraBox2D.position.y = playerPosition.position.y;
+        cameraBox2D.update(); //to draw stuff using meters
+        cameraUI.update(); //to draw stuff using pixels
     }
 }
