@@ -31,6 +31,7 @@ public class EnemyFactory {
     public static final String SPIDER = "spider";
     public static final String GOBLIN = "goblin";
     public static final String DEVIL = "devil";
+    public static final String ORC = "orc";
 
 
     //unique instance of this class = created only one time
@@ -51,6 +52,7 @@ public class EnemyFactory {
         loadEnemyDefinition(SPIDER);
         loadEnemyDefinition(GOBLIN);
         loadEnemyDefinition(DEVIL);
+        loadEnemyDefinition(ORC);
     }
 
 

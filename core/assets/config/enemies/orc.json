@@ -1,0 +1,9 @@
+{
+		"life": 70,
+		"speed": 0.3,
+		"damage": 0.05,
+		"aggressiveNature": "false",
+		"aggroRange": 3,
+		"movingRange": 4,
+		"xpGain": 10
+}

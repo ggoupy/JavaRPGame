@@ -216,6 +216,33 @@
             <key type="filename">enemy/goblin/goblin-walkingUp_004.png</key>
             <key type="filename">enemy/goblin/goblin-walkingUp_005.png</key>
             <key type="filename">enemy/goblin/goblin-walkingUp_006.png</key>
+            <key type="filename">enemy/orc/orc-standingDown.png</key>
+            <key type="filename">enemy/orc/orc-standingRight.png</key>
+            <key type="filename">enemy/orc/orc-standingUp.png</key>
+            <key type="filename">enemy/orc/orc-walkingDown_1.png</key>
+            <key type="filename">enemy/orc/orc-walkingDown_2.png</key>
+            <key type="filename">enemy/orc/orc-walkingDown_3.png</key>
+            <key type="filename">enemy/orc/orc-walkingDown_4.png</key>
+            <key type="filename">enemy/orc/orc-walkingDown_5.png</key>
+            <key type="filename">enemy/orc/orc-walkingDown_6.png</key>
+            <key type="filename">enemy/orc/orc-walkingDown_7.png</key>
+            <key type="filename">enemy/orc/orc-walkingDown_8.png</key>
+            <key type="filename">enemy/orc/orc-walkingRight_1.png</key>
+            <key type="filename">enemy/orc/orc-walkingRight_2.png</key>
+            <key type="filename">enemy/orc/orc-walkingRight_3.png</key>
+            <key type="filename">enemy/orc/orc-walkingRight_4.png</key>
+            <key type="filename">enemy/orc/orc-walkingRight_5.png</key>
+            <key type="filename">enemy/orc/orc-walkingRight_6.png</key>
+            <key type="filename">enemy/orc/orc-walkingRight_7.png</key>
+            <key type="filename">enemy/orc/orc-walkingRight_8.png</key>
+            <key type="filename">enemy/orc/orc-walkingUp_1.png</key>
+            <key type="filename">enemy/orc/orc-walkingUp_2.png</key>
+            <key type="filename">enemy/orc/orc-walkingUp_3.png</key>
+            <key type="filename">enemy/orc/orc-walkingUp_4.png</key>
+            <key type="filename">enemy/orc/orc-walkingUp_5.png</key>
+            <key type="filename">enemy/orc/orc-walkingUp_6.png</key>
+            <key type="filename">enemy/orc/orc-walkingUp_7.png</key>
+            <key type="filename">enemy/orc/orc-walkingUp_8.png</key>
             <key type="filename">enemy/spider/spider-standingDown.png</key>
             <key type="filename">enemy/spider/spider-standingRight.png</key>
             <key type="filename">enemy/spider/spider-standingUp.png</key>
@@ -672,6 +699,33 @@
             <filename>enemy/goblin/goblin-standingDown.png</filename>
             <filename>enemy/enemy-healthbar-aggressive.png</filename>
             <filename>enemy/enemy-healthbar-passive.png</filename>
+            <filename>enemy/orc/orc-standingDown.png</filename>
+            <filename>enemy/orc/orc-standingRight.png</filename>
+            <filename>enemy/orc/orc-standingUp.png</filename>
+            <filename>enemy/orc/orc-walkingDown_1.png</filename>
+            <filename>enemy/orc/orc-walkingDown_2.png</filename>
+            <filename>enemy/orc/orc-walkingDown_3.png</filename>
+            <filename>enemy/orc/orc-walkingDown_4.png</filename>
+            <filename>enemy/orc/orc-walkingDown_5.png</filename>
+            <filename>enemy/orc/orc-walkingDown_6.png</filename>
+            <filename>enemy/orc/orc-walkingDown_7.png</filename>
+            <filename>enemy/orc/orc-walkingDown_8.png</filename>
+            <filename>enemy/orc/orc-walkingRight_1.png</filename>
+            <filename>enemy/orc/orc-walkingRight_2.png</filename>
+            <filename>enemy/orc/orc-walkingRight_3.png</filename>
+            <filename>enemy/orc/orc-walkingRight_4.png</filename>
+            <filename>enemy/orc/orc-walkingRight_5.png</filename>
+            <filename>enemy/orc/orc-walkingRight_6.png</filename>
+            <filename>enemy/orc/orc-walkingRight_7.png</filename>
+            <filename>enemy/orc/orc-walkingRight_8.png</filename>
+            <filename>enemy/orc/orc-walkingUp_1.png</filename>
+            <filename>enemy/orc/orc-walkingUp_2.png</filename>
+            <filename>enemy/orc/orc-walkingUp_3.png</filename>
+            <filename>enemy/orc/orc-walkingUp_4.png</filename>
+            <filename>enemy/orc/orc-walkingUp_5.png</filename>
+            <filename>enemy/orc/orc-walkingUp_6.png</filename>
+            <filename>enemy/orc/orc-walkingUp_7.png</filename>
+            <filename>enemy/orc/orc-walkingUp_8.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
