@@ -2,8 +2,10 @@ package game.entity.factory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
@@ -71,7 +73,7 @@ public class EnemyFactory {
         enemy.life = new Bar((float) enemyCfg.get("life"));
         enemy.speed = (float) enemyCfg.get("speed");
         enemy.damage = (float) enemyCfg.get("damage");
-        enemy.aggressive = Boolean.parseBoolean((String) enemyCfg.get("aggressive"));
+        enemy.aggressiveNature = Boolean.parseBoolean((String) enemyCfg.get("aggressiveNature"));
         enemy.aggroRange = (float) enemyCfg.get("aggroRange");
         enemy.movingRange = (float) enemyCfg.get("movingRange");
         enemy.xpGain = (float) enemyCfg.get("xpGain");
@@ -89,7 +91,8 @@ public class EnemyFactory {
         enemyCom.life = new Bar(toCopy.life.getMax());
         enemyCom.speed = toCopy.speed;
         enemyCom.damage = toCopy.damage;
-        enemyCom.aggressive = toCopy.aggressive;
+        enemyCom.aggressiveNature = toCopy.aggressiveNature;
+        enemyCom.aggressive = enemyCom.aggressiveNature;
         enemyCom.aggroRange = toCopy.aggroRange;
         enemyCom.movingRange = toCopy.movingRange;
         enemyCom.movingTime = (float) (2 + Math.random() * 2); //rand between 2 and 4
@@ -169,7 +172,7 @@ public class EnemyFactory {
         //convert rectangle coordinates into rectangle center coordinates in the world
         Vector2 center = BodyFactory.getTransformedCenterForRectangle(spawnPos);
 
-        body.body = entityFactory.bodyFactory.makeBox(spawnPos, BodyDef.BodyType.DynamicBody, BodyFactory.STONE, true);
+        body.body = entityFactory.bodyFactory.makeCircleBox(center.x, center.y, 1, BodyDef.BodyType.DynamicBody, BodyFactory.STONE, true);
 
         position.position.set(center.x,center.y,0);
 
@@ -233,7 +236,14 @@ public class EnemyFactory {
 
         attached.attachedEntity = enemy;
 
-        texture.region = new TextureRegion(entityFactory.atlas.findRegion("enemy-healthbar"));
+        //we store both health bar type (aggressive/passive) in tex.region2 & tex.region3 and
+        //display the wanted one with tex.region
+        //we would need to use it in case of the enemy becomes aggressive or passive
+        String healthBarType = (enemyMapper.get(enemy).aggressiveNature) ? "aggressive" : "passive";
+        String healthBarOtherType = (enemyMapper.get(enemy).aggressiveNature) ? "passive" : "aggressive";
+        texture.region2 = new TextureRegion(entityFactory.atlas.findRegion("enemy-healthbar-"+healthBarType));
+        texture.region3 = new TextureRegion(entityFactory.atlas.findRegion("enemy-healthbar-"+healthBarOtherType));
+        texture.region = texture.region2;
 
         Vector3 enemyPos = enemy.getComponent(TransformComponent.class).position;
         position.position.set(enemyPos);

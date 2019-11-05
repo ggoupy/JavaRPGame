@@ -41,8 +41,12 @@ public class CollisionSystem  extends IteratingSystem {
                 {
                     if (type.type == TypeComponent.ENEMY)
                     {
-                        player.life.updateCurrent(-collidedEntity.getComponent(EnemyComponent.class).damage);
-                        player.lastDamageDuration = 0;
+                        EnemyComponent enemyAttacking = enemyMapper.get(collidedEntity);
+                        if (enemyAttacking.aggressive) //aggressive enemy attacking player at collision
+                        {
+                            player.life.updateCurrent(-enemyAttacking.damage);
+                            player.lastDamageDuration = 0;
+                        }
                     }
                 }
             }
@@ -51,38 +55,42 @@ public class CollisionSystem  extends IteratingSystem {
 
         /* do enemy collision */
         //if the enemy has a collision with an entity
-        if(thisType.type == TypeComponent.ENEMY && collidedEntities.size != 0)
+        if(thisType.type == TypeComponent.ENEMY)
         {
             //get the enemy component of the entity
             EnemyComponent enemy = enemyMapper.get(entity);
 
-            for (Entity collidedEntity : collidedEntities)
-            {
-                //get the collided entity type component
-                TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
+            enemy.attacking = false; //set to false every frame, and change it to true in case later
 
-                //if the the collided entity has a type
-                if(type != null)
+            if (collidedEntities.size != 0) //if it has a collision with one or more entities
+            {
+                for (Entity collidedEntity : collidedEntities)
                 {
-                    if (type.type == TypeComponent.PLAYER)
-                    {
-                        PlayerComponent player = collidedEntity.getComponent(PlayerComponent.class);
-                        ReceiveAttackComponent receiveAttack = entity.getComponent(ReceiveAttackComponent.class);
-                        if (player.isAttacking)
-                        {
-                            if (!receiveAttack.hasReceivedAttack(collidedEntity))
-                            {
-                                receiveAttack.receiveAttack(collidedEntity, player.attackDuration.getMax());
-                                enemy.life.updateCurrent(-player.damage);
+                    //get the collided entity type component
+                    TypeComponent type = collidedEntity.getComponent(TypeComponent.class);
+
+                    //if the the collided entity has a type
+                    if (type != null) {
+                        if (type.type == TypeComponent.PLAYER) {
+                            PlayerComponent player = collidedEntity.getComponent(PlayerComponent.class);
+                            ReceiveAttackComponent receiveAttack = entity.getComponent(ReceiveAttackComponent.class);
+                            if (player.isAttacking) {
+                                if (!receiveAttack.hasReceivedAttack(collidedEntity)) {
+                                    receiveAttack.receiveAttack(collidedEntity, player.attackDuration.getMax());
+                                    enemy.life.updateCurrent(-player.damage);
+                                    enemy.aggressive = true; //if he receives an attack, he becomes aggressive
+                                }
                             }
+
+                            if (enemy.aggressive) enemy.attacking = true; //the enemy attacks when he collides with the player
                         }
-                    }
-                    //If collision with scenery
-                    //We treat the collision normally
-                    if (type.type == TypeComponent.SCENERY)
-                    {
-                        enemy.collision = true; //so that he can change his direction
-                        collision.removeCollidedEntity(collidedEntity);
+
+                        //If collision with scenery
+                        //We treat the collision normally
+                        if (type.type == TypeComponent.SCENERY) {
+                            enemy.collision = true; //so that he can change his direction
+                            collision.removeCollidedEntity(collidedEntity);
+                        }
                     }
                 }
             }

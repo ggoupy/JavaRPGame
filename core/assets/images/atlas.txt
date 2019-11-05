@@ -5,7 +5,7 @@ filter: Linear,Linear
 repeat: none
 action-bar
   rotate: false
-  xy: 793, 868
+  xy: 793, 877
   size: 1, 50
   orig: 1, 50
   offset: 0, 0
@@ -115,9 +115,16 @@ devil-walkingUp
   orig: 64, 64
   offset: 0, 0
   index: 4
-enemy-healthbar
+enemy-healthbar-aggressive
   rotate: false
   xy: 793, 859
+  size: 50, 7
+  orig: 50, 7
+  offset: 0, 0
+  index: -1
+enemy-healthbar-passive
+  rotate: false
+  xy: 793, 868
   size: 50, 7
   orig: 50, 7
   offset: 0, 0
@@ -264,7 +271,7 @@ goblin-walkingUp
   index: 6
 health-bar
   rotate: false
-  xy: 796, 868
+  xy: 796, 877
   size: 1, 50
   orig: 1, 50
   offset: 0, 0

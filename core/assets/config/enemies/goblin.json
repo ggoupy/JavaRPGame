@@ -2,7 +2,7 @@
 		"life": 80,
 		"speed": 0.3,
 		"damage": 0.4,
-		"aggressive": "true",
+		"aggressiveNature": "false",
 		"aggroRange": 3,
 		"movingRange": 4,
 		"xpGain": 20

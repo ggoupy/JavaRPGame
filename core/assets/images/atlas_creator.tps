@@ -395,7 +395,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">enemy/enemy-healthbar.png</key>
+            <key type="filename">enemy/enemy-healthbar-aggressive.png</key>
+            <key type="filename">enemy/enemy-healthbar-passive.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -550,7 +551,6 @@
             <filename>hero/mage/mage-walkingUp_8.png</filename>
             <filename>hud/action-bar.png</filename>
             <filename>hud/health-bar.png</filename>
-            <filename>enemy/enemy-healthbar.png</filename>
             <filename>hero/mage/mage-attackingDown_1.png</filename>
             <filename>hero/mage/mage-attackingDown_2.png</filename>
             <filename>hero/mage/mage-attackingDown_3.png</filename>
@@ -670,6 +670,8 @@
             <filename>enemy/spider/spider-walkingUp_5.png</filename>
             <filename>enemy/spider/spider-walkingUp_6.png</filename>
             <filename>enemy/goblin/goblin-standingDown.png</filename>
+            <filename>enemy/enemy-healthbar-aggressive.png</filename>
+            <filename>enemy/enemy-healthbar-passive.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

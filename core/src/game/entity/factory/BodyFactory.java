@@ -95,7 +95,7 @@ public class BodyFactory {
         //definition of the box
         BodyDef def = new BodyDef();
         def.type = type;
-        def.fixedRotation = true; //always true in this case, might change in the future
+        def.fixedRotation = true; //we will always use fixed rotation
 
         //we create a box in the world with it's definition
         Body box = world.createBody(def);
@@ -105,7 +105,7 @@ public class BodyFactory {
 
         //create a body fixture (= physical properties) with the material of the box and it's shape
         Fixture fixt = box.createFixture(makeFixture(material, getShapeFromRectangle(r)));
-        fixt.setSensor(isSensor);
+        fixt.setSensor(isSensor); //false, disable collision with box2D
 
         return box;
     }
@@ -113,12 +113,16 @@ public class BodyFactory {
     //Create and return a circle box2D in the world with given attributes
     public Body makeCircleBox(float x, float y, float radius, BodyType type, int material)
     {
+        return makeCircleBox(x,y,radius,type,material,false);
+    }
+    public Body makeCircleBox(float x, float y, float radius, BodyType type, int material, boolean isSensor)
+    {
         //definition of the box
         BodyDef boxBodyDef = new BodyDef();
         boxBodyDef.type = type;
         boxBodyDef.position.x = x;
         boxBodyDef.position.y = y;
-        boxBodyDef.fixedRotation = true; //always true in this case, might change in the future
+        boxBodyDef.fixedRotation = true; //we will always use fixed rotation
 
         //we create a box in the world with it's definition
         Body box = world.createBody(boxBodyDef);
@@ -128,7 +132,8 @@ public class BodyFactory {
         circleShape.setRadius(radius /2);
 
         //fixture of the box
-        box.createFixture(makeFixture(material, circleShape));
+        Fixture fixt = box.createFixture(makeFixture(material, circleShape));
+        fixt.setSensor(isSensor); //false, disable collision with box2D
 
         //we don't need the shape no more
         circleShape.dispose();

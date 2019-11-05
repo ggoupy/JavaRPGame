@@ -33,6 +33,7 @@ public class EnemyMovementSystem extends IteratingSystem {
         TransformComponent enemyPos = transformMapper.get(entity); //get the transform component of the entity
 
 
+        /* Aggro system */
         /* For aggressive enemy which are able to aggro */
         if (enemy.aggressive && !enemy.cant_aggro)
         {
@@ -49,19 +50,42 @@ public class EnemyMovementSystem extends IteratingSystem {
                 double distance = Math.hypot(enemyPos.position.x-playerPos.position.x,
                                              enemyPos.position.y-playerPos.position.y);
 
-                //if distance between player and enemy is < to its aggro range
+                //if distance between player and enemy is < to its aggro
                 //we set the direction of the enemy to player
                 if (distance <= enemy.aggroRange)
                 {
-                    goTo(enemy, body, playerPos.position.x, playerPos.position.y);
-                    setMovingState(state, enemy.direction);
                     enemy.aggro = true; //enemy is "aggro-ing"
+
+                    /*Enemy aggro movement */
+                    //if the enemy is not already attacking (= no collision with player)
+                    //we move the enemy to player
+                    if (!enemy.attacking)
+                    {
+                        goTo(enemy, body, playerPos.position.x, playerPos.position.y);
+                        setMovingState(state, enemy.direction);
+                    }
+                    else //else we stop the movement of the enemy
+                    {
+                        if (isMoving(state.get())) //only if it was moving
+                        {
+                            setStandingState(state, enemy.direction);
+                            enemy.direction.set(0,0);
+                            body.body.setLinearVelocity(enemy.direction.x,enemy.direction.y);
+                        }
+                    }
                 }
                 else enemy.aggro = false;
 
                 if (enemy.aggro == true) break; //stop the loop when found a player to aggro
             }
+
+            if (enemy.aggressiveNature == false) //passive enemy
+            {
+                //we put the enemy passive if he is not aggro-ing
+                if (enemy.aggro == false) enemy.aggressive = false;
+            }
         }
+
 
         /* Treat other movements if the enemy is not already aggro-ing */
         if (!enemy.aggro)
@@ -98,6 +122,7 @@ public class EnemyMovementSystem extends IteratingSystem {
 
             enemy.currentTime -= deltaTime;
         }
+
         else //enemy is aggro-ing
         {
             //check if it is too far from its spawn
@@ -110,6 +135,7 @@ public class EnemyMovementSystem extends IteratingSystem {
             }
             else enemy.cant_aggro = false;
         }
+
 
         /* Treat enemy collision with static body */
         if(enemy.collision)
@@ -129,6 +155,14 @@ public class EnemyMovementSystem extends IteratingSystem {
         return (state == StateComponent.MOVING
                 || state == StateComponent.MOVING_UP
                 || state == StateComponent.MOVING_DOWN);
+    }
+
+    //true if the enemy is currently standing
+    private boolean isStanding(int state)
+    {
+         return (state == StateComponent.STANDING
+                || state == StateComponent.STANDING_UP
+                || state == StateComponent.STANDING_DOWN);
     }
 
     //return a random speed vector

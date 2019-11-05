@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TextureComponent implements Component {
     public TextureRegion region = null;
+    public TextureRegion region2 = null;
+    public TextureRegion region3 = null;
     public Texture texture = null;
     public Sprite sprite = null;
 }
