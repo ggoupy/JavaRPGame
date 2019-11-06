@@ -13,6 +13,8 @@ public class InputsController implements InputProcessor {
     public boolean attack_key;
     public boolean map_key;
     public boolean exitMap_key;
+    public boolean zoom;
+    public boolean dezoom;
 
 
     @Override
@@ -46,6 +48,14 @@ public class InputsController implements InputProcessor {
                 break;
             case Keys.ESCAPE:
                 exitMap_key = true;
+                keyProcessed = true;
+                break;
+            case Keys.F1:
+                zoom = true;
+                keyProcessed = true;
+                break;
+            case Keys.F2:
+                dezoom = true;
                 keyProcessed = true;
                 break;
         }
@@ -84,6 +94,14 @@ public class InputsController implements InputProcessor {
                 break;
             case Keys.ESCAPE:
                 exitMap_key = false;
+                keyProcessed = true;
+                break;
+            case Keys.F1:
+                zoom = false;
+                keyProcessed = true;
+                break;
+            case Keys.F2:
+                dezoom = false;
                 keyProcessed = true;
                 break;
         }

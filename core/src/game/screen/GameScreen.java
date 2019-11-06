@@ -118,6 +118,7 @@ public class GameScreen implements Screen {
     //package private
     InputsController getController() {return controller;}
     TiledMap getTiledMap() {return tiledMap;}
+    Entity getPlayerEntity() {return player;}
 
 
 
