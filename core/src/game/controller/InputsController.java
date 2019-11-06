@@ -11,6 +11,8 @@ public class InputsController implements InputProcessor {
     public boolean up;
     public boolean down;
     public boolean attack_key;
+    public boolean map_key;
+    public boolean exitMap_key;
 
 
     @Override
@@ -36,6 +38,14 @@ public class InputsController implements InputProcessor {
                 break;
             case Keys.E:
                 attack_key = true;
+                keyProcessed = true;
+                break;
+            case Keys.M:
+                map_key = true;
+                keyProcessed = true;
+                break;
+            case Keys.ESCAPE:
+                exitMap_key = true;
                 keyProcessed = true;
                 break;
         }
@@ -66,6 +76,14 @@ public class InputsController implements InputProcessor {
                 break;
             case Keys.E:
                 attack_key = false;
+                keyProcessed = true;
+                break;
+            case Keys.M:
+                map_key = false;
+                keyProcessed = true;
+                break;
+            case Keys.ESCAPE:
+                exitMap_key = false;
                 keyProcessed = true;
                 break;
         }

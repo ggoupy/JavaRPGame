@@ -19,6 +19,10 @@ public class Bar {
         max = m;
         if (fillCurrent) current = m;
     }
+    public void updateMax(float m, boolean fillCurrent)
+    {
+        setMax(max+m, fillCurrent);
+    }
     public float getCurrent() {return current;}
     public void setCurrent(float c) {current = c;}
     public void updateCurrent(float c) {current += c;}

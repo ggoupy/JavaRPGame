@@ -101,18 +101,19 @@ public class EnemyFactory {
         enemyCom.standingTime = (float) (2 + Math.random() * 2); //rand between 2 and 4
         enemyCom.xpGain = (float) (toCopy.xpGain + Math.random() * 30f); //random between xpGain and xpGain+30;
         enemyCom.level = level;
-        adjustLevel(enemyCom); //up some stats according to level
+        adjustLevel(enemyCom, toCopy); //up some stats according to level
         return enemyCom;
     }
 
     //adjust stats of an enemy component according to its level
-    public void adjustLevel(EnemyComponent enemyCom)
+    public void adjustLevel(EnemyComponent enemyCom, EnemyComponent prototype)
     {
         if (enemyCom.level > 1) //we do not multiply stats of lvl 1
         {
-            enemyCom.life.setMax(enemyCom.life.getMax()*enemyCom.level*1.1f,true);
-            enemyCom.damage *= enemyCom.level*1.1f;
-            enemyCom.xpGain *= enemyCom.level*1.1f;
+            float lvlCoeff = 0.30f; //multiply this coeff to base stats
+            enemyCom.life.updateMax(enemyCom.level * (prototype.life.getMax()*lvlCoeff),true);
+            enemyCom.damage += enemyCom.level * (prototype.damage*lvlCoeff);
+            enemyCom.xpGain += enemyCom.level * (prototype.xpGain*lvlCoeff);
         }
     }
 

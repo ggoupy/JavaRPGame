@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import game.GDXGame;
+import game.loader.AssetsManager;
 
 public class MenuScreen implements Screen {
 
@@ -38,7 +39,7 @@ public class MenuScreen implements Screen {
         stage.addActor(table);
 
         //Background image
-        Texture background = game.assetsManager.manager.get(game.assetsManager.background);
+        Texture background = game.assetsManager.manager.get(AssetsManager.background);
         table.background(new TextureRegionDrawable(background));
 
         Skin skin = game.assetsManager.getMenuSkin();
@@ -60,7 +61,7 @@ public class MenuScreen implements Screen {
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.changeScreen(GDXGame.SELECTION);
+                game.changeScreen(GDXGame.SELECTION_SCREEN);
             }
         });
     }
@@ -70,8 +71,6 @@ public class MenuScreen implements Screen {
         //Clear the screen ready for next set of images to be drawn
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        //Draw the background
 
         //Tell our stage to do actions and draw itself
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));

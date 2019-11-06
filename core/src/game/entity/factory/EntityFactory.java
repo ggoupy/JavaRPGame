@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -87,6 +88,20 @@ public class EntityFactory {
         return playerFactory.createPlayer(playerObj,spec,name);
     }
 
+
+    //create all enemy spawns from the tile map
+    public void createEnemySpawns(MapLayers layers)
+    {
+        //for each layer, check if its name contains "enemySpawn"
+        //if yes, create a new spawn
+        for(MapLayer layer : layers)
+        {
+            if (layer.getName().contains("enemySpawn"))
+            {
+                createEnemySpawn(layer);
+            }
+        }
+    }
 
     //create an enemy spawn in the world
     public void createEnemySpawn(MapLayer spawnLayer)

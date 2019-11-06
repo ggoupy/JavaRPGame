@@ -2,6 +2,7 @@ package game.screen;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -88,11 +89,9 @@ public class GameScreen implements Screen {
                     game.playerSpecialization,
                     game.playerName
         );
-        entityFactory.createObjects(tiledMap.getLayers().get("bounds").getObjects());
         entityFactory.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
 
-        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnFieldLvl1"));
-        entityFactory.createEnemySpawn(tiledMap.getLayers().get("enemySpawnForestLvl2"));
+        entityFactory.createEnemySpawns(tiledMap.getLayers());
 
         PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, player.getComponent(PlayerComponent.class));
         engine.addSystem(HUD);
@@ -110,16 +109,26 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         engine.update(delta);
+        if (controller.map_key)
+        {
+            game.changeScreen(GDXGame.MAP_SCREEN);
+        }
     }
 
-   @Override
-   public void resize(int width, int height) {}
-   @Override
-   public void pause() {}
-   @Override
-   public void resume() {}
-   @Override
-   public void hide() {}
-   @Override
-   public void dispose() {}
+    //package private
+    InputsController getController() {return controller;}
+    TiledMap getTiledMap() {return tiledMap;}
+
+
+
+    @Override
+    public void resize(int width, int height) {}
+    @Override
+    public void pause() {}
+    @Override
+    public void resume() {}
+    @Override
+    public void hide() {}
+    @Override
+    public void dispose() {}
 }

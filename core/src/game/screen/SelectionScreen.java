@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import game.GDXGame;
+import game.loader.AssetsManager;
+
 import java.util.ArrayList;
 
 
@@ -43,7 +45,7 @@ public class SelectionScreen implements Screen {
         stage.addActor(table);
 
         //Background image
-        Texture background = game.assetsManager.manager.get(game.assetsManager.background);
+        Texture background = game.assetsManager.manager.get(AssetsManager.background);
         table.background(new TextureRegionDrawable(background));
 
         final Skin skin = game.assetsManager.getMenuSkin();
@@ -90,7 +92,7 @@ public class SelectionScreen implements Screen {
                         Actions.fadeOut(1),
                         Actions.run(new Runnable() {
                             @Override
-                            public void run() {game.changeScreen(GDXGame.APPLICATION);}
+                            public void run() {game.changeScreen(GDXGame.GAME_SCREEN);}
                         })
                     ));
                 }

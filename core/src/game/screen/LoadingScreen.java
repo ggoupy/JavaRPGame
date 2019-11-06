@@ -21,7 +21,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        game.changeScreen(GDXGame.MENU);
+        game.changeScreen(GDXGame.MENU_SCREEN);
     }
 
     @Override
