@@ -1,34 +1,28 @@
 package game.screen;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import game.GDXGame;
 import game.controller.InputsController;
-import game.entity.component.PlayerComponent;
 import game.entity.component.TransformComponent;
 import game.utils.Constants;
 
 
 public class MapScreen implements Screen {
 
+    private Vector2 cameraMovement;
     private GDXGame game;
     private GameScreen gameScreen;
     private InputsController controller;
-
     private OrthographicCamera camera;
-    private FillViewport viewport;
     private SpriteBatch batch;
     private OrthogonalTiledMapRenderer map;
     private TextureRegion playerPoint;
@@ -41,20 +35,29 @@ public class MapScreen implements Screen {
         this.gameScreen = gameScreen;
         this.controller = gameScreen.getController();
 
+        //Game tiled map
         TiledMap tiledMap = gameScreen.getTiledMap();
         float worldWidth = tiledMap.getProperties().get("width", float.class);
         float worldHeight = tiledMap.getProperties().get("height", float.class);
 
+        //Map camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, worldWidth, worldHeight);
 
+        //Sprite batch to draw player on map
         batch = new SpriteBatch();
 
+        //Tile map renderer
         map = new OrthogonalTiledMapRenderer(tiledMap, 1/Constants.TILE_SIZE);
 
+        //Texture of the player point
         playerPoint = game.assetsManager.getAtlas().findRegion(game.playerSpecialization+"-standingDown");
 
+        //Position of the player
         playerPos = gameScreen.getPlayerEntity().getComponent(TransformComponent.class);
+
+        //save camera movement and apply it to camera position if not outside of map
+        cameraMovement = new Vector2();
     }
 
     public void inputsController()
@@ -66,21 +69,34 @@ public class MapScreen implements Screen {
             return;
         }
 
-        //Move
-        if (controller.up) camera.position.y+=1;
-        if (controller.down) camera.position.y-=1;
-        if (controller.right) camera.position.x+=1;
-        if (controller.left) camera.position.x-=1;
+        //camera.zoom = 1 by default
+        //to zoom: camera.zoom-- / to de-zoom: camera.zoom++
+        if (controller.e_key) //Zoom
+        {
+            if (camera.zoom > 0.1) camera.zoom-=0.01;
+        }
+        if (controller.r_key) //De-zoom
+        {
+            if (camera.zoom < 1) camera.zoom+=0.01;
+        }
 
-        //Zoom
-        if (controller.zoom)
-        {
-            camera.setToOrtho(false, camera.viewportWidth+1, camera.viewportHeight+1);
-        }
-        if (controller.dezoom)
-        {
-            camera.setToOrtho(false, camera.viewportWidth-1, camera.viewportHeight-1);
-        }
+        //Move
+        float cameraSpeed = camera.zoom * 2; //movement speed according to camera zoom
+        if (controller.up) cameraMovement.y=camera.position.y+cameraSpeed;
+        if (controller.down) cameraMovement.y=camera.position.y-cameraSpeed;
+        if (controller.right) cameraMovement.x=camera.position.x+cameraSpeed;
+        if (controller.left) cameraMovement.x=camera.position.x-cameraSpeed;
+
+        //set camera position according to world bounds (in order to do not move out of map)
+        float minCameraX = camera.zoom * (camera.viewportWidth / 2);
+        float maxCameraX = 200 - minCameraX;
+        float minCameraY = camera.zoom * (camera.viewportHeight / 2);
+        float maxCameraY = 200 - minCameraY;
+        camera.position.set(
+                Math.min(maxCameraX, Math.max(cameraMovement.x, minCameraX)),
+                Math.min(maxCameraY, Math.max(cameraMovement.y, minCameraY)),
+                0
+        );
     }
 
     @Override
@@ -98,9 +114,11 @@ public class MapScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        //*6 to increase player texture in "de-zoom world" (the map)
-        float width = playerPoint.getRegionWidth()*6;
-        float height = playerPoint.getRegionHeight()*6;
+        //textureCoeff to increase player texture in map according to camera zoom
+        float textureCoeff = 6f * camera.zoom;
+        textureCoeff = (textureCoeff<1) ? 1 : textureCoeff; //assert that > 1
+        float width = playerPoint.getRegionWidth()*(textureCoeff);
+        float height = playerPoint.getRegionHeight()*(textureCoeff);
         float originX = width/2f;
         float originY = height/2f;
 
@@ -110,7 +128,6 @@ public class MapScreen implements Screen {
                 width, height,
                 PixelsToMeters(playerPos.scale.x), PixelsToMeters(playerPos.scale.y),
                 playerPos.rotation
-
         );
 
         batch.end();

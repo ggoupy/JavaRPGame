@@ -27,7 +27,7 @@ public class PlayerAttackSystem extends IteratingSystem {
         StateComponent state = stateMapper.get(entity);
 
         //set the attack statement if the player is pressing the attack key and not already attacking
-        if (controller.attack_key && player.isAttacking == false)
+        if (controller.e_key && player.isAttacking == false)
         {
             player.isAttacking = true;
             int last_state = state.get();

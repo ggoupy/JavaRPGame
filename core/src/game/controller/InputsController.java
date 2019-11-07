@@ -6,15 +6,17 @@ import com.badlogic.gdx.Input.Keys;
 
 public class InputsController implements InputProcessor {
 
+    //Player control inputs
     public boolean left;
     public boolean right;
     public boolean up;
     public boolean down;
-    public boolean attack_key;
+    public boolean e_key;
+    public boolean r_key;
+
+    //Map inputs
     public boolean map_key;
     public boolean exitMap_key;
-    public boolean zoom;
-    public boolean dezoom;
 
 
     @Override
@@ -39,7 +41,11 @@ public class InputsController implements InputProcessor {
                 keyProcessed = true;
                 break;
             case Keys.E:
-                attack_key = true;
+                e_key = true;
+                keyProcessed = true;
+                break;
+            case Keys.R:
+                r_key = true;
                 keyProcessed = true;
                 break;
             case Keys.M:
@@ -48,14 +54,6 @@ public class InputsController implements InputProcessor {
                 break;
             case Keys.ESCAPE:
                 exitMap_key = true;
-                keyProcessed = true;
-                break;
-            case Keys.F1:
-                zoom = true;
-                keyProcessed = true;
-                break;
-            case Keys.F2:
-                dezoom = true;
                 keyProcessed = true;
                 break;
         }
@@ -85,7 +83,11 @@ public class InputsController implements InputProcessor {
                 keyProcessed = true;
                 break;
             case Keys.E:
-                attack_key = false;
+                e_key = false;
+                keyProcessed = true;
+                break;
+            case Keys.R:
+                r_key = false;
                 keyProcessed = true;
                 break;
             case Keys.M:
@@ -94,14 +96,6 @@ public class InputsController implements InputProcessor {
                 break;
             case Keys.ESCAPE:
                 exitMap_key = false;
-                keyProcessed = true;
-                break;
-            case Keys.F1:
-                zoom = false;
-                keyProcessed = true;
-                break;
-            case Keys.F2:
-                dezoom = false;
                 keyProcessed = true;
                 break;
         }
@@ -134,7 +128,5 @@ public class InputsController implements InputProcessor {
     }
 
     @Override
-    public boolean scrolled(int amount) {
-        return false;
-    }
+    public boolean scrolled(int amount) {return false;}
 }
