@@ -2,10 +2,7 @@ package game.entity.factory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
@@ -19,10 +16,12 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
 import game.entity.component.*;
 import game.entity.utils.Spawn;
+import game.loader.AssetsManager;
 import game.utils.Bar;
 import game.utils.Timer;
 
-import static game.entity.utils.Mappers.*;
+import static game.entity.utils.Mappers.enemyMapper;
+import static game.entity.utils.Mappers.enemySpawnMapper;
 
 
 public class EnemyFactory {
@@ -68,7 +67,7 @@ public class EnemyFactory {
     {
         ObjectMap enemyCfg = entityFactory.assetsManager.json.fromJson(
                 ObjectMap.class,
-                Gdx.files.internal(entityFactory.assetsManager.enemyCfg_path+prototype+".json")
+                Gdx.files.internal(AssetsManager.enemyCfg_path+prototype+".json")
         );
 
         EnemyComponent enemy = new EnemyComponent();

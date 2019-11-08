@@ -18,15 +18,17 @@ import game.utils.Constants;
 
 public class MapScreen implements Screen {
 
-    private Vector2 cameraMovement;
     private GDXGame game;
     private GameScreen gameScreen;
     private InputsController controller;
     private OrthographicCamera camera;
     private SpriteBatch batch;
+    private float worldWidth;
+    private float worldHeight;
     private OrthogonalTiledMapRenderer map;
     private TextureRegion playerPoint;
     private TransformComponent playerPos;
+    private Vector2 cameraMovement;
 
 
     public MapScreen(GDXGame game, GameScreen gameScreen)
@@ -37,8 +39,8 @@ public class MapScreen implements Screen {
 
         //Game tiled map
         TiledMap tiledMap = gameScreen.getTiledMap();
-        float worldWidth = tiledMap.getProperties().get("width", float.class);
-        float worldHeight = tiledMap.getProperties().get("height", float.class);
+        worldWidth = tiledMap.getProperties().get("width", float.class);
+        worldHeight = tiledMap.getProperties().get("height", float.class);
 
         //Map camera
         camera = new OrthographicCamera();
@@ -89,9 +91,9 @@ public class MapScreen implements Screen {
 
         //set camera position according to world bounds (in order to do not move out of map)
         float minCameraX = camera.zoom * (camera.viewportWidth / 2);
-        float maxCameraX = 200 - minCameraX;
+        float maxCameraX = worldWidth - minCameraX;
         float minCameraY = camera.zoom * (camera.viewportHeight / 2);
-        float maxCameraY = 200 - minCameraY;
+        float maxCameraY = worldHeight - minCameraY;
         camera.position.set(
                 Math.min(maxCameraX, Math.max(cameraMovement.x, minCameraX)),
                 Math.min(maxCameraY, Math.max(cameraMovement.y, minCameraY)),
