@@ -23,7 +23,7 @@ import game.entity.system.player.*;
 import game.loader.AssetsManager;
 import game.utils.Constants;
 
-import static game.utils.Constants.TILE_SIZE;
+import static game.entity.utils.Mappers.playerMapper;
 
 
 public class GameScreen implements Screen {
@@ -45,20 +45,23 @@ public class GameScreen implements Screen {
     public GameScreen(GDXGame g)
     {
         game = g;
-        controller = new InputsController();
-        world = new World(new Vector2(0, 0), true);
-        world.setContactListener(new CollisionListener());
 
         /* CAMERAS */
         cameraBox2D = new OrthographicCamera();
-        cameraBox2D.setToOrtho(false, TILE_SIZE, TILE_SIZE);
+        cameraBox2D.setToOrtho(false, Constants.TILE_SIZE, Constants.TILE_SIZE);
         cameraUI = new OrthographicCamera();
         cameraUI.setToOrtho(false, Constants.G_WIDTH, Constants.G_HEIGHT);
+
+        controller = new InputsController();
+        Gdx.input.setInputProcessor(controller);
+
+        world = new World(new Vector2(0, 0), true);
+        world.setContactListener(new CollisionListener());
 
         /* RENDERING SYSTEM */
         spriteBatch = new SpriteBatch();
         tiledMap = game.assetsManager.manager.get(AssetsManager.tiledMap);
-        RenderingSystem renderingSystem = new RenderingSystem(spriteBatch, cameraBox2D, cameraUI, tiledMap, g.assetsManager);
+        RenderingSystem renderingSystem = new RenderingSystem(spriteBatch, cameraBox2D, cameraUI, tiledMap, game.assetsManager);
 
         /* ENGINE */
         engine = new PooledEngine();
@@ -72,9 +75,10 @@ public class GameScreen implements Screen {
         engine.addSystem(new CameraSystem(cameraBox2D, cameraUI));
         engine.addSystem(new CollisionSystem());
         engine.addSystem(new PlayerMovementSystem(controller));
-        engine.addSystem(new PlayerHealthSystem(g, entityFactory));
+        engine.addSystem(new PlayerHealthSystem(game, entityFactory));
         engine.addSystem(new PlayerAttackSystem(controller));
         engine.addSystem(new PlayerXpSystem());
+        engine.addSystem(new PlayerUISystem(game, controller));
         engine.addSystem(new EnemySpawnSystem(entityFactory));
         engine.addSystem(new EnemyMovementSystem(engine));
         engine.addSystem(new EnemyHealthSystem(entityFactory));
@@ -85,35 +89,45 @@ public class GameScreen implements Screen {
 
         //create entities
         player = entityFactory.createPlayer(
-                    tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
-                    game.playerSpecialization,
-                    game.playerName
+                tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
+                game.playerSpecialization,
+                game.playerName
         );
         entityFactory.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
 
         entityFactory.createEnemySpawns(tiledMap.getLayers());
 
-        PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, player.getComponent(PlayerComponent.class));
+        PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, playerMapper.get(player));
         engine.addSystem(HUD);
     }
 
-    @Override
-    //Like the constructor (called when created)
-    public void show()
+
+    public void resetGame()
     {
+        //set our InputsController class as input processor
         Gdx.input.setInputProcessor(controller);
+
+        //create a new player entity
+        player = entityFactory.createPlayer(
+                tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
+                game.playerSpecialization,
+                game.playerName
+        );
+
+        //remove last HUD containing the died player and create another one
+        engine.getSystem(PlayerHUDSystem.class).dispose();
+        PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, playerMapper.get(player));
+        engine.addSystem(HUD);
     }
+
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         engine.update(delta);
-        if (controller.map_key)
-        {
-            game.changeScreen(GDXGame.MAP_SCREEN);
-        }
     }
+
 
     //package private
     InputsController getController() {return controller;}
@@ -121,7 +135,8 @@ public class GameScreen implements Screen {
     Entity getPlayerEntity() {return player;}
 
 
-
+    @Override
+    public void show() {}
     @Override
     public void resize(int width, int height) {}
     @Override

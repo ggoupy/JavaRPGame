@@ -88,7 +88,6 @@ public class EntityFactory {
         return playerFactory.createPlayer(playerObj,spec,name);
     }
 
-
     //create all enemy spawns from the tile map
     public void createEnemySpawns(MapLayers layers)
     {

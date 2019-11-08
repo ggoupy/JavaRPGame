@@ -13,7 +13,7 @@ import static game.entity.utils.Mappers.*;
 public class PlayerHealthSystem extends IteratingSystem {
 
     private GDXGame game;
-    private static EntityFactory entityFactory;
+    private EntityFactory entityFactory;
 
     public PlayerHealthSystem(GDXGame g, EntityFactory entityFactory)
     {
@@ -30,9 +30,9 @@ public class PlayerHealthSystem extends IteratingSystem {
 
         if (player.life.isEmpty())
         {
-            //entityFactory.destroyEntity(entity);
-            //game.changeScreen(GDXGame.ENDSCREEN);
-            //return;
+            entityFactory.destroyEntity(entity);
+            game.changeScreen(GDXGame.END_SCREEN);
+            return;
         }
 
         if (player.lastDamageDuration > 3)

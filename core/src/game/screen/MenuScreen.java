@@ -23,17 +23,14 @@ public class MenuScreen implements Screen {
     private GDXGame game;
     private Stage stage;
 
-    public MenuScreen(GDXGame g)
-    {
-        game = g;
-
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
-    }
+    public MenuScreen(GDXGame g) {game = g;}
 
     @Override
     public void show()
     {
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -98,7 +95,5 @@ public class MenuScreen implements Screen {
     }
 
     @Override
-    public void dispose() {
-        stage.dispose();
-    }
+    public void dispose() {stage.dispose();}
 }

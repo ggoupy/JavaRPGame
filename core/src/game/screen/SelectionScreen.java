@@ -29,17 +29,14 @@ public class SelectionScreen implements Screen {
     private TextButton [] classBtns;
     private TextButton createBtn;
 
-    public SelectionScreen(GDXGame g)
-    {
-        game = g;
-
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
-    }
+    public SelectionScreen(GDXGame g) {game = g;}
 
     @Override
     public void show()
     {
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+
         final Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -147,5 +144,5 @@ public class SelectionScreen implements Screen {
     public void hide() {}
 
     @Override
-    public void dispose() {}
+    public void dispose() {stage.dispose();}
 }

@@ -1,6 +1,7 @@
 package game.entity.factory;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.MapObject;
@@ -13,6 +14,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 import game.entity.component.*;
 import game.utils.Bar;
 import game.utils.Timer;
+
+import static game.entity.utils.Mappers.playerMapper;
 
 
 public class PlayerFactory {

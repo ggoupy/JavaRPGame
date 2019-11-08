@@ -596,7 +596,7 @@
   <object id="752" name="spawn" x="2080" y="320" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="6" name="playerPosition">
-  <object id="6" name="player" x="1760" y="1824" width="16" height="16"/>
+  <object id="6" name="player" x="1056" y="2640" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="7" name="mapObjects">
   <object id="95" name="village" x="420.471" y="2780.5" width="58.0739" height="22.5917"/>

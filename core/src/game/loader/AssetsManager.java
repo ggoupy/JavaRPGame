@@ -12,7 +12,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Json;
 
-import java.util.ArrayList;
 
 public class AssetsManager {
 
@@ -90,4 +89,13 @@ public class AssetsManager {
     public final Skin getHUDSkin() { return HUDSkin; }
 
     public final BitmapFont getFont() { return font; }
+
+    public void dispose()
+    {
+        atlas.dispose();
+        menuSkin.dispose();
+        HUDSkin.dispose();
+        font.dispose();
+        manager.dispose();
+    }
 }

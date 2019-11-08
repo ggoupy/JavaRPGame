@@ -24,4 +24,9 @@ public class PlayerHUDSystem extends EntitySystem {
         hud.act(); // For the xp progress bar
         hud.draw(); // Draw the HUD stage
     }
+
+    public void dispose()
+    {
+        hud.dispose();
+    }
 }

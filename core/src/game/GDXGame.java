@@ -20,15 +20,20 @@ public class GDXGame extends Game {
 	private SelectionScreen selectionScreen;
 	private GameScreen gameScreen;
 	private MapScreen mapScreen;
+	private EndScreen endScreen;
 
 	public String playerSpecialization;
 	public String playerName;
 
+	private boolean resetGame; //to start a new game after game over
+
 
 	@Override
-	public void create ()
+	public void create()
 	{
 		playerSpecialization = "";
+		playerName = "";
+		resetGame = false;
 
 		assetsManager = new AssetsManager();
 		assetsManager.queueAddAssets();
@@ -37,9 +42,6 @@ public class GDXGame extends Game {
 		loadingScreen = new LoadingScreen(this);
 		this.setScreen(loadingScreen);
 	}
-	
-	@Override
-	public void dispose () {}
 
 
 	public void changeScreen(int screen) {
@@ -56,7 +58,8 @@ public class GDXGame extends Game {
 				break;
 
 			case GAME_SCREEN:
-				if (gameScreen == null) gameScreen = new GameScreen(this);
+				if (gameScreen == null) {gameScreen = new GameScreen(this);}
+				if (resetGame) {gameScreen.resetGame(); resetGame = false;}
 				this.setScreen(gameScreen);
 				break;
 
@@ -66,8 +69,21 @@ public class GDXGame extends Game {
 				break;
 
 			case END_SCREEN:
-				Gdx.app.exit();
+				if (endScreen == null) endScreen = new EndScreen(this);
+				resetGame();
+				this.setScreen(endScreen);
 				break;
 		}
 	}
+
+	private void resetGame()
+	{
+		playerSpecialization = ""; //reset player
+		playerName = ""; //reset player
+		resetGame = true; //able to create new game
+	}
+
+
+	@Override
+	public void dispose() {}
 }

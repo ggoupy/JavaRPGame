@@ -19,7 +19,6 @@ import game.utils.Constants;
 public class MapScreen implements Screen {
 
     private GDXGame game;
-    private GameScreen gameScreen;
     private InputsController controller;
     private OrthographicCamera camera;
     private SpriteBatch batch;
@@ -34,7 +33,6 @@ public class MapScreen implements Screen {
     public MapScreen(GDXGame game, GameScreen gameScreen)
     {
         this.game = game;
-        this.gameScreen = gameScreen;
         this.controller = gameScreen.getController();
 
         //Game tiled map
