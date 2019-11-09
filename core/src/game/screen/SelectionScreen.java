@@ -95,13 +95,13 @@ public class SelectionScreen implements Screen {
                 }
                 else
                 {
-                    Dialog a = new Dialog("Error", skin);
+                    Dialog errAlert = new Dialog("Error", skin);
                     String err = "";
                     if (game.playerSpecialization.equals("")) err+="You need to select a class\n";
                     if (nameTf.getText().equals("")) err+="You need to enter your hero name\n";
-                    a.text(err).pad(60);
-                    a.button("Got it!").right();
-                    a.show(stage);
+                    errAlert.text(err).pad(60);
+                    errAlert.button("Got it!").right();
+                    errAlert.show(stage);
                 }
             }
         });

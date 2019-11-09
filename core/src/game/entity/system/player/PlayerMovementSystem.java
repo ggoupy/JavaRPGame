@@ -1,6 +1,6 @@
 package game.entity.system.player;
 
-import game.controller.InputsController;
+import game.controller.InputsControllerGame;
 import game.entity.component.BodyComponent;
 import game.entity.component.StateComponent;
 import com.badlogic.ashley.core.ComponentMapper;
@@ -14,9 +14,9 @@ import static game.entity.utils.Mappers.*;
 
 public class PlayerMovementSystem extends IteratingSystem {
 
-    InputsController controller;
+    private InputsControllerGame controller;
 
-    public PlayerMovementSystem(InputsController keyCon)
+    public PlayerMovementSystem(InputsControllerGame keyCon)
     {
         //We create a player control system for all entities containing a player component
         super(Family.all(PlayerComponent.class).get());

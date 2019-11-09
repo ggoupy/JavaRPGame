@@ -10,12 +10,14 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import game.entity.component.AnimationComponent;
 import game.entity.component.AttachedComponent;
 import game.entity.component.BodyComponent;
 import game.entity.component.TypeComponent;
+import game.entity.system.player.PlayerHUDSystem;
 import game.loader.AssetsManager;
 
 
@@ -83,10 +85,18 @@ public class EntityFactory {
 
 
     //create a player box2D in the world according to his position in the tiled map
-    public Entity createPlayer(MapObject playerObj, String spec, String name)
+    public void createPlayer(MapObject playerObj, String spec, String name)
     {
-        return playerFactory.createPlayer(playerObj,spec,name);
+        playerFactory.createPlayer(playerObj,spec,name);
     }
+
+
+    //reset the player entity (if he dies)
+    public void killPlayer(Entity playerEntity)
+    {
+        playerFactory.killPlayer(playerEntity);
+    }
+
 
     //create all enemy spawns from the tile map
     public void createEnemySpawns(MapLayers layers)

@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -12,10 +13,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import game.entity.component.*;
+import game.loader.AssetsManager;
 import game.utils.Bar;
 import game.utils.Timer;
 
-import static game.entity.utils.Mappers.playerMapper;
+import static game.entity.utils.Mappers.*;
 
 
 public class PlayerFactory {
@@ -39,7 +41,7 @@ public class PlayerFactory {
 
 
     //create a player box2D in the world according to his position in the tiled map
-    public Entity createPlayer(MapObject playerObj, String spec, String name)
+    public void createPlayer(MapObject playerObj, String spec, String name)
     {
         // Create the Entity and all the components that will go in the entity
         Entity entity = entityFactory.engine.createEntity();
@@ -61,12 +63,12 @@ public class PlayerFactory {
         Rectangle rectangle = ((RectangleMapObject)playerObj).getRectangle();
 
         //convert rectangle coordinates into rectangle center coordinates in the world
-        Vector2 center = BodyFactory.getTransformedCenterForRectangle(rectangle);
+        position.origin = BodyFactory.getTransformedCenterForRectangle(rectangle);
 
         //create a box in the world with coordinates and specific attributes
-        body.body = entityFactory.bodyFactory.makeCircleBox(center.x, center.y,0.75f, BodyDef.BodyType.DynamicBody, BodyFactory.HUMAN);
+        body.body = entityFactory.bodyFactory.makeCircleBox(position.origin.x, position.origin.y,0.75f, BodyDef.BodyType.DynamicBody, BodyFactory.HUMAN);
 
-        position.position.set(center.x,center.y,0);
+        position.position.set(position.origin.x,position.origin.y,0);
 
         texture.region = entityFactory.atlas.findRegion(player.spec+"-standingDown");
 
@@ -109,8 +111,6 @@ public class PlayerFactory {
 
         // add the entity to the engine
         entityFactory.engine.addEntity(entity);
-
-        return entity; //to save the player
     }
 
     //set player attributes according to his specialization
@@ -118,7 +118,7 @@ public class PlayerFactory {
     {
         ObjectMap heroCfg = entityFactory.assetsManager.json.fromJson(
                 ObjectMap.class,
-                Gdx.files.internal(entityFactory.assetsManager.heroCfg_path+spec+".json")
+                Gdx.files.internal(AssetsManager.heroCfg_path+spec+".json")
         );
 
         player.life = new Bar((float) heroCfg.get("life"));
@@ -129,5 +129,24 @@ public class PlayerFactory {
         player.level = 1;
         player.xpBar = new Bar(100,0);
         player.spec = spec;
+    }
+
+    //reset player
+    public void killPlayer(Entity playerEntity)
+    {
+        //We reset the player life
+        PlayerComponent player = playerMapper.get(playerEntity);
+        player.life.setMax(player.life.getMax(), true);
+
+        //We remove all entities that had collision with player before to die
+        //Collisions are usually removed when a contact end but like we set manually player pos, we need to remove them
+        CollisionComponent collision = collisionMapper.get(playerEntity);
+        collision.removeCollidedEntities();
+
+        //We set body position of the player in the world to spawn player position
+        //Body position will update automatically transform component position
+        BodyComponent body = bodyMapper.get(playerEntity);
+        TransformComponent pos = transformMapper.get(playerEntity);
+        body.body.setTransform(pos.origin.x, pos.origin.y, 0);
     }
 }

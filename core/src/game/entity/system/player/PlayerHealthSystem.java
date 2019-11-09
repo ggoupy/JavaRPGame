@@ -4,7 +4,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import game.GDXGame;
+import game.entity.component.BodyComponent;
 import game.entity.component.PlayerComponent;
+import game.entity.component.TransformComponent;
 import game.entity.factory.EntityFactory;
 
 import static game.entity.utils.Mappers.*;
@@ -30,9 +32,7 @@ public class PlayerHealthSystem extends IteratingSystem {
 
         if (player.life.isEmpty())
         {
-            entityFactory.destroyEntity(entity);
-            game.changeScreen(GDXGame.END_SCREEN);
-            return;
+            entityFactory.killPlayer(entity);
         }
 
         if (player.lastDamageDuration > 3)

@@ -1,0 +1,39 @@
+- Game reset properly (enemy reset and all world?)
+
+- Sounds 
+
+- New Enemies
+
+- Quests 
+
+- Improve player movements (+ during collisions with static bodies)
+
+- Action bar
+
+- Enemy attacks
+
+- Player Spells and different attacks
+
+- Player preview in selection screen
+
+- Improve map movements
+
+- Stuff and inventory
+
+- Fix enemy & player stats and Xp system
+
+- New maps 
+
+- Races 
+
+- Add a visual to stuff/weapon (weapon attack...)
+
+- Network 
+
+- Check memory leaks
+
+- Function to auto add a collision
+
+- Improve sprites for better collisions
+
+- Keys preference

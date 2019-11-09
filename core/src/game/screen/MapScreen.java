@@ -2,6 +2,7 @@ package game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,9 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.Timer;
 import game.GDXGame;
-import game.controller.InputsController;
+import game.controller.InputsControllerUI;
 import game.entity.component.TransformComponent;
 import game.utils.Constants;
 
@@ -19,7 +20,8 @@ import game.utils.Constants;
 public class MapScreen implements Screen {
 
     private GDXGame game;
-    private InputsController controller;
+    private GameScreen gameScreen;
+    private InputsControllerUI controller;
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private float worldWidth;
@@ -33,7 +35,10 @@ public class MapScreen implements Screen {
     public MapScreen(GDXGame game, GameScreen gameScreen)
     {
         this.game = game;
-        this.controller = gameScreen.getController();
+        this.gameScreen = gameScreen;
+
+        /* INPUTS CONTROLLER */
+        controller = new InputsControllerUI(game);
 
         //Game tiled map
         TiledMap tiledMap = gameScreen.getTiledMap();
@@ -44,38 +49,54 @@ public class MapScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, worldWidth, worldHeight);
 
+        //Tile map renderer
+        map = new OrthogonalTiledMapRenderer(tiledMap, 1/Constants.TILE_SIZE);
+
         //Sprite batch to draw player on map
         batch = new SpriteBatch();
 
-        //Tile map renderer
-        map = new OrthogonalTiledMapRenderer(tiledMap, 1/Constants.TILE_SIZE);
+        //save camera movement and apply it to camera position if not outside of map
+        cameraMovement = new Vector2();
+    }
+
+
+    //called every time we set screen to this one
+    //so we need to (re) init some variables
+    @Override
+    public void show()
+    {
+        //Set UI controller
+        controller.setToCurrentController();
+
+        //Set camera options
+        camera.position.x = worldWidth/2;
+        camera.position.y = worldHeight/2;
+        camera.zoom = 1;
 
         //Texture of the player point
         playerPoint = game.assetsManager.getAtlas().findRegion(game.playerSpecialization+"-standingDown");
 
         //Position of the player
         playerPos = gameScreen.getPlayerEntity().getComponent(TransformComponent.class);
-
-        //save camera movement and apply it to camera position if not outside of map
-        cameraMovement = new Vector2();
     }
 
-    public void inputsController()
+    private void inputsController()
     {
         //Quit
-        if (controller.exitMap_key)
+        if (controller.exitMap)
         {
+            controller.resetKeys(); //we force keys to be false (keyUp) to avoid problems in next screen
             game.changeScreen(GDXGame.GAME_SCREEN);
             return;
         }
 
         //camera.zoom = 1 by default
         //to zoom: camera.zoom-- / to de-zoom: camera.zoom++
-        if (controller.e_key) //Zoom
+        if (controller.e) //Zoom
         {
             if (camera.zoom > 0.1) camera.zoom-=0.01;
         }
-        if (controller.r_key) //De-zoom
+        if (controller.r) //De-zoom
         {
             if (camera.zoom < 1) camera.zoom+=0.01;
         }
@@ -100,7 +121,8 @@ public class MapScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)
+    {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -139,8 +161,6 @@ public class MapScreen implements Screen {
     }
 
 
-    @Override
-    public void show() {}
     @Override
     public void resize(int width, int height) {}
     @Override

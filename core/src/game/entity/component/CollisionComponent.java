@@ -11,4 +11,8 @@ public class CollisionComponent implements Component {
     public void addCollidedEntity(Entity e) {collisionEntity.add(e);}
     public void removeCollidedEntity(Entity e) {collisionEntity.removeValue(e, false);}
     public boolean hasCollidedEntity(Entity e) {return collisionEntity.contains(e, false);}
+    public void removeCollidedEntities()
+    {
+        for (Entity e : collisionEntity) removeCollidedEntity(e);
+    }
 }

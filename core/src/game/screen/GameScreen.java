@@ -1,24 +1,26 @@
 package game.screen;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.World;
 import game.CollisionListener;
+import game.GDXGame;
+import game.controller.InputsControllerGame;
 import game.entity.component.PlayerComponent;
 import game.entity.factory.EntityFactory;
-import game.GDXGame;
-import game.controller.InputsController;
 import game.entity.system.*;
-import game.entity.system.enemy.*;
+import game.entity.system.enemy.EnemyHealthSystem;
+import game.entity.system.enemy.EnemyLevelSystem;
+import game.entity.system.enemy.EnemyMovementSystem;
+import game.entity.system.enemy.EnemySpawnSystem;
 import game.entity.system.player.*;
 import game.loader.AssetsManager;
 import game.utils.Constants;
@@ -30,7 +32,7 @@ public class GameScreen implements Screen {
 
     private OrthographicCamera cameraUI;
     private OrthographicCamera cameraBox2D;
-    private InputsController controller;
+    private InputsControllerGame controller;
     private GDXGame game;
     private World world;
     private SpriteBatch spriteBatch;
@@ -40,11 +42,9 @@ public class GameScreen implements Screen {
 
     private EntityFactory entityFactory;
 
-    private Entity player;
+    public GameScreen(GDXGame g) {
+        game = g; //reference to GDXGame
 
-    public GameScreen(GDXGame g)
-    {
-        game = g;
 
         /* CAMERAS */
         cameraBox2D = new OrthographicCamera();
@@ -52,26 +52,44 @@ public class GameScreen implements Screen {
         cameraUI = new OrthographicCamera();
         cameraUI.setToOrtho(false, Constants.G_WIDTH, Constants.G_HEIGHT);
 
-        controller = new InputsController();
-        Gdx.input.setInputProcessor(controller);
 
+        /* INPUTS CONTROLLER */
+        controller = new InputsControllerGame(game);
+
+
+        /* BOX2D WORLD */
         world = new World(new Vector2(0, 0), true);
         world.setContactListener(new CollisionListener());
+
 
         /* RENDERING SYSTEM */
         spriteBatch = new SpriteBatch();
         tiledMap = game.assetsManager.manager.get(AssetsManager.tiledMap);
         RenderingSystem renderingSystem = new RenderingSystem(spriteBatch, cameraBox2D, cameraUI, tiledMap, game.assetsManager);
 
+
         /* ENGINE */
         engine = new PooledEngine();
+
 
         /* ENTITY FACTORY */
         entityFactory = EntityFactory.getInstance(world, engine, game.assetsManager);
 
+
+        /* CREATE ENTITIES OF ENGINE */
+        entityFactory.createPlayer(
+                tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
+                game.playerSpecialization,
+                game.playerName
+        );
+        entityFactory.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
+        entityFactory.createEnemySpawns(tiledMap.getLayers());
+
+
+        /* ADD SYSTEMS TO ENGINE */
         engine.addSystem(renderingSystem);
         engine.addSystem(new PhysicsSystem(world));
-        //engine.addSystem(new PhysicsDebugSystem(world, cameraBox2D));
+        engine.addSystem(new PhysicsDebugSystem(world, cameraBox2D));
         engine.addSystem(new CameraSystem(cameraBox2D, cameraUI));
         engine.addSystem(new CollisionSystem());
         engine.addSystem(new PlayerMovementSystem(controller));
@@ -86,43 +104,20 @@ public class GameScreen implements Screen {
         engine.addSystem(new ReceiveAttackSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new PerspectiveSystem());
-
-        //create entities
-        player = entityFactory.createPlayer(
-                tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
-                game.playerSpecialization,
-                game.playerName
-        );
-        entityFactory.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
-
-        entityFactory.createEnemySpawns(tiledMap.getLayers());
-
-        PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, playerMapper.get(player));
-        engine.addSystem(HUD);
-    }
-
-
-    public void resetGame()
-    {
-        //set our InputsController class as input processor
-        Gdx.input.setInputProcessor(controller);
-
-        //create a new player entity
-        player = entityFactory.createPlayer(
-                tiledMap.getLayers().get("playerPosition").getObjects().get("player"),
-                game.playerSpecialization,
-                game.playerName
-        );
-
-        //remove last HUD containing the died player and create another one
-        engine.getSystem(PlayerHUDSystem.class).dispose();
-        PlayerHUDSystem HUD = new PlayerHUDSystem(spriteBatch, game.assetsManager, playerMapper.get(player));
-        engine.addSystem(HUD);
+        engine.addSystem(new PlayerHUDSystem(spriteBatch, game.assetsManager, playerMapper.get(getPlayerEntity())));
     }
 
 
     @Override
-    public void render(float delta) {
+    public void show()
+    {
+        controller.setToCurrentController();
+    }
+
+
+    @Override
+    public void render(float delta)
+    {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         engine.update(delta);
@@ -130,13 +125,14 @@ public class GameScreen implements Screen {
 
 
     //package private
-    InputsController getController() {return controller;}
+    InputsControllerGame getController() {return controller;}
     TiledMap getTiledMap() {return tiledMap;}
-    Entity getPlayerEntity() {return player;}
+    Entity getPlayerEntity() //Work when only have one player (would be need to modify later)
+    {
+        return engine.getEntitiesFor(Family.all(PlayerComponent.class).get()).first();
+    }
 
 
-    @Override
-    public void show() {}
     @Override
     public void resize(int width, int height) {}
     @Override

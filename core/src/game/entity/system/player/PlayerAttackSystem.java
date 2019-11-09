@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import game.controller.InputsController;
+import game.controller.InputsControllerGame;
 import game.entity.component.PlayerComponent;
 import game.entity.component.StateComponent;
 import static game.entity.utils.Mappers.*;
@@ -12,9 +12,9 @@ import static game.entity.utils.Mappers.*;
 
 public class PlayerAttackSystem extends IteratingSystem {
 
-    private InputsController controller;
+    private InputsControllerGame controller;
 
-    public PlayerAttackSystem(InputsController keyCon)
+    public PlayerAttackSystem(InputsControllerGame keyCon)
     {
         super(Family.all(PlayerComponent.class).get());
         controller = keyCon;
@@ -27,7 +27,7 @@ public class PlayerAttackSystem extends IteratingSystem {
         StateComponent state = stateMapper.get(entity);
 
         //set the attack statement if the player is pressing the attack key and not already attacking
-        if (controller.e_key && player.isAttacking == false)
+        if (controller.e && player.isAttacking == false)
         {
             player.isAttacking = true;
             int last_state = state.get();
