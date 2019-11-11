@@ -39,8 +39,8 @@ public class HUD extends Stage {
         Skin HUDSkin = assetsManager.getHUDSkin();
 
         //Table size
-        hud_width = Constants.G_WIDTH / 6;
-        hud_height = Constants.G_HEIGHT /  9;
+        hud_width = Constants.G_WIDTH / 6f;
+        hud_height = Constants.G_HEIGHT /  9f;
 
         // Extract regions from the texture atlas.
         TextureAtlas atlas = assetsManager.getAtlas();
@@ -48,7 +48,7 @@ public class HUD extends Stage {
         AtlasRegion actionBarRegion = atlas.findRegion("action-bar");
 
         // Get HUD background
-        Texture background = assetsManager.manager.get(assetsManager.background_hud);
+        Texture background = assetsManager.manager.get(AssetsManager.background_hud);
 
         // Create a container storing our table
         Container<Table> hudContainer = new Container<>();

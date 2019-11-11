@@ -13,7 +13,9 @@ public class Mappers {
     public static final ComponentMapper<EnemyHealthComponent> enemyHealthMapper = ComponentMapper.getFor(EnemyHealthComponent.class);
     public static final ComponentMapper<EnemySpawnComponent> enemySpawnMapper = ComponentMapper.getFor(EnemySpawnComponent.class);
     public static final ComponentMapper<FontComponent> fontMapper = ComponentMapper.getFor(FontComponent.class);
+    public static final ComponentMapper<NpcComponent> npcMapper = ComponentMapper.getFor(NpcComponent.class);
     public static final ComponentMapper<PlayerComponent> playerMapper = ComponentMapper.getFor(PlayerComponent.class);
+    public static final ComponentMapper<QuestComponent> questMapper = ComponentMapper.getFor(QuestComponent.class);
     public static final ComponentMapper<ReceiveAttackComponent> receiveAttackMapper = ComponentMapper.getFor(ReceiveAttackComponent.class);
     public static final ComponentMapper<StateComponent> stateMapper = ComponentMapper.getFor(StateComponent.class);
     public static final ComponentMapper<TextureComponent> textureMapper = ComponentMapper.getFor(TextureComponent.class);

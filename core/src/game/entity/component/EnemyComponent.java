@@ -19,6 +19,7 @@ public class EnemyComponent implements Component {
     public boolean aggressive = false; // if the enemy is currently aggressive
 
     /* Specific attributes */
+    public String name = null;
     public Bar life = null;
     public int level = 1;
     public float speed = 0.5f;

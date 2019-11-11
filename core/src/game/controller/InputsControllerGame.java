@@ -11,23 +11,26 @@ public class InputsControllerGame implements InputProcessor {
 
     private GDXGame game;
 
+    //Keys from preferences
     private int leftKey;
     private int rightKey;
     private int upKey;
     private int downKey;
+    private int attack1Key;
+    private int mapKey;
 
     //Player control inputs
     public boolean left;
     public boolean right;
     public boolean up;
     public boolean down;
-    public boolean e;
-    public boolean r;
+    public boolean att1;
+    public boolean att2;
 
-    //Map inputs
+    //UI Inputs
+    public boolean acceptQuest;
+    public boolean showQuests;
     public boolean map;
-
-    //Quit input
     public boolean quitGame;
 
 
@@ -55,20 +58,31 @@ public class InputsControllerGame implements InputProcessor {
             down = true;
             keyProcessed = true;
         }
-        if (Input.Keys.E == keycode) {
-            e = true;
+        if (attack1Key == keycode) {
+            att1 = true;
             keyProcessed = true;
         }
         if (Input.Keys.R == keycode) {
-            r = true;
+            att2 = true;
             keyProcessed = true;
         }
-        if (Input.Keys.M == keycode) {
-            map = true;
+
+        //Theses keys have to be detect only one time when pressing them
+        //Later we need to set it manually to false when manage the action
+        if (Input.Keys.ENTER == keycode) {
+            acceptQuest = !acceptQuest;
+            keyProcessed = true;
+        }
+        if (Input.Keys.K == keycode) {
+            showQuests = !showQuests;
+            keyProcessed = true;
+        }
+        if (mapKey == keycode) {
+            map = !map;
             keyProcessed = true;
         }
         if (Input.Keys.ESCAPE == keycode) {
-            quitGame = true;
+            quitGame = !quitGame;
             keyProcessed = true;
         }
 
@@ -96,20 +110,12 @@ public class InputsControllerGame implements InputProcessor {
             down = false;
             keyProcessed = true;
         }
-        if (Input.Keys.E == keycode) {
-            e = false;
+        if (attack1Key == keycode) {
+            att1 = false;
             keyProcessed = true;
         }
         if (Input.Keys.R == keycode) {
-            r = false;
-            keyProcessed = true;
-        }
-        if (Input.Keys.M == keycode) {
-            map = false;
-            keyProcessed = true;
-        }
-        if (Input.Keys.ESCAPE == keycode) {
-            quitGame = false;
+            att2 = false;
             keyProcessed = true;
         }
 
@@ -125,8 +131,10 @@ public class InputsControllerGame implements InputProcessor {
         right = false;
         up = false;
         down = false;
-        e = false;
-        r = false;
+        att1 = false;
+        att2 = false;
+        acceptQuest = false;
+        showQuests = false;
         map = false;
         quitGame = false;
     }
@@ -150,6 +158,8 @@ public class InputsControllerGame implements InputProcessor {
         rightKey = Input.Keys.valueOf(preferences.getMovingRightKey());
         upKey = Input.Keys.valueOf(preferences.getMovingUpKey());
         downKey = Input.Keys.valueOf(preferences.getMovingDownKey());
+        attack1Key = Input.Keys.valueOf(preferences.getAttack1Key());
+        mapKey = Input.Keys.valueOf(preferences.getMapKey());
     }
 
 

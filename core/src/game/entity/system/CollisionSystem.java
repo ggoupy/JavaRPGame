@@ -60,7 +60,7 @@ public class CollisionSystem  extends IteratingSystem {
             //get the enemy component of the entity
             EnemyComponent enemy = enemyMapper.get(entity);
 
-            enemy.attacking = false; //set to false every frame, and change it to true in case later
+            enemy.attacking = false; //set to false every frame, and change it later in case he attacks
 
             if (collidedEntities.size != 0) //if it has a collision with one or more entities
             {

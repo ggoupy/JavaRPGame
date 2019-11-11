@@ -54,6 +54,7 @@ public class PlayerFactory {
         AnimationComponent animation = entityFactory.engine.createComponent(AnimationComponent.class);
         CollisionComponent collision = entityFactory.engine.createComponent(CollisionComponent.class);
         ReceiveAttackComponent receiveAttack = entityFactory.engine.createComponent(ReceiveAttackComponent.class);
+        QuestComponent questCom = entityFactory.engine.createComponent(QuestComponent.class);
 
         //player definition
         createPlayerDefinition(player, spec);
@@ -95,6 +96,8 @@ public class PlayerFactory {
         //get the attack duration to disable movements when player attacking
         player.attackDuration = new Timer(animation.animations.get(StateComponent.ATTACKING).getAnimationDuration());
 
+        questCom.quests = new Array<>();
+
         //store a reference to the entity in the box2d box
         body.body.setUserData(entity);
 
@@ -108,12 +111,14 @@ public class PlayerFactory {
         entity.add(type);
         entity.add(state);
         entity.add(receiveAttack);
+        entity.add(questCom);
 
         // add the entity to the engine
         entityFactory.engine.addEntity(entity);
     }
 
     //set player attributes according to his specialization
+    @SuppressWarnings("unchecked")
     private void createPlayerDefinition(PlayerComponent player, String spec)
     {
         ObjectMap heroCfg = entityFactory.assetsManager.json.fromJson(

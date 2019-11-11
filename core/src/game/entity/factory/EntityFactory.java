@@ -10,14 +10,12 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import game.entity.component.AnimationComponent;
 import game.entity.component.AttachedComponent;
 import game.entity.component.BodyComponent;
 import game.entity.component.TypeComponent;
-import game.entity.system.player.PlayerHUDSystem;
 import game.loader.AssetsManager;
 
 
@@ -30,6 +28,7 @@ public class EntityFactory {
     AssetsManager assetsManager;
     BodyFactory bodyFactory;
 
+    private NpcFactory npcFactory;
     private EnemyFactory enemyFactory;
     private PlayerFactory playerFactory;
 
@@ -46,9 +45,10 @@ public class EntityFactory {
         this.engine = engine;
         this.atlas = assetsManager.getAtlas();
         this.assetsManager = assetsManager;
-        bodyFactory = bodyFactory.getInstance(world);
-        enemyFactory = enemyFactory.getInstance(this);
-        playerFactory = playerFactory.getInstance(this);
+        bodyFactory = BodyFactory.getInstance(world);
+        enemyFactory = EnemyFactory.getInstance(this);
+        playerFactory = PlayerFactory.getInstance(this);
+        npcFactory = NpcFactory.getInstance(this);
     }
 
     //get the body factory instance and create it if not instanced
@@ -95,6 +95,13 @@ public class EntityFactory {
     public void killPlayer(Entity playerEntity)
     {
         playerFactory.killPlayer(playerEntity);
+    }
+
+
+    //create all NPC from object positions
+    public void createNPCs(MapLayer layer)
+    {
+        npcFactory.createNPCs(layer);
     }
 
 

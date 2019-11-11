@@ -10,11 +10,14 @@ public class InputsControllerUI implements InputProcessor {
 
     private GDXGame game;
 
+    //Keys from preferences
     private int leftKey;
     private int rightKey;
     private int upKey;
     private int downKey;
+    private int exitMapKey;
 
+    //Movements of camera in map
     public boolean left;
     public boolean right;
     public boolean up;
@@ -56,7 +59,7 @@ public class InputsControllerUI implements InputProcessor {
             r = true;
             keyProcessed = true;
         }
-        if (Input.Keys.M == keycode) {
+        if (exitMapKey == keycode) {
             exitMap = true;
             keyProcessed = true;
         }
@@ -94,7 +97,7 @@ public class InputsControllerUI implements InputProcessor {
             r = false;
             keyProcessed = true;
         }
-        if (Input.Keys.M == keycode) {
+        if (exitMapKey == keycode) {
             exitMap = false;
             keyProcessed = true;
         }
@@ -135,6 +138,7 @@ public class InputsControllerUI implements InputProcessor {
         rightKey = Input.Keys.valueOf(preferences.getMovingRightKey());
         upKey = Input.Keys.valueOf(preferences.getMovingUpKey());
         downKey = Input.Keys.valueOf(preferences.getMovingDownKey());
+        exitMapKey = Input.Keys.valueOf(preferences.getMapKey());
     }
 
 

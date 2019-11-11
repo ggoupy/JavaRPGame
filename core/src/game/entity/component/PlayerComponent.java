@@ -18,5 +18,6 @@ public class PlayerComponent implements Component {
     public boolean isAttacking = false;
     public float lifeRegeneration = 1;
     public float lastDamageDuration = 0;
+    public EnemyComponent lastKilled = null;
 }
 

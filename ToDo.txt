@@ -1,6 +1,4 @@
-- Game reset properly (enemy reset and all world?)
-
-- Sounds 
+- Sounds
 
 - New Enemies
 
@@ -35,5 +33,3 @@
 - Function to auto add a collision
 
 - Improve sprites for better collisions
-
-- Keys preference

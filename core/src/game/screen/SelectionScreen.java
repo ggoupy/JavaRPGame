@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import game.CollisionListener;
 import game.GDXGame;
 import game.loader.AssetsManager;
 
@@ -60,6 +61,7 @@ public class SelectionScreen implements Screen {
             classBtns[i].addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    setcheckedClassButton(actor);
                     game.playerSpecialization = actor.toString().split(" ")[1];
                 }
             });
@@ -125,13 +127,24 @@ public class SelectionScreen implements Screen {
         stage.getViewport().update(width, height, true);
     }
 
-    public String [] getClassesFromJson()
+    private String [] getClassesFromJson()
     {
         Json json = new Json();
         ArrayList<String> list = json.fromJson(ArrayList.class, Gdx.files.internal(game.assetsManager.heroes));
 
         String [] classes = list.toArray(new String[list.size()]);
         return classes;
+    }
+
+    //color the current checked class Button
+    private void setcheckedClassButton(Actor checkedBtn)
+    {
+        for(TextButton btn : classBtns) //reset class buttons color (to remove last checked)
+        {
+            btn.setColor(Color.WHITE);
+        }
+
+        checkedBtn.setColor(Color.GRAY); //set checked color of current checked button
     }
 
     @Override

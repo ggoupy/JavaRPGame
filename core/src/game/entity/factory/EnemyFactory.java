@@ -14,15 +14,14 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.Scaling;
 import game.entity.component.*;
 import game.entity.utils.Spawn;
 import game.loader.AssetsManager;
 import game.utils.Bar;
 import game.utils.Timer;
 
-import static game.entity.utils.Mappers.enemyMapper;
-import static game.entity.utils.Mappers.enemySpawnMapper;
-
+import static game.entity.utils.Mappers.*;
 
 public class EnemyFactory {
 
@@ -71,6 +70,7 @@ public class EnemyFactory {
         );
 
         EnemyComponent enemy = new EnemyComponent();
+        enemy.name = prototype;
         enemy.life = new Bar((float) enemyCfg.get("life"));
         enemy.speed = (float) enemyCfg.get("speed");
         enemy.damage = (float) enemyCfg.get("damage");
@@ -89,6 +89,7 @@ public class EnemyFactory {
     {
         EnemyComponent enemyCom = entityFactory.engine.createComponent(EnemyComponent.class);
         EnemyComponent toCopy = prototypes.get(prototype);
+        enemyCom.name = toCopy.name;
         enemyCom.life = new Bar(toCopy.life.getMax());
         enemyCom.speed = toCopy.speed;
         enemyCom.damage = toCopy.damage;

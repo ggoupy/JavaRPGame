@@ -27,7 +27,7 @@ public class PlayerAttackSystem extends IteratingSystem {
         StateComponent state = stateMapper.get(entity);
 
         //set the attack statement if the player is pressing the attack key and not already attacking
-        if (controller.e && player.isAttacking == false)
+        if (controller.att1 && !player.isAttacking)
         {
             player.isAttacking = true;
             int last_state = state.get();
@@ -49,7 +49,7 @@ public class PlayerAttackSystem extends IteratingSystem {
         }
 
         //update the attack duration timer if the player is attacking
-        if (player.isAttacking == true)
+        if (player.isAttacking)
         {
             //time of animation attack
             //Update timer function returns a boolean, true if the attack duration has been reached

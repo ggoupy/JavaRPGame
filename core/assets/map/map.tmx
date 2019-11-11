@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2019.10.08" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="32" nextobjectid="753">
+<map version="1.2" tiledversion="2019.10.08" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="754">
  <properties>
   <property name="height" type="float" value="200"/>
   <property name="width" type="float" value="200"/>
@@ -596,7 +596,14 @@
   <object id="752" name="spawn" x="2080" y="320" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="6" name="playerPosition">
-  <object id="6" name="player" x="1056" y="2640" width="16" height="16"/>
+  <object id="6" name="player" x="448" y="2832" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="32" name="npcPositions">
+  <object id="753" name="Arthas" x="352" y="2880" width="16" height="16">
+   <properties>
+    <property name="type" value="human"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="mapObjects">
   <object id="95" name="village" x="420.471" y="2780.5" width="58.0739" height="22.5917"/>

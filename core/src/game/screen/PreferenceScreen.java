@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -12,10 +13,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import game.AppPreferences;
 import game.GDXGame;
 import game.loader.AssetsManager;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 
 public class PreferenceScreen implements Screen {
@@ -27,6 +34,8 @@ public class PreferenceScreen implements Screen {
     private TextField movingRightTf;
     private TextField movingUpTf;
     private TextField movingDownTf;
+    private TextField attackTf;
+    private TextField mapTf;
 
 
     public PreferenceScreen(GDXGame g)
@@ -49,13 +58,19 @@ public class PreferenceScreen implements Screen {
 
         //Background image
         Texture background = game.assetsManager.manager.get(AssetsManager.background);
-        table.background(new TextureRegionDrawable(background));
+        table.background(new TextureRegionDrawable(background).tint(Color.GRAY));
 
         //Keys selection
+        Label keyPreferencesLb = new Label ("Key preferences", skin);
+
         Label movingUpLb = new Label("moving up", skin);
         Label movingLeftLb = new Label("moving left", skin);
         Label movingDownLb = new Label("moving down", skin);
         Label movingRightLb = new Label("moving right", skin);
+        Label attackLb = new Label("attack", skin);
+        Label mapLb = new Label("open map", skin);
+        Label escapeLb = new Label("quit game", skin);
+
         movingUpTf = new TextField(gamePreferences.getMovingUpKey(), skin);
         movingUpTf.setMaxLength(1); movingUpTf.setAlignment(Align.center);
         movingLeftTf = new TextField(gamePreferences.getMovingLeftKey(), skin);
@@ -64,6 +79,14 @@ public class PreferenceScreen implements Screen {
         movingDownTf.setMaxLength(1); movingDownTf.setAlignment(Align.center);
         movingRightTf = new TextField(gamePreferences.getMovingRightKey(), skin);
         movingRightTf.setMaxLength(1); movingRightTf.setAlignment(Align.center);
+        attackTf = new TextField(gamePreferences.getAttack1Key(), skin);
+        attackTf.setMaxLength(1); attackTf.setAlignment(Align.center);
+        mapTf = new TextField(gamePreferences.getMapKey(), skin);
+        mapTf.setMaxLength(1); mapTf.setAlignment(Align.center);
+        TextField escapeTf = new TextField("ESC", skin);
+        escapeTf.setDisabled(true); escapeTf.setAlignment(Align.center);
+
+        table.add(keyPreferencesLb).left().padBottom(50).row();
 
         table.add(movingUpLb).right().padRight(30);
         table.add(movingUpTf).center();
@@ -80,6 +103,38 @@ public class PreferenceScreen implements Screen {
         table.add(movingRightLb).right().padRight(30);
         table.add(movingRightTf).center();
         table.row();
+
+        table.add(attackLb).right().padRight(30);
+        table.add(attackTf).center();
+        table.row();
+
+        table.add(mapLb).right().padRight(30);
+        table.add(mapTf).center();
+        table.row();
+
+        table.add(escapeLb).right().padRight(30);
+        table.add(escapeTf).center();
+        table.row().padTop(40);
+
+
+        Label mapInfo = new Label("To move the camera in the map screen:", skin);
+        Label mapInfo1 = new Label("use player movement keys", skin);
+        Label mapInfo2 = new Label("E to zoom and R to dezoom", skin);
+        table.add(mapInfo).right().colspan(10).row(); //colspan(10) is a trick to make the label taking all cells
+        table.add(mapInfo1).right().colspan(10).row();
+        table.add(mapInfo2).right().colspan(10).row();
+
+        table.row().padTop(100);
+
+        //Quit button
+        TextButton quitBtn = new TextButton("Quit", skin);
+        quitBtn.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.changeScreen(GDXGame.MENU_SCREEN);
+            }
+        });
+        table.add(quitBtn).left().padRight(50);
 
         //Save button
         TextButton saveBtn = new TextButton("Save", skin);
@@ -100,7 +155,7 @@ public class PreferenceScreen implements Screen {
                 }
             }
         });
-        table.add(saveBtn).padTop(100).colspan(10).right(); //colspan 10 = trick to set the col taking all the row
+        table.add(saveBtn).right();
     }
 
     @Override
@@ -116,28 +171,66 @@ public class PreferenceScreen implements Screen {
     }
 
 
+    //Try to save user changes in game preferences class
+    //return "OK" if changes are saved, the error message if not
+    //FACTORISE THIS FUNCTION LATER AND MAKE IT MORE EFFICIENT
     private String saveChanges()
     {
+        //text field are storing string of one character, so we get it through charAt(0)
+
         //Key Up
-        char keyUp = movingUpTf.getText().charAt(0);
+        String movingUp = movingUpTf.getText();
+        if (movingUp.equals("")) return "moving up does not have assigned key";
+        char keyUp = movingUp.charAt(0);
         if (!Character.isLetter(keyUp)) return "Could not assign this key for moving up";
 
         //Key Down
-        char keyDown = movingDownTf.getText().charAt(0);
+        String movingDown = movingDownTf.getText();
+        if (movingDown.equals("")) return "moving down does not have assigned key";
+        char keyDown = movingDown.charAt(0);
         if (!Character.isLetter(keyDown)) return "Could not assign this key for moving down";
 
         //Key Left
-        char keyLeft = movingLeftTf.getText().charAt(0);
+        String movingLeft = movingLeftTf.getText();
+        if (movingLeft.equals("")) return "moving left does not have assigned key";
+        char keyLeft = movingLeft.charAt(0);
         if (!Character.isLetter(keyLeft)) return "Could not assign this key for moving left";
 
         //Key Right
-        char keyRight = movingRightTf.getText().charAt(0);
+        String movingRight = movingRightTf.getText();
+        if (movingRight.equals("")) return "moving right does not have assigned key";
+        char keyRight = movingRight.charAt(0);
         if (!Character.isLetter(keyRight)) return "Could not assign this key for moving right";
+
+        //Attack 1
+        String attack1 = attackTf.getText();
+        if (attack1.equals("")) return "attack does not have assigned key";
+        char keyAttack1 = attack1.charAt(0);
+        if (!Character.isLetter(keyAttack1)) return "Could not assign this key for attack";
+
+        //Map
+        String map = mapTf.getText();
+        if (map.equals("")) return "map does not have assigned key";
+        char keyMap = map.charAt(0);
+        if (!Character.isLetter(keyMap)) return "Could not assign this key for map";
+
+        Set<String> keys = new HashSet<>(); //Contains unique values
+        int nbKeys = 0;
+        keys.add(movingUp.toUpperCase()); nbKeys++;
+        keys.add(movingDown.toUpperCase()); nbKeys++;
+        keys.add(movingLeft.toUpperCase()); nbKeys++;
+        keys.add(movingRight.toUpperCase()); nbKeys++;
+        keys.add(attack1.toUpperCase()); nbKeys++;
+        keys.add(map.toUpperCase()); nbKeys++;
+
+        if (keys.size() < nbKeys) return "Two keys have the same value";
 
         gamePreferences.setMovingUpKey(Character.toString(keyUp).toUpperCase());
         gamePreferences.setMovingDownKey(Character.toString(keyDown).toUpperCase());
         gamePreferences.setMovingLeftKey(Character.toString(keyLeft).toUpperCase());
         gamePreferences.setMovingRightKey(Character.toString(keyRight).toUpperCase());
+        gamePreferences.setAttack1Key(Character.toString(keyAttack1).toUpperCase());
+        gamePreferences.setMapKey(Character.toString(keyMap).toUpperCase());
 
         return "OK";
     }

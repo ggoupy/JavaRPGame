@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import game.CollisionListener;
 import game.GDXGame;
+import game.UserInterface;
 import game.controller.InputsControllerGame;
 import game.entity.component.PlayerComponent;
 import game.entity.factory.EntityFactory;
@@ -41,6 +42,9 @@ public class GameScreen implements Screen {
     private TiledMap tiledMap;
 
     private EntityFactory entityFactory;
+
+    private UserInterface ui;
+
 
     public GameScreen(GDXGame g) {
         game = g; //reference to GDXGame
@@ -84,19 +88,24 @@ public class GameScreen implements Screen {
         );
         entityFactory.createObjects(tiledMap.getLayers().get("mapObjects").getObjects());
         entityFactory.createEnemySpawns(tiledMap.getLayers());
+        entityFactory.createNPCs(tiledMap.getLayers().get("npcPositions"));
+
+
+        /*USER INTERFACE*/
+        ui = new UserInterface(game,this);
 
 
         /* ADD SYSTEMS TO ENGINE */
         engine.addSystem(renderingSystem);
         engine.addSystem(new PhysicsSystem(world));
-        engine.addSystem(new PhysicsDebugSystem(world, cameraBox2D));
+        //engine.addSystem(new PhysicsDebugSystem(world, cameraBox2D));
         engine.addSystem(new CameraSystem(cameraBox2D, cameraUI));
         engine.addSystem(new CollisionSystem());
         engine.addSystem(new PlayerMovementSystem(controller));
         engine.addSystem(new PlayerHealthSystem(game, entityFactory));
         engine.addSystem(new PlayerAttackSystem(controller));
         engine.addSystem(new PlayerXpSystem());
-        engine.addSystem(new PlayerUISystem(game, controller));
+        engine.addSystem(new PlayerQuestSystem(ui));
         engine.addSystem(new EnemySpawnSystem(entityFactory));
         engine.addSystem(new EnemyMovementSystem(engine));
         engine.addSystem(new EnemyHealthSystem(entityFactory));
@@ -104,7 +113,7 @@ public class GameScreen implements Screen {
         engine.addSystem(new ReceiveAttackSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new PerspectiveSystem());
-        engine.addSystem(new PlayerHUDSystem(spriteBatch, game.assetsManager, playerMapper.get(getPlayerEntity())));
+        engine.addSystem(new NpcSystem(ui, controller, getPlayerEntity()));
     }
 
 
@@ -120,17 +129,22 @@ public class GameScreen implements Screen {
     {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         engine.update(delta);
+
+        ui.updateUI();
     }
 
 
-    //package private
-    InputsControllerGame getController() {return controller;}
-    TiledMap getTiledMap() {return tiledMap;}
-    Entity getPlayerEntity() //Work when only have one player (would be need to modify later)
-    {
+    //Work when only have one player (would be need to modify later)
+    public Entity getPlayerEntity() {
         return engine.getEntitiesFor(Family.all(PlayerComponent.class).get()).first();
     }
+    public PooledEngine getEngine() {return engine;}
+    public AssetsManager getAssetsManager() {return game.assetsManager;}
+    public InputsControllerGame getController() {return controller;}
+    public SpriteBatch getSpriteBatch() {return spriteBatch;}
+    TiledMap getTiledMap() {return tiledMap;} //package private
 
 
     @Override

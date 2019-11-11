@@ -37,20 +37,24 @@ public class EnemyHealthSystem extends IteratingSystem {
 
 
         //Death test
+        //Make it better in the future
         if (enemy.life.isEmpty())
         {
             Entity lastAttacking = enemyAttacker.lastAttacking;
 
             /* Player experience */
-            PlayerComponent player = lastAttacking.getComponent(PlayerComponent.class);
+            PlayerComponent player = playerMapper.get(lastAttacking);
             if (player != null) player.xpBar.updateCurrent(enemy.xpGain);
+
+            /* To manage Quest */
+            player.lastKilled = enemy;
 
             entityFactory.destroyEntity(entity);
             return;
         }
 
         //color of the health bar for passive enemy
-        //texture region2 contains the agressiveNature health bar type (passive in this case)
+        //texture region2 contains the aggressive nature health bar type (passive in this case)
         //texture region3 contains the other health bar type (aggressive in this case)
         //--- not very efficient ---//
         if (!enemy.aggressiveNature)
