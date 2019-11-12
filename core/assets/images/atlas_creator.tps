@@ -464,8 +464,38 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">hud/action-bar.png</key>
-            <key type="filename">hud/health-bar.png</key>
+            <key type="filename">npc/human-npc.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,12,16,24</rect>
+                <key>scale9Paddings</key>
+                <rect>8,12,16,24</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">ui/completed-quest-icon.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>7,16,13,32</rect>
+                <key>scale9Paddings</key>
+                <rect>7,16,13,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">ui/hud/action-bar.png</key>
+            <key type="filename">ui/hud/health-bar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -480,7 +510,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">npc/human-npc.png</key>
+            <key type="filename">ui/quest-icon.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -489,9 +519,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,12,16,24</rect>
+                <rect>7,16,14,32</rect>
                 <key>scale9Paddings</key>
-                <rect>8,12,16,24</rect>
+                <rect>7,16,14,32</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -591,8 +621,6 @@
             <filename>hero/mage/mage-walkingUp_6.png</filename>
             <filename>hero/mage/mage-walkingUp_7.png</filename>
             <filename>hero/mage/mage-walkingUp_8.png</filename>
-            <filename>hud/action-bar.png</filename>
-            <filename>hud/health-bar.png</filename>
             <filename>hero/mage/mage-attackingDown_1.png</filename>
             <filename>hero/mage/mage-attackingDown_2.png</filename>
             <filename>hero/mage/mage-attackingDown_3.png</filename>
@@ -742,6 +770,10 @@
             <filename>enemy/orc/orc-walkingUp_7.png</filename>
             <filename>enemy/orc/orc-walkingUp_8.png</filename>
             <filename>npc/human-npc.png</filename>
+            <filename>ui/hud/action-bar.png</filename>
+            <filename>ui/hud/health-bar.png</filename>
+            <filename>ui/completed-quest-icon.png</filename>
+            <filename>ui/quest-icon.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

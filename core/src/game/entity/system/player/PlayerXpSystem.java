@@ -23,7 +23,6 @@ public class PlayerXpSystem extends IteratingSystem {
             playerUP(player);
 
             float xpSurplus = player.xpBar.getCurrent() - player.xpBar.getMax(); //xp points over the max
-            System.out.println(xpSurplus);
             xpSurplus = xpSurplus > 0 ? xpSurplus : 0; //assert that is > 0
             player.xpBar.setCurrent(xpSurplus); //init xp bar for next level
             player.xpBar.setMax(player.xpBar.getMax()*1.5f); //update xp needed for next level

@@ -2,11 +2,14 @@ package game.entity.factory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -55,6 +58,7 @@ public class NpcFactory {
         TransformComponent position = entityFactory.engine.createComponent(TransformComponent.class);
         TextureComponent texture = entityFactory.engine.createComponent(TextureComponent.class);
         CollisionComponent collision = entityFactory.engine.createComponent(CollisionComponent.class);
+        AttachedComponent attached = entityFactory.engine.createComponent(AttachedComponent.class);
 
         //get the rectangle of the mapObject (to have the coordinates)
         Rectangle rectangle = ((RectangleMapObject)npcObj).getRectangle();
@@ -71,9 +75,7 @@ public class NpcFactory {
 
         type.type = TypeComponent.NPC;
 
-        collision.collisionEntity = new Array<>();
-
-        questCom.quests = createNpcQuests((String) npcObj.getName());
+        createNpcQuests(npcObj.getName(), questCom.quests);
 
         //store a reference to the entity in the box2d box
         body.body.setUserData(entity);
@@ -86,14 +88,38 @@ public class NpcFactory {
         entity.add(texture);
         entity.add(collision);
 
+        attached.attachedEntity = createQuestIcon(entity);
+        entity.add(attached);
+
         entityFactory.engine.addEntity(entity);
     }
 
-    @SuppressWarnings("unchecked")
-    private Array<Quest> createNpcQuests(String npcName)
+    private Entity createQuestIcon(Entity npcEntity)
     {
-        Array<Quest> quests = new Array<>();
+        Entity entity = entityFactory.engine.createEntity();
+        TextureComponent texture = entityFactory.engine.createComponent(TextureComponent.class);
+        TransformComponent position = entityFactory.engine.createComponent(TransformComponent.class);
+        AttachedComponent attached = entityFactory.engine.createComponent(AttachedComponent.class);
 
+        texture.region = null;
+        texture.region2 = entityFactory.assetsManager.getAtlas().findRegion("quest-icon");
+        texture.region3 = entityFactory.assetsManager.getAtlas().findRegion("completed-quest-icon");
+
+        position.isHidden = true;
+        Vector3 npcPos = transformMapper.get(npcEntity).position;
+        position.position.set(npcPos.x, npcPos.y+1, npcPos.z);
+
+        entity.add(texture);
+        entity.add(position);
+        entity.add(attached);
+        entityFactory.engine.addEntity(entity);
+
+        return entity;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void createNpcQuests(String npcName, Array<Quest> quests)
+    {
         Array<ObjectMap> jsonQuests = entityFactory.assetsManager.json.fromJson(
                 Array.class, ObjectMap.class,
                 Gdx.files.internal(AssetsManager.npcCfg_path+npcName+".json")
@@ -104,16 +130,15 @@ public class NpcFactory {
             ObjectMap quest = jsonQuests.get(i);
             String title = (String) quest.get("title");
             String description = (String) quest.get("description");
+            int xp = Integer.parseInt((String) quest.get("xp"));
             String type = (String) quest.get("type");
             if (type.equals("kill"))
             {
                 int toKill = Integer.parseInt((String) quest.get("toKill"));
                 String enemy = (String) quest.get("enemy");
                 Objective obj = new KillingObjective(description, type, toKill, enemy);
-                quests.add(new Quest(title, obj));
+                quests.add(new Quest(title, obj, xp));
             }
         }
-
-        return quests;
     }
 }

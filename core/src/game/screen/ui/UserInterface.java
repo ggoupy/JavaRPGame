@@ -1,7 +1,9 @@
-package game;
+package game.screen.ui;
 
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ai.utils.Collision;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -10,11 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import game.GDXGame;
 import game.controller.InputsControllerGame;
 import game.loader.AssetsManager;
 import game.quest.Quest;
 import game.screen.GameScreen;
-import game.screen.hud.HUD;
 import game.utils.Constants;
 
 import static game.entity.utils.Mappers.playerMapper;
@@ -37,6 +39,7 @@ public class UserInterface {
     private Table questTable;
     private Label questTitle;
     private Label questDescription;
+    private Label questAccept;
     private boolean showQuest = false;
 
     /* QUEST MENU UI */
@@ -90,10 +93,15 @@ public class UserInterface {
 
     private void drawUI()
     {
+        //We always draw the player HUD
         drawHUD();
-        if (showQuest) stage.draw();
-        if (showQuestMenu) stage.draw();
-        if (showQuitDialog) stage.draw();
+
+        //We draw the UI only if at least one component needs to be draw
+        if (showQuest || showQuestMenu || showQuitDialog)
+        {
+            stage.act();
+            stage.draw();
+        }
     }
 
     private void drawHUD()
@@ -151,6 +159,8 @@ public class UserInterface {
     {
         questTitle.setText(quest.getTitle());
         questDescription.setText(quest.getObjective().getDescription());
+        if (quest.isCompleted()) questAccept.setText("Press ENTER to return the quest");
+        else questAccept.setText("Press ENTER to accept the quest");
     }
 
     public void removeQuest()
@@ -183,18 +193,20 @@ public class UserInterface {
     private void createQuestUI(Skin skin)
     {
         // Get Quest background
-        Texture questBg = assetsManager.manager.get(AssetsManager.background_hud);
+        Texture questBg = assetsManager.manager.get(AssetsManager.background_quest);
 
         questTable = new Table();
         questTable.setBackground(new TextureRegionDrawable(questBg));
 
         questTitle = new Label("", skin);
+        questTitle.setFontScale(1.5f);
         questDescription = new Label("", skin);
         questDescription.setWrap(true);
-        Label questAccept = new Label("Press ENTER to accept", skin);
-        questTable.add(questTitle).pad(60).row();
-        questTable.add(questDescription).width(Constants.G_WIDTH/3f).pad(50).row();
-        questTable.add(questAccept).pad(60).row();
+        questAccept = new Label("Press ENTER to accept the quest", skin);
+        questTable.add(questTitle).pad(100,50,0,50).row();
+        questTable.add(questDescription).width(Constants.G_WIDTH/3f).height(Constants.G_HEIGHT/3f).pad(60).top().row();
+        questTable.add(questAccept).pad(50);
+        questTable.top();
 
         //Padding
         float questPadY = Constants.G_HEIGHT/6f;
@@ -207,7 +219,7 @@ public class UserInterface {
     private void createQuestMenuUI(Skin skin)
     {
         // Get Quest background
-        Texture questBg = assetsManager.manager.get(AssetsManager.background_hud);
+        Texture questBg = assetsManager.manager.get(AssetsManager.background_quest);
 
         questMenuDialog = new Dialog("", skin);
         questMenuDialog.setBackground(new TextureRegionDrawable(questBg));
@@ -215,13 +227,14 @@ public class UserInterface {
         Table questMenuTable = new Table();
 
         questMenuTitle = new Label("You don't have any quests", skin);
+        questMenuTitle.setFontScale(1.2f);
         questMenuDescription = new Label("Accept a quest to have a mission", skin);
         questMenuDescription.setWrap(true);
         questMenuObjective = new Label("", skin);
 
-        questMenuTable.add(questMenuTitle).pad(80).row();
-        questMenuTable.add(questMenuDescription).width(Constants.G_WIDTH/4f).pad(60).row();
-        questMenuTable.add(questMenuObjective).pad(80).row();
+        questMenuTable.add(questMenuTitle).pad(80,50,0,50).row();
+        questMenuTable.add(questMenuDescription).width(Constants.G_WIDTH/4f).height(Constants.G_HEIGHT/5f).pad(50).row();
+        questMenuTable.add(questMenuObjective).pad(0,50,80,50).row();
 
         questMenuDialog.add(questMenuTable);
         questMenuDialog.show(stage);

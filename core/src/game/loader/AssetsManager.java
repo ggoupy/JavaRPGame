@@ -28,7 +28,6 @@ public class AssetsManager {
 
     //Background path
     public static final String background = "background/background.png";
-    public static final String background_hud = "background/background-hud.png";
 
     //Skin for menu
     private Skin menuSkin;
@@ -37,6 +36,10 @@ public class AssetsManager {
     //Skin for HUD
     private Skin HUDSkin;
     public static final String HUDSkin_path = "skin/pixthulhu/skin/pixthulhu-ui.json";
+
+    //UI
+    public static final String background_hud = "images/ui/hud/hud-background.png";
+    public static final String background_quest = "images/ui/quest-background.png";
 
     //Textures path
     public static final String spritesheet = "images/atlas.txt";
@@ -76,6 +79,7 @@ public class AssetsManager {
     {
         manager.load(background, Texture.class);
         manager.load(background_hud, Texture.class);
+        manager.load(background_quest, Texture.class);
 
         manager.setLoader(TiledMap.class, new TmxMapLoader());
         manager.load(tiledMap, TiledMap.class);

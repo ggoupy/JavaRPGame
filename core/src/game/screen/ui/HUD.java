@@ -1,4 +1,4 @@
-package game.screen.hud;
+package game.screen.ui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -24,8 +24,8 @@ public class HUD extends Stage {
     private Image healthBar;
     private Image actionBar;
     private ProgressBar xpBar;
-    float hud_width;
-    float hud_height;
+    private float hud_width;
+    private float hud_height;
 
     public HUD(AssetsManager assetsManager, Batch batch, PlayerComponent p)
     {

@@ -3,8 +3,7 @@ package game.entity.system.player;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.utils.ObjectMap;
-import game.UserInterface;
+import game.screen.ui.UserInterface;
 import game.entity.component.PlayerComponent;
 import game.entity.component.QuestComponent;
 import game.quest.KillingObjective;
@@ -50,6 +49,7 @@ public class PlayerQuestSystem extends IteratingSystem {
                             {
                                 player.lastKilled = null;
                                 obj.updateObjective();
+                                if (obj.isCompleted()) quest.setCompleted();
                             }
                         }
                         break;
@@ -58,6 +58,7 @@ public class PlayerQuestSystem extends IteratingSystem {
                 }
             }
         }
+        else ui.removeQuestToMenuQuest();
 
 
     }

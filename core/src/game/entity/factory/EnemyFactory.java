@@ -125,7 +125,7 @@ public class EnemyFactory {
 
         Entity entitySpawn = entityFactory.engine.createEntity();
         EnemySpawnComponent enemySpawnCom = entityFactory.engine.createComponent(EnemySpawnComponent.class);
-        enemySpawnCom.spawns = new Array<>();
+
         enemySpawnCom.RespawnTimer = new Timer(spawns.getCount()*3); //new enemy all x seconds
         enemySpawnCom.enemyType = (String) spawnLayer.getProperties().get("enemyType");
         enemySpawnCom.enemyLevel = (int) spawnLayer.getProperties().get("enemyLevel");
@@ -182,9 +182,6 @@ public class EnemyFactory {
         enemy.origin = new Vector2(center.x, center.y);
         enemy.direction = new Vector2(0,0);
 
-        receiveAttack.entitiesAttacking = new Array<>();
-
-        collision.collisionEntity = new Array<>();
 
         texture.region = entityFactory.atlas.findRegion(spawnCom.enemyType+"-standingDown");
 
@@ -203,8 +200,6 @@ public class EnemyFactory {
         body.body.setUserData(entity);
 
         font.text = "Lv. " + enemy.level;
-        font.worldPos = new Vector3();
-        font.screenPos = new Vector3();
 
         // add the components to the entity
         entity.add(body);

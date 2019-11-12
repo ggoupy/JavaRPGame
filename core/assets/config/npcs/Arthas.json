@@ -4,13 +4,15 @@
 		"description": "A group of Goblins from the north is camping in the field around the village. You need to kill these vermins!",
 		"type": "kill",
 		"toKill": "5",
-		"enemy": "goblin"
+		"enemy": "goblin",
+		"xp": "100"
 	},
 	{
 		"title": "Save the forest",	
 		"description": "There is a Orc's camp in the forest next to the road going to the east. They are cutting off all threes that we need for the village. It would be very grateful if you kill them...",
 		"type": "kill",
 		"toKill": "5",
-		"enemy": "orc"
+		"enemy": "orc",
+		"xp": "150"
 	}
 ]

@@ -75,10 +75,6 @@ public class PlayerFactory {
 
         type.type = TypeComponent.PLAYER;
 
-        receiveAttack.entitiesAttacking = new Array<>();
-
-        collision.collisionEntity = new Array<>();
-
         state.set(StateComponent.STANDING_DOWN);
 
         //we add animations of the player in function of the state component
@@ -95,8 +91,6 @@ public class PlayerFactory {
 
         //get the attack duration to disable movements when player attacking
         player.attackDuration = new Timer(animation.animations.get(StateComponent.ATTACKING).getAnimationDuration());
-
-        questCom.quests = new Array<>();
 
         //store a reference to the entity in the box2d box
         body.body.setUserData(entity);

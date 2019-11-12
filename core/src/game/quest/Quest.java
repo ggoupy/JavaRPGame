@@ -4,15 +4,17 @@ public class Quest {
 
     private String title;
     private Objective objective;
-    private boolean terminated;
+    private boolean completed;
     private boolean accepted;
+    private int xp;
 
-    public Quest(String title, Objective objective)
+    public Quest(String title, Objective objective, int xp)
     {
         this.title = title;
         this.objective = objective;
-        this.terminated = false;
+        this.completed = false;
         this.accepted = false;
+        this.xp = xp;
     }
 
     public String getTitle() {return title;}
@@ -21,11 +23,13 @@ public class Quest {
 
     public String objectiveToString() {return objective.objectiveToString();}
 
-    public boolean isTerminated() {return terminated;}
+    public boolean isCompleted() {return completed;}
 
-    public void setTerminated() {this.terminated = true;}
+    public void setCompleted() {this.completed = true;}
 
     public boolean isAccepted() {return accepted;}
 
     public void setAccepted() {this.accepted = true;}
+
+    public int getXP() {return xp;}
 }

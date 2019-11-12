@@ -3,11 +3,10 @@ package game.entity.system;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import game.UserInterface;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import game.entity.component.*;
+import game.screen.ui.UserInterface;
 import game.controller.InputsControllerGame;
-import game.entity.component.CollisionComponent;
-import game.entity.component.NpcComponent;
-import game.entity.component.QuestComponent;
 import game.quest.Quest;
 
 import static game.entity.utils.Mappers.*;
@@ -34,35 +33,77 @@ public class NpcSystem extends IteratingSystem {
         CollisionComponent collision = collisionMapper.get(entity);
 
         //We treat the collision here because we need to handle the moment
-        //when the contact end to set showQuests to false
+        //when the contact end to set the show quest panel not visible in the UI
         if (collision.hasCollidedEntity(player))
         {
-            Quest quest = null;
+            //We get the first completed quest
+            Quest quest = questCom.getCompletedQuest();
 
-            for(int i=0; i < questCom.quests.size; ++i)
+            //If there is no completed quests
+            if (quest == null)
             {
-                //we stop the loop when we find the first not terminated and accepted quest of the NPC
-                if (!questCom.quests.get(i).isTerminated() && !questCom.quests.get(i).isAccepted())
-                {
-                    quest = questCom.quests.get(i);
-                    break;
-                }
+                //we get the first not accepted quest
+                quest = questCom.getNewQuest();
             }
 
+
+            //To show the quest in the UI, if we found a completed or not accepted quest
             if (quest != null)
             {
                 ui.setQuest(quest); //Quest to show in UI
 
+                //Interact quest key
                 if (controller.acceptQuest)
                 {
-                    controller.acceptQuest = false; //manually set to false the accept quest key
+                    controller.acceptQuest = false; //manually set to false the key
+
                     QuestComponent playerQuests = questMapper.get(player); //quest component of the player
-                    playerQuests.quests.add(new Quest(quest.getTitle(), quest.getObjective())); //add the shown quest to the player quest component
-                    quest.setAccepted(); //set the quest to accepted (to do not keep showing it)
+
+                    //Case of new quest -> Player accepts it
+                    if (!quest.isCompleted())
+                    {
+                        playerQuests.quests.add(quest); //add the quest to the player quest component
+                        quest.setAccepted(); //set the quest to accepted by the player
+                    }
+
+                    //Case of completed case -> Player returns it
+                    else
+                    {
+                        PlayerComponent playerCom = playerMapper.get(player); //Player component
+
+                        //We add the XP of the quest to player
+                        playerCom.xpBar.updateCurrent(quest.getXP());
+
+                        //We remove the quest from the NPC and the player
+                        questCom.quests.removeValue(quest, true);
+                        playerQuests.quests.removeValue(quest, true);
+                    }
                 }
             }
             else ui.removeQuest(); //remove the last quest shown if no one encountered
         }
-        else ui.removeQuest(); //No quest to show in UI
+        else ui.removeQuest(); //remove quest shown if end collision with player
+
+
+        //Quest icon
+        Entity iconEntity = attachedMapper.get(entity).attachedEntity; //Icon entity attached to NPC
+        TextureComponent iconTexture = textureMapper.get(iconEntity);
+        TransformComponent iconPos = transformMapper.get(iconEntity);
+
+        iconPos.isHidden = true; //Firstly hidden
+
+        //We set the icon according to current quests
+        //If the NPC has a quest completed by player
+        if(questCom.getCompletedQuest() != null)
+        {
+            iconTexture.region = new TextureRegion(iconTexture.region3);
+            iconPos.isHidden = false;
+        }
+        //If the NPC has a quest not accepted by player
+        else if (questCom.getNewQuest() != null)
+        {
+            iconTexture.region = new TextureRegion(iconTexture.region2);
+            iconPos.isHidden = false;
+        }
     }
 }

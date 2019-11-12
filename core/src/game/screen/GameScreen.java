@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import game.CollisionListener;
 import game.GDXGame;
-import game.UserInterface;
+import game.screen.ui.UserInterface;
 import game.controller.InputsControllerGame;
 import game.entity.component.PlayerComponent;
 import game.entity.factory.EntityFactory;
@@ -25,8 +25,6 @@ import game.entity.system.enemy.EnemySpawnSystem;
 import game.entity.system.player.*;
 import game.loader.AssetsManager;
 import game.utils.Constants;
-
-import static game.entity.utils.Mappers.playerMapper;
 
 
 public class GameScreen implements Screen {

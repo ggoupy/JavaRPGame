@@ -8,7 +8,7 @@ import game.utils.Timer;
 
 
 public class ReceiveAttackComponent implements Component {
-    public Array<EntityAttacking> entitiesAttacking = null;
+    public Array<EntityAttacking> entitiesAttacking = new Array<>();
     public Entity lastAttacking = null;
 
 
