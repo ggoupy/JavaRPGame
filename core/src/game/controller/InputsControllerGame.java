@@ -18,6 +18,7 @@ public class InputsControllerGame implements InputProcessor {
     private int downKey;
     private int attack1Key;
     private int mapKey;
+    private int questKey;
 
     //Player control inputs
     public boolean left;
@@ -73,7 +74,7 @@ public class InputsControllerGame implements InputProcessor {
             acceptQuest = !acceptQuest;
             keyProcessed = true;
         }
-        if (Input.Keys.K == keycode) {
+        if (questKey == keycode) {
             showQuests = !showQuests;
             keyProcessed = true;
         }
@@ -160,6 +161,7 @@ public class InputsControllerGame implements InputProcessor {
         downKey = Input.Keys.valueOf(preferences.getMovingDownKey());
         attack1Key = Input.Keys.valueOf(preferences.getAttack1Key());
         mapKey = Input.Keys.valueOf(preferences.getMapKey());
+        questKey = Input.Keys.valueOf(preferences.getQuestKey());
     }
 
 

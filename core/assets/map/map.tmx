@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2019.10.08" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="754">
+<map version="1.2" tiledversion="2019.10.08" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="769">
  <properties>
   <property name="height" type="float" value="200"/>
   <property name="width" type="float" value="200"/>
@@ -40,7 +40,7 @@
   <object id="237" name="2" x="2320" y="2848" width="16" height="16"/>
   <object id="238" name="4" x="2336" y="2992" width="16" height="16"/>
   <object id="239" name="5" x="2416" y="2864" width="16" height="16"/>
-  <object id="240" name="3" x="2528" y="2848"/>
+  <object id="240" name="3" x="2544" y="2848"/>
   <object id="241" name="6" x="2448.71" y="2927.99" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="16" name="enemySpawnFieldLvl5">
@@ -49,10 +49,17 @@
    <property name="enemyType" value="goblin"/>
   </properties>
   <object id="242" name="1" x="2640" y="2624" width="16" height="16"/>
-  <object id="243" name="2" x="2656" y="2560" width="16" height="16"/>
-  <object id="244" name="3" x="2864" y="2624" width="16" height="16"/>
-  <object id="245" name="4" x="2832" y="2560" width="16" height="16"/>
-  <object id="246" name="5" x="2768" y="2608" width="16" height="16"/>
+  <object id="243" name="2" x="2704" y="2528" width="16" height="16"/>
+  <object id="244" name="3" x="2864" y="2560" width="16" height="16"/>
+  <object id="245" name="4" x="2768" y="2608" width="16" height="16"/>
+  <object id="246" name="5" x="2416" y="2240" width="16" height="16"/>
+  <object id="762" name="6" x="2624" y="2464" width="16" height="16"/>
+  <object id="763" name="7" x="2768" y="2272" width="16" height="16"/>
+  <object id="764" name="8" x="2768" y="2448" width="16" height="16"/>
+  <object id="765" name="9" x="2624" y="2352" width="16" height="16"/>
+  <object id="766" name="10" x="2496" y="2320" width="16" height="16"/>
+  <object id="767" name="11" x="2432" y="2384" width="16" height="16"/>
+  <object id="768" name="12" x="2480" y="2496" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="18" name="enemySpawnFieldLvl7">
   <properties>
@@ -125,14 +132,14 @@
    <property name="enemyLevel" type="int" value="10"/>
    <property name="enemyType" value="orc"/>
   </properties>
-  <object id="449" name="1" x="256" y="2400" width="16" height="16"/>
-  <object id="450" name="2" x="368" y="2400" width="16" height="16"/>
-  <object id="451" name="3" x="192" y="2432" width="16" height="16"/>
-  <object id="452" name="4" x="304" y="2432" width="16" height="16"/>
+  <object id="449" name="1" x="400" y="2464" width="16" height="16"/>
+  <object id="450" name="2" x="464" y="2416" width="16" height="16"/>
+  <object id="451" name="3" x="336" y="2400" width="16" height="16"/>
+  <object id="452" name="4" x="288" y="2464" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="20" name="enemySpawnForestLvl12">
   <properties>
-   <property name="enemyLevel" type="int" value="12"/>
+   <property name="enemyLevel" type="int" value="11"/>
    <property name="enemyType" value="orc"/>
   </properties>
   <object id="453" name="1" x="432" y="2160" width="16" height="16"/>
@@ -148,7 +155,7 @@
  </objectgroup>
  <objectgroup id="23" name="enemySpawnLakeLvl13">
   <properties>
-   <property name="enemyLevel" type="int" value="13"/>
+   <property name="enemyLevel" type="int" value="12"/>
    <property name="enemyType" value="skeleton"/>
   </properties>
   <object id="496" name="1" x="768" y="1472" width="16" height="16">
@@ -322,7 +329,7 @@
  </objectgroup>
  <objectgroup id="24" name="enemySpawnInfiernoLvl14">
   <properties>
-   <property name="enemyLevel" type="int" value="14"/>
+   <property name="enemyLevel" type="int" value="13"/>
    <property name="enemyType" value="skeleton"/>
   </properties>
   <object id="524" name="1" x="848" y="1088" width="16" height="16"/>
@@ -362,7 +369,7 @@
  </objectgroup>
  <objectgroup id="25" name="enemySpawnInfiernoLvl15">
   <properties>
-   <property name="enemyLevel" type="int" value="15"/>
+   <property name="enemyLevel" type="int" value="14"/>
    <property name="enemyType" value="skeleton"/>
   </properties>
   <object id="559" name="1" x="960" y="656" width="16" height="16"/>
@@ -400,7 +407,7 @@
  </objectgroup>
  <objectgroup id="27" name="enemySpawnMountainLvl16">
   <properties>
-   <property name="enemyLevel" type="int" value="16"/>
+   <property name="enemyLevel" type="int" value="15"/>
    <property name="enemyType" value="goblin"/>
   </properties>
   <object id="585" name="spawn" x="1776" y="736" width="16" height="16"/>
@@ -448,7 +455,7 @@
  </objectgroup>
  <objectgroup id="28" name="enemySpawnForestLvl17">
   <properties>
-   <property name="enemyLevel" type="int" value="17"/>
+   <property name="enemyLevel" type="int" value="16"/>
    <property name="enemyType" value="spider"/>
   </properties>
   <object id="627" name="spawn" x="2336" y="1280" width="16" height="16"/>
@@ -476,7 +483,7 @@
  </objectgroup>
  <objectgroup id="29" name="enemySpawnMountainLvl18">
   <properties>
-   <property name="enemyLevel" type="int" value="18"/>
+   <property name="enemyLevel" type="int" value="17"/>
    <property name="enemyType" value="orc"/>
   </properties>
   <object id="649" name="spawn" x="2192" y="1088" width="16" height="16"/>
@@ -509,7 +516,7 @@
  </objectgroup>
  <objectgroup id="30" name="enemySpawnMountainLvl19">
   <properties>
-   <property name="enemyLevel" type="int" value="19"/>
+   <property name="enemyLevel" type="int" value="18"/>
    <property name="enemyType" value="skeleton"/>
   </properties>
   <object id="671" name="spawn" x="2208" y="816" width="16" height="16"/>
@@ -601,7 +608,42 @@
  <objectgroup id="32" name="npcPositions">
   <object id="753" name="Arthas" x="352" y="2880" width="16" height="16">
    <properties>
-    <property name="type" value="human"/>
+    <property name="type" value="paladin"/>
+   </properties>
+  </object>
+  <object id="754" name="Jenoh" x="2160" y="2880" width="16" height="16">
+   <properties>
+    <property name="type" value="mage"/>
+   </properties>
+  </object>
+  <object id="755" name="Gabriel" x="2128" y="2304" width="16" height="16">
+   <properties>
+    <property name="type" value="farmer"/>
+   </properties>
+  </object>
+  <object id="756" name="Gargok" x="1488" y="1824" width="16" height="16">
+   <properties>
+    <property name="type" value="warrior"/>
+   </properties>
+  </object>
+  <object id="758" name="Thurak" x="192" y="2384" width="16" height="16">
+   <properties>
+    <property name="type" value="orc"/>
+   </properties>
+  </object>
+  <object id="759" name="Thomas" x="240" y="1296" width="16" height="16">
+   <properties>
+    <property name="type" value="farmer"/>
+   </properties>
+  </object>
+  <object id="760" name="Ezil" x="1056" y="1312" width="16" height="16">
+   <properties>
+    <property name="type" value="mage"/>
+   </properties>
+  </object>
+  <object id="761" name="Devin" x="1488" y="1104" width="16" height="16">
+   <properties>
+    <property name="type" value="warrior"/>
    </properties>
   </object>
  </objectgroup>

@@ -11,6 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import game.CollisionListener;
 import game.GDXGame;
 import game.screen.ui.UserInterface;
@@ -29,8 +32,8 @@ import game.utils.Constants;
 
 public class GameScreen implements Screen {
 
-    private OrthographicCamera cameraUI;
-    private OrthographicCamera cameraBox2D;
+    private ScreenViewport UIViewport;
+    private ExtendViewport gameViewport;
     private InputsControllerGame controller;
     private GDXGame game;
     private World world;
@@ -44,15 +47,18 @@ public class GameScreen implements Screen {
     private UserInterface ui;
 
 
-    public GameScreen(GDXGame g) {
+    public GameScreen(GDXGame g)
+    {
         game = g; //reference to GDXGame
 
 
-        /* CAMERAS */
-        cameraBox2D = new OrthographicCamera();
+        /* CAMERAS AND VIEWPORTS */
+        OrthographicCamera cameraBox2D = new OrthographicCamera();
         cameraBox2D.setToOrtho(false, Constants.TILE_SIZE, Constants.TILE_SIZE);
-        cameraUI = new OrthographicCamera();
+        OrthographicCamera cameraUI = new OrthographicCamera();
         cameraUI.setToOrtho(false, Constants.G_WIDTH, Constants.G_HEIGHT);
+        gameViewport = new ExtendViewport(Constants.TILE_SIZE, Constants.TILE_SIZE, cameraBox2D);
+        UIViewport = new ScreenViewport(cameraUI);
 
 
         /* INPUTS CONTROLLER */
@@ -67,7 +73,7 @@ public class GameScreen implements Screen {
         /* RENDERING SYSTEM */
         spriteBatch = new SpriteBatch();
         tiledMap = game.assetsManager.manager.get(AssetsManager.tiledMap);
-        RenderingSystem renderingSystem = new RenderingSystem(spriteBatch, cameraBox2D, cameraUI, tiledMap, game.assetsManager);
+        RenderingSystem renderingSystem = new RenderingSystem(spriteBatch, gameViewport, UIViewport, tiledMap, game.assetsManager);
 
 
         /* ENGINE */
@@ -102,7 +108,7 @@ public class GameScreen implements Screen {
         engine.addSystem(new PlayerMovementSystem(controller));
         engine.addSystem(new PlayerHealthSystem(game, entityFactory));
         engine.addSystem(new PlayerAttackSystem(controller));
-        engine.addSystem(new PlayerXpSystem());
+        engine.addSystem(new PlayerXpSystem(entityFactory));
         engine.addSystem(new PlayerQuestSystem(ui));
         engine.addSystem(new EnemySpawnSystem(entityFactory));
         engine.addSystem(new EnemyMovementSystem(engine));
@@ -125,12 +131,23 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta)
     {
+        //Clear the screen
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        engine.update(delta);
+        ui.clearUIComponents(); // Remove UI components that changes every frame
 
-        ui.updateUI();
+        engine.update(delta);   // Update the engine and draw entities
+
+        ui.updateUI();          // Update and draw the UI
+    }
+
+
+    @Override
+    public void resize(int width, int height)
+    {
+        gameViewport.update(width, height, true);
+        UIViewport.update(width,height,true);
     }
 
 
@@ -142,11 +159,10 @@ public class GameScreen implements Screen {
     public AssetsManager getAssetsManager() {return game.assetsManager;}
     public InputsControllerGame getController() {return controller;}
     public SpriteBatch getSpriteBatch() {return spriteBatch;}
+    public Viewport getUIViewport() {return UIViewport;}
     TiledMap getTiledMap() {return tiledMap;} //package private
 
 
-    @Override
-    public void resize(int width, int height) {}
     @Override
     public void pause() {}
     @Override

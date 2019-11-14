@@ -464,7 +464,52 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">npc/human-npc.png</key>
+            <key type="filename">npc/farmer-npc.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,13,15,26</rect>
+                <key>scale9Paddings</key>
+                <rect>8,13,15,26</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">npc/mage-npc.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,13,16,27</rect>
+                <key>scale9Paddings</key>
+                <rect>8,13,16,27</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">npc/orc-npc.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>9,12,18,25</rect>
+                <key>scale9Paddings</key>
+                <rect>9,12,18,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">npc/paladin-npc.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -476,6 +521,21 @@
                 <rect>8,12,16,24</rect>
                 <key>scale9Paddings</key>
                 <rect>8,12,16,24</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">npc/warrior-npc.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,12,16,25</rect>
+                <key>scale9Paddings</key>
+                <rect>8,12,16,25</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -769,11 +829,15 @@
             <filename>enemy/orc/orc-walkingUp_6.png</filename>
             <filename>enemy/orc/orc-walkingUp_7.png</filename>
             <filename>enemy/orc/orc-walkingUp_8.png</filename>
-            <filename>npc/human-npc.png</filename>
             <filename>ui/hud/action-bar.png</filename>
             <filename>ui/hud/health-bar.png</filename>
             <filename>ui/completed-quest-icon.png</filename>
             <filename>ui/quest-icon.png</filename>
+            <filename>npc/farmer-npc.png</filename>
+            <filename>npc/mage-npc.png</filename>
+            <filename>npc/orc-npc.png</filename>
+            <filename>npc/paladin-npc.png</filename>
+            <filename>npc/warrior-npc.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

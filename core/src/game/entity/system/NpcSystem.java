@@ -3,7 +3,6 @@ package game.entity.system;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import game.entity.component.*;
 import game.screen.ui.UserInterface;
 import game.controller.InputsControllerGame;
@@ -80,9 +79,7 @@ public class NpcSystem extends IteratingSystem {
                     }
                 }
             }
-            else ui.removeQuest(); //remove the last quest shown if no one encountered
         }
-        else ui.removeQuest(); //remove quest shown if end collision with player
 
 
         //Quest icon
@@ -96,13 +93,13 @@ public class NpcSystem extends IteratingSystem {
         //If the NPC has a quest completed by player
         if(questCom.getCompletedQuest() != null)
         {
-            iconTexture.region = new TextureRegion(iconTexture.region3);
+            iconTexture.region = iconTexture.region3;
             iconPos.isHidden = false;
         }
         //If the NPC has a quest not accepted by player
         else if (questCom.getNewQuest() != null)
         {
-            iconTexture.region = new TextureRegion(iconTexture.region2);
+            iconTexture.region = iconTexture.region2;
             iconPos.isHidden = false;
         }
     }

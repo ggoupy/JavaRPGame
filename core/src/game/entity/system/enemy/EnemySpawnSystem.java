@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.utils.Array;
 import game.entity.component.EnemySpawnComponent;
-import game.entity.factory.EnemyFactory;
 import game.entity.factory.EntityFactory;
 import game.entity.utils.Spawn;
 
@@ -19,7 +18,7 @@ import static game.entity.utils.Mappers.*;
 public class EnemySpawnSystem extends IteratingSystem {
 
     private Random rand;
-    private static EntityFactory entityFactory;
+    private EntityFactory entityFactory;
 
     public EnemySpawnSystem(EntityFactory entityFactory)
     {

@@ -2,10 +2,13 @@ package game.screen.ui;
 
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ai.utils.Collision;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -65,13 +68,10 @@ public class UserInterface {
 
         this.hud = new HUD(assetsManager, spriteBatch, playerMapper.get(gameScreen.getPlayerEntity()));
 
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(gameScreen.getUIViewport());
         stageTable = new Table();
         stageTable.setFillParent(true);
         stage.addActor(stageTable);
-
-        stageTable.debugAll();
-        stage.setDebugAll(true);
 
         Skin skin = assetsManager.getMenuSkin();
 
@@ -138,7 +138,19 @@ public class UserInterface {
         {
             showQuitDialog = true;
             quitDialog.setVisible(true);
-            Gdx.input.setInputProcessor(stage);
+            //Set a input processor using stage processor + function declared below
+            //To change in the future but for the moment only need to look at escape Key
+            Gdx.input.setInputProcessor(new InputMultiplexer(stage) {
+                @Override
+                public boolean keyDown(int keycode) {
+                    if (keycode == Input.Keys.ESCAPE) {
+                        controller.setToCurrentController(); //Game Controller
+                        controller.quitGame = false;
+                        quitDialog.setVisible(false);
+                    }
+                    return false;
+                }
+            });
         }
 
         if (hasQuest())
@@ -152,6 +164,9 @@ public class UserInterface {
             showQuestMenu = true;
             questMenuDialog.setVisible(true);
         }
+
+        //Resize update
+        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
 
@@ -271,5 +286,11 @@ public class UserInterface {
         });
         quitDialog.add(yesButton).right();
         quitDialog.show(stage);
+    }
+
+
+    public void clearUIComponents()
+    {
+        removeQuest();
     }
 }

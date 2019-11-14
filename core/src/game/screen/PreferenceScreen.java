@@ -36,6 +36,7 @@ public class PreferenceScreen implements Screen {
     private TextField movingDownTf;
     private TextField attackTf;
     private TextField mapTf;
+    private TextField questTf;
 
 
     public PreferenceScreen(GDXGame g)
@@ -68,7 +69,8 @@ public class PreferenceScreen implements Screen {
         Label movingDownLb = new Label("moving down", skin);
         Label movingRightLb = new Label("moving right", skin);
         Label attackLb = new Label("attack", skin);
-        Label mapLb = new Label("open map", skin);
+        Label mapLb = new Label("open/close map", skin);
+        Label questLb = new Label("open/close quests", skin);
         Label escapeLb = new Label("quit game", skin);
 
         movingUpTf = new TextField(gamePreferences.getMovingUpKey(), skin);
@@ -83,6 +85,8 @@ public class PreferenceScreen implements Screen {
         attackTf.setMaxLength(1); attackTf.setAlignment(Align.center);
         mapTf = new TextField(gamePreferences.getMapKey(), skin);
         mapTf.setMaxLength(1); mapTf.setAlignment(Align.center);
+        questTf = new TextField(gamePreferences.getQuestKey(), skin);
+        questTf.setMaxLength(1); questTf.setAlignment(Align.center);
         TextField escapeTf = new TextField("ESC", skin);
         escapeTf.setDisabled(true); escapeTf.setAlignment(Align.center);
 
@@ -110,6 +114,10 @@ public class PreferenceScreen implements Screen {
 
         table.add(mapLb).right().padRight(30);
         table.add(mapTf).center();
+        table.row();
+
+        table.add(questLb).right().padRight(30);
+        table.add(questTf).center();
         table.row();
 
         table.add(escapeLb).right().padRight(30);
@@ -214,6 +222,13 @@ public class PreferenceScreen implements Screen {
         char keyMap = map.charAt(0);
         if (!Character.isLetter(keyMap)) return "Could not assign this key for map";
 
+        //Quests
+        String quest = questTf.getText();
+        if (quest.equals("")) return "quest does not have assigned key";
+        char keyQuest = quest.charAt(0);
+        if (!Character.isLetter(keyQuest)) return "Could not assign this key for quest";
+
+
         Set<String> keys = new HashSet<>(); //Contains unique values
         int nbKeys = 0;
         keys.add(movingUp.toUpperCase()); nbKeys++;
@@ -222,6 +237,7 @@ public class PreferenceScreen implements Screen {
         keys.add(movingRight.toUpperCase()); nbKeys++;
         keys.add(attack1.toUpperCase()); nbKeys++;
         keys.add(map.toUpperCase()); nbKeys++;
+        keys.add(quest.toUpperCase()); nbKeys++;
 
         if (keys.size() < nbKeys) return "Two keys have the same value";
 
@@ -231,6 +247,7 @@ public class PreferenceScreen implements Screen {
         gamePreferences.setMovingRightKey(Character.toString(keyRight).toUpperCase());
         gamePreferences.setAttack1Key(Character.toString(keyAttack1).toUpperCase());
         gamePreferences.setMapKey(Character.toString(keyMap).toUpperCase());
+        gamePreferences.setQuestKey(Character.toString(keyQuest).toUpperCase());
 
         return "OK";
     }

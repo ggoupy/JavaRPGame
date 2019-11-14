@@ -47,7 +47,7 @@ public class EnemyLevelSystem extends IteratingSystem {
 
         //cpy attributes a different vector for each entity
         fontCom.worldPos = cameraBox2D.project(vectPos.set(pos.position.x, pos.position.y, 0).cpy());
-        float upPadd = texture.region.getRegionHeight() + Constants.TILE_SIZE;
+        float upPadd = texture.region.getRegionHeight() + Constants.TILE_SIZE + 10;
         fontCom.worldPos.y = cameraUI.viewportHeight - fontCom.worldPos.y - upPadd;
         fontCom.worldPos.x -= texture.region.getRegionWidth()/2f;
         fontCom.screenPos = cameraUI.unproject(fontCom.worldPos);

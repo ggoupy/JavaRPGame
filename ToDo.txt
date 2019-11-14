@@ -2,8 +2,6 @@
 
 - New Enemies
 
-- Quests 
-
 - Improve player movements (+ during collisions with static bodies)
 
 - Action bar

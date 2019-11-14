@@ -1,0 +1,10 @@
+[
+	{
+		"title": "The bridge",	
+		"description": "Hey! Hero! Goblins are blocking the access to east entry of the bridge. Could you help me and clean the area?",
+		"type": "kill",
+		"toKill": "30",
+		"enemy": "goblin",
+		"xp": "45000"
+	}
+]

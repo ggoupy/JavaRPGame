@@ -3,7 +3,6 @@ package game.entity.factory;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -11,25 +10,24 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.Scaling;
 import game.entity.component.*;
 import game.entity.utils.Spawn;
 import game.loader.AssetsManager;
 import game.utils.Bar;
 import game.utils.Timer;
 
-import static game.entity.utils.Mappers.*;
+import static game.entity.utils.Mappers.enemyMapper;
+import static game.entity.utils.Mappers.enemySpawnMapper;
 
-public class EnemyFactory {
+class EnemyFactory {
 
-    public static final String SKELETON = "skeleton";
-    public static final String SPIDER = "spider";
-    public static final String GOBLIN = "goblin";
-    public static final String DEVIL = "devil";
-    public static final String ORC = "orc";
+    private static final String SKELETON = "skeleton";
+    private static final String SPIDER = "spider";
+    private static final String GOBLIN = "goblin";
+    private static final String DEVIL = "devil";
+    private static final String ORC = "orc";
 
 
     //unique instance of this class = created only one time
@@ -40,7 +38,7 @@ public class EnemyFactory {
     private EntityFactory entityFactory;
 
 
-    public EnemyFactory(EntityFactory entityFactory)
+    private EnemyFactory(EntityFactory entityFactory)
     {
         this.entityFactory = entityFactory;
 
@@ -54,7 +52,7 @@ public class EnemyFactory {
     }
 
 
-    public static EnemyFactory getInstance(EntityFactory entityFactory)
+    static EnemyFactory getInstance(EntityFactory entityFactory)
     {
         if(thisInstance == null) thisInstance = new EnemyFactory(entityFactory);
         return thisInstance;
@@ -62,7 +60,7 @@ public class EnemyFactory {
 
 
     //load a enemy prototype from a json file
-    public void loadEnemyDefinition(String prototype)
+    private void loadEnemyDefinition(String prototype)
     {
         ObjectMap enemyCfg = entityFactory.assetsManager.json.fromJson(
                 ObjectMap.class,
@@ -85,7 +83,7 @@ public class EnemyFactory {
 
 
     //create an enemy component using a prototype for a given level
-    public EnemyComponent createEnemyComponent(String prototype, int level)
+    private EnemyComponent createEnemyComponent(String prototype, int level)
     {
         EnemyComponent enemyCom = entityFactory.engine.createComponent(EnemyComponent.class);
         EnemyComponent toCopy = prototypes.get(prototype);
@@ -106,7 +104,7 @@ public class EnemyFactory {
     }
 
     //adjust stats of an enemy component according to its level
-    public void adjustLevel(EnemyComponent enemyCom, EnemyComponent prototype)
+    private void adjustLevel(EnemyComponent enemyCom, EnemyComponent prototype)
     {
         if (enemyCom.level > 1) //we do not multiply stats of lvl 1
         {
@@ -119,7 +117,7 @@ public class EnemyFactory {
 
 
     //create an enemy spawn entity containing various spawns in an area
-    public void createEnemySpawn(MapLayer spawnLayer)
+    void createEnemySpawn(MapLayer spawnLayer)
     {
         MapObjects spawns = spawnLayer.getObjects();
 
@@ -141,7 +139,7 @@ public class EnemyFactory {
 
 
     //create enemy box2D from a spawn entity and the index of the spawn
-    public void createEnemy(Entity spawnEntity, int index)
+    void createEnemy(Entity spawnEntity, int index)
     {
         //get the spawn component from the spawn entity
         EnemySpawnComponent spawnCom = enemySpawnMapper.get(spawnEntity);
@@ -239,8 +237,8 @@ public class EnemyFactory {
         //we would need to use it in case of the enemy becomes aggressive or passive
         String healthBarType = (enemyMapper.get(enemy).aggressiveNature) ? "aggressive" : "passive";
         String healthBarOtherType = (enemyMapper.get(enemy).aggressiveNature) ? "passive" : "aggressive";
-        texture.region2 = new TextureRegion(entityFactory.atlas.findRegion("enemy-healthbar-"+healthBarType));
-        texture.region3 = new TextureRegion(entityFactory.atlas.findRegion("enemy-healthbar-"+healthBarOtherType));
+        texture.region2 = entityFactory.atlas.findRegion("enemy-healthbar-"+healthBarType);
+        texture.region3 = entityFactory.atlas.findRegion("enemy-healthbar-"+healthBarOtherType);
         texture.region = texture.region2;
 
         Vector3 enemyPos = enemy.getComponent(TransformComponent.class).position;

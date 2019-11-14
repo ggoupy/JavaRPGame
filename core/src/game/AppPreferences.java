@@ -12,6 +12,7 @@ public class AppPreferences {
     private static final String MOVING_RIGHT_KEY = "moving.right.key";
     private static final String ATTACK1_KEY = "attack.1.key";
     private static final String MAP_KEY = "map.key";
+    private static final String QUEST_KEY = "quest.key";
     private static final String PREFERENCES_NAME = "user";
 
     private Preferences getPreferences() {
@@ -24,6 +25,7 @@ public class AppPreferences {
     public String getMovingRightKey() {return getPreferences().getString(MOVING_RIGHT_KEY, "D");}
     public String getAttack1Key() {return getPreferences().getString(ATTACK1_KEY, "E");}
     public String getMapKey() {return getPreferences().getString(MAP_KEY, "M");}
+    public String getQuestKey() {return getPreferences().getString(QUEST_KEY, "K");}
 
     public void setMovingUpKey(String k) {getPreferences().putString(MOVING_UP_KEY, k); getPreferences().flush();}
     public void setMovingDownKey(String k) {getPreferences().putString(MOVING_DOWN_KEY, k); getPreferences().flush();}
@@ -31,4 +33,5 @@ public class AppPreferences {
     public void setMovingRightKey(String k) {getPreferences().putString(MOVING_RIGHT_KEY, k); getPreferences().flush();}
     public void setAttack1Key(String k) {getPreferences().putString(ATTACK1_KEY, k); getPreferences().flush();}
     public void setMapKey(String k) {getPreferences().putString(MAP_KEY, k); getPreferences().flush();}
+    public void setQuestKey(String k) {getPreferences().putString(QUEST_KEY, k); getPreferences().flush();}
 }

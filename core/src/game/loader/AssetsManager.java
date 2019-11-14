@@ -21,8 +21,9 @@ public class AssetsManager {
 
     //Config
     public Json json;
-    public static final String heroes = "config/heroes/heroes.json";
     public static final String heroCfg_path = "config/heroes/";
+    public static final String heroes = heroCfg_path+"heroes.json";
+    public static final String heroXpCfg = heroCfg_path+"xpForLevel.json";
     public static final String enemyCfg_path = "config/enemies/";
     public static final String npcCfg_path = "config/npcs/";
 

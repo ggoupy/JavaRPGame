@@ -11,6 +11,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import game.entity.component.FontComponent;
 import game.entity.component.TextureComponent;
 import game.entity.component.TransformComponent;
@@ -22,9 +26,11 @@ import static game.loader.AssetsManager.*;
 
 public class RenderingSystem extends SortedIteratingSystem {
 
-    private SpriteBatch batch;
+    private Viewport gameViewport;
+    private Viewport UIViewport;
     private OrthographicCamera cameraUI;
     private OrthographicCamera cameraBox2D;
+    private SpriteBatch batch;
     private MapRenderer mapRenderer;
     private AssetsManager assetsManager;
     private int [] bgLayersIndex; //index of tile map layers to render at the beginning
@@ -34,32 +40,36 @@ public class RenderingSystem extends SortedIteratingSystem {
     private ZComparator perspectiveComparator; // a comparator to sort images based on the z position of the transformComponent
 
 
-    public RenderingSystem(SpriteBatch batch, OrthographicCamera cameraBox2D, OrthographicCamera cameraUI, TiledMap tiledMap, AssetsManager am) {
-
+    public RenderingSystem(SpriteBatch batch, Viewport gameViewport, Viewport UIViewport, TiledMap tiledMap, AssetsManager am)
+    {
         // gets all entities with a TransformComponent and TextureComponent
         super(Family.all(TransformComponent.class, TextureComponent.class).get(), new ZComparator());
 
-        perspectiveComparator = new ZComparator();
+        this.UIViewport = UIViewport;
+        this.gameViewport = gameViewport;
+        this.cameraUI = (OrthographicCamera) UIViewport.getCamera();
+        this.cameraBox2D = (OrthographicCamera) gameViewport.getCamera();
+
+        this.perspectiveComparator = new ZComparator();
 
         this.batch = batch;
-        this.cameraUI = cameraUI;
-        this.cameraBox2D = cameraBox2D;
+
         this.mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1/Constants.TILE_SIZE);
 
         this.assetsManager = am;
 
         //Get layers to render it in a specific order
         MapLayers map = tiledMap.getLayers();
-        bgLayersIndex = new int[] {
+        this.bgLayersIndex = new int[] {
                 map.getIndex(tmBackground),
                 map.getIndex(tmGround)
         };
-        fgLayersIndex = new int[] {
+        this.fgLayersIndex = new int[] {
                 map.getIndex(tmForeground)
         };
 
         // create array for sorting entities
-        renderQueue = new Array<>();
+        this.renderQueue = new Array<>();
     }
 
     @Override
@@ -70,21 +80,24 @@ public class RenderingSystem extends SortedIteratingSystem {
         //sort entities according to Z axes in order to display one before other
         renderQueue.sort(perspectiveComparator);
 
+        gameViewport.apply();
+
         mapRenderer.setView(cameraBox2D);
         mapRenderer.render(bgLayersIndex);
+
         batch.setProjectionMatrix(cameraBox2D.combined);
         batch.enableBlending();
         batch.begin();
 
         // loop through each entity in our render queue
-        for (Entity entity : renderQueue) {
+        for (Entity entity : renderQueue)
+        {
             TextureComponent tex = textureMapper.get(entity);
             TransformComponent t = transformMapper.get(entity);
             FontComponent fontCom = fontMapper.get(entity);
 
-            if (tex.region == null || t.isHidden) {
-                continue;
-            }
+            if (tex.region == null || t.isHidden) continue;
+
 
             float width = tex.region.getRegionWidth();
             float height = tex.region.getRegionHeight();
@@ -101,11 +114,16 @@ public class RenderingSystem extends SortedIteratingSystem {
 
             if (fontCom != null) //entity has a font component
             {
+                UIViewport.apply();
                 batch.setProjectionMatrix(cameraUI.combined); //we change the camera to deal with pixels
+
                 assetsManager.getFont().draw(batch, fontCom.text, fontCom.screenPos.x, fontCom.screenPos.y);
+
                 batch.setProjectionMatrix(cameraBox2D.combined); //we set the world camera
+                gameViewport.apply();
             }
         }
+
         batch.end();
         renderQueue.clear();
 
@@ -113,12 +131,12 @@ public class RenderingSystem extends SortedIteratingSystem {
     }
 
     @Override
-    protected void processEntity(Entity entity, float deltaTime) {
+    public void processEntity(Entity entity, float deltaTime) {
         renderQueue.add(entity);
     }
 
     // convenience method to convert pixels to meters
-    public static float PixelsToMeters(float pixelValue){
+    private static float PixelsToMeters(float pixelValue){
         return pixelValue * Constants.PIXELS_TO_METRES;
     }
 }

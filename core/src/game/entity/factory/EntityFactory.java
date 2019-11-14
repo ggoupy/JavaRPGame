@@ -98,6 +98,10 @@ public class EntityFactory {
     }
 
 
+    //Get the number of XP that the hero has to reach for a level
+    public int getHeroXpForLevel(int level) {return playerFactory.getXpForLevel(level);}
+
+
     //create all NPC from object positions
     public void createNPCs(MapLayer layer)
     {

@@ -1,16 +1,12 @@
 package game.entity.factory;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import game.entity.component.*;
 import game.loader.AssetsManager;
@@ -20,20 +16,26 @@ import game.utils.Timer;
 import static game.entity.utils.Mappers.*;
 
 
-public class PlayerFactory {
+class PlayerFactory {
 
     //unique instance of this class = created only one time
     private static PlayerFactory thisInstance = null;
 
     private EntityFactory entityFactory;
 
+    private ObjectMap xpForLevel;
 
-    public PlayerFactory(EntityFactory entityFactory)
+
+    private PlayerFactory(EntityFactory entityFactory)
     {
         this.entityFactory = entityFactory;
+        this.xpForLevel = entityFactory.assetsManager.json.fromJson(
+            ObjectMap.class,
+            Gdx.files.internal(AssetsManager.heroXpCfg)
+        );
     }
 
-    public static PlayerFactory getInstance(EntityFactory entityFactory)
+    static PlayerFactory getInstance(EntityFactory entityFactory)
     {
         if(thisInstance == null) thisInstance = new PlayerFactory(entityFactory);
         return thisInstance;
@@ -41,7 +43,7 @@ public class PlayerFactory {
 
 
     //create a player box2D in the world according to his position in the tiled map
-    public void createPlayer(MapObject playerObj, String spec, String name)
+    void createPlayer(MapObject playerObj, String spec, String name)
     {
         // Create the Entity and all the components that will go in the entity
         Entity entity = entityFactory.engine.createEntity();
@@ -126,12 +128,12 @@ public class PlayerFactory {
         player.speed = (float) heroCfg.get("speed");
         player.lifeRegeneration = (float) heroCfg.get("lifeRegeneration");
         player.level = 1;
-        player.xpBar = new Bar(100,0);
+        player.xpBar = new Bar(getXpForLevel(1),0);
         player.spec = spec;
     }
 
     //reset player
-    public void killPlayer(Entity playerEntity)
+    void killPlayer(Entity playerEntity)
     {
         //We reset the player life
         PlayerComponent player = playerMapper.get(playerEntity);
@@ -147,5 +149,11 @@ public class PlayerFactory {
         BodyComponent body = bodyMapper.get(playerEntity);
         TransformComponent pos = transformMapper.get(playerEntity);
         body.body.setTransform(pos.origin.x, pos.origin.y, 0);
+    }
+
+    @SuppressWarnings("unchecked")
+    int getXpForLevel(int level)
+    {
+        return Integer.parseInt((String) xpForLevel.get("lvl "+ level));
     }
 }

@@ -2,8 +2,6 @@ package game.entity.factory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -12,7 +10,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
 import game.entity.component.*;
 import game.loader.AssetsManager;
@@ -22,7 +19,7 @@ import game.quest.Quest;
 
 import static game.entity.utils.Mappers.*;
 
-public class NpcFactory {
+class NpcFactory {
 
     //unique instance of this class = created only one time
     private static NpcFactory thisInstance = null;
@@ -30,24 +27,24 @@ public class NpcFactory {
     private EntityFactory entityFactory;
 
 
-    public NpcFactory(EntityFactory entityFactory)
+    private NpcFactory(EntityFactory entityFactory)
         {
             this.entityFactory = entityFactory;
         }
 
-    public static NpcFactory getInstance(EntityFactory entityFactory)
+    static NpcFactory getInstance(EntityFactory entityFactory)
     {
         if(thisInstance == null) thisInstance = new NpcFactory(entityFactory);
         return thisInstance;
     }
 
-    public void createNPCs(MapLayer spawnLayer)
+    void createNPCs(MapLayer spawnLayer)
     {
         MapObjects spawns = spawnLayer.getObjects();
         for (MapObject npc : spawns) createNpc(npc);
     }
 
-    public void createNpc(MapObject npcObj)
+    private void createNpc(MapObject npcObj)
     {
         // Create the Entity and all the components that will go in the entity
         Entity entity = entityFactory.engine.createEntity();

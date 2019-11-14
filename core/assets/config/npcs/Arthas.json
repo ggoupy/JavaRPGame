@@ -5,7 +5,7 @@
 		"type": "kill",
 		"toKill": "5",
 		"enemy": "goblin",
-		"xp": "100"
+		"xp": "500"
 	},
 	{
 		"title": "Save the forest",	
@@ -13,6 +13,6 @@
 		"type": "kill",
 		"toKill": "5",
 		"enemy": "orc",
-		"xp": "150"
+		"xp": "800"
 	}
 ]
