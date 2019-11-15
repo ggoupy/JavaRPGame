@@ -1,18 +1,24 @@
 [
-	{
-		"title": "Those f&!#@*% spiders",	
-		"description": "Where the hell are coming from all these spiders? Kill them all before they attack the church!",
-		"type": "kill",
-		"toKill": "20",
-		"enemy": "spider",
-		"xp": "9000"
-	},
-	{
-		"title": "Clear the forest",	
-		"description": "Once upon a time, there were a road in the forest to connect the south west village to the lake. Today, the forest is infected by orcs. You should take a look in the south entry and make it safe.",
-		"type": "kill",
-		"toKill": "4",
-		"enemy": "orc",
-		"xp": "11000"
-	}
+  {
+    "title": "Those f&!#@*% spiders",
+    "description": "Where the hell are coming from all these spiders? Kill them all before they attack the church!",
+    "type": "kill",
+    "toKill": "20",
+    "enemy": "spider",
+    "area": [
+      "enemySpawnFieldLvl9"
+    ],
+    "xp": "9000"
+  },
+  {
+    "title": "Clear the forest",
+    "description": "Once upon a time, there were a road in the forest to connect the south west village to the lake. Today, the forest is infected by orcs. You should take a look in the south entry and make it safe.",
+    "type": "kill",
+    "toKill": "4",
+    "enemy": "orc",
+    "area": [
+      "enemySpawnForestLvl10"
+    ],
+    "xp": "11000"
+  }
 ]

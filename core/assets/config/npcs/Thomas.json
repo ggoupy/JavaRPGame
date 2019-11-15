@@ -1,10 +1,13 @@
 [
-	{
-		"title": "The lake",	
-		"description": "What happened to my beautiful lake... Where do these things are coming from ? Please help me...",
-		"type": "kill",
-		"toKill": "25",
-		"enemy": "skeleton",
-		"xp": "24000"
-	}
+  {
+    "title": "The lake",
+    "description": "What happened to my beautiful lake... Where do these things are coming from ? Please help me...",
+    "type": "kill",
+    "toKill": "25",
+    "enemy": "skeleton",
+    "area": [
+      "enemySpawnLakeLvl13"
+    ],
+    "xp": "24000"
+  }
 ]

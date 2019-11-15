@@ -1,10 +1,13 @@
 [
-	{
-		"title": "GRRRRRRRAAGH",	
-		"description": "Not kill me. I not enemy. Orcs bad. I can not pass. You, clean road to lake.",
-		"type": "kill",
-		"toKill": "20",
-		"enemy": "orcs",
-		"xp": "20000"
-	}
+  {
+    "title": "GRRRRRRRAAGH",
+    "description": "Not kill me. I not enemy. Orcs bad. I can not pass. You, clean road to lake.",
+    "type": "kill",
+    "toKill": "20",
+    "enemy": "orcs",
+    "area": [
+      "enemySpawnForestLvl12"
+    ],
+    "xp": "20000"
+  }
 ]

@@ -1,10 +1,13 @@
 [
-	{
-		"title": "Help Jenoh",	
-		"description": "There are a lot of spiders in the field next to my tower. I can't collect anymore flowers to make my potions. Could you help me and clean the field ?",
-		"type": "kill",
-		"toKill": "6",
-		"enemy": "spider",
-		"xp": "1500"
-	}
+  {
+    "title": "Help Jenoh",
+    "description": "There are a lot of spiders in the field next to my tower. I can't collect anymore flowers to make my potions. Could you help me and clean the field ?",
+    "type": "kill",
+    "toKill": "6",
+    "enemy": "spider",
+    "area": [
+      "enemySpawnFieldLvl3"
+    ],
+    "xp": "1500"
+  }
 ]

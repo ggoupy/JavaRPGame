@@ -1,18 +1,25 @@
 [
-	{
-		"title": "The Hell Gate",	
-		"description": "The north west of the island is infected by the devil himself... These creatures are very dangerous and destroy everything in their paths. Hero, you need to fight this invasion.",
-		"type": "kill",
-		"toKill": "30",
-		"enemy": "skeleton",
-		"xp": "30000"
-	},
-	{
-		"title": "The heart of the invasion",	
-		"description": "There is a daemon, Thur'k azhal. I guess that he is the reason of what is happening in the north west of the island. Go over there and kill him.",
-		"type": "kill",
-		"toKill": "1",
-		"enemy": "devil",
-		"xp": "40000"
-	}
+  {
+    "title": "The Hell Gate",
+    "description": "The north west of the island is infected by the devil himself... These creatures are very dangerous and destroy everything in their paths. Hero, you need to fight this invasion.",
+    "type": "kill",
+    "toKill": "30",
+    "enemy": "skeleton",
+    "area": [
+      "enemySpawnInfiernoLvl14",
+      "enemySpawnInfiernoLvl15"
+    ],
+    "xp": "30000"
+  },
+  {
+    "title": "The heart of the invasion",
+    "description": "There is a daemon, Thur'k azhal. I guess that he is the reason of what is happening in the north west of the island. Go over there and kill him.",
+    "type": "kill",
+    "toKill": "1",
+    "enemy": "devil",
+    "area": [
+      "enemySpawnInfiernoLvl16"
+    ],
+    "xp": "40000"
+  }
 ]

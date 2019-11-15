@@ -1,10 +1,10 @@
 - Sounds
 
+- enemy collision bug
+
 - New Enemies
 
 - Improve player movements (+ during collisions with static bodies)
-
-- Action bar
 
 - Enemy attacks
 

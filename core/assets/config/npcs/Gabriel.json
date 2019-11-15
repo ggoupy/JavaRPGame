@@ -1,18 +1,25 @@
 [
-	{
-		"title": "Protect the village",	
-		"description": "My village has been attacked by goblins. Everyone fled... You are my last chance. Follow the road going to the east and save my village!",
-		"type": "kill",
-		"toKill": "10",
-		"enemy": "goblin",
-		"xp": "3500"
-	},
-	{
-		"title": "The infected field",	
-		"description": "Some spiders are installed in the field in the north of the village. We need resources for the coming winter and we can't access to the field anymore. Could you help us?",
-		"type": "kill",
-		"toKill": "15",
-		"enemy": "spider",
-		"xp": "7000"
-	}
+  {
+    "title": "Protect the village",
+    "description": "My village has been attacked by goblins. Everyone fled... You are my last chance. Follow the road going to the east and save my village!",
+    "type": "kill",
+    "toKill": "10",
+    "enemy": "goblin",
+    "area": [
+      "enemySpawnFieldLvl5"
+    ],
+    "xp": "3500"
+  },
+  {
+    "title": "The infected field",
+    "description": "Some spiders are installed in the field in the north of the village. We need resources for the coming winter and we can't access to the field anymore. Could you help us?",
+    "type": "kill",
+    "toKill": "15",
+    "enemy": "spider",
+    "area": [
+      "enemySpawnFieldLvl7",
+      "enemySpawnFieldLvl8"
+    ],
+    "xp": "7000"
+  }
 ]
