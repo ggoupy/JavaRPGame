@@ -68,13 +68,9 @@ public class RenderingSystem extends SortedIteratingSystem {
         this.renderQueue = new Array<>();
     }
 
-    // convenience method to convert pixels to meters
-    private static float PixelsToMeters(float pixelValue) {
-        return pixelValue * Constants.PIXELS_TO_METRES;
-    }
-
     @Override
-    public void update(float deltaTime) {
+    public void update(float deltaTime)
+    {
         super.update(deltaTime);
 
         //sort entities according to Z axes in order to display one before other
@@ -108,7 +104,7 @@ public class RenderingSystem extends SortedIteratingSystem {
                     t.position.x - originX, t.position.y - originY,
                     originX, originY,
                     width, height,
-                    PixelsToMeters(t.scale.x), PixelsToMeters(t.scale.y),
+                    Constants.PixelsToMeters(t.scale.x), Constants.PixelsToMeters(t.scale.y),
                     t.rotation);
 
             if (fontCom != null) //entity has a font component

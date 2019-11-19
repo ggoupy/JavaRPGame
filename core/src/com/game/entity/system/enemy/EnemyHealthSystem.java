@@ -6,12 +6,14 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.game.entity.component.*;
 import com.game.entity.factory.EntityFactory;
+import com.game.utils.Constants;
 
 import static com.game.entity.utils.Mappers.*;
+import static com.game.utils.Constants.*;
 
 public class EnemyHealthSystem extends IteratingSystem {
 
-    private static EntityFactory entityFactory; //reference to entity factory
+    private EntityFactory entityFactory; //reference to entity factory
 
     public EnemyHealthSystem(EntityFactory entityFactory) {
         super(Family.all(EnemyHealthComponent.class, AttachedComponent.class).get());
@@ -40,10 +42,13 @@ public class EnemyHealthSystem extends IteratingSystem {
 
             /* Player experience */
             PlayerComponent player = playerMapper.get(lastAttacking);
-            if (player != null) player.xpBar.updateCurrent(enemy.xpGain);
+            if (player != null)
+            {
+                player.xpBar.updateCurrent(enemy.xpGain);
 
-            /* To manage Quest */
-            player.lastKilled = enemy;
+                /* To manage Quest */
+                player.lastKilled = enemy;
+            }
 
             entityFactory.destroyEntity(entity);
             return;
@@ -67,6 +72,6 @@ public class EnemyHealthSystem extends IteratingSystem {
         float percentLife = enemy.life.getCurrent() / enemy.life.getMax();
         tex.region.setRegionWidth((int) (health.size.width * percentLife));
         position.position.x = enemyPos.position.x;
-        position.position.y = enemyPos.position.y + 0.5f;
+        position.position.y = enemyPos.position.y + 0.6f;
     }
 }

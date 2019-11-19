@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.utils.Array;
 import com.game.entity.component.*;
+import com.game.loader.SoundsManager;
 
 import static com.game.entity.utils.Mappers.*;
 

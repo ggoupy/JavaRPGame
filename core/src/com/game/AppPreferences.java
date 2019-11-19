@@ -3,9 +3,10 @@ package com.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
-//FACTORISE THIS CLASS TO ADD KEY MORE EASILY (public variables and one setter)
+//FACTORISE THIS CLASS TO ADD KEY MORE EASILY (public static final string variables and one setter)
 public class AppPreferences {
 
+    private static final String SOUND_VOL = "sound";
     private static final String MOVING_UP_KEY = "moving.up.key";
     private static final String MOVING_DOWN_KEY = "moving.down.key";
     private static final String MOVING_LEFT_KEY = "moving.left.key";
@@ -17,6 +18,14 @@ public class AppPreferences {
 
     private Preferences getPreferences() {
         return Gdx.app.getPreferences(PREFERENCES_NAME);
+    }
+
+
+    public float getSoundVol() {return getPreferences().getFloat(SOUND_VOL, 1f);}
+
+    public void setSoundVol(float vol) {
+        getPreferences().putFloat(SOUND_VOL, vol);
+        getPreferences().flush();
     }
 
     public String getMovingUpKey() {

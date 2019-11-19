@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.GDXGame;
 import com.game.controller.InputsControllerGame;
 import com.game.loader.AssetsManager;
+import com.game.loader.SoundsManager;
 import com.game.quest.Quest;
 import com.game.screen.GameScreen;
 import com.game.utils.Constants;

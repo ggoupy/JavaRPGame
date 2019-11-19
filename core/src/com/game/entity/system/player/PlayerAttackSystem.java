@@ -6,6 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.game.controller.InputsControllerGame;
 import com.game.entity.component.PlayerComponent;
 import com.game.entity.component.StateComponent;
+import com.game.loader.SoundsManager;
 
 import static com.game.entity.utils.Mappers.playerMapper;
 import static com.game.entity.utils.Mappers.stateMapper;
@@ -14,10 +15,12 @@ import static com.game.entity.utils.Mappers.stateMapper;
 public class PlayerAttackSystem extends IteratingSystem {
 
     private InputsControllerGame controller;
+    private SoundsManager soundsManager;
 
-    public PlayerAttackSystem(InputsControllerGame keyCon) {
+    public PlayerAttackSystem(InputsControllerGame keyCon, SoundsManager soundsManager) {
         super(Family.all(PlayerComponent.class).get());
-        controller = keyCon;
+        this.controller = keyCon;
+        this.soundsManager = soundsManager;
     }
 
     @Override
@@ -28,6 +31,7 @@ public class PlayerAttackSystem extends IteratingSystem {
         //set the attack statement if the player is pressing the attack key,
         //not already attacking and has enough action points
         if (controller.att1 && !player.isAttacking && player.action.getCurrent() >= player.attackPoints) {
+            soundsManager.playEffect("hero-attack");
             player.isAttacking = true;
             int last_state = state.get();
 

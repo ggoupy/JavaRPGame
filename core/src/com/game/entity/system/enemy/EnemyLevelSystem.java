@@ -47,15 +47,14 @@ public class EnemyLevelSystem extends IteratingSystem {
         //finally we convert world position into screen position
 
         //cpy attributes a different vector for each entity
-        fontCom.worldPos = cameraBox2D.project(vectPos.set(pos.position.x, pos.position.y, 0).cpy());
+        //Project delivered Y pos to upper corner, we will need to flip it
+        fontCom.worldPos = cameraBox2D.project(vectPos.set(pos.position.x, pos.position.y+1f, 0).cpy());
 
         //To get text size
         GlyphLayout lvlText = new GlyphLayout();
         lvlText.setText(assetsManager.getFont(), fontCom.text);
 
-        float upPadd = texture.region.getRegionHeight() + Constants.TILE_SIZE + lvlText.height;
-
-        fontCom.worldPos.y = cameraUI.viewportHeight - fontCom.worldPos.y - upPadd;
+        fontCom.worldPos.y = cameraUI.viewportHeight - fontCom.worldPos.y;
         fontCom.worldPos.x -= lvlText.width / 2;
 
         fontCom.screenPos = cameraUI.unproject(fontCom.worldPos);

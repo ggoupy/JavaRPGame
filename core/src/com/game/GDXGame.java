@@ -32,7 +32,9 @@ public class GDXGame extends Game {
 
         assetsManager = new AssetsManager();
         assetsManager.queueAddAssets();
-        assetsManager.manager.finishLoading();
+        assetsManager.finishLoading();
+        assetsManager.getSoundsManager().setSoundsVolume(preferences.getSoundVol());
+        assetsManager.getSoundsManager().playBgMusic();
 
         this.changeScreen(MENU_SCREEN);
     }

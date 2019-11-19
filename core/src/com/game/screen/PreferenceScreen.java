@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -54,6 +56,22 @@ public class PreferenceScreen implements Screen {
         Texture background = game.assetsManager.manager.get(AssetsManager.background);
         table.background(new TextureRegionDrawable(background).tint(Color.GRAY));
 
+
+        //Volume settings
+        Label musicVol = new Label("Volume of the music :", skin);
+        musicVol.setAlignment(Align.center);
+        final Slider volumeMusicSlider = new Slider( 0f, 1f, 0.1f,false, skin );
+        volumeMusicSlider.setValue(gamePreferences.getSoundVol());
+        volumeMusicSlider.addListener( new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                gamePreferences.setSoundVol(volumeMusicSlider.getValue());
+                return false;
+            }
+        });
+        table.add(musicVol).left();
+        table.add(volumeMusicSlider).row();
+
         //Keys selection
         Label keyPreferencesLb = new Label("Key preferences", skin);
 
@@ -91,7 +109,7 @@ public class PreferenceScreen implements Screen {
         escapeTf.setDisabled(true);
         escapeTf.setAlignment(Align.center);
 
-        table.add(keyPreferencesLb).left().padBottom(50).row();
+        table.add(keyPreferencesLb).left().pad(100,0,50,0).row();
 
         table.add(movingUpLb).right().padRight(30);
         table.add(movingUpTf).center();
@@ -252,6 +270,9 @@ public class PreferenceScreen implements Screen {
         gamePreferences.setAttack1Key(Character.toString(keyAttack1).toUpperCase());
         gamePreferences.setMapKey(Character.toString(keyMap).toUpperCase());
         gamePreferences.setQuestKey(Character.toString(keyQuest).toUpperCase());
+
+        //Update volume
+        game.assetsManager.getSoundsManager().setSoundsVolume(gamePreferences.getSoundVol());
 
         return "OK";
     }

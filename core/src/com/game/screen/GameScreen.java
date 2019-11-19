@@ -31,7 +31,7 @@ import com.game.screen.ui.UserInterface;
 
 
 public class GameScreen implements Screen {
-    private OrthographicCamera cameraBox2D;
+
     private ScreenViewport UIViewport;
     private ExtendViewport gameViewport;
     private InputsControllerGame controller;
@@ -47,15 +47,14 @@ public class GameScreen implements Screen {
     private UserInterface ui;
 
 
-    public GameScreen(GDXGame g) {
+    public GameScreen(GDXGame g)
+    {
         game = g; //reference to GDXGame
 
 
         /* CAMERAS AND VIEWPORTS */
-        cameraBox2D = new OrthographicCamera();
-        cameraBox2D.setToOrtho(false, Constants.TILE_SIZE, Constants.TILE_SIZE);
+        OrthographicCamera cameraBox2D = new OrthographicCamera();
         OrthographicCamera cameraUI = new OrthographicCamera();
-        cameraUI.setToOrtho(false, Constants.G_WIDTH, Constants.G_HEIGHT);
         gameViewport = new ExtendViewport(Constants.TILE_SIZE, Constants.TILE_SIZE, cameraBox2D);
         UIViewport = new ScreenViewport(cameraUI);
 
@@ -101,13 +100,13 @@ public class GameScreen implements Screen {
         /* ADD SYSTEMS TO ENGINE */
         engine.addSystem(renderingSystem);
         engine.addSystem(new PhysicsSystem(world));
-        //engine.addSystem(new PhysicsDebugSystem(world, cameraBox2D));
+     //   engine.addSystem(new PhysicsDebugSystem(world, cameraBox2D));
         engine.addSystem(new CameraSystem(cameraBox2D, cameraUI));
         engine.addSystem(new CollisionSystem());
         engine.addSystem(new PlayerMovementSystem(controller));
         engine.addSystem(new PlayerHealthSystem(game, entityFactory));
-        engine.addSystem(new PlayerAttackSystem(controller));
-        engine.addSystem(new PlayerXpSystem(entityFactory));
+        engine.addSystem(new PlayerAttackSystem(controller, game.assetsManager.getSoundsManager()));
+        engine.addSystem(new PlayerXpSystem(entityFactory, game.assetsManager.getSoundsManager()));
         engine.addSystem(new PlayerQuestSystem(ui));
         engine.addSystem(new EnemySpawnSystem(entityFactory));
         engine.addSystem(new EnemyMovementSystem(engine));
@@ -116,7 +115,7 @@ public class GameScreen implements Screen {
         engine.addSystem(new ReceiveAttackSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new PerspectiveSystem());
-        engine.addSystem(new NpcSystem(ui, controller, getPlayerEntity()));
+        engine.addSystem(new NpcSystem(ui, controller, getPlayerEntity(), game.assetsManager.getSoundsManager()));
     }
 
 

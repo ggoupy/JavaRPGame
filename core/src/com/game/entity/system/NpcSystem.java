@@ -5,6 +5,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.game.controller.InputsControllerGame;
 import com.game.entity.component.*;
+import com.game.loader.AssetsManager;
+import com.game.loader.SoundsManager;
 import com.game.quest.Quest;
 import com.game.screen.ui.UserInterface;
 
@@ -13,12 +15,14 @@ import static com.game.entity.utils.Mappers.*;
 
 public class NpcSystem extends IteratingSystem {
 
+    private SoundsManager soundsManager;
     private InputsControllerGame controller;
     private UserInterface ui;
     private Entity player;
 
-    public NpcSystem(UserInterface ui, InputsControllerGame controller, Entity player) {
+    public NpcSystem(UserInterface ui, InputsControllerGame controller, Entity player, SoundsManager soundsManager) {
         super(Family.all(NpcComponent.class, QuestComponent.class).get());
+        this.soundsManager = soundsManager;
         this.controller = controller;
         this.player = player;
         this.ui = ui;
@@ -26,12 +30,18 @@ public class NpcSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+        NpcComponent npc = npcMapper.get(entity);
         QuestComponent questCom = questMapper.get(entity);
         CollisionComponent collision = collisionMapper.get(entity);
 
         //We treat the collision here because we need to handle the moment
         //when the contact end to set the show quest panel not visible in the UI
         if (collision.hasCollidedEntity(player)) {
+            if (!npc.hasGreet) {
+                soundsManager.playNpcGreeting(npc.type);
+                npc.hasGreet = true;
+            }
+
             //We get the first completed quest
             Quest quest = questCom.getCompletedQuest();
 
@@ -72,6 +82,7 @@ public class NpcSystem extends IteratingSystem {
                 }
             }
         }
+        else npc.hasGreet = false; //reset
 
 
         //Quest icon

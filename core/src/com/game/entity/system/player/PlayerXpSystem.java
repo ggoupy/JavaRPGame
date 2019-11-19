@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.game.entity.component.PlayerComponent;
 import com.game.entity.factory.EntityFactory;
+import com.game.loader.SoundsManager;
 
 import static com.game.entity.utils.Mappers.playerMapper;
 
@@ -12,11 +13,13 @@ import static com.game.entity.utils.Mappers.playerMapper;
 public class PlayerXpSystem extends IteratingSystem {
 
     private EntityFactory entityFactory;
+    private SoundsManager soundsManager;
 
-    public PlayerXpSystem(EntityFactory entityFactory) {
+    public PlayerXpSystem(EntityFactory entityFactory, SoundsManager soundsManager) {
         super(Family.all(PlayerComponent.class).get());
 
         this.entityFactory = entityFactory;
+        this.soundsManager = soundsManager;
     }
 
     @Override
@@ -24,6 +27,7 @@ public class PlayerXpSystem extends IteratingSystem {
         PlayerComponent player = playerMapper.get(entity); //get player component for the entity
         if (player.xpBar.isFull()) //if player xpBar is completed
         {
+            soundsManager.playEffect("level-up");
             playerUP(player);
         }
     }

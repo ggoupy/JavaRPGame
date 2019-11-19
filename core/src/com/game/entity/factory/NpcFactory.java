@@ -64,7 +64,8 @@ class NpcFactory {
 
         position.position.set(position.origin.x, position.origin.y, 0);
 
-        texture.region = entityFactory.atlas.findRegion(npcObj.getProperties().get("type") + "-npc");
+        npc.type = (String) npcObj.getProperties().get("type");
+        texture.region = entityFactory.atlas.findRegion( npc.type+"-npc");
 
         type.type = TypeComponent.NPC;
 

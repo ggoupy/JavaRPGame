@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.game.AppPreferences;
 import com.game.GDXGame;
+import com.game.loader.SoundsManager;
 
 public class InputsControllerGame implements InputProcessor {
 
@@ -15,12 +16,13 @@ public class InputsControllerGame implements InputProcessor {
     public boolean down;
     public boolean att1;
     public boolean att2;
+
     //UI Inputs
     public boolean acceptQuest;
     public boolean showQuests;
     public boolean map;
     public boolean quitGame;
-    private GDXGame game;
+
     //Keys from preferences
     private int leftKey;
     private int rightKey;
@@ -30,9 +32,14 @@ public class InputsControllerGame implements InputProcessor {
     private int mapKey;
     private int questKey;
 
+    private GDXGame game;
+    private SoundsManager soundsManager;
 
-    public InputsControllerGame(GDXGame g) {
-        game = g;
+
+    public InputsControllerGame(GDXGame g)
+    {
+        this.game = g;
+        this.soundsManager = game.assetsManager.getSoundsManager();
     }
 
 
@@ -72,10 +79,12 @@ public class InputsControllerGame implements InputProcessor {
             keyProcessed = true;
         }
         if (questKey == keycode) {
+            if (!showQuests) soundsManager.playEffect("open-map"); //only when open
             showQuests = !showQuests;
             keyProcessed = true;
         }
         if (mapKey == keycode) {
+            if (!map) soundsManager.playEffect("open-map"); //only when open
             map = !map;
             keyProcessed = true;
         }

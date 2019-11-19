@@ -133,7 +133,7 @@ class PlayerFactory {
     void killPlayer(Entity playerEntity) {
         //We reset the player life
         PlayerComponent player = playerMapper.get(playerEntity);
-        player.life.setMax(player.life.getMax(), true);
+        player.life.setCurrent(1);
 
         //We remove all entities that had collision with player before to die
         //Collisions are usually removed when a contact end but like we set manually player pos, we need to remove them

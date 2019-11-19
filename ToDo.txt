@@ -31,3 +31,11 @@
 - Function to auto add a collision
 
 - Improve sprites for better collisions
+
+- sound manager
+
+// Scale //
+-> ENTITIES OK
+-> ISSUE WITH FONT : windows resize fonts ... NEED TO CREATE A FONT SIZE ACCORDING TO SCREEN
+-> FIX THE UI (Change font? or set fixed cell/table idk)
+maybe wrap text to fit exactly a rectangle and size table/cells
