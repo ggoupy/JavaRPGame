@@ -32,7 +32,6 @@ public class EnemyLevelSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         TransformComponent pos = transformMapper.get(entity);
-        TextureComponent texture = textureMapper.get(entity);
         EnemyComponent enemy = enemyMapper.get(entity);
         FontComponent fontCom = fontMapper.get(entity);
 

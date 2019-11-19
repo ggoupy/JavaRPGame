@@ -19,7 +19,7 @@ import com.game.entity.factory.EntityFactory;
 import com.game.entity.system.*;
 import com.game.entity.system.player.*;
 import com.game.utils.Constants;
-import com.game.CollisionListener;
+import com.game.controller.CollisionListener;
 import com.game.GDXGame;
 import com.game.controller.InputsControllerGame;
 import com.game.entity.system.enemy.EnemyHealthSystem;
@@ -37,13 +37,10 @@ public class GameScreen implements Screen {
     private InputsControllerGame controller;
     private GDXGame game;
     private World world;
-    private SpriteBatch spriteBatch;
     private PooledEngine engine;
-
+    private SpriteBatch spriteBatch;
     private TiledMap tiledMap;
-
     private EntityFactory entityFactory;
-
     private UserInterface ui;
 
 

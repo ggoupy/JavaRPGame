@@ -38,6 +38,7 @@ public class CollisionSystem extends IteratingSystem {
                 if (type != null) {
                     if (type.type == TypeComponent.ENEMY) {
                         EnemyComponent enemyAttacking = enemyMapper.get(collidedEntity);
+
                         if (enemyAttacking.aggressive) //aggressive enemy attacking player at collision
                         {
                             player.life.updateCurrent(-enemyAttacking.damage);
@@ -54,6 +55,7 @@ public class CollisionSystem extends IteratingSystem {
         if (thisType.type == TypeComponent.ENEMY) {
             //get the enemy component of the entity
             EnemyComponent enemy = enemyMapper.get(entity);
+            BodyComponent enemyBody = bodyMapper.get(entity);
 
             enemy.attacking = false; //set to false every frame, and change it later in case he attacks
 
@@ -65,6 +67,19 @@ public class CollisionSystem extends IteratingSystem {
 
                     //if the the collided entity has a type
                     if (type != null) {
+
+                        //If collision with scenery
+                        //We treat the collision normally
+                        //Enemy fixtures are sensors so they don't collide with the world
+                        //To treat normally the collision with scenery, we need to set its sensor as false during collision
+                        //After treating the collision we can set it back as sensor
+                        if (type.type == TypeComponent.SCENERY) {
+                            enemyBody.body.getFixtureList().get(0).setSensor(false); //We set it as a non sensor = has a body
+                            collision.removeCollidedEntity(collidedEntity); //we do not need to store anymore the collision
+                        }
+                        else  enemyBody.body.getFixtureList().get(0).setSensor(true); //We reset it as a sensor
+
+
                         if (type.type == TypeComponent.PLAYER) {
                             PlayerComponent player = collidedEntity.getComponent(PlayerComponent.class);
                             ReceiveAttackComponent receiveAttack = entity.getComponent(ReceiveAttackComponent.class);
@@ -78,13 +93,6 @@ public class CollisionSystem extends IteratingSystem {
 
                             if (enemy.aggressive)
                                 enemy.attacking = true; //the enemy attacks when he collides with the player
-                        }
-
-                        //If collision with scenery
-                        //We treat the collision normally
-                        if (type.type == TypeComponent.SCENERY) {
-                            enemy.collision = true; //so that he can change his direction
-                            collision.removeCollidedEntity(collidedEntity);
                         }
                     }
                 }

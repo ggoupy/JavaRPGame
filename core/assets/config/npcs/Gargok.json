@@ -8,7 +8,7 @@
     "area": [
       "enemySpawnFieldLvl9"
     ],
-    "xp": "9000"
+    "xp": "19000"
   },
   {
     "title": "Clear the forest",
@@ -19,6 +19,6 @@
     "area": [
       "enemySpawnForestLvl10"
     ],
-    "xp": "11000"
+    "xp": "25000"
   }
 ]

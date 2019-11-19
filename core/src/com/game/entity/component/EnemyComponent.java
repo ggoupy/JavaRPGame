@@ -9,7 +9,6 @@ public class EnemyComponent implements Component {
     /* Common attributes */
     public Vector2 origin = null; //origin position
     public Vector2 direction = null; //direction of the enemy // (to avoid collision with static body which set body velocity to 0 and so can't get the last velocity)
-    public boolean collision = false; //handle collisions with scenery
     public boolean aggro = false; // if the enemy has aggro player
     public boolean cant_aggro = false; //disable the aggro possibility
     public boolean attacking = false; //know if collide with the player == attacking

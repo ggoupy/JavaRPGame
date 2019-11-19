@@ -2,7 +2,9 @@ package com.game.entity.factory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -23,13 +25,6 @@ import static com.game.entity.utils.Mappers.enemySpawnMapper;
 
 class EnemyFactory {
 
-    private static final String SKELETON = "skeleton";
-    private static final String SPIDER = "spider";
-    private static final String GOBLIN = "goblin";
-    private static final String DEVIL = "devil";
-    private static final String ORC = "orc";
-
-
     //unique instance of this class = created only one time
     private static EnemyFactory thisInstance = null;
 
@@ -43,11 +38,7 @@ class EnemyFactory {
 
         this.prototypes = new ArrayMap<>();
 
-        loadEnemyDefinition(SKELETON);
-        loadEnemyDefinition(SPIDER);
-        loadEnemyDefinition(GOBLIN);
-        loadEnemyDefinition(DEVIL);
-        loadEnemyDefinition(ORC);
+        loadEnemyDefinitions();
     }
 
 
@@ -57,25 +48,37 @@ class EnemyFactory {
     }
 
 
-    //load a enemy prototype from a json file
-    private void loadEnemyDefinition(String prototype) {
-        ObjectMap enemyCfg = entityFactory.assetsManager.json.fromJson(
-                ObjectMap.class,
-                Gdx.files.internal(AssetsManager.enemyCfg_path + prototype + ".json")
-        );
+    //load all enemy prototypes from json config files
+    @SuppressWarnings("unchecked")
+    private void loadEnemyDefinitions()
+    {
+        FileHandle cfgDir = new FileHandle(AssetsManager.enemyCfg_path);
+        for (FileHandle f : cfgDir.list())
+        {
+            String prototype = f.nameWithoutExtension();
 
-        EnemyComponent enemy = new EnemyComponent();
-        enemy.name = prototype;
-        enemy.life = new Bar((float) enemyCfg.get("life"));
-        enemy.speed = (float) enemyCfg.get("speed");
-        enemy.damage = (float) enemyCfg.get("damage");
-        enemy.aggressiveNature = Boolean.parseBoolean((String) enemyCfg.get("aggressiveNature"));
-        enemy.aggroRange = (float) enemyCfg.get("aggroRange");
-        enemy.movingRange = (float) enemyCfg.get("movingRange");
-        enemy.xpGain = (float) enemyCfg.get("xpGain");
-        enemy.level = 1;
+            ObjectMap enemyCfg = entityFactory.assetsManager.json.fromJson(
+                    ObjectMap.class,
+                    Gdx.files.internal(AssetsManager.enemyCfg_path + f.name())
+            );
 
-        prototypes.put(prototype, enemy);
+            EnemyComponent enemy = new EnemyComponent();
+            enemy.name = prototype;
+            enemy.life = new Bar((float) enemyCfg.get("life"));
+            enemy.speed = (float) enemyCfg.get("speed");
+            enemy.damage = (float) enemyCfg.get("damage");
+            enemy.aggressiveNature = Boolean.parseBoolean((String) enemyCfg.get("aggressiveNature"));
+            enemy.aggroRange = (float) enemyCfg.get("aggroRange");
+            enemy.movingRange = (float) enemyCfg.get("movingRange");
+            enemy.xpGain = (float) enemyCfg.get("xpGain");
+            enemy.level = 1;
+
+            //We check if the config has a standing time value, else we set the normal procedure
+            Object standingTime = enemyCfg.get("standingTime");
+            enemy.standingTime = (standingTime != null) ? (float) standingTime : -1; //to inform that no standing time set
+
+            prototypes.put(prototype, enemy);
+        }
     }
 
 
@@ -92,7 +95,7 @@ class EnemyFactory {
         enemyCom.aggroRange = toCopy.aggroRange;
         enemyCom.movingRange = toCopy.movingRange;
         enemyCom.movingTime = (float) (2 + Math.random() * 2); //rand between 2 and 4
-        enemyCom.standingTime = (float) (2 + Math.random() * 2); //rand between 2 and 4
+        enemyCom.standingTime = toCopy.standingTime == -1 ? (float) (2 + Math.random() * 2) : toCopy.standingTime; //we set a standing time if not defined
         enemyCom.xpGain = (float) (toCopy.xpGain + Math.random() * 30f); //random between xpGain and xpGain+30;
         enemyCom.level = level;
         adjustLevel(enemyCom, toCopy); //up some stats according to level
@@ -100,13 +103,16 @@ class EnemyFactory {
     }
 
     //adjust stats of an enemy component according to its level
+    //stat are based with player level stats, but is not perfect and would be modified later
     private void adjustLevel(EnemyComponent enemyCom, EnemyComponent prototype) {
         if (enemyCom.level > 1) //we do not multiply stats of lvl 1
         {
-            float lvlCoeff = 0.30f; //multiply this coeff to base stats
-            enemyCom.life.updateMax(enemyCom.level * (prototype.life.getMax() * lvlCoeff), true);
-            enemyCom.damage += enemyCom.level * (prototype.damage * lvlCoeff);
-            enemyCom.xpGain += enemyCom.level * (prototype.xpGain * lvlCoeff);
+            enemyCom.life.setMax(prototype.life.getMax() * ((float) Math.pow(1.1, enemyCom.level-1)), true);
+
+           enemyCom.damage = enemyCom.damage * ((float) Math.pow(1.05, enemyCom.level-1));
+
+            //To have the enemy XP gain according to its level (+ its initial xp = bonus)
+            enemyCom.xpGain += (enemyCom.level * 5) + 50;
         }
     }
 
@@ -229,11 +235,12 @@ class EnemyFactory {
         //we store both health bar type (aggressive/passive) in tex.region2 & tex.region3 and
         //display the wanted one with tex.region
         //we would need to use it in case of the enemy becomes aggressive or passive
+        //We need to create new texture region as we will use it for different enemies (bug if not)
         String healthBarType = (enemyMapper.get(enemy).aggressiveNature) ? "aggressive" : "passive";
         String healthBarOtherType = (enemyMapper.get(enemy).aggressiveNature) ? "passive" : "aggressive";
-        texture.region2 = entityFactory.atlas.findRegion("enemy-healthbar-" + healthBarType);
-        texture.region3 = entityFactory.atlas.findRegion("enemy-healthbar-" + healthBarOtherType);
-        texture.region = texture.region2;
+        texture.region2 = new TextureRegion(entityFactory.atlas.findRegion("enemy-healthbar-" + healthBarType));
+        texture.region3 = new TextureRegion(entityFactory.atlas.findRegion("enemy-healthbar-" + healthBarOtherType));
+        texture.region = new TextureRegion(texture.region2);
 
         Vector3 enemyPos = enemy.getComponent(TransformComponent.class).position;
         position.position.set(enemyPos);

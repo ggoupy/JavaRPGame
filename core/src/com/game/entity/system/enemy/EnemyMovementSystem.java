@@ -69,19 +69,22 @@ public class EnemyMovementSystem extends IteratingSystem {
                     }
                 } else enemy.aggro = false;
 
-                if (enemy.aggro == true) break; //stop the loop when found a player to aggro
+                if (enemy.aggro) break; //stop the loop when found a player to aggro
             }
 
-            if (enemy.aggressiveNature == false) //passive enemy
+            if (!enemy.aggressiveNature) //passive enemy
             {
                 //we put the enemy passive if he is not aggro-ing
-                if (enemy.aggro == false) enemy.aggressive = false;
+                if (!enemy.aggro) enemy.aggressive = false;
             }
         }
 
 
         /* Treat other movements if the enemy is not already aggro-ing */
-        if (!enemy.aggro) {
+        if (!enemy.aggro)
+        {
+            enemy.cant_aggro = false; //reset
+
             //new action (moving or standing)
             if (enemy.currentTime <= 0) {
                 //we check the last action of the enemy (before currentTime reached 0)
@@ -108,7 +111,9 @@ public class EnemyMovementSystem extends IteratingSystem {
             }
 
             enemy.currentTime -= deltaTime;
-        } else //enemy is aggro-ing
+        }
+
+        else //enemy is aggro-ing
         {
             //check if it is too far from its spawn
             if (isTooFarFromSpawn(body.body.getPosition(), enemy.origin, 10)) //range adjusted to 10
@@ -118,16 +123,6 @@ public class EnemyMovementSystem extends IteratingSystem {
                 enemy.aggro = false;
                 enemy.cant_aggro = true; //make it unable to aggro player
             } else enemy.cant_aggro = false;
-        }
-
-
-        /* Treat enemy collision with static body */
-        if (enemy.collision) {
-            enemy.direction.set(-enemy.direction.x, -enemy.direction.y);
-            body.body.setLinearVelocity(enemy.direction);
-            setMovingState(state, enemy.direction);
-            enemy.collision = false;
-            enemy.aggro = false;
         }
     }
 

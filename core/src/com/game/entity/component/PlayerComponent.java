@@ -14,7 +14,7 @@ public class PlayerComponent implements Component {
     public Bar action = null; //Call it differently
     public float speed = 1;
     public float damage = 0;
-    public float attackPoints = 15; //action points that consume 1 attack
+    public float attackPoints = 10; //action points that consume 1 attack
     public Timer attackDuration = null;
     public boolean isAttacking = false;
     public float lifeRegeneration = 1;

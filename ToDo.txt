@@ -1,8 +1,4 @@
-- Sounds
-
 - enemy collision bug
-
-- New Enemies
 
 - Improve player movements (+ during collisions with static bodies)
 
@@ -16,7 +12,7 @@
 
 - Stuff and inventory
 
-- Fix enemy & player stats and Xp system
+- improve enemy stats / xp (according to player level ?)
 
 - New maps 
 
@@ -32,7 +28,6 @@
 
 - Improve sprites for better collisions
 
-- sound manager
 
 // Scale //
 -> ENTITIES OK

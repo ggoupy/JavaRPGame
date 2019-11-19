@@ -125,6 +125,11 @@ public class InputsControllerGame implements InputProcessor {
             keyProcessed = true;
         }
 
+        if (Input.Keys.ENTER == keycode) {
+            acceptQuest = false; //In all cases, if the key is up it becomes false
+            keyProcessed = true;
+        }
+
         return keyProcessed;
     }
 
@@ -148,9 +153,9 @@ public class InputsControllerGame implements InputProcessor {
     //We update GDX with this controller
     //We reset keys (if used before changing) and load keys set in preferences
     public void setToCurrentController() {
-        resetKeys();
-        loadUserKeys();
-        Gdx.input.setInputProcessor(this);
+        resetKeys(); //reset all pressed keys
+        loadUserKeys(); //check if user changed key preferences
+        Gdx.input.setInputProcessor(this); //set the gdx input processor to this class
     }
 
 

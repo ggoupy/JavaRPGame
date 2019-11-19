@@ -57,6 +57,7 @@ public class EnemyHealthSystem extends IteratingSystem {
         //color of the health bar for passive enemy
         //texture region2 contains the aggressive nature health bar type (passive in this case)
         //texture region3 contains the other health bar type (aggressive in this case)
+        //We need to create new texture region because bug if not
         //--- not very efficient ---//
         if (!enemy.aggressiveNature) {
             if (enemy.aggressive) //if currently aggressive

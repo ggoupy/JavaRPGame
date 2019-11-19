@@ -181,6 +181,32 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">enemy/bear/bear-standingDown.png</key>
+            <key type="filename">enemy/bear/bear-standingRight.png</key>
+            <key type="filename">enemy/bear/bear-standingUp.png</key>
+            <key type="filename">enemy/bear/bear-walkingDown_1.png</key>
+            <key type="filename">enemy/bear/bear-walkingDown_2.png</key>
+            <key type="filename">enemy/bear/bear-walkingDown_3.png</key>
+            <key type="filename">enemy/bear/bear-walkingRight_1.png</key>
+            <key type="filename">enemy/bear/bear-walkingRight_2.png</key>
+            <key type="filename">enemy/bear/bear-walkingRight_3.png</key>
+            <key type="filename">enemy/bear/bear-walkingUp_1.png</key>
+            <key type="filename">enemy/bear/bear-walkingUp_2.png</key>
+            <key type="filename">enemy/bear/bear-walkingUp_3.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>14,14,28,28</rect>
+                <key>scale9Paddings</key>
+                <rect>14,14,28,28</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">enemy/devil/devil-standingDown.png</key>
             <key type="filename">enemy/devil/devil-standingRight.png</key>
             <key type="filename">enemy/devil/devil-standingUp.png</key>
@@ -422,6 +448,35 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">enemy/dragon/dragon-standingDown.png</key>
+            <key type="filename">enemy/dragon/dragon-standingRight.png</key>
+            <key type="filename">enemy/dragon/dragon-standingUp.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingDown_1.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingDown_2.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingDown_3.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingDown_4.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingRight_1.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingRight_2.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingRight_3.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingRight_4.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingUp_1.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingUp_2.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingUp_3.png</key>
+            <key type="filename">enemy/dragon/dragon-walkingUp_4.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>24,24,48,48</rect>
+                <key>scale9Paddings</key>
+                <rect>24,24,48,48</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">enemy/enemy-healthbar-aggressive.png</key>
             <key type="filename">enemy/enemy-healthbar-passive.png</key>
             <struct type="IndividualSpriteSettings">
@@ -435,6 +490,79 @@
                 <rect>13,2,25,3</rect>
                 <key>scale9Paddings</key>
                 <rect>13,2,25,3</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">enemy/ostrich/ostrich-standingDown.png</key>
+            <key type="filename">enemy/ostrich/ostrich-standingRight.png</key>
+            <key type="filename">enemy/ostrich/ostrich-standingUp.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingDown_1.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingDown_2.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingDown_3.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingDown_4.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingRight_1.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingRight_2.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingRight_3.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingRight_4.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingUp_1.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingUp_2.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingUp_3.png</key>
+            <key type="filename">enemy/ostrich/ostrich-walkingUp_4.png</key>
+            <key type="filename">enemy/raccoon/raccoon-standingDown.png</key>
+            <key type="filename">enemy/raccoon/raccoon-standingRight.png</key>
+            <key type="filename">enemy/raccoon/raccoon-standingUp.png</key>
+            <key type="filename">enemy/raccoon/raccoon-walkingDown_1.png</key>
+            <key type="filename">enemy/raccoon/raccoon-walkingDown_2.png</key>
+            <key type="filename">enemy/raccoon/raccoon-walkingDown_3.png</key>
+            <key type="filename">enemy/raccoon/raccoon-walkingRight_1.png</key>
+            <key type="filename">enemy/raccoon/raccoon-walkingRight_2.png</key>
+            <key type="filename">enemy/raccoon/raccoon-walkingRight_3.png</key>
+            <key type="filename">enemy/raccoon/raccoon-walkingUp_1.png</key>
+            <key type="filename">enemy/raccoon/raccoon-walkingUp_2.png</key>
+            <key type="filename">enemy/raccoon/raccoon-walkingUp_3.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,12,24,24</rect>
+                <key>scale9Paddings</key>
+                <rect>12,12,24,24</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">enemy/scorpion/scorpion-standingDown.png</key>
+            <key type="filename">enemy/scorpion/scorpion-standingRight.png</key>
+            <key type="filename">enemy/scorpion/scorpion-standingUp.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingDown_1.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingDown_2.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingDown_3.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingDown_4.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingDown_5.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingRight_1.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingRight_2.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingRight_3.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingRight_4.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingRight_5.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingUp_1.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingUp_2.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingUp_3.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingUp_4.png</key>
+            <key type="filename">enemy/scorpion/scorpion-walkingUp_5.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,16,16,32</rect>
+                <key>scale9Paddings</key>
+                <rect>8,16,16,32</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -838,6 +966,78 @@
             <filename>npc/orc-npc.png</filename>
             <filename>npc/paladin-npc.png</filename>
             <filename>npc/warrior-npc.png</filename>
+            <filename>enemy/bear/bear-standingDown.png</filename>
+            <filename>enemy/bear/bear-standingRight.png</filename>
+            <filename>enemy/bear/bear-standingUp.png</filename>
+            <filename>enemy/bear/bear-walkingDown_1.png</filename>
+            <filename>enemy/bear/bear-walkingDown_2.png</filename>
+            <filename>enemy/bear/bear-walkingDown_3.png</filename>
+            <filename>enemy/bear/bear-walkingRight_1.png</filename>
+            <filename>enemy/bear/bear-walkingRight_2.png</filename>
+            <filename>enemy/bear/bear-walkingRight_3.png</filename>
+            <filename>enemy/bear/bear-walkingUp_1.png</filename>
+            <filename>enemy/bear/bear-walkingUp_2.png</filename>
+            <filename>enemy/bear/bear-walkingUp_3.png</filename>
+            <filename>enemy/dragon/dragon-standingDown.png</filename>
+            <filename>enemy/dragon/dragon-standingRight.png</filename>
+            <filename>enemy/dragon/dragon-standingUp.png</filename>
+            <filename>enemy/dragon/dragon-walkingDown_1.png</filename>
+            <filename>enemy/dragon/dragon-walkingDown_2.png</filename>
+            <filename>enemy/dragon/dragon-walkingDown_3.png</filename>
+            <filename>enemy/dragon/dragon-walkingDown_4.png</filename>
+            <filename>enemy/dragon/dragon-walkingRight_1.png</filename>
+            <filename>enemy/dragon/dragon-walkingRight_2.png</filename>
+            <filename>enemy/dragon/dragon-walkingRight_3.png</filename>
+            <filename>enemy/dragon/dragon-walkingRight_4.png</filename>
+            <filename>enemy/dragon/dragon-walkingUp_1.png</filename>
+            <filename>enemy/dragon/dragon-walkingUp_2.png</filename>
+            <filename>enemy/dragon/dragon-walkingUp_3.png</filename>
+            <filename>enemy/dragon/dragon-walkingUp_4.png</filename>
+            <filename>enemy/ostrich/ostrich-standingDown.png</filename>
+            <filename>enemy/ostrich/ostrich-standingRight.png</filename>
+            <filename>enemy/ostrich/ostrich-standingUp.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingDown_1.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingDown_2.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingDown_3.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingDown_4.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingRight_1.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingRight_2.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingRight_3.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingRight_4.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingUp_1.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingUp_2.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingUp_3.png</filename>
+            <filename>enemy/ostrich/ostrich-walkingUp_4.png</filename>
+            <filename>enemy/raccoon/raccoon-standingDown.png</filename>
+            <filename>enemy/raccoon/raccoon-standingRight.png</filename>
+            <filename>enemy/raccoon/raccoon-standingUp.png</filename>
+            <filename>enemy/raccoon/raccoon-walkingDown_1.png</filename>
+            <filename>enemy/raccoon/raccoon-walkingDown_2.png</filename>
+            <filename>enemy/raccoon/raccoon-walkingDown_3.png</filename>
+            <filename>enemy/raccoon/raccoon-walkingRight_1.png</filename>
+            <filename>enemy/raccoon/raccoon-walkingRight_2.png</filename>
+            <filename>enemy/raccoon/raccoon-walkingRight_3.png</filename>
+            <filename>enemy/raccoon/raccoon-walkingUp_1.png</filename>
+            <filename>enemy/raccoon/raccoon-walkingUp_2.png</filename>
+            <filename>enemy/raccoon/raccoon-walkingUp_3.png</filename>
+            <filename>enemy/scorpion/scorpion-standingDown.png</filename>
+            <filename>enemy/scorpion/scorpion-standingRight.png</filename>
+            <filename>enemy/scorpion/scorpion-standingUp.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingDown_1.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingDown_2.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingDown_3.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingDown_4.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingDown_5.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingRight_1.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingRight_2.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingRight_3.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingRight_4.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingRight_5.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingUp_1.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingUp_2.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingUp_3.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingUp_4.png</filename>
+            <filename>enemy/scorpion/scorpion-walkingUp_5.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

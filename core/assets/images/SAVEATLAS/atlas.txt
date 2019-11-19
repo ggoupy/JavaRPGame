@@ -1,0 +1,1755 @@
+atlas.png
+size: 512, 1984
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+action-bar
+  rotate: false
+  xy: 0, 0
+  size: 1, 50
+  orig: 1, 50
+  offset: 0, 0
+  index: -1
+health-bar
+  rotate: false
+  xy: 1, 0
+  size: 1, 50
+  orig: 1, 50
+  offset: 0, 0
+  index: -1
+enemy-healthbar-passive
+  rotate: false
+  xy: 52, 0
+  size: 50, 7
+  orig: 50, 7
+  offset: 0, 0
+  index: -1
+enemy-healthbar-aggressive
+  rotate: false
+  xy: 2, 0
+  size: 50, 7
+  orig: 50, 7
+  offset: 0, 0
+  index: -1
+paladin-npc
+  rotate: false
+  xy: 102, 0
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+warrior-npc
+  rotate: false
+  xy: 134, 0
+  size: 32, 49
+  orig: 32, 49
+  offset: 0, 0
+  index: -1
+farmer-npc
+  rotate: false
+  xy: 166, 0
+  size: 30, 52
+  orig: 30, 52
+  offset: 0, 0
+  index: -1
+mage-npc
+  rotate: false
+  xy: 232, 0
+  size: 32, 53
+  orig: 32, 53
+  offset: 0, 0
+  index: -1
+orc-npc
+  rotate: false
+  xy: 196, 0
+  size: 36, 49
+  orig: 36, 49
+  offset: 0, 0
+  index: -1
+completed-quest-icon
+  rotate: false
+  xy: 264, 0
+  size: 27, 64
+  orig: 27, 64
+  offset: 0, 0
+  index: -1
+quest-icon
+  rotate: false
+  xy: 291, 0
+  size: 28, 64
+  orig: 28, 64
+  offset: 0, 0
+  index: -1
+skeleton-walkingUp
+  rotate: false
+  xy: 192, 64
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 3
+skeleton-walkingRight
+  rotate: false
+  xy: 240, 64
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 3
+skeleton-walkingUp
+  rotate: false
+  xy: 288, 64
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 2
+skeleton-walkingDown
+  rotate: false
+  xy: 336, 64
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 1
+skeleton-walkingUp
+  rotate: false
+  xy: 96, 64
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 1
+skeleton-walkingRight
+  rotate: false
+  xy: 144, 64
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 2
+skeleton-walkingDown
+  rotate: false
+  xy: 319, 0
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 2
+skeleton-standingRight
+  rotate: false
+  xy: 367, 0
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: -1
+skeleton-standingUp
+  rotate: false
+  xy: 415, 0
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: -1
+skeleton-walkingRight
+  rotate: false
+  xy: 48, 64
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 1
+skeleton-walkingDown
+  rotate: false
+  xy: 463, 0
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 3
+skeleton-standingDown
+  rotate: false
+  xy: 0, 64
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: -1
+devil-walkingUp
+  rotate: false
+  xy: 256, 1280
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+goblin-walkingDown
+  rotate: false
+  xy: 320, 1280
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+goblin-walkingRight
+  rotate: false
+  xy: 384, 1280
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+devil-walkingUp
+  rotate: false
+  xy: 448, 1280
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+goblin-walkingRight
+  rotate: false
+  xy: 0, 1344
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+devil-walkingDown
+  rotate: false
+  xy: 192, 1280
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+devil-walkingDown
+  rotate: false
+  xy: 128, 1280
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+devil-standingDown
+  rotate: false
+  xy: 320, 1216
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+goblin-walkingRight
+  rotate: false
+  xy: 64, 1344
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+devil-standingRight
+  rotate: false
+  xy: 384, 1216
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+devil-standingUp
+  rotate: false
+  xy: 0, 1280
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+devil-walkingDown
+  rotate: false
+  xy: 64, 1280
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+devil-walkingDown
+  rotate: false
+  xy: 448, 1216
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+hunter-walkingDown
+  rotate: false
+  xy: 256, 1408
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+goblin-walkingDown
+  rotate: false
+  xy: 128, 1408
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+goblin-walkingRight
+  rotate: false
+  xy: 128, 1344
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+goblin-walkingDown
+  rotate: false
+  xy: 192, 1408
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+mage-attackingUp
+  rotate: false
+  xy: 320, 1408
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+hunter-walkingDown
+  rotate: false
+  xy: 384, 1408
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+devil-walkingRight
+  rotate: false
+  xy: 256, 1216
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+goblin-walkingDown
+  rotate: false
+  xy: 64, 1408
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+goblin-walkingRight
+  rotate: false
+  xy: 192, 1344
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+goblin-standingUp
+  rotate: false
+  xy: 0, 1408
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+goblin-walkingDown
+  rotate: false
+  xy: 256, 1344
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+goblin-standingRight
+  rotate: false
+  xy: 384, 1344
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+goblin-walkingDown
+  rotate: false
+  xy: 448, 1344
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+goblin-standingDown
+  rotate: false
+  xy: 320, 1344
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hunter-attackingUp
+  rotate: false
+  xy: 0, 1152
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+hunter-standingRight
+  rotate: false
+  xy: 448, 1024
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+devil-walkingRight
+  rotate: false
+  xy: 192, 1216
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-attackingRight
+  rotate: false
+  xy: 0, 1088
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+hunter-walkingDown
+  rotate: false
+  xy: 128, 1088
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-walkingDown
+  rotate: false
+  xy: 192, 1088
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+hunter-standingUp
+  rotate: false
+  xy: 64, 1088
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hunter-attackingRight
+  rotate: false
+  xy: 384, 1024
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+goblin-walkingUp
+  rotate: false
+  xy: 0, 1024
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+goblin-walkingUp
+  rotate: false
+  xy: 320, 1024
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+hunter-attackingDown
+  rotate: false
+  xy: 64, 1024
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+hunter-attackingDown
+  rotate: false
+  xy: 192, 1024
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+hunter-attackingDown
+  rotate: false
+  xy: 256, 1024
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+goblin-walkingUp
+  rotate: false
+  xy: 128, 1024
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+hunter-walkingDown
+  rotate: false
+  xy: 256, 1088
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+devil-walkingRight
+  rotate: false
+  xy: 384, 1152
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 13
+hunter-standingDown
+  rotate: false
+  xy: 320, 1088
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+goblin-walkingUp
+  rotate: false
+  xy: 448, 1152
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+devil-walkingUp
+  rotate: false
+  xy: 64, 1216
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+devil-walkingUp
+  rotate: false
+  xy: 128, 1216
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+devil-walkingRight
+  rotate: false
+  xy: 0, 1216
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 14
+goblin-walkingUp
+  rotate: false
+  xy: 320, 1152
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-attackingRight
+  rotate: false
+  xy: 384, 1088
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+hunter-attackingUp
+  rotate: false
+  xy: 448, 1088
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+hunter-attackingUp
+  rotate: false
+  xy: 256, 1152
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+mage-standingDown
+  rotate: false
+  xy: 448, 1408
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hunter-attackingUp
+  rotate: false
+  xy: 128, 1152
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+hunter-attackingUp
+  rotate: false
+  xy: 192, 1152
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+hunter-attackingUp
+  rotate: false
+  xy: 64, 1152
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+mage-attackingUp
+  rotate: false
+  xy: 128, 1536
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-walkingDown
+  rotate: false
+  xy: 320, 1728
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+mage-standingUp
+  rotate: false
+  xy: 0, 1472
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hunter-walkingRight
+  rotate: false
+  xy: 384, 1728
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-walkingRight
+  rotate: false
+  xy: 0, 1792
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+hunter-walkingUp
+  rotate: false
+  xy: 64, 1792
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+hunter-walkingRight
+  rotate: false
+  xy: 448, 1728
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+hunter-walkingRight
+  rotate: false
+  xy: 256, 1728
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+hunter-walkingUp
+  rotate: false
+  xy: 384, 1664
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+hunter-walkingDown
+  rotate: false
+  xy: 192, 1728
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+hunter-walkingUp
+  rotate: false
+  xy: 448, 1664
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-walkingRight
+  rotate: false
+  xy: 64, 1728
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+hunter-walkingDown
+  rotate: false
+  xy: 128, 1728
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+hunter-walkingRight
+  rotate: false
+  xy: 0, 1728
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+mage-attackingDown
+  rotate: false
+  xy: 128, 1792
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+hunter-walkingUp
+  rotate: false
+  xy: 192, 1856
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+mage-attackingDown
+  rotate: false
+  xy: 192, 1792
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+mage-attackingDown
+  rotate: false
+  xy: 256, 1856
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+mage-attackingDown
+  rotate: false
+  xy: 384, 1856
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+mage-attackingDown
+  rotate: false
+  xy: 448, 1856
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-walkingUp
+  rotate: false
+  xy: 320, 1856
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+hunter-walkingUp
+  rotate: false
+  xy: 128, 1856
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+hunter-walkingUp
+  rotate: false
+  xy: 256, 1792
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+mage-attackingDown
+  rotate: false
+  xy: 64, 1856
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+mage-attackingDown
+  rotate: false
+  xy: 320, 1792
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+mage-attackingRight
+  rotate: false
+  xy: 448, 1792
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+mage-attackingRight
+  rotate: false
+  xy: 0, 1856
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+mage-attackingRight
+  rotate: false
+  xy: 384, 1792
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-walkingRight
+  rotate: false
+  xy: 320, 1664
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+mage-attackingUp
+  rotate: false
+  xy: 0, 1536
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+mage-attackingRight
+  rotate: false
+  xy: 256, 1664
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+mage-attackingUp
+  rotate: false
+  xy: 64, 1536
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+mage-walkingDown
+  rotate: false
+  xy: 192, 1536
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+mage-walkingRight
+  rotate: false
+  xy: 256, 1536
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+goblin-walkingUp
+  rotate: false
+  xy: 448, 960
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+mage-attackingUp
+  rotate: false
+  xy: 448, 1472
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+mage-walkingDown
+  rotate: false
+  xy: 64, 1472
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+mage-attackingUp
+  rotate: false
+  xy: 384, 1472
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+mage-standingRight
+  rotate: false
+  xy: 128, 1472
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+mage-attackingRight
+  rotate: false
+  xy: 256, 1472
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+mage-attackingRight
+  rotate: false
+  xy: 320, 1472
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+mage-attackingUp
+  rotate: false
+  xy: 192, 1472
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+mage-walkingDown
+  rotate: false
+  xy: 320, 1536
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+mage-walkingDown
+  rotate: false
+  xy: 448, 1600
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+mage-walkingRight
+  rotate: false
+  xy: 384, 1536
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+mage-walkingRight
+  rotate: false
+  xy: 0, 1664
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+mage-attackingRight
+  rotate: false
+  xy: 128, 1664
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+hunter-walkingRight
+  rotate: false
+  xy: 192, 1664
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+mage-walkingDown
+  rotate: false
+  xy: 64, 1664
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+mage-walkingDown
+  rotate: false
+  xy: 384, 1600
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+warrior-walkingUp
+  rotate: false
+  xy: 448, 1536
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+mage-walkingRight
+  rotate: false
+  xy: 0, 1600
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+mage-walkingRight
+  rotate: false
+  xy: 320, 1600
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+mage-walkingRight
+  rotate: false
+  xy: 64, 1600
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+mage-walkingDown
+  rotate: false
+  xy: 192, 1600
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+mage-walkingDown
+  rotate: false
+  xy: 256, 1600
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+mage-walkingRight
+  rotate: false
+  xy: 128, 1600
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-attackingRight
+  rotate: false
+  xy: 256, 896
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+orc-walkingRight
+  rotate: false
+  xy: 128, 384
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+hunter-attackingDown
+  rotate: false
+  xy: 384, 960
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+orc-walkingDown
+  rotate: false
+  xy: 192, 384
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+orc-walkingRight
+  rotate: false
+  xy: 320, 384
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+orc-walkingRight
+  rotate: false
+  xy: 384, 384
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+orc-walkingDown
+  rotate: false
+  xy: 256, 384
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+spider-walkingRight
+  rotate: false
+  xy: 64, 384
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+orc-walkingDown
+  rotate: false
+  xy: 192, 320
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+orc-walkingUp
+  rotate: false
+  xy: 0, 384
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+orc-walkingRight
+  rotate: false
+  xy: 256, 320
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+orc-walkingRight
+  rotate: false
+  xy: 384, 320
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+orc-walkingUp
+  rotate: false
+  xy: 448, 320
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+orc-walkingDown
+  rotate: false
+  xy: 320, 320
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+orc-walkingRight
+  rotate: false
+  xy: 448, 384
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-walkingDown
+  rotate: false
+  xy: 0, 512
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+orc-walkingRight
+  rotate: false
+  xy: 0, 448
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-walkingDown
+  rotate: false
+  xy: 64, 512
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-attackingUp
+  rotate: false
+  xy: 192, 512
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+warrior-walkingDown
+  rotate: false
+  xy: 256, 512
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+warrior-attackingUp
+  rotate: false
+  xy: 128, 512
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+warrior-walkingDown
+  rotate: false
+  xy: 448, 448
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+orc-walkingRight
+  rotate: false
+  xy: 64, 448
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+warrior-walkingDown
+  rotate: false
+  xy: 384, 448
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+spider-walkingRight
+  rotate: false
+  xy: 128, 448
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+spider-walkingRight
+  rotate: false
+  xy: 256, 448
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-walkingDown
+  rotate: false
+  xy: 320, 448
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-walkingDown
+  rotate: false
+  xy: 192, 448
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+mage-walkingUp
+  rotate: false
+  xy: 128, 320
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+spider-walkingDown
+  rotate: false
+  xy: 320, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+mage-walkingUp
+  rotate: false
+  xy: 64, 320
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+spider-walkingDown
+  rotate: false
+  xy: 384, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+spider-standingUp
+  rotate: false
+  xy: 0, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+spider-walkingRight
+  rotate: false
+  xy: 64, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+orc-walkingUp
+  rotate: false
+  xy: 448, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+spider-walkingDown
+  rotate: false
+  xy: 256, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+orc-walkingUp
+  rotate: false
+  xy: 384, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+spider-walkingDown
+  rotate: false
+  xy: 192, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+orc-walkingUp
+  rotate: false
+  xy: 448, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+spider-walkingDown
+  rotate: false
+  xy: 64, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+spider-walkingDown
+  rotate: false
+  xy: 128, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+orc-walkingUp
+  rotate: false
+  xy: 0, 128
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+spider-standingRight
+  rotate: false
+  xy: 128, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+mage-walkingUp
+  rotate: false
+  xy: 256, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+spider-standingDown
+  rotate: false
+  xy: 192, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+mage-walkingUp
+  rotate: false
+  xy: 320, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+mage-walkingUp
+  rotate: false
+  xy: 448, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+mage-walkingUp
+  rotate: false
+  xy: 0, 320
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+orc-standingDown
+  rotate: false
+  xy: 384, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+orc-standingRight
+  rotate: false
+  xy: 192, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+orc-walkingUp
+  rotate: false
+  xy: 256, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+orc-standingUp
+  rotate: false
+  xy: 320, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+orc-walkingDown
+  rotate: false
+  xy: 128, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+orc-walkingUp
+  rotate: false
+  xy: 384, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+orc-walkingDown
+  rotate: false
+  xy: 0, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+orc-walkingDown
+  rotate: false
+  xy: 64, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+orc-walkingDown
+  rotate: false
+  xy: 448, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-standingDown
+  rotate: false
+  xy: 320, 512
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+warrior-attackingUp
+  rotate: false
+  xy: 192, 832
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-standingUp
+  rotate: false
+  xy: 384, 512
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+warrior-attackingUp
+  rotate: false
+  xy: 256, 832
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-attackingUp
+  rotate: false
+  xy: 384, 832
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+warrior-attackingRight
+  rotate: false
+  xy: 448, 832
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+warrior-attackingUp
+  rotate: false
+  xy: 320, 832
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-attackingDown
+  rotate: false
+  xy: 128, 832
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+spider-walkingUp
+  rotate: false
+  xy: 256, 768
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+warrior-attackingRight
+  rotate: false
+  xy: 64, 832
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+spider-walkingUp
+  rotate: false
+  xy: 320, 768
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-attackingDown
+  rotate: false
+  xy: 448, 768
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-attackingRight
+  rotate: false
+  xy: 0, 832
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+spider-walkingUp
+  rotate: false
+  xy: 384, 768
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-attackingDown
+  rotate: false
+  xy: 0, 896
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+mage-walkingUp
+  rotate: false
+  xy: 64, 960
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-attackingDown
+  rotate: false
+  xy: 64, 896
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+hunter-attackingDown
+  rotate: false
+  xy: 128, 960
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+hunter-attackingRight
+  rotate: false
+  xy: 256, 960
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+hunter-attackingRight
+  rotate: false
+  xy: 320, 960
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+hunter-attackingRight
+  rotate: false
+  xy: 192, 960
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-attackingDown
+  rotate: false
+  xy: 0, 960
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-attackingRight
+  rotate: false
+  xy: 128, 896
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+mage-walkingRight
+  rotate: false
+  xy: 448, 896
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+warrior-attackingRight
+  rotate: false
+  xy: 192, 896
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-attackingRight
+  rotate: false
+  xy: 320, 896
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-attackingRight
+  rotate: false
+  xy: 384, 896
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hunter-walkingUp
+  rotate: false
+  xy: 0, 1920
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+spider-walkingRight
+  rotate: false
+  xy: 192, 768
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+warrior-walkingUp
+  rotate: false
+  xy: 384, 576
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+spider-walkingUp
+  rotate: false
+  xy: 128, 768
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-walkingUp
+  rotate: false
+  xy: 448, 576
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-walkingRight
+  rotate: false
+  xy: 64, 640
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-walkingRight
+  rotate: false
+  xy: 128, 640
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-walkingUp
+  rotate: false
+  xy: 0, 640
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+warrior-walkingUp
+  rotate: false
+  xy: 320, 576
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+warrior-walkingDown
+  rotate: false
+  xy: 448, 512
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-walkingUp
+  rotate: false
+  xy: 256, 576
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-standingRight
+  rotate: false
+  xy: 0, 576
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+warrior-walkingUp
+  rotate: false
+  xy: 128, 576
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-walkingRight
+  rotate: false
+  xy: 192, 576
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+warrior-walkingRight
+  rotate: false
+  xy: 64, 576
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-walkingUp
+  rotate: false
+  xy: 192, 640
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-attackingDown
+  rotate: false
+  xy: 320, 704
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+warrior-walkingRight
+  rotate: false
+  xy: 256, 640
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-attackingDown
+  rotate: false
+  xy: 384, 704
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+spider-walkingRight
+  rotate: false
+  xy: 0, 768
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+mage-walkingUp
+  rotate: false
+  xy: 64, 768
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+spider-walkingUp
+  rotate: false
+  xy: 448, 704
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-attackingDown
+  rotate: false
+  xy: 256, 704
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+warrior-walkingRight
+  rotate: false
+  xy: 320, 640
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+warrior-walkingRight
+  rotate: false
+  xy: 384, 640
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+warrior-attackingDown
+  rotate: false
+  xy: 192, 704
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+warrior-walkingRight
+  rotate: false
+  xy: 448, 640
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+spider-walkingUp
+  rotate: false
+  xy: 64, 704
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+warrior-attackingUp
+  rotate: false
+  xy: 128, 704
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+warrior-attackingUp
+  rotate: false
+  xy: 0, 704
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6

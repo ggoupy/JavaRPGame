@@ -35,7 +35,7 @@ public class PlayerXpSystem extends IteratingSystem {
     private void playerUP(PlayerComponent player) {
         player.level++; //update player level
         player.life.setMax(player.life.getMax() * 1.1f, true);
-        player.action.setMax(player.action.getMax() * 1.1f, true);
+        player.action.setMax(player.action.getMax() * 1.03f, true);
         player.damage = player.damage * 1.1f;
 
         float xpSurplus = player.xpBar.getCurrent() - player.xpBar.getMax(); //xp points over the max

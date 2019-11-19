@@ -82,7 +82,9 @@ public class NpcSystem extends IteratingSystem {
                 }
             }
         }
-        else npc.hasGreet = false; //reset
+        else {
+            npc.hasGreet = false; //reset
+        }
 
 
         //Quest icon

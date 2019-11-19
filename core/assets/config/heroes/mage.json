@@ -1,8 +1,8 @@
 {
-  "life": 80,
+  "life": 100,
   "action": 200,
   "damage": 20,
-  "speed": 3,
+  "speed": 2.7,
   "lifeRegeneration": 0.05,
   "actionRegeneration": 0.15
 }
