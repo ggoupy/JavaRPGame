@@ -18,6 +18,7 @@ import com.game.entity.component.*;
 import com.game.entity.utils.Spawn;
 import com.game.loader.AssetsManager;
 import com.game.utils.Bar;
+import com.game.utils.JarUtils;
 import com.game.utils.Timer;
 
 import static com.game.entity.utils.Mappers.enemyMapper;
@@ -52,33 +53,48 @@ class EnemyFactory {
     @SuppressWarnings("unchecked")
     private void loadEnemyDefinitions()
     {
-        FileHandle cfgDir = new FileHandle(AssetsManager.enemyCfg_path);
-        for (FileHandle f : cfgDir.list())
+        FileHandle cfgDir = Gdx.files.internal(AssetsManager.enemyCfg_path);
+        for (FileHandle f: cfgDir.list())
         {
-            String prototype = f.nameWithoutExtension();
-
-            ObjectMap enemyCfg = entityFactory.assetsManager.json.fromJson(
-                    ObjectMap.class,
-                    Gdx.files.internal(AssetsManager.enemyCfg_path + f.name())
-            );
-
-            EnemyComponent enemy = new EnemyComponent();
-            enemy.name = prototype;
-            enemy.life = new Bar((float) enemyCfg.get("life"));
-            enemy.speed = (float) enemyCfg.get("speed");
-            enemy.damage = (float) enemyCfg.get("damage");
-            enemy.aggressiveNature = Boolean.parseBoolean((String) enemyCfg.get("aggressiveNature"));
-            enemy.aggroRange = (float) enemyCfg.get("aggroRange");
-            enemy.movingRange = (float) enemyCfg.get("movingRange");
-            enemy.xpGain = (float) enemyCfg.get("xpGain");
-            enemy.level = 1;
-
-            //We check if the config has a standing time value, else we set the normal procedure
-            Object standingTime = enemyCfg.get("standingTime");
-            enemy.standingTime = (standingTime != null) ? (float) standingTime : -1; //to inform that no standing time set
-
-            prototypes.put(prototype, enemy);
+            readEnemyDefinition(f);
         }
+
+        /* TO LOAD IF COMES FROM JAR */
+        //The previous for loop will not do anything if running from a jar
+        FileHandle []  cfgDirJar = JarUtils.listFromJarIfNecessary(AssetsManager.enemyCfg_path);
+        for (FileHandle f: cfgDirJar)
+        {
+            readEnemyDefinition(f);
+        }
+    }
+
+
+    //Read an enemy config file
+    @SuppressWarnings("unchecked")
+    private void readEnemyDefinition(FileHandle f)
+    {
+        String prototype = f.nameWithoutExtension();
+        ObjectMap enemyCfg = entityFactory.assetsManager.json.fromJson(
+                ObjectMap.class,
+                Gdx.files.internal(AssetsManager.enemyCfg_path + f.name())
+        );
+
+        EnemyComponent enemy = new EnemyComponent();
+        enemy.name = prototype;
+        enemy.life = new Bar((float) enemyCfg.get("life"));
+        enemy.speed = (float) enemyCfg.get("speed");
+        enemy.damage = (float) enemyCfg.get("damage");
+        enemy.aggressiveNature = Boolean.parseBoolean((String) enemyCfg.get("aggressiveNature"));
+        enemy.aggroRange = (float) enemyCfg.get("aggroRange");
+        enemy.movingRange = (float) enemyCfg.get("movingRange");
+        enemy.xpGain = (float) enemyCfg.get("xpGain");
+        enemy.level = 1;
+
+        //We check if the config has a standing time value, else we set the normal procedure
+        Object standingTime = enemyCfg.get("standingTime");
+        enemy.standingTime = (standingTime != null) ? (float) standingTime : -1; //to inform that no standing time set
+
+        prototypes.put(prototype, enemy);
     }
 
 

@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.utils.Array;
 import com.game.entity.component.*;
-import com.game.loader.SoundsManager;
 
 import static com.game.entity.utils.Mappers.*;
 
@@ -41,7 +40,9 @@ public class CollisionSystem extends IteratingSystem {
 
                         if (enemyAttacking.aggressive) //aggressive enemy attacking player at collision
                         {
-                            player.life.updateCurrent(-enemyAttacking.damage);
+                            //Enemy damage + coeff according to player level
+                            float enemyDamage = enemyAttacking.damage + ((enemyAttacking.level - player.level) * enemyAttacking.damage);
+                            player.life.updateCurrent(-enemyDamage);
                             player.lastDamageDuration = 0;
                         }
                     }
@@ -75,7 +76,6 @@ public class CollisionSystem extends IteratingSystem {
                         //After treating the collision we can set it back as sensor
                         if (type.type == TypeComponent.SCENERY) {
                             enemyBody.body.getFixtureList().get(0).setSensor(false); //We set it as a non sensor = has a body
-                            collision.removeCollidedEntity(collidedEntity); //we do not need to store anymore the collision
                         }
                         else  enemyBody.body.getFixtureList().get(0).setSensor(true); //We reset it as a sensor
 

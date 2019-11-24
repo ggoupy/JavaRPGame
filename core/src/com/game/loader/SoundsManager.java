@@ -7,7 +7,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.game.AppPreferences;
+import com.game.utils.JarUtils;
 
 import java.util.Random;
 
@@ -51,6 +51,20 @@ public class SoundsManager {
         {
             manager.load(npcSounds_path+f.name(), Music.class);
         }
+
+
+        /* TO LOAD IF COMES FROM JAR */
+        //The previous for loop will not do anything if running from a jar
+        FileHandle []  effectDirJar = JarUtils.listFromJarIfNecessary(soundEffects_path);
+        for (FileHandle f : effectDirJar)
+        {
+            manager.load(soundEffects_path+f.name(), Sound.class);
+        }
+        FileHandle []  npcDirJar = JarUtils.listFromJarIfNecessary(npcSounds_path);
+        for (FileHandle f : npcDirJar)
+        {
+            manager.load(npcSounds_path+f.name(), Music.class);
+        }
     }
 
 
@@ -67,6 +81,19 @@ public class SoundsManager {
         //NPCs
         FileHandle npcDir = new FileHandle(npcSounds_path);
         for (FileHandle f : npcDir.list())
+        {
+            npcSounds.put(npcSounds_path+f.name(),manager.get(npcSounds_path+f.name(), Music.class));
+        }
+
+        /* TO STORE IF COMES FROM JAR */
+        //The previous for loop will not do anything if running from a jar
+        FileHandle []  effectDirJar = JarUtils.listFromJarIfNecessary(soundEffects_path);
+        for (FileHandle f : effectDirJar)
+        {
+            soundEffects.put(soundEffects_path+f.name(), manager.get(soundEffects_path+f.name(), Sound.class));
+        }
+        FileHandle []  npcDirJar = JarUtils.listFromJarIfNecessary(npcSounds_path);
+        for (FileHandle f : npcDirJar)
         {
             npcSounds.put(npcSounds_path+f.name(),manager.get(npcSounds_path+f.name(), Music.class));
         }

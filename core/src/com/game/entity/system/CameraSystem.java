@@ -28,5 +28,15 @@ public class CameraSystem extends IteratingSystem {
         cameraBox2D.position.y = playerPosition.position.y;
         cameraBox2D.update(); //to draw stuff using meters
         cameraUI.update(); //to draw stuff using pixels
+
+
+
+        //TO DO LATER : FOR SMOOTH CAMERA MOVEMENT -> LERP
+        //THIS CODE IS SHAKING, TRY WITH NEW POSITION OF PLAYER INSTEAD OF LAST? CHANGE ORDER BETWEEN CAMERA AND PLAYER MOVEMENT SYSTEM?
+        //ADD A IF STATEMENT TO DONT LERP IF PLAYER NOT MOVING? USE INTERPOLATED POS OF PLAYER?...
+        //Vector3 v = new Vector3(playerPosition.position.x, playerPosition.position.y, 0);
+        //Vector3 v2 = new Vector3(cameraBox2D.position.x, cameraBox2D.position.y, 0);
+        //Vector3 v3 = v2.lerp(v, deltaTime);
+        //cameraBox2D.position.set(v3);
     }
 }

@@ -12,9 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.game.GDXGame;
 import com.game.loader.AssetsManager;
+import com.game.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -35,7 +36,7 @@ public class SelectionScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(new ExtendViewport(Constants.G_WIDTH, Constants.G_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
         final Table table = new Table();

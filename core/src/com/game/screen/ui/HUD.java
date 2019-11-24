@@ -1,5 +1,6 @@
 package com.game.screen.ui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -9,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.game.entity.component.PlayerComponent;
-import com.game.utils.Constants;
 import com.game.loader.AssetsManager;
+import com.game.utils.Constants;
 
 
 public class HUD extends Stage {
@@ -58,10 +59,13 @@ public class HUD extends Stage {
         actionBar.setSize(hud_width, hud_width / 9);
 
         // Initialize player name
-        Label nameLb = new Label(player.name, menuSkin);
+        Label.LabelStyle nameLbStyle = new Label.LabelStyle(assetsManager.createTextFont(), Color.WHITE);
+        Label nameLb = new Label(player.name, nameLbStyle);
 
         // Initialize the player level
-        levelLb = new Label("Level : " + player.level, menuSkin);
+        Label.LabelStyle levelLbStyle = new Label.LabelStyle(assetsManager.createTextFont(), Color.WHITE);
+        levelLb = new Label("Level : " + player.level, levelLbStyle);
+
 
         // Create table for positioning
         Table barTable = new Table();

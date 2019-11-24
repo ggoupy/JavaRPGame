@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.game.GDXGame;
 import com.game.controller.InputsControllerGame;
 import com.game.loader.AssetsManager;
-import com.game.loader.SoundsManager;
 import com.game.quest.Quest;
 import com.game.screen.GameScreen;
 import com.game.utils.Constants;
@@ -31,6 +31,10 @@ public class UserInterface {
     private Batch spriteBatch;
     private Stage stage;
     private Table stageTable;
+
+    private Skin skin;
+    private Label.LabelStyle textStyle;
+    private Label.LabelStyle titleStyle;
 
     /* HUD */
     private HUD hud;
@@ -69,16 +73,18 @@ public class UserInterface {
         stageTable.setFillParent(true);
         stage.addActor(stageTable);
 
-        Skin skin = assetsManager.getMenuSkin();
+        skin = assetsManager.getMenuSkin();
+        titleStyle = new Label.LabelStyle(assetsManager.createTitleFont(), Color.WHITE);
+        textStyle = new Label.LabelStyle(assetsManager.createTextFont(), Color.WHITE);
 
         /* QUEST MENU UI */
-        createQuestMenuUI(skin);
+        createQuestMenuUI();
 
         /* QUEST UI */
-        createQuestUI(skin);
+        createQuestUI();
 
         /* QUIT DIALOG UI */
-        createQuitDialogUI(skin);
+        createQuitDialogUI();
     }
 
     public void updateUI() {
@@ -164,13 +170,13 @@ public class UserInterface {
         else questAccept.setText("Press ENTER to accept the quest");
     }
 
-    public void removeQuest() {
+    private void removeQuest() {
         questTitle.setText("");
         questDescription.setText("");
     }
 
     private boolean hasQuest() {
-        return questTitle.getText().length != 0;
+        return questTitle.getText().length > 0;
     }
 
 
@@ -187,20 +193,19 @@ public class UserInterface {
     }
 
 
-    private void createQuestUI(Skin skin) {
+    private void createQuestUI() {
         // Get Quest background
         Texture questBg = assetsManager.manager.get(AssetsManager.background_quest);
 
         questTable = new Table();
         questTable.setBackground(new TextureRegionDrawable(questBg));
 
-        questTitle = new Label("", skin);
-        questTitle.setFontScale(1.5f);
-        questDescription = new Label("", skin);
+        questTitle = new Label("", titleStyle);
+        questDescription = new Label("", textStyle);
         questDescription.setWrap(true);
-        questAccept = new Label("Press ENTER to accept the quest", skin);
+        questAccept = new Label("Press ENTER to accept the quest", textStyle);
         questTable.add(questTitle).pad(100, 50, 0, 50).row();
-        questTable.add(questDescription).width(Constants.G_WIDTH / 3f).height(Constants.G_HEIGHT / 4f).pad(60).top().row();
+        questTable.add(questDescription).width(Constants.G_WIDTH / 3f).height(Constants.G_HEIGHT / 4f).pad(70).top().row();
         questTable.add(questAccept).padTop(10);
         questTable.top();
 
@@ -212,33 +217,31 @@ public class UserInterface {
     }
 
 
-    private void createQuestMenuUI(Skin skin) {
+    private void createQuestMenuUI() {
         // Get Quest background
         Texture questBg = assetsManager.manager.get(AssetsManager.background_quest);
 
         questMenuDialog = new Dialog("", skin);
         questMenuDialog.setBackground(new TextureRegionDrawable(questBg));
 
-        Table questMenuTable = new Table();
-
-        questMenuTitle = new Label("You don't have any quests", skin);
-        questMenuTitle.setFontScale(1.2f);
-        questMenuDescription = new Label("Accept a quest to have a mission", skin);
+        questMenuTitle = new Label("You don't have any quests", titleStyle);
+        questMenuDescription = new Label("Accept a quest to have a mission", textStyle);
         questMenuDescription.setWrap(true);
-        questMenuObjective = new Label("", skin);
+        questMenuObjective = new Label("", textStyle);
 
-        questMenuTable.add(questMenuTitle).pad(80, 50, 0, 50).center().row();
-        questMenuTable.add(questMenuDescription).width(Constants.G_WIDTH / 4f).height(Constants.G_HEIGHT / 5f).pad(50).center().row();
-        questMenuTable.add(questMenuObjective).pad(0, 50, 80, 50).center().row();
+        questMenuDialog.row();
+        questMenuDialog.add(questMenuTitle).pad(80, 50, 0, 50).center().row();
+        questMenuDialog.add(questMenuDescription).width(Constants.G_WIDTH / 4f).height(Constants.G_HEIGHT / 5f).pad(50).center().row();
+        questMenuDialog.add(questMenuObjective).pad(0, 50, 80, 50).center().row();
 
-        questMenuDialog.add(questMenuTable);
         questMenuDialog.show(stage);
     }
 
 
-    private void createQuitDialogUI(Skin skin) {
+    private void createQuitDialogUI() {
         quitDialog = new Dialog("", skin);
         quitDialog.row();
+
 
         Label text = new Label("You really want to go back to the main menu?", skin);
         quitDialog.add(text).pad(30).colspan(2);

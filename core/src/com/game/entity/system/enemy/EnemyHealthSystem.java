@@ -6,10 +6,8 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.game.entity.component.*;
 import com.game.entity.factory.EntityFactory;
-import com.game.utils.Constants;
 
 import static com.game.entity.utils.Mappers.*;
-import static com.game.utils.Constants.*;
 
 public class EnemyHealthSystem extends IteratingSystem {
 

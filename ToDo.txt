@@ -1,5 +1,3 @@
-- enemy collision bug
-
 - Improve player movements (+ during collisions with static bodies)
 
 - Enemy attacks

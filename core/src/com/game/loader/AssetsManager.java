@@ -1,14 +1,14 @@
 package com.game.loader;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
@@ -17,8 +17,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Json;
 import com.game.utils.Constants;
-
-import java.util.Random;
 
 
 public class AssetsManager {
@@ -48,7 +46,9 @@ public class AssetsManager {
     public static final String tmForeground = "foreground"; //tiles drawing after player
 
     //Font
-    public static final String font = "fonts/DroidSans-Bold.ttf";
+    public static final String font = "fonts/font.ttf";//"fonts/DroidSans-Bold.ttf";
+    private FreeTypeFontGenerator fontGenerator;
+    private FreeTypeFontParameter fontParameter;
 
     //Skins
     public static final String menuSkin = "skin/craftacular/skin/craftacular-ui.json";
@@ -93,20 +93,41 @@ public class AssetsManager {
         //Load textures
         manager.load(spriteSheet, TextureAtlas.class);
 
-        //Load the font
-        FreeTypeFontLoaderParameter fontParameter = new FreeTypeFontLoaderParameter();
-        fontParameter.fontFileName = font;
-        fontParameter.fontParameters.size = Constants.G_HEIGHT/90; //10% of the screen height
+        //Load the basic font
+        FreeTypeFontLoaderParameter parameter = new FreeTypeFontLoaderParameter();
+        parameter.fontFileName = font;
+        parameter.fontParameters.size = Constants.FONT_SIZE;
         FileHandleResolver resolver = new InternalFileHandleResolver();
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
         manager.setLoader(BitmapFont.class, new FreetypeFontLoader(resolver));
-        manager.load(font, BitmapFont.class, fontParameter);
+        manager.load(font, BitmapFont.class, parameter);
+
+        //Create the font generator
+        this.fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal(font));
+        this.fontParameter = new FreeTypeFontParameter();
     }
+
 
     public void finishLoading()
     {
         manager.finishLoading();
         soundsManager.storeSounds();
+
+        getFont().getData().setScale(0.9f, 0.9f);
+    }
+
+
+    public BitmapFont createTitleFont() {return createFont(Constants.FONT_SIZE*2);}
+    public BitmapFont createSubTitleFont() {return createFont((int) (Constants.FONT_SIZE*1.5));}
+    public BitmapFont createTextFont() {return createFont((int) (Constants.FONT_SIZE*1.2));}
+    public BitmapFont createLittleTextFont() {return createFont((int) (Constants.FONT_SIZE*0.9));}
+    public BitmapFont createFont() {return createFont(Constants.FONT_SIZE);}
+    private BitmapFont createFont(int dp)
+    {
+        fontParameter.size = dp;
+        BitmapFont f = fontGenerator.generateFont(fontParameter);
+        f.getData().setScale(0.9f,0.9f);
+        return f;
     }
 
 
@@ -120,15 +141,14 @@ public class AssetsManager {
 
     public final Skin getHUDSkin() {return manager.get(hudSkin, Skin.class);}
 
-    public final BitmapFont getFont() {
-        return manager.get(font, BitmapFont.class);
-    }
+    public final BitmapFont getFont() {return manager.get(font, BitmapFont.class);}
 
     public final SoundsManager getSoundsManager() {return soundsManager;}
 
 
     public void dispose()
     {
+        fontGenerator.dispose();
         manager.dispose();
     }
 }

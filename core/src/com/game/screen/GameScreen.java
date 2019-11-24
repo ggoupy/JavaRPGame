@@ -14,20 +14,20 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.game.GDXGame;
+import com.game.controller.CollisionListener;
+import com.game.controller.InputsControllerGame;
 import com.game.entity.component.PlayerComponent;
 import com.game.entity.factory.EntityFactory;
 import com.game.entity.system.*;
-import com.game.entity.system.player.*;
-import com.game.utils.Constants;
-import com.game.controller.CollisionListener;
-import com.game.GDXGame;
-import com.game.controller.InputsControllerGame;
 import com.game.entity.system.enemy.EnemyHealthSystem;
 import com.game.entity.system.enemy.EnemyLevelSystem;
 import com.game.entity.system.enemy.EnemyMovementSystem;
 import com.game.entity.system.enemy.EnemySpawnSystem;
+import com.game.entity.system.player.*;
 import com.game.loader.AssetsManager;
 import com.game.screen.ui.UserInterface;
+import com.game.utils.Constants;
 
 
 public class GameScreen implements Screen {

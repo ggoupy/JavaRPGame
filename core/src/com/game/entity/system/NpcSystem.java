@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.game.controller.InputsControllerGame;
 import com.game.entity.component.*;
-import com.game.loader.AssetsManager;
 import com.game.loader.SoundsManager;
 import com.game.quest.Quest;
 import com.game.screen.ui.UserInterface;
@@ -61,17 +60,17 @@ public class NpcSystem extends IteratingSystem {
                     controller.acceptQuest = false; //manually set to false the key
 
                     QuestComponent playerQuests = questMapper.get(player); //quest component of the player
+                    PlayerComponent playerCom = playerMapper.get(player); //player component of the player
 
                     //Case of new quest -> Player accepts it
                     if (!quest.isCompleted()) {
+                        playerCom.lastKilled = null; //We reset the last enemy killed
                         playerQuests.quests.add(quest); //add the quest to the player quest component
                         quest.setAccepted(); //set the quest to accepted by the player
                     }
 
                     //Case of completed case -> Player returns it
                     else {
-                        PlayerComponent playerCom = playerMapper.get(player); //Player component
-
                         //We add the XP of the quest to player
                         playerCom.xpBar.updateCurrent(quest.getXP());
 

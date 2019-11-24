@@ -11,12 +11,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.game.utils.Constants;
 import com.game.entity.component.FontComponent;
 import com.game.entity.component.TextureComponent;
 import com.game.entity.component.TransformComponent;
 import com.game.entity.utils.ZComparator;
 import com.game.loader.AssetsManager;
+import com.game.utils.Constants;
 
 import static com.game.entity.utils.Mappers.*;
 import static com.game.loader.AssetsManager.*;

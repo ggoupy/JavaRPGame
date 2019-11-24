@@ -6,8 +6,9 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Vector3;
-import com.game.utils.Constants;
-import com.game.entity.component.*;
+import com.game.entity.component.EnemyComponent;
+import com.game.entity.component.FontComponent;
+import com.game.entity.component.TransformComponent;
 import com.game.loader.AssetsManager;
 
 import static com.game.entity.utils.Mappers.*;

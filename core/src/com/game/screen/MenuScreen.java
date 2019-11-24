@@ -11,9 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.game.GDXGame;
 import com.game.loader.AssetsManager;
+import com.game.utils.Constants;
 
 public class MenuScreen implements Screen {
 
@@ -26,7 +27,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(new ExtendViewport(Constants.G_WIDTH, Constants.G_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
         Skin skin = game.assetsManager.getMenuSkin();

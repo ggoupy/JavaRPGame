@@ -9,10 +9,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.game.utils.Constants;
 import com.game.GDXGame;
 import com.game.controller.InputsControllerUI;
 import com.game.entity.component.TransformComponent;
+import com.game.utils.Constants;
 
 
 public class MapScreen implements Screen {
