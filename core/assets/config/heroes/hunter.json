@@ -2,7 +2,7 @@
   "life": 150,
   "action": 150,
   "damage": 15,
-  "speed": 6,
+  "speed": 3,
   "lifeRegeneration": 0.08,
   "actionRegeneration": 0.15
 }
